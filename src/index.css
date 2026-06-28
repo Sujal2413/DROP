@@ -548,20 +548,7 @@
   }
 
   .drop-can__halo {
-    inset: -30% -80%;
-    z-index: 0;
-    border-radius: 50%;
-    background:
-      radial-gradient(circle at 50% 50%, #ffffff 0%, var(--can-accent) 15%, var(--can-glow) 45%, transparent 75%);
-    opacity: 0.85;
-    mix-blend-mode: screen;
-    transform: translateZ(-85px);
-    animation: pulse-backlight 4s ease-in-out infinite alternate;
-  }
-
-  @keyframes pulse-backlight {
-    0% { opacity: 0.6; transform: translateZ(-85px) scale(0.9); }
-    100% { opacity: 0.95; transform: translateZ(-85px) scale(1.05); }
+    display: none;
   }
 
   .drop-can__floor-shadow {
@@ -1818,21 +1805,6 @@
 }
 
 .hero-can-glare {
-  content: '';
-  position: absolute;
-  top: 10%;
-  left: 25%;
-  width: 50%;
-  height: 80%;
-  background: linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 0.08) 20%,
-    rgba(255, 255, 255, 0) 60%
-  );
-  transform: skewX(-20deg);
-  pointer-events: none;
-  mix-blend-mode: overlay;
-  z-index: 10;
+  display: none;
 }
 
