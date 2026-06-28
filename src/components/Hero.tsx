@@ -74,14 +74,15 @@ const Hero = () => {
         .fromTo('.hero-rim-light', { opacity: 0, xPercent: -30 }, { opacity: 1, xPercent: 0, duration: 1.2 }, '-=0.8');
 
       gsap.to('.hero-can-float', {
-        y: (index) => [-16, 22, -10][index] ?? 14,
-        rotateZ: (index) => [3.2, -3.8, 2.4][index] ?? 2,
-        rotateY: (index) => [-5.5, 6, -3.5][index] ?? 4,
-        rotateX: (index) => [1.5, -2.2, 1][index] ?? 1,
-        duration: (index) => 5.6 + index * 0.72,
+        y: (index) => [-22, 28, -14][index] ?? 16,
+        x: (index) => [6, -8, 5][index] ?? 0,
+        rotateZ: (index) => [4, -5, 3][index] ?? 2,
+        rotateY: (index) => [-12, 14, -8][index] ?? 4,
+        rotateX: (index) => [2.5, -3, 1.5][index] ?? 1,
+        duration: (index) => 6.2 + index * 0.8,
         repeat: -1,
         yoyo: true,
-        ease: 'sine.inOut',
+        ease: 'power1.inOut',
         force3D: true,
       });
 

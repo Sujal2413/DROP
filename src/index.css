@@ -661,7 +661,7 @@
       radial-gradient(circle at 18% 70%, rgba(255, 255, 255, 0.6) 0 0.7px, transparent 1.2px);
     background-size: 58px 72px, 74px 86px, 64px 82px, 86px 92px, 92px 78px, 68px 94px, 52px 64px;
     mix-blend-mode: screen;
-    opacity: 0.62;
+    opacity: 0.95;
     mask-image: linear-gradient(180deg, transparent 0%, black 10%, black 91%, transparent 100%);
   }
 
@@ -676,9 +676,9 @@
       radial-gradient(circle at 74% 72%, rgba(255, 255, 255, 0.66) 0 0.75px, transparent 1.5px);
     background-size: 82px 94px, 72px 86px, 92px 78px, 66px 76px;
     mix-blend-mode: screen;
-    opacity: 0.54;
+    opacity: 0.9;
     mask-image: linear-gradient(180deg, transparent 0%, black 11%, black 88%, transparent 100%);
-    animation: droplet-twinkle 4.8s ease-in-out infinite alternate;
+    animation: droplet-twinkle 4.2s ease-in-out infinite alternate;
   }
 
   .drop-can__sheen {
@@ -686,12 +686,12 @@
     z-index: 4;
     border-radius: 999px;
     background:
-      linear-gradient(105deg, transparent 22%, rgba(255, 255, 255, 0.08) 38%, rgba(255, 255, 255, 0.65) 49%, transparent 60%),
-      radial-gradient(circle at 50% 16%, rgba(255, 255, 255, 0.55), transparent 15%);
+      linear-gradient(105deg, transparent 22%, rgba(255, 255, 255, 0.15) 38%, rgba(255, 255, 255, 0.95) 49%, transparent 60%),
+      radial-gradient(circle at 50% 16%, rgba(255, 255, 255, 0.75), transparent 18%);
     mix-blend-mode: screen;
-    opacity: 0.8;
+    opacity: 1;
     mask-image: linear-gradient(180deg, transparent 1%, black 12%, black 89%, transparent 99%);
-    animation: sheen-drift 5.8s ease-in-out infinite alternate;
+    animation: sheen-drift 5.2s ease-in-out infinite alternate;
   }
 
   .drop-can__cold-line {
@@ -741,11 +741,11 @@
     height: 50px;
     border-radius: 50%;
     background:
-      radial-gradient(ellipse at 50% 31%, rgba(255, 255, 255, 0.16), transparent 34%),
-      linear-gradient(180deg, rgba(22, 18, 36, 0.98), rgba(6, 4, 14, 1));
+      radial-gradient(ellipse at 50% 31%, rgba(255, 255, 255, 0.22), transparent 34%),
+      linear-gradient(180deg, rgba(32, 26, 48, 0.98), rgba(6, 4, 14, 1));
     box-shadow:
-      inset 0 2px 0 rgba(255, 255, 255, 0.18),
-      inset 0 -11px 18px rgba(0, 0, 0, 0.72),
+      inset 0 3px 0 rgba(255, 255, 255, 0.45),
+      inset 0 -11px 18px rgba(0, 0, 0, 0.82),
       0 0 52px rgba(177, 138, 255, 0.12);
   }
 
@@ -754,12 +754,12 @@
     z-index: 2;
     height: var(--podium-h);
     background:
-      linear-gradient(90deg, #020108 0%, #1a142c 25%, #2a2046 50%, #151024 75%, #030206 100%);
+      linear-gradient(90deg, #020108 0%, #201a35 25%, #342854 50%, #1a142c 75%, #030206 100%);
     border-radius: 0 0 50% 50% / 0 0 26px 26px;
     box-shadow:
-      inset 0 22px 30px rgba(255, 255, 255, 0.05),
-      inset 0 -34px 38px rgba(0, 0, 0, 0.88),
-      0 28px 54px rgba(3, 2, 10, 0.8);
+      inset 0 22px 30px rgba(255, 255, 255, 0.1),
+      inset 0 -34px 38px rgba(0, 0, 0, 0.95),
+      0 28px 54px rgba(3, 2, 10, 0.9);
   }
 
   .podium__rim {
