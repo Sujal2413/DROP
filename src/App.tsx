@@ -1,0 +1,90 @@
+import { useEffect } from 'react';
+import Lenis from 'lenis';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Hero from './components/Hero';
+import ProductSubstanceSection from './components/ProductSubstanceSection';
+import ProductShowcase from './components/ProductShowcase';
+import DetailView from './components/DetailView';
+import SustainabilitySection from './components/SustainabilitySection';
+import WaitlistSection from './components/WaitlistSection';
+import Footer from './components/Footer';
+
+gsap.registerPlugin(ScrollTrigger);
+
+const App = () => {
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.18,
+      easing: (t) => 1 - Math.pow(1 - t, 4),
+      orientation: 'vertical',
+      gestureOrientation: 'vertical',
+      smoothWheel: true,
+      wheelMultiplier: 0.72,
+      touchMultiplier: 1.35,
+    });
+
+    const raf = (time: number) => {
+      lenis.raf(time * 1000);
+    };
+
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(raf);
+    gsap.ticker.lagSmoothing(0);
+
+    const ctx = gsap.context(() => {
+      // The video reference has a living outer gradient. This keeps it breathing
+      // subtly while ScrollTrigger handles the content rhythm.
+      gsap.to('.ambient-aura', {
+        backgroundPosition: '65% 35%, 35% 70%, 50% 50%',
+        duration: 10,
+        repeat: -1,
+        yoyo: true,
+        ease: 'sine.inOut',
+      });
+
+      gsap.utils.toArray<HTMLElement>('.motion-scene').forEach((scene) => {
+        gsap.fromTo(
+          scene.querySelector('.site-frame'),
+          { y: 74, scale: 0.965, opacity: 0.72 },
+          {
+            y: 0,
+            scale: 1,
+            opacity: 1,
+            ease: 'expo.out',
+            duration: 1.1,
+            scrollTrigger: {
+              trigger: scene,
+              start: 'top 76%',
+              end: 'top 24%',
+              scrub: 0.85,
+            },
+          },
+        );
+      });
+    });
+
+    return () => {
+      ctx.revert();
+      gsap.ticker.remove(raf);
+      lenis.destroy();
+    };
+  }, []);
+
+  return (
+    <div className="drop-experience">
+      <div className="ambient-aura" />
+      <main>
+        <Hero />
+        <ProductSubstanceSection />
+        <ProductShowcase />
+        <DetailView />
+        <SustainabilitySection />
+        <WaitlistSection />
+      </main>
+      <Footer />
+    </div>
+  );
+};
+
+export default App;
