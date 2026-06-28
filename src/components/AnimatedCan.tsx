@@ -5,9 +5,9 @@ import Image from 'next/image';
 import gsap from 'gsap';
 
 const CANS = [
-  { id: 'purple', src: '/assets/new-can-variant-1.png', alt: 'Deep Purple Can' },
-  { id: 'silver', src: '/assets/new-can-variant-2.png', alt: 'Icy Silver Can' },
-  { id: 'black', src: '/assets/new-can-variant-3.png', alt: 'Full Black Can' }
+  { id: 'purple', src: '/assets/new-can-1.png', alt: 'Deep Purple Can' },
+  { id: 'silver', src: '/assets/new-can-2.png', alt: 'Icy Silver Can' },
+  { id: 'black', src: '/assets/new-can-3.png', alt: 'Full Black Can' }
 ];
 
 export default function AnimatedCan({ activeIndex }: { activeIndex: number }) {
@@ -24,22 +24,22 @@ export default function AnimatedCan({ activeIndex }: { activeIndex: number }) {
         { opacity: 1, scale: 1, x: 0, duration: 1.5, ease: 'power3.out' }
       );
     } else {
-      // Transition: drop outgoing can to the left, bring incoming can from right
+      // Transition: circular rolling out to the left, circular rolling in from the right
       const tl = gsap.timeline();
       
       tl.to(canRefs.current[prevIndex], {
         x: '-100vw',
-        y: 100, // Drop down slightly
-        rotationZ: -20,
+        y: -100, // Arc up
+        rotationZ: -90, // Roll to the left
         opacity: 0,
-        duration: 1,
-        ease: 'power3.in'
+        duration: 1.2,
+        ease: 'power3.inOut'
       }, 0);
 
       tl.fromTo(canRefs.current[activeIndex],
-        { x: '100vw', y: -100, rotationZ: 20, opacity: 0 },
+        { x: '100vw', y: 150, rotationZ: 90, opacity: 0 },
         { x: 0, y: 0, rotationZ: 0, opacity: 1, duration: 1.2, ease: 'power3.out' },
-        0.4
+        0.2
       );
     }
 
@@ -67,7 +67,7 @@ export default function AnimatedCan({ activeIndex }: { activeIndex: number }) {
   return (
     <div
       ref={containerRef}
-      className="absolute right-[5%] md:right-[10%] top-1/2 -translate-y-1/2 z-[30] pointer-events-none flex flex-col items-center justify-center w-[80vw] md:w-[50vw] max-w-[600px] aspect-[37/100] h-[clamp(400px,70vh,900px)]"
+      className="absolute right-[10%] md:right-[20%] top-1/2 -translate-y-1/2 z-[30] pointer-events-none flex flex-col items-center justify-center w-[90vw] md:w-[60vw] max-w-[850px] aspect-[37/100] h-[clamp(500px,85vh,1000px)]"
     >
       {CANS.map((can, idx) => (
         <div 
@@ -85,7 +85,7 @@ export default function AnimatedCan({ activeIndex }: { activeIndex: number }) {
             alt={can.alt}
             fill
             priority
-            sizes="(max-width: 768px) 80vw, 600px"
+            sizes="(max-width: 768px) 90vw, 850px"
             className="object-contain"
           />
         </div>

@@ -54,9 +54,26 @@ export default function HeroSection() {
       
       {/* Right Side Accent Background (Curve Split) */}
       <div 
-        className="absolute right-0 top-0 w-full md:w-[45%] lg:w-[40%] h-full rounded-l-[100px] sm:rounded-l-[200px] transition-colors duration-1000 z-0"
+        className="absolute right-0 top-0 w-full md:w-[35%] lg:w-[30%] h-full rounded-l-[100px] sm:rounded-l-[150px] transition-colors duration-1000 z-0"
         style={{ backgroundColor: THEMES[activeIndex].accentBg }}
-      />
+      >
+        {/* Semi-circle shape on the line */}
+        <div 
+          className="absolute left-0 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[30vh] h-[30vh] md:w-[40vh] md:h-[40vh] rounded-full z-0 transition-colors duration-1000"
+          style={{ backgroundColor: THEMES[activeIndex].accentBg, opacity: 0.7 }}
+        />
+      </div>
+
+      {/* Floating Note Tags */}
+      <div className="absolute left-[5%] top-[15%] md:left-[25%] md:top-[12%] bg-black text-white text-[10px] sm:text-xs font-bold px-3 py-1.5 rounded-full rotate-[-5deg] shadow-xl z-[60] tracking-widest border border-white/20">
+        PREMIUM HYDRATION
+      </div>
+      <div className="absolute left-[10%] bottom-[20%] md:left-[35%] md:bottom-[25%] bg-white text-black text-[10px] sm:text-xs font-bold px-3 py-1.5 rounded-full rotate-[4deg] shadow-xl z-[60] tracking-widest border border-black/10">
+        100% RECYCLABLE
+      </div>
+      <div className="absolute right-[35%] top-[20%] md:right-[40%] md:top-[25%] bg-[var(--color-red)] text-white text-[10px] sm:text-xs font-bold px-3 py-1.5 rounded-full rotate-[12deg] shadow-xl z-[60] tracking-widest border border-white/20">
+        0.0% ABV
+      </div>
 
       {/* Vertical Name Display */}
       <div className="absolute right-4 md:right-12 top-1/2 -translate-y-1/2 z-[10] pointer-events-none overflow-hidden h-[80vh] flex items-center justify-center">
