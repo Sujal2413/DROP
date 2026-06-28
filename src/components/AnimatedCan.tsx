@@ -7,7 +7,6 @@ import gsap from 'gsap';
 export default function AnimatedCan() {
   const containerRef = useRef<HTMLDivElement>(null);
   const canRef = useRef<HTMLDivElement>(null);
-  const shadowRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     // Initial Load Animation
@@ -32,17 +31,6 @@ export default function AnimatedCan() {
       ease: 'sine.inOut',
       delay: 1.5, // start after intro
     });
-
-    // Shadow scaling with float
-    gsap.to(shadowRef.current, {
-      scale: 0.8,
-      opacity: 0.3,
-      duration: 3,
-      repeat: -1,
-      yoyo: true,
-      ease: 'sine.inOut',
-      delay: 1.5,
-    });
   }, []);
 
   return (
@@ -53,7 +41,7 @@ export default function AnimatedCan() {
     >
       <div 
         ref={canRef} 
-        className="relative w-full h-full drop-shadow-[0_15px_30px_rgba(0,0,0,0.2)] z-[30]"
+        className="relative w-full h-full z-[30]"
         style={{ perspective: 800 }}
       >
         <Image
@@ -65,12 +53,6 @@ export default function AnimatedCan() {
           className="object-contain"
         />
       </div>
-
-      {/* Floor Shadow */}
-      <div
-        ref={shadowRef}
-        className="absolute bottom-[-10%] left-1/2 -translate-x-1/2 w-[70%] h-[20px] bg-black/40 rounded-[100%] blur-[10px] z-[20]"
-      />
     </div>
   );
 }

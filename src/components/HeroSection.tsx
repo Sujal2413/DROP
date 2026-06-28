@@ -47,9 +47,8 @@ export default function HeroSection() {
             lineHeight: 0.88,
           }}
         >
-          UNLIMITED<br />
-          RELEASE<br />
-          WATER
+          AS.IT.<br />
+          SHOULD.BE.
         </h1>
       </div>
 
