@@ -156,9 +156,6 @@ const Hero = () => {
   return (
     <section ref={rootRef} id="hero" className="hero-section full-screen" style={style}>
       <div className="hero-background" style={{ background: 'var(--hero-bg)' }}>
-        <div className="ribbed-curtain" aria-hidden="true" />
-        <span className="hero-rib-pulse" aria-hidden="true" />
-        <span className="hero-rim-light" aria-hidden="true" />
       </div>
       
       <Header />
