@@ -1808,3 +1808,34 @@
   display: none;
 }
 
+
+
+/* --- FIXED CAN ARCHITECTURE --- */
+.fixed-can-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+  z-index: 100;
+}
+
+.fixed-can-wrapper .drop-can {
+  height: 70vh;
+  max-height: 800px;
+  width: auto;
+  will-change: transform;
+}
+
+/* Layout tweaks for fixed center can */
+.push-left { padding-right: 50vw; }
+.push-right { padding-left: 50vw; }
+
+@media (max-width: 768px) {
+  .push-left, .push-right { padding: 0; text-align: center; }
+  .fixed-can-wrapper .drop-can { height: 50vh; opacity: 0.8; }
+}

@@ -47,16 +47,18 @@ const ProductSubstanceSection = () => {
   }, []);
 
   return (
-    <section id="features" className="substance-section" style={{ backgroundColor: '#D32F2F', padding: '100px 20px', textAlign: 'center' }}>
-      <div ref={rootRef} className="substance-scene">
-        <div className="statement-text">
-          <h2 className="statement-title" style={{ fontFamily: 'Oswald, sans-serif', color: '#F6F4EB', fontSize: '4rem', textTransform: 'uppercase', marginBottom: '40px' }}>
-            HYDRATION
-          </h2>
-          <div style={{ display: 'flex', gap: '20px', justifyContent: 'center' }}>
-            <span style={{ backgroundColor: '#FBC02D', color: '#1A1A1A', padding: '10px 24px', borderRadius: '99px', fontFamily: 'Oswald, sans-serif', fontWeight: 'bold', fontSize: '1.2rem' }}>CRISP</span>
-            <span style={{ backgroundColor: '#1A1A1A', color: '#FFFFFF', padding: '10px 24px', borderRadius: '99px', fontFamily: 'Oswald, sans-serif', fontWeight: 'bold', fontSize: '1.2rem' }}>PURE</span>
-          </div>
+    <section id="features" className="substance-section" style={{ backgroundColor: '#D32F2F', padding: '100px 20px', minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+      <h2 className="statement-title" style={{ fontFamily: 'Oswald, sans-serif', color: '#F6F4EB', fontSize: 'clamp(4rem, 15vw, 12rem)', textTransform: 'uppercase', textAlign: 'center', opacity: 0.9 }}>
+        HYDRATION
+      </h2>
+      <div className="info-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem', maxWidth: '1200px', margin: '4rem auto 0' }}>
+        <div className="info-card push-left" style={{ background: '#FBC02D', color: '#1A1A1A', padding: '2rem', borderRadius: '10px', transform: 'rotate(-2deg)', boxShadow: '5px 5px 0px #1A1A1A' }}>
+          <h2 style={{ fontFamily: 'Oswald, sans-serif' }}>PURE SOURCE</h2>
+          <p style={{ fontFamily: 'Helvetica Neue, sans-serif' }}>500ml of still water. No additives, no noise. Just crisp hydration in a hyper-realistic shell.</p>
+        </div>
+        <div className="info-card push-right" style={{ background: '#1A1A1A', color: '#F6F4EB', padding: '2rem', borderRadius: '10px', transform: 'rotate(2deg)', boxShadow: '5px 5px 0px #1A1A1A' }}>
+          <h2 style={{ fontFamily: 'Oswald, sans-serif' }}>0.0% ABV</h2>
+          <p style={{ fontFamily: 'Helvetica Neue, sans-serif' }}>Because it's water. Drink it anywhere, anytime. Stay sharp.</p>
         </div>
       </div>
     </section>

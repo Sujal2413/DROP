@@ -10,6 +10,9 @@ import SustainabilitySection from './components/SustainabilitySection';
 import WaitlistSection from './components/WaitlistSection';
 import Footer from './components/Footer';
 
+import ProductCan from './components/ProductCan';
+import { dropVariants } from './data/dropProducts';
+
 gsap.registerPlugin(ScrollTrigger);
 
 const App = () => {
@@ -84,7 +87,16 @@ const App = () => {
         ease: 'sine.inOut',
       });
 
-      // Removed scaling for full-screen
+      // Fixed can transform based on scroll
+      lenis.on('scroll', () => {
+        const scrollY = window.scrollY;
+        const can = document.getElementById('global-fixed-can');
+        if (can) {
+          const rotation = scrollY * 0.02;
+          const scale = Math.max(0.8, 1 - (scrollY * 0.0002));
+          can.style.transform = `rotate(${rotation}deg) scale(${scale})`;
+        }
+      });
     });
 
     return () => {
@@ -99,7 +111,14 @@ const App = () => {
   return (
     <div className="drop-experience">
       <div className="ambient-aura" />
-      <main>
+      
+      <div className="fixed-can-wrapper">
+        <div id="global-fixed-can" style={{ willChange: 'transform' }}>
+          <ProductCan variant={dropVariants[1]} /> {/* Purple variant as requested in reference */}
+        </div>
+      </div>
+
+      <main style={{ position: 'relative', zIndex: 1 }}>
         <Hero />
         <ProductSubstanceSection />
         <ProductShowcase />
