@@ -14,12 +14,12 @@ export type DropVariant = {
 export const dropVariants: DropVariant[] = [
   {
     id: 'pure-black',
-    name: 'Pure Black',
-    shortName: 'Black',
-    verticalLabel: 'PURE BLACK',
-    copy: 'Timeless premium still water in matte aluminium.',
+    name: 'Athlete Energy Booster',
+    shortName: 'Energy',
+    verticalLabel: 'ENERGY BOOSTER',
+    copy: 'High-performance energy booster water.',
     detailCopy:
-      'Bold, minimal, and cold to the touch. Pure Black keeps DROP. severe, refined, and ready for the city.',
+      'Engineered for athletes. Clean energy without the crash, sealed in matte black aluminium.',
     image: '/assets/new-can-1.png',
     accent: '#d9e0ea',
     glow: 'rgba(218, 226, 238, 0.35)',
@@ -28,12 +28,12 @@ export const dropVariants: DropVariant[] = [
   },
   {
     id: 'midnight-purple',
-    name: 'Midnight Purple',
-    shortName: 'Purple',
-    verticalLabel: 'MIDNIGHT PURPLE',
-    copy: 'Deep, modern confidence in every sip.',
+    name: 'Clove Water',
+    shortName: 'Clove',
+    verticalLabel: 'CLOVE WATER',
+    copy: 'Infused clove water for deep hydration.',
     detailCopy:
-      'A low-lit violet finish with chrome edges and quiet drama. Designed to feel rare before the first sip.',
+      'A low-lit violet finish containing pure clove-infused water. Designed to refresh and restore.',
     image: '/assets/new-can-2.png',
     accent: '#a98cff',
     glow: 'rgba(149, 91, 255, 0.55)',
@@ -42,12 +42,12 @@ export const dropVariants: DropVariant[] = [
   },
   {
     id: 'icy-silver',
-    name: 'Icy Silver',
-    shortName: 'Silver',
-    verticalLabel: 'ICY SILVER',
-    copy: 'Pure hydration, crystal cold.',
+    name: 'Sparkling Water',
+    shortName: 'Sparkling',
+    verticalLabel: 'SPARKLING WATER',
+    copy: 'Pure sparkling water, crystal cold.',
     detailCopy:
-      'Bright chrome, frosted light, and a clean studio sheen. Icy Silver is the clearest expression of DROP.',
+      'Bright chrome, frosted light, and crisp carbonation. The clearest expression of DROP.',
     image: '/assets/new-can-3.png',
     accent: '#ccecff',
     glow: 'rgba(154, 217, 255, 0.55)',

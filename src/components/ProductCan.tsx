@@ -29,12 +29,6 @@ const ProductCan = ({ variant, className = '', imageClassName = '', label }: Pro
         fetchPriority="high"
         draggable="false"
       />
-      <span className="drop-can__edge-light" aria-hidden="true" />
-      <span className="drop-can__metal-map" aria-hidden="true" />
-      <span className="drop-can__condensation" aria-hidden="true" />
-      <span className="drop-can__droplet-glint" aria-hidden="true" />
-      <span className="drop-can__sheen" aria-hidden="true" />
-      <span className="drop-can__cold-line" aria-hidden="true" />
     </div>
   );
 };

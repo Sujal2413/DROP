@@ -542,26 +542,26 @@
   }
 
   .drop-can__halo,
-  .drop-can__floor-shadow,
-  .drop-can__edge-light,
-  .drop-can__metal-map,
-  .drop-can__condensation,
-  .drop-can__droplet-glint,
-  .drop-can__sheen,
-  .drop-can__cold-line {
+  .drop-can__floor-shadow {
     position: absolute;
     pointer-events: none;
   }
 
   .drop-can__halo {
-    inset: 2% -34% -2%;
+    inset: -30% -80%;
     z-index: 0;
     border-radius: 50%;
     background:
-      radial-gradient(ellipse at 50% 46%, var(--can-glow), transparent 62%),
-      radial-gradient(ellipse at 56% 18%, rgba(255, 255, 255, 0.18), transparent 30%);
-    opacity: 0.68;
+      radial-gradient(circle at 50% 50%, #ffffff 0%, var(--can-accent) 15%, var(--can-glow) 45%, transparent 75%);
+    opacity: 0.85;
+    mix-blend-mode: screen;
     transform: translateZ(-85px);
+    animation: pulse-backlight 4s ease-in-out infinite alternate;
+  }
+
+  @keyframes pulse-backlight {
+    0% { opacity: 0.6; transform: translateZ(-85px) scale(0.9); }
+    100% { opacity: 0.95; transform: translateZ(-85px) scale(1.05); }
   }
 
   .drop-can__floor-shadow {
@@ -595,32 +595,6 @@
 
   .drop-can--icy-silver .drop-can__image {
     transform: translateZ(1px) scale(1.025);
-  }
-
-  .drop-can__edge-light {
-    inset: 3% 10% 4%;
-    z-index: 2;
-    border-radius: 45% / 10%;
-    background:
-      linear-gradient(90deg, rgba(255, 255, 255, 0.38), transparent 9%, transparent 86%, rgba(255, 255, 255, 0.46)),
-      radial-gradient(circle at 50% 1%, rgba(255, 255, 255, 0.62), transparent 14%),
-      radial-gradient(circle at 50% 98%, rgba(255, 255, 255, 0.4), transparent 14%);
-    mix-blend-mode: screen;
-    opacity: 0.74;
-    mask-image: linear-gradient(180deg, transparent 0%, black 9%, black 95%, transparent 100%);
-  }
-
-  .drop-can__metal-map {
-    inset: 4% 14% 7%;
-    z-index: 2;
-    border-radius: 999px;
-    background:
-      linear-gradient(90deg, transparent 0 11%, rgba(255, 255, 255, 0.18) 19%, transparent 31%, rgba(0, 0, 0, 0.42) 47%, transparent 62%, rgba(255, 255, 255, 0.16) 78%, transparent 92%),
-      linear-gradient(16deg, transparent 10%, rgba(255, 255, 255, 0.1) 30%, transparent 44%, rgba(255, 255, 255, 0.16) 60%, transparent 77%);
-    mix-blend-mode: screen;
-    opacity: 0.62;
-    mask-image: linear-gradient(180deg, transparent 0%, black 10%, black 91%, transparent 99%);
-    animation: metal-scan 7.5s ease-in-out infinite alternate;
   }
 
   .drop-can__condensation {
