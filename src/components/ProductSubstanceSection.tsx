@@ -1,8 +1,6 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 
-import ProductCan from './ProductCan';
-import { dropVariants } from '../data/dropProducts';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -49,16 +47,16 @@ const ProductSubstanceSection = () => {
   }, []);
 
   return (
-    <section id="story" className="substance-section">
+    <section id="features" className="substance-section" style={{ backgroundColor: '#D32F2F', padding: '100px 20px', textAlign: 'center' }}>
       <div ref={rootRef} className="substance-scene">
         <div className="statement-text">
-          <p className="statement-kicker">AS. IT. SHOULD. BE.</p>
-          <h2 className="statement-title">Water, redesigned for a cleaner future.</h2>
-          <p className="statement-copy">No plastic. No compromise. Just DROP.</p>
-        </div>
-
-        <div className="statement-can" aria-hidden="true">
-          <ProductCan variant={dropVariants[2]} />
+          <h2 className="statement-title" style={{ fontFamily: 'Oswald, sans-serif', color: '#F6F4EB', fontSize: '4rem', textTransform: 'uppercase', marginBottom: '40px' }}>
+            HYDRATION
+          </h2>
+          <div style={{ display: 'flex', gap: '20px', justifyContent: 'center' }}>
+            <span style={{ backgroundColor: '#FBC02D', color: '#1A1A1A', padding: '10px 24px', borderRadius: '99px', fontFamily: 'Oswald, sans-serif', fontWeight: 'bold', fontSize: '1.2rem' }}>CRISP</span>
+            <span style={{ backgroundColor: '#1A1A1A', color: '#FFFFFF', padding: '10px 24px', borderRadius: '99px', fontFamily: 'Oswald, sans-serif', fontWeight: 'bold', fontSize: '1.2rem' }}>PURE</span>
+          </div>
         </div>
       </div>
     </section>

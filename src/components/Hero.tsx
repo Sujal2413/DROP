@@ -155,7 +155,7 @@ const Hero = () => {
 
   return (
     <section ref={rootRef} id="hero" className="hero-section full-screen" style={style}>
-      <div className="hero-background" style={{ background: 'var(--hero-bg)' }}>
+      <div className="hero-background" style={{ background: '#F6F4EB' }}>
       </div>
       
       <Header />
@@ -163,10 +163,9 @@ const Hero = () => {
       <div className="hero-grid">
         <div className="hero-left">
           <div className="hero-text-content">
-            <h1 className="hero-headline">
-              <span className="hero-headline-line">Pure Water.</span><br />
-              <span className="hero-headline-line">Zero Plastic.</span><br />
-              <span className="hero-headline-line accent-text" style={{ color: 'var(--hero-accent)' }}>Choose DROP.</span>
+            <h1 className="hero-headline" style={{ fontFamily: 'Oswald, sans-serif', color: '#D32F2F', textTransform: 'uppercase', lineHeight: 1.1 }}>
+              <span className="hero-headline-line">UNLIMITED</span><br />
+              <span className="hero-headline-line">RELEASE WATER</span><br />
             </h1>
             <p className="hero-subtext">
               Premium still water in a recyclable aluminium can. Clean, cold, and made for a plastic-free future.
