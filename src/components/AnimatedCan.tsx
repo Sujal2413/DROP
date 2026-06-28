@@ -22,11 +22,11 @@ export default function AnimatedCan() {
 
     // Continuous floating and rotating loop
     gsap.to(canRef.current, {
-      y: -20,
-      rotationZ: 4,
-      rotationY: 12,
-      rotationX: 5,
-      duration: 3,
+      y: -15,
+      rotationZ: 3,
+      rotationY: 8,
+      rotationX: 4,
+      duration: 3.5,
       repeat: -1,
       yoyo: true,
       ease: 'sine.inOut',
@@ -48,19 +48,20 @@ export default function AnimatedCan() {
   return (
     <div
       ref={containerRef}
-      className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[30] pointer-events-none flex flex-col items-center justify-center w-full max-w-[550px] aspect-[37/100]"
+      className="absolute left-1/2 -translate-x-1/2 z-[30] pointer-events-none flex flex-col items-center justify-center aspect-[37/100]"
+      style={{ top: '54%', transform: 'translate(-50%, -50%)', height: 'clamp(210px, 24vw, 300px)' }}
     >
       <div 
         ref={canRef} 
-        className="relative w-full h-full drop-shadow-[0_20px_40px_rgba(0,0,0,0.3)] z-[30]"
+        className="relative w-full h-full drop-shadow-[0_15px_30px_rgba(0,0,0,0.2)] z-[30]"
         style={{ perspective: 800 }}
       >
         <Image
-          src="/assets/new-can-1.png"
-          alt="DROP Can"
+          src="/assets/new-can-variant-2.png"
+          alt="DROP Silver Can"
           fill
           priority
-          sizes="(max-width: 768px) 100vw, 600px"
+          sizes="(max-width: 768px) 300px, 400px"
           className="object-contain"
         />
       </div>

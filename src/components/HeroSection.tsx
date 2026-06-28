@@ -37,7 +37,15 @@ export default function HeroSection() {
       <div className="absolute inset-0 flex flex-col items-center justify-center z-[10] pointer-events-none mt-[-5vh]">
         <h1 
           ref={headlineRef}
-          className="text-[clamp(4rem,14vw,12rem)] text-[#8B0000] tracking-tighter leading-[0.85] text-center mix-blend-multiply opacity-0"
+          className="text-center opacity-0"
+          style={{
+            fontFamily: '"Anton", "Bebas Neue", "Druk Condensed", Impact, sans-serif',
+            fontSize: 'clamp(4rem, 16vw, 13rem)',
+            color: '#B11212',
+            fontWeight: 900,
+            letterSpacing: '-0.03em',
+            lineHeight: 0.88,
+          }}
         >
           UNLIMITED<br />
           RELEASE<br />
