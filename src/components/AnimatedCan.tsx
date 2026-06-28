@@ -47,15 +47,15 @@ export default function AnimatedCan({ activeIndex }: { activeIndex: number }) {
   }, [activeIndex]);
 
   useEffect(() => {
-    // Continuous subtle floating loop for all cans
+    // Continuous subtle floating loop with pronounced rotation
     canRefs.current.forEach((can) => {
       if (can) {
         gsap.to(can, {
           y: -20,
-          rotationZ: 2,
-          rotationY: 6,
-          rotationX: 3,
-          duration: 4,
+          rotationZ: 1,
+          rotationY: 15, // Enhanced rotating motion
+          rotationX: 1,
+          duration: 5,
           repeat: -1,
           yoyo: true,
           ease: 'sine.inOut',

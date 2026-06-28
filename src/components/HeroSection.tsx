@@ -7,9 +7,9 @@ import AnimatedCan from './AnimatedCan';
 import HeroParticles from './HeroParticles';
 
 const THEMES = [
-  { id: 'purple', bg: '#1A0B2E', text: '#E9D5FF' },
-  { id: 'silver', bg: '#F8F4E6', text: '#B11212' },
-  { id: 'black', bg: '#0A0A0A', text: '#FFFFFF' }
+  { id: 'purple', name: 'DEEP PURPLE', bg: '#1A0B2E', accentBg: '#2D1B4E', text: '#E9D5FF' },
+  { id: 'silver', name: 'ICY SILVER', bg: '#F8F4E6', accentBg: '#E8E2D2', text: '#B11212' },
+  { id: 'black', name: 'FULL BLACK', bg: '#0A0A0A', accentBg: '#1A1A1A', text: '#FFFFFF' }
 ];
 
 export default function HeroSection() {
@@ -52,8 +52,29 @@ export default function HeroSection() {
       <HeroNavbar />
       <HeroParticles />
       
+      {/* Right Side Accent Background (Curve Split) */}
+      <div 
+        className="absolute right-0 top-0 w-full md:w-[60%] h-full rounded-l-[100px] sm:rounded-l-[200px] transition-colors duration-1000 z-0"
+        style={{ backgroundColor: THEMES[activeIndex].accentBg }}
+      />
+
+      {/* Vertical Name Display */}
+      <div className="absolute right-4 md:right-12 top-1/2 -translate-y-1/2 z-[10] pointer-events-none overflow-hidden h-[80vh] flex items-center justify-center">
+        <h2 
+          className="text-[10vh] md:text-[15vh] font-bold tracking-tighter opacity-10 transition-colors duration-1000 whitespace-nowrap"
+          style={{ 
+            writingMode: 'vertical-rl',
+            transform: 'rotate(180deg)',
+            color: THEMES[activeIndex].text,
+            fontFamily: '"Anton", "Bebas Neue", "Druk Condensed", Impact, sans-serif'
+          }}
+        >
+          {THEMES[activeIndex].name}
+        </h2>
+      </div>
+
       {/* Left Content Container */}
-      <div className="relative z-[50] w-full md:w-1/2 px-8 md:pl-16 lg:pl-24 flex flex-col items-start justify-center pt-20 pointer-events-auto">
+      <div className="relative z-[50] w-full md:w-[45%] px-8 md:pl-16 lg:pl-24 flex flex-col items-start justify-center pt-20 pointer-events-auto">
         
         {/* Headline */}
         <h1 
