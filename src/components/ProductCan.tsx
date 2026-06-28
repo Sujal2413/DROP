@@ -22,6 +22,11 @@ const ProductCan = ({ variant, className = '', imageClassName = '', label }: Pro
         src={variant.image}
         alt={label ?? `${variant.name} DROP. can`}
         className={`drop-can__image ${imageClassName}`}
+        width={746}
+        height={1536}
+        decoding="async"
+        loading="eager"
+        fetchPriority="high"
         draggable="false"
       />
       <span className="drop-can__edge-light" aria-hidden="true" />

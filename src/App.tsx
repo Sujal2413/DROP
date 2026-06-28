@@ -15,13 +15,17 @@ gsap.registerPlugin(ScrollTrigger);
 const App = () => {
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 1.18,
+      lerp: 0.085,
+      duration: 1.34,
       easing: (t) => 1 - Math.pow(1 - t, 4),
       orientation: 'vertical',
       gestureOrientation: 'vertical',
       smoothWheel: true,
-      wheelMultiplier: 0.72,
-      touchMultiplier: 1.35,
+      wheelMultiplier: 0.78,
+      touchMultiplier: 1.42,
+      syncTouch: true,
+      syncTouchLerp: 0.075,
+      touchInertiaExponent: 1.68,
     });
 
     const raf = (time: number) => {
@@ -31,6 +35,43 @@ const App = () => {
     lenis.on('scroll', ScrollTrigger.update);
     gsap.ticker.add(raf);
     gsap.ticker.lagSmoothing(0);
+    ScrollTrigger.defaults({ fastScrollEnd: true });
+    ScrollTrigger.refresh();
+
+    const scrollToHash = (hash: string, immediate = false) => {
+      if (!hash || hash === '#') return false;
+      const target = document.querySelector(hash);
+      if (!target) return false;
+
+      lenis.scrollTo(target as HTMLElement, {
+        duration: immediate ? 0 : 1.42,
+        immediate,
+        easing: (t) => 1 - Math.pow(1 - t, 4),
+      });
+      return true;
+    };
+
+    const handleAnchorClick = (event: MouseEvent) => {
+      const link = (event.target as HTMLElement).closest<HTMLAnchorElement>('a[href^="#"]');
+      const hash = link?.getAttribute('href');
+      if (!link || !hash || hash === '#') return;
+
+      if (!document.querySelector(hash)) return;
+
+      event.preventDefault();
+      window.history.pushState(null, '', hash);
+      scrollToHash(hash);
+    };
+
+    const handleHashChange = () => scrollToHash(window.location.hash);
+
+    document.addEventListener('click', handleAnchorClick);
+    window.addEventListener('hashchange', handleHashChange);
+
+    window.setTimeout(() => {
+      scrollToHash(window.location.hash, true);
+      ScrollTrigger.refresh();
+    }, 80);
 
     const ctx = gsap.context(() => {
       // The video reference has a living outer gradient. This keeps it breathing
@@ -53,11 +94,12 @@ const App = () => {
             opacity: 1,
             ease: 'expo.out',
             duration: 1.1,
+            force3D: true,
             scrollTrigger: {
               trigger: scene,
               start: 'top 76%',
               end: 'top 24%',
-              scrub: 0.85,
+              scrub: 1.2,
             },
           },
         );
@@ -65,6 +107,8 @@ const App = () => {
     });
 
     return () => {
+      document.removeEventListener('click', handleAnchorClick);
+      window.removeEventListener('hashchange', handleHashChange);
       ctx.revert();
       gsap.ticker.remove(raf);
       lenis.destroy();

@@ -47,7 +47,7 @@ const DetailView = () => {
 
       gsap.fromTo(
         '.detail-product',
-        { x: 150, y: -10, rotateZ: 14, rotateY: -22, scale: 0.84, opacity: 0, filter: 'blur(8px)' },
+        { x: 150, y: -10, rotateZ: 14, rotateY: -22, scale: 0.84, opacity: 0 },
         {
           x: 0,
           y: 0,
@@ -55,7 +55,7 @@ const DetailView = () => {
           rotateY: 0,
           scale: 1,
           opacity: 1,
-          filter: 'blur(0px)',
+          force3D: true,
           duration: 1.25,
           ease: 'power4.out',
           scrollTrigger: { trigger: rootRef.current, start: 'top 58%' },
@@ -86,8 +86,8 @@ const DetailView = () => {
     const ctx = gsap.context(() => {
       gsap.fromTo(
         '.detail-product',
-        { y: -18, rotateY: -16, scale: 0.94, filter: 'blur(3px)' },
-        { y: 0, rotateY: 0, scale: 1, filter: 'blur(0px)', duration: 0.75, ease: 'power4.out' },
+        { y: -18, rotateY: -16, scale: 0.94 },
+        { y: 0, rotateY: 0, scale: 1, duration: 0.75, ease: 'power4.out', force3D: true },
       );
     }, rootRef);
 
@@ -99,6 +99,16 @@ const DetailView = () => {
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (!stage || reduceMotion) return;
 
+    const product = stage.querySelector<HTMLElement>('.detail-product');
+    if (!product) return;
+
+    const move = {
+      x: gsap.quickTo(product, 'x', { duration: 0.95, ease: 'power4.out' }),
+      y: gsap.quickTo(product, 'y', { duration: 0.95, ease: 'power4.out' }),
+      rotateY: gsap.quickTo(product, 'rotateY', { duration: 0.95, ease: 'power4.out' }),
+      rotateX: gsap.quickTo(product, 'rotateX', { duration: 0.95, ease: 'power4.out' }),
+    };
+
     const onPointerMove = (event: PointerEvent) => {
       const rect = stage.getBoundingClientRect();
       const x = (event.clientX - rect.left) / rect.width - 0.5;
@@ -107,24 +117,22 @@ const DetailView = () => {
       stage.style.setProperty('--cursor-x', `${50 + x * 32}%`);
       stage.style.setProperty('--cursor-y', `${46 + y * 24}%`);
 
-      gsap.to('.detail-product', {
-        rotateY: x * 12,
-        rotateX: y * -8,
-        x: x * 16,
-        y: y * 8,
-        duration: 0.95,
-        ease: 'power4.out',
-        overwrite: true,
-      });
+      move.rotateY(x * 12);
+      move.rotateX(y * -8);
+      move.x(x * 16);
+      move.y(y * 8);
     };
 
     const onPointerLeave = () => {
       stage.style.setProperty('--cursor-x', '54%');
       stage.style.setProperty('--cursor-y', '45%');
-      gsap.to('.detail-product', { rotateX: 0, rotateY: 0, x: 0, y: 0, duration: 1, ease: 'power4.out' });
+      move.rotateX(0);
+      move.rotateY(0);
+      move.x(0);
+      move.y(0);
     };
 
-    stage.addEventListener('pointermove', onPointerMove);
+    stage.addEventListener('pointermove', onPointerMove, { passive: true });
     stage.addEventListener('pointerleave', onPointerLeave);
 
     return () => {
@@ -204,7 +212,9 @@ const DetailView = () => {
             {playing ? <Pause size={17} fill="currentColor" /> : <Play size={17} fill="currentColor" />}
           </button>
           <div className={`detail-product ${playing ? 'is-playing' : ''}`}>
-            <ProductCan variant={variant} className="drop-can--detail" />
+            <div className="detail-product-float">
+              <ProductCan variant={variant} className="drop-can--detail" />
+            </div>
           </div>
         </div>
       </div>

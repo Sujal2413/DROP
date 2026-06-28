@@ -34,7 +34,7 @@ const ProductShowcase = () => {
 
       gsap.fromTo(
         '.showcase-can',
-        { y: -140, x: 90, rotateZ: 18, rotateY: -22, scale: 0.88, opacity: 0, filter: 'blur(8px)' },
+        { y: -140, x: 90, rotateZ: 18, rotateY: -22, scale: 0.88, opacity: 0 },
         {
           y: 0,
           x: 0,
@@ -42,7 +42,7 @@ const ProductShowcase = () => {
           rotateZ: 0,
           scale: 1,
           opacity: 1,
-          filter: 'blur(0px)',
+          force3D: true,
           duration: 1.35,
           stagger: 0.12,
           ease: 'power4.out',
@@ -64,18 +64,47 @@ const ProductShowcase = () => {
         },
       );
 
-      gsap.to('.showcase-can', {
+      gsap.to('.showcase-can-float', {
         y: (index) => (index === 1 ? -12 : 10),
         rotateZ: (index) => [-3, 2.2, 3.4][index] ?? 2,
+        rotateY: (index) => [4, -3, 3][index] ?? 2,
         duration: (index) => 4.4 + index * 0.5,
         repeat: -1,
         yoyo: true,
         ease: 'sine.inOut',
+        force3D: true,
       });
     }, rootRef);
 
     return () => ctx.revert();
   }, []);
+
+  useEffect(() => {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduceMotion) return;
+
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        `.showcase-product-${active + 1} .showcase-can`,
+        { y: -24, rotateY: -16, scale: 0.98 },
+        {
+          y: -14,
+          rotateY: 0,
+          scale: 1.06,
+          duration: 0.72,
+          ease: 'power4.out',
+          force3D: true,
+        },
+      );
+      gsap.fromTo(
+        `.showcase-product-${active + 1} .showcase-product__beam`,
+        { opacity: 0.35, scale: 0.82 },
+        { opacity: 0.88, scale: 1, duration: 0.72, ease: 'power4.out' },
+      );
+    }, rootRef);
+
+    return () => ctx.revert();
+  }, [active]);
 
   return (
     <SceneFrame id="products" tone="purple">
@@ -114,7 +143,9 @@ const ProductShowcase = () => {
               <span className="showcase-product__beam" aria-hidden="true" />
               <Pedestal className={`showcase-podium showcase-podium-${index + 1}`} />
               <div className="showcase-can">
-                <ProductCan variant={variant} className="drop-can--showcase" />
+                <div className="showcase-can-float">
+                  <ProductCan variant={variant} className="drop-can--showcase" />
+                </div>
               </div>
               <span className="showcase-product__label">{variant.name}</span>
             </button>
