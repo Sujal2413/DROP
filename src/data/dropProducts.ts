@@ -24,7 +24,7 @@ export const dropVariants: DropVariant[] = [
     accent: '#d9e0ea',
     glow: 'rgba(218, 226, 238, 0.35)',
     gradient:
-      'radial-gradient(circle at 72% 44%, rgba(213, 222, 236, 0.4), transparent 30%), linear-gradient(135deg, #fdfbf7 0%, #f4eee1 48%, #e8e0d5 100%)',
+      'radial-gradient(circle at 72% 44%, rgba(200, 16, 46, 0.25), transparent 30%), linear-gradient(135deg, #0F0F0F 0%, #1A1A1A 48%, #0A0A0A 100%)',
   },
   {
     id: 'midnight-purple',
@@ -38,7 +38,7 @@ export const dropVariants: DropVariant[] = [
     accent: '#a98cff',
     glow: 'rgba(149, 91, 255, 0.55)',
     gradient:
-      'radial-gradient(circle at 74% 44%, rgba(139, 92, 246, 0.2), transparent 31%), linear-gradient(135deg, #fdfbf7 0%, #f0ebf5 48%, #e4dce8 100%)',
+      'radial-gradient(circle at 74% 44%, rgba(75, 0, 130, 0.4), transparent 31%), linear-gradient(135deg, #0F0F0F 0%, #140C1A 48%, #08050D 100%)',
   },
   {
     id: 'icy-silver',
@@ -52,6 +52,6 @@ export const dropVariants: DropVariant[] = [
     accent: '#ccecff',
     glow: 'rgba(154, 217, 255, 0.55)',
     gradient:
-      'radial-gradient(circle at 76% 44%, rgba(191, 230, 255, 0.3), transparent 32%), linear-gradient(135deg, #fdfbf7 0%, #ebf2f5 50%, #dfe8eb 100%)',
+      'radial-gradient(circle at 76% 44%, rgba(44, 44, 44, 0.4), transparent 32%), linear-gradient(135deg, #0F0F0F 0%, #171717 50%, #050505 100%)',
   },
 ];
