@@ -60,6 +60,7 @@ export default function AnimatedCan() {
           alt="DROP Can"
           fill
           priority
+          sizes="(max-width: 768px) 100vw, 400px"
           className="object-contain"
         />
       </div>
