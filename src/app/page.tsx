@@ -7,13 +7,24 @@ export default function Home() {
 
       <main className="relative z-10">
         {/* Section 1: Hero */}
-        <section className="min-h-screen bg-[var(--color-cream)] flex items-center justify-center p-8 text-center relative z-10">
-          <h1 className="text-[clamp(4rem,12vw,10rem)] text-[var(--color-red)] tracking-tighter leading-[0.9] relative z-10 mix-blend-multiply">
+        <section className="min-h-screen bg-[var(--color-cream)] flex items-center justify-center p-8 text-center relative z-10 overflow-hidden">
+          {/* Background Video */}
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="absolute top-0 left-0 w-full h-full object-cover z-0 opacity-80"
+          >
+            <source src="/hero_animation.mp4" type="video/mp4" />
+          </video>
+          
+          <h1 className="text-[clamp(4rem,12vw,10rem)] text-[var(--color-red)] tracking-tighter leading-[0.9] relative z-10 mix-blend-multiply drop-shadow-xl">
             UNLIMITED<br />
             RELEASE<br />
             WATER
           </h1>
-          <p className="absolute bottom-10 font-medium tracking-widest text-[var(--color-dark)] text-lg z-10">
+          <p className="absolute bottom-10 font-medium tracking-widest text-[var(--color-dark)] text-lg z-10 bg-[var(--color-cream)] px-4 py-1 rounded-full shadow-md">
             DROP. AS. IT. SHOULD. BE.
           </p>
         </section>
