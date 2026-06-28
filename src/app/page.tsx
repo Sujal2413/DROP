@@ -7,23 +7,22 @@ export default function Home() {
 
       <main className="relative z-10">
         {/* Section 1: Hero */}
-        <section className="min-h-screen bg-[var(--color-cream)] flex items-center justify-center p-8 text-center relative z-10 overflow-hidden">
-          {/* Background Video */}
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="absolute top-0 left-0 w-full h-full object-cover z-0 opacity-80"
-          >
-            <source src="/hero_animation.mp4" type="video/mp4" />
-          </video>
-          
-          <h1 className="text-[clamp(4rem,12vw,10rem)] text-[var(--color-red)] tracking-tighter leading-[0.9] relative z-10 mix-blend-multiply drop-shadow-xl">
+        <section className="min-h-screen bg-[var(--color-cream)] flex flex-col items-center justify-center p-8 text-center relative z-10 overflow-hidden">
+          <h1 className="text-[clamp(4rem,12vw,10rem)] text-[var(--color-red)] tracking-tighter leading-[0.9] relative z-10 mix-blend-multiply drop-shadow-xl mt-[-10vh]">
             UNLIMITED<br />
             RELEASE<br />
             WATER
           </h1>
+          
+          <div className="relative z-10 mt-12 flex gap-4">
+            <button className="px-8 py-4 bg-[var(--color-dark)] text-[var(--color-cream)] font-bold tracking-widest text-sm rounded-full shadow-lg hover:scale-105 transition-transform">
+              PRE-ORDER NOW
+            </button>
+            <button className="px-8 py-4 bg-transparent border-2 border-[var(--color-dark)] text-[var(--color-dark)] font-bold tracking-widest text-sm rounded-full hover:bg-[var(--color-dark)] hover:text-[var(--color-cream)] transition-colors">
+              VIEW LINEUP
+            </button>
+          </div>
+
           <p className="absolute bottom-10 font-medium tracking-widest text-[var(--color-dark)] text-lg z-10 bg-[var(--color-cream)] px-4 py-1 rounded-full shadow-md">
             DROP. AS. IT. SHOULD. BE.
           </p>
