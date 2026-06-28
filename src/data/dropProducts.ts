@@ -20,7 +20,7 @@ export const dropVariants: DropVariant[] = [
     copy: 'Timeless premium still water in matte aluminium.',
     detailCopy:
       'Bold, minimal, and cold to the touch. Pure Black keeps DROP. severe, refined, and ready for the city.',
-    image: '/assets/can-black-crisp.jpeg',
+    image: '/assets/new-can-1.jpeg',
     accent: '#d9e0ea',
     glow: 'rgba(218, 226, 238, 0.35)',
     gradient:
@@ -34,7 +34,7 @@ export const dropVariants: DropVariant[] = [
     copy: 'Deep, modern confidence in every sip.',
     detailCopy:
       'A low-lit violet finish with chrome edges and quiet drama. Designed to feel rare before the first sip.',
-    image: '/assets/can-purple-crisp.jpeg',
+    image: '/assets/new-can-2.jpeg',
     accent: '#a98cff',
     glow: 'rgba(149, 91, 255, 0.55)',
     gradient:
@@ -48,7 +48,7 @@ export const dropVariants: DropVariant[] = [
     copy: 'Pure hydration, crystal cold.',
     detailCopy:
       'Bright chrome, frosted light, and a clean studio sheen. Icy Silver is the clearest expression of DROP.',
-    image: '/assets/can-silver-crisp.jpeg',
+    image: '/assets/new-can-3.jpeg',
     accent: '#ccecff',
     glow: 'rgba(154, 217, 255, 0.55)',
     gradient:
