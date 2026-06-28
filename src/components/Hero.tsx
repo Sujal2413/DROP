@@ -105,10 +105,10 @@ const Hero = () => {
             scrub: 1.5,
           },
         })
-        .to('.hero-can--black', { y: 62, rotateZ: -10, scale: 0.94, ease: 'power2.out', force3D: true }, 0)
-        .to('.hero-can--purple', { y: 78, rotateZ: 8, scale: 0.96, ease: 'power2.out', force3D: true }, 0)
-        .to('.hero-can--silver', { y: 48, rotateZ: 8, scale: 0.93, opacity: 0.82, ease: 'none', force3D: true }, 0)
-        .to('.hero-podium', { y: -24, opacity: 1, ease: 'power2.out', force3D: true }, 0)
+        .to('.hero-can--black', { y: 62, rotateZ: -10, scale: 0.94, ease: 'power2.inOut', force3D: true }, 0)
+        .to('.hero-can--purple', { y: 78, rotateZ: 8, scale: 0.96, ease: 'power2.inOut', force3D: true }, 0)
+        .to('.hero-can--silver', { y: 48, rotateZ: 8, scale: 0.93, opacity: 0.82, ease: 'power2.inOut', force3D: true }, 0)
+        .to('.hero-podium', { y: -24, opacity: 1, ease: 'power2.inOut', force3D: true }, 0)
         .to('.hero-content', { y: -36, opacity: 0.4, ease: 'power2.out', force3D: true }, 0);
     }, rootRef);
 
