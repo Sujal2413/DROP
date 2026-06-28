@@ -49,7 +49,7 @@ export default function AnimatedCan() {
     <div
       ref={containerRef}
       className="absolute left-1/2 -translate-x-1/2 z-[30] pointer-events-none flex flex-col items-center justify-center aspect-[37/100]"
-      style={{ top: '54%', transform: 'translate(-50%, -50%)', height: 'clamp(210px, 24vw, 300px)' }}
+      style={{ top: '54%', transform: 'translate(-50%, -50%)', height: 'clamp(350px, 40vw, 650px)' }}
     >
       <div 
         ref={canRef} 
