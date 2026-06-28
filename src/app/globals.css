@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+@theme {
+  --color-cream: #F6F4EB;
+  --color-red: #D32F2F;
+  --color-mustard: #FBC02D;
+  --color-dark: #1A1A1A;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-cream);
+    color: var(--color-dark);
+    font-family: var(--font-body), sans-serif;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3 {
+    font-family: var(--font-heading), sans-serif;
+    text-transform: uppercase;
+    line-height: 0.9;
+  }
+}
