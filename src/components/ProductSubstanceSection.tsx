@@ -1,9 +1,9 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import SceneFrame from './SceneFrame';
+
 import ProductCan from './ProductCan';
 import { dropVariants } from '../data/dropProducts';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -49,8 +49,8 @@ const ProductSubstanceSection = () => {
   }, []);
 
   return (
-    <SceneFrame id="story" tone="charcoal">
-      <div ref={rootRef} className="statement-scene">
+    <section id="story" className="substance-section">
+      <div ref={rootRef} className="substance-scene">
         <div className="statement-text">
           <p className="statement-kicker">AS. IT. SHOULD. BE.</p>
           <h2 className="statement-title">Water, redesigned for a cleaner future.</h2>
@@ -61,7 +61,7 @@ const ProductSubstanceSection = () => {
           <ProductCan variant={dropVariants[2]} />
         </div>
       </div>
-    </SceneFrame>
+    </section>
   );
 };
 

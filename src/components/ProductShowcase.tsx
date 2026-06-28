@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import type { CSSProperties } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import SceneFrame from './SceneFrame';
+
 import ProductCan from './ProductCan';
 import Pedestal from './Pedestal';
 import { dropVariants } from '../data/dropProducts';
@@ -107,7 +107,7 @@ const ProductShowcase = () => {
   }, [active]);
 
   return (
-    <SceneFrame id="products" tone="purple">
+    <section id="products" className="showcase-section">
       <div
         ref={rootRef}
         className="showcase-scene"
@@ -152,7 +152,7 @@ const ProductShowcase = () => {
           ))}
         </div>
       </div>
-    </SceneFrame>
+    </section>
   );
 };
 

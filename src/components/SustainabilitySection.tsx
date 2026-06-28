@@ -2,17 +2,17 @@ import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Ban, Leaf, PackageCheck, Recycle } from 'lucide-react';
-import SceneFrame from './SceneFrame';
-import ProductCan from './ProductCan';
-import { dropVariants } from '../data/dropProducts';
+
+
 
 gsap.registerPlugin(ScrollTrigger);
 
 const items = [
-  { title: 'Recyclable aluminium', copy: 'Built for circular reuse.', Icon: Recycle },
-  { title: 'Zero plastic', copy: 'No single-use bottles.', Icon: Ban },
-  { title: 'Urban portable', copy: 'Slim, cold, modern.', Icon: PackageCheck },
-  { title: 'Cleaner future', copy: 'Made for modern India.', Icon: Leaf },
+  { title: '100% recyclable aluminium can', Icon: Recycle },
+  { title: 'Premium still water', Icon: Leaf },
+  { title: 'Zero plastic bottle', Icon: Ban },
+  { title: 'Modern portable design', Icon: PackageCheck },
+  { title: 'Built for a cleaner future', Icon: Leaf },
 ];
 
 const SustainabilitySection = () => {
@@ -54,30 +54,22 @@ const SustainabilitySection = () => {
   }, []);
 
   return (
-    <SceneFrame id="sustainability" tone="silver">
+    <section id="sustainability" className="sustainability-section">
       <div ref={rootRef} className="sustain-scene">
         <div className="sustain-copy">
           <p className="scene-label">Sustainability</p>
           <h2>No Plastic. Just Water.</h2>
-          <p>DROP. replaces plastic bottles with recyclable aluminium cans and a cleaner cold ritual.</p>
-          <div className="sustain-grid">
-            {items.map(({ title, copy, Icon }) => (
-              <article key={title} className="sustain-card">
+          <ul className="sustain-list">
+            {items.map(({ title, Icon }) => (
+              <li key={title} className="sustain-card">
                 <Icon size={18} strokeWidth={1.7} />
-                <div>
-                  <h3>{title}</h3>
-                  <p>{copy}</p>
-                </div>
-              </article>
+                <span>{title}</span>
+              </li>
             ))}
-          </div>
-        </div>
-
-        <div className="sustain-product">
-          <ProductCan variant={dropVariants[2]} />
+          </ul>
         </div>
       </div>
-    </SceneFrame>
+    </section>
   );
 };
 

@@ -84,26 +84,7 @@ const App = () => {
         ease: 'sine.inOut',
       });
 
-      gsap.utils.toArray<HTMLElement>('.motion-scene').forEach((scene) => {
-        gsap.fromTo(
-          scene.querySelector('.site-frame'),
-          { y: 74, scale: 0.965, opacity: 0.72 },
-          {
-            y: 0,
-            scale: 1,
-            opacity: 1,
-            ease: 'expo.out',
-            duration: 1.1,
-            force3D: true,
-            scrollTrigger: {
-              trigger: scene,
-              start: 'top 76%',
-              end: 'top 24%',
-              scrub: 1.2,
-            },
-          },
-        );
-      });
+      // Removed scaling for full-screen
     });
 
     return () => {

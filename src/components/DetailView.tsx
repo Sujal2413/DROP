@@ -3,7 +3,7 @@ import type { CSSProperties } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Pause, Play } from 'lucide-react';
-import SceneFrame from './SceneFrame';
+
 import ProductCan from './ProductCan';
 import Pedestal from './Pedestal';
 import { dropVariants } from '../data/dropProducts';
@@ -142,7 +142,7 @@ const DetailView = () => {
   }, []);
 
   return (
-    <SceneFrame id="detail" tone={variant.id === 'icy-silver' ? 'silver' : 'pink'}>
+    <section id="detail" className="detail-section">
       <div
         ref={rootRef}
         className="detail-scene"
@@ -152,7 +152,7 @@ const DetailView = () => {
           <p className="scene-label">DROP. Pure Still Water</p>
           <h2>{variant.name}</h2>
           <p>
-            Premium still water in recyclable aluminium. Tall, slim, minimal. Pure hydration, as it should be.
+            Premium still water in a recyclable aluminium can. No plastic. No noise. Just water, as it should be.
           </p>
 
           <div className="detail-control">
@@ -218,7 +218,7 @@ const DetailView = () => {
           </div>
         </div>
       </div>
-    </SceneFrame>
+    </section>
   );
 };
 

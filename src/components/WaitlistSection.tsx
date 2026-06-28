@@ -3,7 +3,7 @@ import type { FormEvent } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Check } from 'lucide-react';
-import SceneFrame from './SceneFrame';
+
 import { dropVariants } from '../data/dropProducts';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -40,11 +40,11 @@ const WaitlistSection = () => {
   };
 
   return (
-    <SceneFrame id="waitlist" tone="pink">
+    <section id="waitlist" className="waitlist-section">
       <div ref={rootRef} className="wait-scene">
         <div className="wait-copy">
           <p className="scene-label">Coming Soon</p>
-          <h2>Join the DROP. list.</h2>
+          <h2>DROP. is coming soon.</h2>
           <p>Be first to experience water as it should be.</p>
         </div>
 
@@ -86,11 +86,19 @@ const WaitlistSection = () => {
                 <option>500ml</option>
               </select>
             </label>
-            <button type="submit">Join Waitlist</button>
+            <label>
+              <span>Would you buy canned water?</span>
+              <select name="buy-canned-water" defaultValue="Yes">
+                <option>Yes</option>
+                <option>Maybe</option>
+                <option>No</option>
+              </select>
+            </label>
+            <button type="submit">Join the DROP. List</button>
           </form>
         )}
       </div>
-    </SceneFrame>
+    </section>
   );
 };
 
