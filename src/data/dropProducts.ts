@@ -20,7 +20,7 @@ export const dropVariants: DropVariant[] = [
     copy: 'High-performance energy booster water.',
     detailCopy:
       'Engineered for athletes. Clean energy without the crash, sealed in matte black aluminium.',
-    image: '/assets/new-can-1.png',
+    image: '/assets/new-can-variant-1.png',
     accent: '#d9e0ea',
     glow: 'rgba(218, 226, 238, 0.35)',
     gradient:
@@ -34,7 +34,7 @@ export const dropVariants: DropVariant[] = [
     copy: 'Infused clove water for deep hydration.',
     detailCopy:
       'A low-lit violet finish containing pure clove-infused water. Designed to refresh and restore.',
-    image: '/assets/new-can-2.png',
+    image: '/assets/new-can-variant-2.png',
     accent: '#a98cff',
     glow: 'rgba(149, 91, 255, 0.55)',
     gradient:
@@ -48,7 +48,7 @@ export const dropVariants: DropVariant[] = [
     copy: 'Pure sparkling water, crystal cold.',
     detailCopy:
       'Bright chrome, frosted light, and crisp carbonation. The clearest expression of DROP.',
-    image: '/assets/new-can-3.png',
+    image: '/assets/new-can-variant-3.png',
     accent: '#ccecff',
     glow: 'rgba(154, 217, 255, 0.55)',
     gradient:
