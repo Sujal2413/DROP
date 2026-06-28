@@ -117,6 +117,35 @@ const Hero = () => {
     };
   }, []);
 
+  useEffect(() => {
+    const stage = stageRef.current;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!stage || reduceMotion) return;
+    
+    // Trigger the custom 3D swap animation on variant change
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        '.hero-can-shell',
+        { 
+          x: 200, 
+          rotateY: 90, 
+          scale: 0.8,
+          opacity: 0 
+        },
+        { 
+          x: 0, 
+          rotateY: 0, 
+          scale: 1,
+          opacity: 1, 
+          duration: 1.2, 
+          ease: 'expo.out'
+        }
+      );
+    }, stageRef);
+    
+    return () => ctx.revert();
+  }, [activeVariant]);
+
   const variant = dropVariants[activeVariant];
   const style = {
     '--hero-accent': variant.accent,
@@ -175,6 +204,7 @@ const Hero = () => {
             <div className="hero-can-container">
               <div className="hero-can-float">
                 <div className="hero-can-shell">
+                  <div className="hero-can-glare" aria-hidden="true" />
                   <ProductCan variant={variant} className="drop-can--hero-massive" />
                 </div>
               </div>

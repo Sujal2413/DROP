@@ -591,6 +591,8 @@
     image-rendering: auto;
     backface-visibility: hidden;
     will-change: transform;
+    mix-blend-mode: normal;
+    filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.6));
   }
 
   .drop-can--icy-silver .drop-can__image {
@@ -1716,7 +1718,7 @@
   line-height: 1.6;
   color: rgba(255, 255, 255, 0.7);
   margin: 0;
-  max-width: 480px;
+  max-width: 45ch;
 }
 
 .hero-cta-group {
@@ -1810,8 +1812,27 @@
 }
 
 .drop-can--hero-massive {
-  height: clamp(400px, 60vh, 800px) !important;
+  height: clamp(550px, 85vh, 1200px) !important;
   width: auto !important;
   aspect-ratio: 746 / 1536;
+}
+
+.hero-can-glare {
+  content: '';
+  position: absolute;
+  top: 10%;
+  left: 25%;
+  width: 50%;
+  height: 80%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.08) 20%,
+    rgba(255, 255, 255, 0) 60%
+  );
+  transform: skewX(-20deg);
+  pointer-events: none;
+  mix-blend-mode: overlay;
+  z-index: 10;
 }
 
