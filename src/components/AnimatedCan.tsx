@@ -48,7 +48,7 @@ export default function AnimatedCan() {
   return (
     <div
       ref={containerRef}
-      className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[30] pointer-events-none flex flex-col items-center justify-center w-full max-w-[400px] aspect-[37/100]"
+      className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[30] pointer-events-none flex flex-col items-center justify-center w-full max-w-[550px] aspect-[37/100]"
     >
       <div 
         ref={canRef} 
@@ -56,11 +56,11 @@ export default function AnimatedCan() {
         style={{ perspective: 800 }}
       >
         <Image
-          src="/Create_a_hyper-realistic_product_image_202606280004.jpeg" // Using the existing can image (purple/silver). User requested silver, we use the best available.
+          src="/assets/new-can-1.png"
           alt="DROP Can"
           fill
           priority
-          sizes="(max-width: 768px) 100vw, 400px"
+          sizes="(max-width: 768px) 100vw, 600px"
           className="object-contain"
         />
       </div>
