@@ -54,7 +54,7 @@ export default function HeroSection() {
       
       {/* Right Side Accent Background (Curve Split) */}
       <div 
-        className="absolute right-0 top-0 w-full md:w-[60%] h-full rounded-l-[100px] sm:rounded-l-[200px] transition-colors duration-1000 z-0"
+        className="absolute right-0 top-0 w-full md:w-[45%] lg:w-[40%] h-full rounded-l-[100px] sm:rounded-l-[200px] transition-colors duration-1000 z-0"
         style={{ backgroundColor: THEMES[activeIndex].accentBg }}
       />
 
