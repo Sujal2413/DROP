@@ -84,7 +84,26 @@ const App = () => {
         ease: 'sine.inOut',
       });
 
-      // Removed .site-frame GSAP scaling since it's full screen now
+      gsap.utils.toArray<HTMLElement>('.motion-scene').forEach((scene) => {
+        gsap.fromTo(
+          scene.querySelector('.site-frame'),
+          { y: 74, scale: 0.965, opacity: 0.72 },
+          {
+            y: 0,
+            scale: 1,
+            opacity: 1,
+            ease: 'expo.out',
+            duration: 1.1,
+            force3D: true,
+            scrollTrigger: {
+              trigger: scene,
+              start: 'top 76%',
+              end: 'top 24%',
+              scrub: 1.2,
+            },
+          },
+        );
+      });
     });
 
     return () => {
@@ -101,13 +120,13 @@ const App = () => {
       <div className="ambient-aura" />
       <main>
         <Hero />
-        {/* <ProductSubstanceSection />
+        <ProductSubstanceSection />
         <ProductShowcase />
         <DetailView />
         <SustainabilitySection />
-        <WaitlistSection /> */}
+        <WaitlistSection />
       </main>
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 };
