@@ -43,8 +43,8 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-7xl mx-auto px-6 relative z-10">
             
             {/* Deep Purple */}
-            <div className="flex flex-col items-center justify-center relative group">
-              <div className="w-full max-w-[320px] aspect-[4/5] relative flex items-center justify-center overflow-hidden">
+            <div className="flex flex-col items-center justify-between p-8 rounded-[40px] bg-white shadow-sm border border-black/5 hover:shadow-2xl transition-shadow duration-500 group">
+              <div className="w-full max-w-[320px] h-[500px] relative flex items-center justify-center overflow-hidden mb-6">
                 <Image 
                   src="/assets/new-can-variant-1.png" 
                   alt="Deep Purple Can" 
@@ -55,15 +55,15 @@ export default function Home() {
                   priority
                 />
               </div>
-              <div className="text-center mt-6 z-10">
-                <h3 className="text-2xl md:text-3xl font-bold text-[var(--color-dark)] tracking-wider mb-2">DEEP PURPLE</h3>
-                <p className="font-medium text-sm md:text-lg text-[var(--color-dark)] opacity-70">A bold, dark aesthetic for the night. Uncompromising hydration.</p>
+              <div className="text-center">
+                <h3 className="text-3xl font-black text-[var(--color-dark)] uppercase tracking-tight mb-3">Deep Purple</h3>
+                <p className="text-[var(--color-dark)] opacity-70 leading-relaxed font-medium">A bold, dark aesthetic for the night. Uncompromising hydration.</p>
               </div>
             </div>
             
             {/* Icy Silver */}
-            <div className="flex flex-col items-center justify-center relative group">
-              <div className="w-full max-w-[320px] aspect-[4/5] relative flex items-center justify-center overflow-hidden">
+            <div className="flex flex-col items-center justify-between p-8 rounded-[40px] bg-white shadow-sm border border-black/5 hover:shadow-2xl transition-shadow duration-500 group">
+              <div className="w-full max-w-[320px] h-[500px] relative flex items-center justify-center overflow-hidden mb-6">
                 <Image 
                   src="/assets/new-can-variant-2.png" 
                   alt="Icy Silver Can" 
@@ -74,15 +74,15 @@ export default function Home() {
                   priority
                 />
               </div>
-              <div className="text-center mt-6 z-10">
-                <h3 className="text-2xl md:text-3xl font-bold text-[var(--color-dark)] tracking-wider mb-2">ICY SILVER</h3>
-                <p className="font-medium text-sm md:text-lg text-[var(--color-dark)] opacity-70">Sleek, bright, and universally premium. The everyday classic.</p>
+              <div className="text-center">
+                <h3 className="text-3xl font-black text-[var(--color-dark)] uppercase tracking-tight mb-3">Icy Silver</h3>
+                <p className="text-[var(--color-dark)] opacity-70 leading-relaxed font-medium">Sleek, bright, and universally premium. The everyday classic.</p>
               </div>
             </div>
 
             {/* Full Black */}
-            <div className="flex flex-col items-center justify-center relative group">
-              <div className="w-full max-w-[320px] aspect-[4/5] relative flex items-center justify-center overflow-hidden">
+            <div className="flex flex-col items-center justify-between p-8 rounded-[40px] bg-white shadow-sm border border-black/5 hover:shadow-2xl transition-shadow duration-500 group">
+              <div className="w-full max-w-[320px] h-[500px] relative flex items-center justify-center overflow-hidden mb-6">
                 <Image 
                   src="/assets/new-can-variant-3.png" 
                   alt="Full Black Can" 
@@ -93,9 +93,9 @@ export default function Home() {
                   priority
                 />
               </div>
-              <div className="text-center mt-6 z-10">
-                <h3 className="text-2xl md:text-3xl font-bold text-[var(--color-dark)] tracking-wider mb-2">FULL BLACK</h3>
-                <p className="font-medium text-sm md:text-lg text-[var(--color-dark)] opacity-70">Matte, mysterious, absolute zero noise. Focus in a can.</p>
+              <div className="text-center">
+                <h3 className="text-3xl font-black text-[var(--color-dark)] uppercase tracking-tight mb-3">Full Black</h3>
+                <p className="text-[var(--color-dark)] opacity-70 leading-relaxed font-medium">Matte, mysterious, absolute zero noise. Focus in a can.</p>
               </div>
             </div>
           </div>
