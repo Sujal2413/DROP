@@ -82,7 +82,10 @@ export default function Home() {
                     fill
                     sizes="(max-width: 1280px) 33vw, 100vw"
                     className="object-cover block transform transition-transform duration-300 group-hover:scale-105" 
-                    style={{ mixBlendMode: 'normal' }}
+                    style={{ 
+                      mixBlendMode: 'normal',
+                      filter: 'drop-shadow(0px 0px 1.5px rgba(0,0,0,0.5)) drop-shadow(0px 10px 30px rgba(0,0,0,0.15))'
+                    }}
                     priority
                   />
                 </div>
