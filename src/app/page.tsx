@@ -47,7 +47,7 @@ export default function Home() {
               <div className="w-full max-w-[320px] h-[380px] lg:h-[420px] relative flex items-center justify-center overflow-hidden mb-6">
                 <div 
                   className="absolute h-[115%] aspect-[2752/1536] flex items-center justify-center pointer-events-none"
-                  style={{ clipPath: 'inset(0 0 15% 0)' }}
+                  style={{ clipPath: 'inset(0 0 11% 0)' }}
                 >
                   <Image 
                     src="/assets/new-can-variant-1.png" 
@@ -71,7 +71,7 @@ export default function Home() {
               <div className="w-full max-w-[320px] h-[380px] lg:h-[420px] relative flex items-center justify-center overflow-hidden mb-6">
                 <div 
                   className="absolute h-[115%] aspect-[2752/1536] flex items-center justify-center pointer-events-none"
-                  style={{ clipPath: 'inset(0 0 15% 0)' }}
+                  style={{ clipPath: 'inset(0 0 11% 0)' }}
                 >
                   <Image 
                     src="/assets/new-can-variant-2.png" 
@@ -95,7 +95,7 @@ export default function Home() {
               <div className="w-full max-w-[320px] h-[380px] lg:h-[420px] relative flex items-center justify-center overflow-hidden mb-6">
                 <div 
                   className="absolute h-[115%] aspect-[2752/1536] flex items-center justify-center pointer-events-none"
-                  style={{ clipPath: 'inset(0 0 15% 0)' }}
+                  style={{ clipPath: 'inset(0 0 11% 0)' }}
                 >
                   <Image 
                     src="/assets/new-can-variant-3.png" 
