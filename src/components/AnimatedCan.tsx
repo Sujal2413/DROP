@@ -87,6 +87,7 @@ export default function AnimatedCan({ activeIndex }: { activeIndex: number }) {
             priority
             sizes="(max-width: 768px) 90vw, 1000px"
             className="object-contain opacity-100 mix-blend-normal"
+            style={{ clipPath: 'inset(0 0 15% 0)' }}
           />
         </div>
       ))}

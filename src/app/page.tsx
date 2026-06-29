@@ -43,7 +43,7 @@ export default function Home() {
             {/* Deep Purple */}
             <div className="flex flex-col items-center group">
               <div className="relative w-full aspect-[1/1.5] mb-6 transition-transform duration-500 group-hover:-translate-y-4">
-                <img src="/assets/new-can-1.png" alt="Deep Purple Can" className="w-full h-full object-contain" />
+                <img src="/assets/new-can-1.png" alt="Deep Purple Can" className="w-full h-full object-contain" style={{ clipPath: 'inset(0 0 15% 0)' }} />
               </div>
               <h3 className="text-3xl font-bold text-[var(--color-dark)] mb-3">DEEP PURPLE</h3>
               <p className="font-medium text-lg text-[var(--color-dark)] opacity-70">A bold, dark aesthetic for the night. Uncompromising hydration.</p>
@@ -52,7 +52,7 @@ export default function Home() {
             {/* Icy Silver */}
             <div className="flex flex-col items-center group">
               <div className="relative w-full aspect-[1/1.5] mb-6 transition-transform duration-500 group-hover:-translate-y-4">
-                <img src="/assets/new-can-2.png" alt="Icy Silver Can" className="w-full h-full object-contain" />
+                <img src="/assets/new-can-2.png" alt="Icy Silver Can" className="w-full h-full object-contain" style={{ clipPath: 'inset(0 0 15% 0)' }} />
               </div>
               <h3 className="text-3xl font-bold text-[var(--color-dark)] mb-3">ICY SILVER</h3>
               <p className="font-medium text-lg text-[var(--color-dark)] opacity-70">Sleek, bright, and universally premium. The everyday classic.</p>
@@ -61,7 +61,7 @@ export default function Home() {
             {/* Full Black */}
             <div className="flex flex-col items-center group">
               <div className="relative w-full aspect-[1/1.5] mb-6 transition-transform duration-500 group-hover:-translate-y-4">
-                <img src="/assets/new-can-3.png" alt="Full Black Can" className="w-full h-full object-contain" />
+                <img src="/assets/new-can-3.png" alt="Full Black Can" className="w-full h-full object-contain" style={{ clipPath: 'inset(0 0 15% 0)' }} />
               </div>
               <h3 className="text-3xl font-bold text-[var(--color-dark)] mb-3">FULL BLACK</h3>
               <p className="font-medium text-lg text-[var(--color-dark)] opacity-70">Matte, mysterious, absolute zero noise. Focus in a can.</p>
