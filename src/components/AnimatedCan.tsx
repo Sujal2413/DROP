@@ -67,7 +67,7 @@ export default function AnimatedCan({ activeIndex }: { activeIndex: number }) {
   return (
     <div
       ref={containerRef}
-      className="absolute right-[10%] md:right-[20%] top-1/2 -translate-y-1/2 z-[30] pointer-events-none flex flex-col items-center justify-center w-[90vw] md:w-[60vw] max-w-[850px] aspect-[37/100] h-[clamp(500px,85vh,1000px)]"
+      className="absolute right-[5%] md:right-[15%] top-1/2 -translate-y-[60%] scale-125 z-[60] pointer-events-none flex flex-col items-center justify-center w-[90vw] md:w-[60vw] max-w-[1000px] aspect-[37/100] h-[clamp(600px,95vh,1200px)]"
     >
       {CANS.map((can, idx) => (
         <div 
@@ -85,8 +85,8 @@ export default function AnimatedCan({ activeIndex }: { activeIndex: number }) {
             alt={can.alt}
             fill
             priority
-            sizes="(max-width: 768px) 90vw, 850px"
-            className="object-contain"
+            sizes="(max-width: 768px) 90vw, 1000px"
+            className="object-contain opacity-100 mix-blend-normal"
           />
         </div>
       ))}
