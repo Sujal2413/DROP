@@ -60,7 +60,7 @@ export default function HeroSection() {
       </div>
 
       {/* Vertical Name Display */}
-      <div className="absolute right-4 md:right-12 top-1/2 -translate-y-1/2 z-[10] pointer-events-none overflow-hidden h-[80vh] flex items-center justify-center">
+      <div className="absolute right-4 md:right-12 top-1/2 -translate-y-1/2 z-[1] pointer-events-none overflow-hidden h-[80vh] flex items-center justify-center">
         <h2 
           className="text-[10vh] md:text-[15vh] font-bold tracking-tighter opacity-10 transition-colors duration-1000 whitespace-nowrap"
           style={{ 
@@ -80,7 +80,7 @@ export default function HeroSection() {
         {/* Headline */}
         <h1 
           ref={headlineRef}
-          className="opacity-0 transition-colors duration-1000"
+          className="opacity-0 transition-colors duration-1000 mb-6"
           style={{
             fontFamily: '"Anton", "Bebas Neue", "Druk Condensed", Impact, sans-serif',
             fontSize: 'clamp(4rem, 12vw, 10rem)',
@@ -90,12 +90,12 @@ export default function HeroSection() {
             lineHeight: 0.88,
           }}
         >
-          AS.IT.<br />
-          SHOULD.BE.
+          AS. IT.<br />
+          SHOULD. BE.
         </h1>
 
         {/* Buttons */}
-        <div className="mt-12 flex flex-col sm:flex-row gap-4">
+        <div className="mt-10 flex flex-col sm:flex-row gap-4">
           <button 
             onClick={() => alert("Pre-order modal coming soon!")} 
             className="px-8 py-4 bg-black text-white border border-white/20 font-bold tracking-widest text-sm rounded-full shadow-lg hover:scale-105 transition-transform"
@@ -113,14 +113,16 @@ export default function HeroSection() {
           </a>
         </div>
         
-        {/* Tagline */}
-        <p 
+        {/* Sleek Footnote */}
+        <div 
           ref={taglineRef}
-          className="mt-16 font-medium tracking-widest text-lg sm:text-xl opacity-0 transition-colors duration-1000"
+          className="mt-16 font-semibold tracking-[0.2em] text-sm md:text-base opacity-0 transition-colors duration-1000 flex items-center gap-4"
           style={{ color: THEMES[activeIndex].text }}
         >
-          DROP. AS. IT. SHOULD. BE.
-        </p>
+          <span className="opacity-70">500ML</span>
+          <span className="w-1 h-1 rounded-full bg-current opacity-40"></span>
+          <span className="opacity-70">STILL WATER</span>
+        </div>
       </div>
 
       <AnimatedCan activeIndex={activeIndex} />
