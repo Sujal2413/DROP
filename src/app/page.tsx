@@ -50,7 +50,7 @@ export default function Home() {
                   alt="Deep Purple Can" 
                   fill
                   sizes="(max-width: 1280px) 33vw, 100vw"
-                  className="object-contain block transform transition-transform duration-300 group-hover:scale-[1.25] scale-[1.2] translate-y-[10%]" 
+                  className="object-contain block transform transition-transform duration-300 group-hover:scale-[1.25] scale-[1.2] translate-y-[15%]" 
                   style={{ mixBlendMode: 'normal' }}
                   priority
                 />
@@ -69,7 +69,7 @@ export default function Home() {
                   alt="Icy Silver Can" 
                   fill
                   sizes="(max-width: 1280px) 33vw, 100vw"
-                  className="object-contain block transform transition-transform duration-300 group-hover:scale-[1.25] scale-[1.2] translate-y-[10%]" 
+                  className="object-contain block transform transition-transform duration-300 group-hover:scale-[1.25] scale-[1.2] translate-y-[15%]" 
                   style={{ mixBlendMode: 'normal' }}
                   priority
                 />
@@ -88,7 +88,7 @@ export default function Home() {
                   alt="Full Black Can" 
                   fill
                   sizes="(max-width: 1280px) 33vw, 100vw"
-                  className="object-contain block transform transition-transform duration-300 group-hover:scale-[1.25] scale-[1.2] translate-y-[10%]" 
+                  className="object-contain block transform transition-transform duration-300 group-hover:scale-[1.25] scale-[1.2] translate-y-[15%]" 
                   style={{ mixBlendMode: 'normal' }}
                   priority
                 />
