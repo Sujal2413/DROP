@@ -87,7 +87,7 @@ export default function Footer() {
       </div>
 
       {/* Text hover effect */}
-      <div className="lg:flex hidden h-[30rem] -mt-20 -mb-40 relative z-10 pointer-events-auto">
+      <div className="lg:flex hidden h-[30rem] -mt-20 -mb-24 relative z-10 pointer-events-auto">
         <TextHoverEffect text="DROP." className="z-50" />
       </div>
 
