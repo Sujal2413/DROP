@@ -5,9 +5,9 @@ import Image from 'next/image';
 import gsap from 'gsap';
 
 const CANS = [
-  { id: 'purple', src: '/assets/new-can-1.png', alt: 'Deep Purple Can' },
-  { id: 'silver', src: '/assets/new-can-2.png', alt: 'Icy Silver Can' },
-  { id: 'black', src: '/assets/new-can-3.png', alt: 'Full Black Can' }
+  { id: 'purple', src: '/I_dont_want_the_reflection_202606290744.jpeg', alt: 'Deep Purple Can' },
+  { id: 'silver', src: '/I_dont_want_the_reflection_202606290744-2.jpeg', alt: 'Icy Silver Can' },
+  { id: 'black', src: '/assets/new-can-3.png', alt: 'Full Black Can' } // kept the 3rd one since only 2 were provided
 ];
 
 export default function AnimatedCan({ activeIndex }: { activeIndex: number }) {
@@ -67,7 +67,7 @@ export default function AnimatedCan({ activeIndex }: { activeIndex: number }) {
   return (
     <div
       ref={containerRef}
-      className="absolute right-[5%] md:right-[15%] top-1/2 -translate-y-[60%] scale-125 z-[60] pointer-events-none flex flex-col items-center justify-center w-[90vw] md:w-[60vw] max-w-[1000px] aspect-[37/100] h-[clamp(600px,95vh,1200px)]"
+      className="absolute right-[30%] translate-x-1/2 top-1/2 -translate-y-[60%] scale-125 z-[60] pointer-events-none flex flex-col items-center justify-center w-[90vw] md:w-[60vw] max-w-[1000px] aspect-[37/100] h-[clamp(600px,95vh,1200px)]"
     >
       {CANS.map((can, idx) => (
         <div 
@@ -87,7 +87,6 @@ export default function AnimatedCan({ activeIndex }: { activeIndex: number }) {
             priority
             sizes="(max-width: 768px) 90vw, 1000px"
             className="object-contain opacity-100 mix-blend-normal"
-            style={{ clipPath: 'inset(0 0 15% 0)' }}
           />
         </div>
       ))}
