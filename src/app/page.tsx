@@ -46,7 +46,7 @@ export default function Home() {
             <div className="flex flex-col items-center justify-center relative overflow-hidden group">
               <div className="w-full max-w-[320px] aspect-[4/5] relative flex items-center justify-center">
                 <Image 
-                  src="/assets/new-can-1.png" 
+                  src="/assets/new-can-variant-1.png" 
                   alt="Deep Purple Can" 
                   fill
                   sizes="(max-width: 1280px) 33vw, 100vw"
@@ -65,7 +65,7 @@ export default function Home() {
             <div className="flex flex-col items-center justify-center relative overflow-hidden group">
               <div className="w-full max-w-[320px] aspect-[4/5] relative flex items-center justify-center">
                 <Image 
-                  src="/assets/new-can-2.png" 
+                  src="/assets/new-can-variant-2.png" 
                   alt="Icy Silver Can" 
                   fill
                   sizes="(max-width: 1280px) 33vw, 100vw"
@@ -84,7 +84,7 @@ export default function Home() {
             <div className="flex flex-col items-center justify-center relative overflow-hidden group">
               <div className="w-full max-w-[320px] aspect-[4/5] relative flex items-center justify-center">
                 <Image 
-                  src="/assets/new-can-3.png" 
+                  src="/assets/new-can-variant-3.png" 
                   alt="Full Black Can" 
                   fill
                   sizes="(max-width: 1280px) 33vw, 100vw"

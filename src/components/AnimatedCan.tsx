@@ -5,22 +5,31 @@ import Image from 'next/image';
 import gsap from 'gsap';
 
 const CANS = [
-  { id: 'purple', src: '/assets/new-can-1.png', alt: 'Deep Purple Can' },
-  { id: 'silver', src: '/assets/new-can-2.png', alt: 'Icy Silver Can' },
-  { id: 'black', src: '/assets/new-can-3.png', alt: 'Full Black Can' }
+  { id: 'purple', src: '/assets/new-can-variant-1.png', alt: 'Deep Purple Can' },
+  { id: 'silver', src: '/assets/new-can-variant-2.png', alt: 'Icy Silver Can' },
+  { id: 'black', src: '/assets/new-can-variant-3.png', alt: 'Full Black Can' }
 ];
 
 export default function AnimatedCan({ activeIndex }: { activeIndex: number }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const canRefs = useRef<(HTMLDivElement | null)[]>([]);
   const prevIndexRef = useRef<number>(activeIndex);
+  const isFirstRender = useRef(true);
 
   useEffect(() => {
     const prevIndex = prevIndexRef.current;
-    if (prevIndex === activeIndex) {
+    if (prevIndex === activeIndex && !isFirstRender.current) return;
+
+    // Kill all ongoing tweens to prevent overlapping animations when switching tabs
+    canRefs.current.forEach(can => {
+      if (can) gsap.killTweensOf(can);
+    });
+
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
       // Initial load: fade in the active can
       gsap.fromTo(canRefs.current[activeIndex],
-        { opacity: 0, scale: 0.8, x: 200 },
+        { opacity: 0, scale: 0.8, x: 100 },
         { opacity: 1, scale: 1, x: 0, duration: 1.5, ease: 'power3.out' }
       );
     } else {
