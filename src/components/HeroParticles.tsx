@@ -11,10 +11,10 @@ export default function HeroParticles() {
     const particles = Array.from(containerRef.current.children);
 
     particles.forEach((particle) => {
-      // Randomize initial position
+      // Uniformly distribute across the entire screen
       gsap.set(particle, {
-        x: 'random(-45vw, 45vw)',
-        y: 'random(-45vh, 45vh)',
+        x: 'random(0, 100vw)',
+        y: 'random(0, 100vh)',
         scale: 'random(0.3, 1)',
         opacity: 'random(0.2, 0.6)',
       });
@@ -36,12 +36,12 @@ export default function HeroParticles() {
   return (
     <div
       ref={containerRef}
-      className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-screen h-screen overflow-hidden pointer-events-none z-[40]"
+      className="absolute top-0 left-0 w-screen h-screen overflow-hidden pointer-events-none z-[40]"
     >
-      {[...Array(45)].map((_, i) => (
+      {[...Array(120)].map((_, i) => (
         <div
           key={i}
-          className="absolute top-1/2 left-1/2 w-1.5 h-1.5 bg-white rounded-full blur-[1px] mix-blend-overlay"
+          className="absolute top-0 left-0 w-1.5 h-1.5 bg-white rounded-full blur-[1px] mix-blend-overlay"
         />
       ))}
     </div>
