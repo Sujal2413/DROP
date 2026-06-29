@@ -96,7 +96,10 @@ export default function AnimatedCan({ activeIndex }: { activeIndex: number }) {
               fill
               priority
               sizes="(max-width: 768px) 90vw, 1000px"
-              className="object-contain opacity-100 mix-blend-normal scale-[1.25] translate-y-[15%]"
+              className="object-contain opacity-100 scale-[1.25] translate-y-[15%]"
+              style={{ 
+                mixBlendMode: 'normal'
+              }}
             />
           </div>
         </div>

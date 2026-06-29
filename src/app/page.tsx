@@ -43,7 +43,7 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-7xl mx-auto px-6 relative z-10">
             
             {/* Deep Purple */}
-            <div className="flex flex-col items-center justify-center relative overflow-hidden group">
+            <div className="flex flex-col items-center justify-center relative group">
               <div className="w-full max-w-[320px] aspect-[4/5] relative flex items-center justify-center overflow-hidden">
                 <Image 
                   src="/assets/new-can-variant-1.png" 
@@ -62,7 +62,7 @@ export default function Home() {
             </div>
             
             {/* Icy Silver */}
-            <div className="flex flex-col items-center justify-center relative overflow-hidden group">
+            <div className="flex flex-col items-center justify-center relative group">
               <div className="w-full max-w-[320px] aspect-[4/5] relative flex items-center justify-center overflow-hidden">
                 <Image 
                   src="/assets/new-can-variant-2.png" 
@@ -81,7 +81,7 @@ export default function Home() {
             </div>
 
             {/* Full Black */}
-            <div className="flex flex-col items-center justify-center relative overflow-hidden group">
+            <div className="flex flex-col items-center justify-center relative group">
               <div className="w-full max-w-[320px] aspect-[4/5] relative flex items-center justify-center overflow-hidden">
                 <Image 
                   src="/assets/new-can-variant-3.png" 
