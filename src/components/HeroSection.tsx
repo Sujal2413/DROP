@@ -64,17 +64,6 @@ export default function HeroSection() {
         />
       </div>
 
-      {/* Floating Note Tags */}
-      <div className="absolute left-[5%] top-[15%] md:left-[25%] md:top-[12%] bg-black text-white text-[10px] sm:text-xs font-bold px-3 py-1.5 rounded-full rotate-[-5deg] shadow-xl z-[60] tracking-widest border border-white/20">
-        PREMIUM HYDRATION
-      </div>
-      <div className="absolute left-[10%] bottom-[20%] md:left-[35%] md:bottom-[25%] bg-white text-black text-[10px] sm:text-xs font-bold px-3 py-1.5 rounded-full rotate-[4deg] shadow-xl z-[60] tracking-widest border border-black/10">
-        100% RECYCLABLE
-      </div>
-      <div className="absolute right-[35%] top-[20%] md:right-[40%] md:top-[25%] bg-[var(--color-red)] text-white text-[10px] sm:text-xs font-bold px-3 py-1.5 rounded-full rotate-[12deg] shadow-xl z-[60] tracking-widest border border-white/20">
-        0.0% ABV
-      </div>
-
       {/* Vertical Name Display */}
       <div className="absolute right-4 md:right-12 top-1/2 -translate-y-1/2 z-[10] pointer-events-none overflow-hidden h-[80vh] flex items-center justify-center">
         <h2 
