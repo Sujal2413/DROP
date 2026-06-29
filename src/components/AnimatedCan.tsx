@@ -89,7 +89,10 @@ export default function AnimatedCan({ activeIndex }: { activeIndex: number }) {
             pointerEvents: idx === activeIndex ? 'auto' : 'none' 
           }}
         >
-          <div className="relative w-full h-[90%] flex items-center justify-center">
+          <div 
+            className="absolute h-full aspect-[2752/1536] flex items-center justify-center"
+            style={{ clipPath: 'inset(0 0 15% 0)' }}
+          >
             <Image
               src={can.src}
               alt={can.alt}
@@ -97,10 +100,7 @@ export default function AnimatedCan({ activeIndex }: { activeIndex: number }) {
               priority
               sizes="(max-width: 768px) 90vw, 1000px"
               className="object-cover opacity-100"
-              style={{ 
-                mixBlendMode: 'normal',
-                clipPath: 'inset(0 0 16% 0)'
-              }}
+              style={{ mixBlendMode: 'normal' }}
             />
           </div>
         </div>

@@ -45,15 +45,20 @@ export default function Home() {
             {/* Deep Purple */}
             <div className="flex flex-col items-center justify-between p-6 md:p-8 rounded-[32px] bg-white shadow-sm border border-black/5 hover:shadow-2xl transition-shadow duration-500 group">
               <div className="w-full max-w-[320px] h-[380px] lg:h-[420px] relative flex items-center justify-center overflow-hidden mb-6">
-                <Image 
-                  src="/assets/new-can-variant-1.png" 
-                  alt="Deep Purple Can" 
-                  fill
-                  sizes="(max-width: 1280px) 33vw, 100vw"
-                  className="object-cover block transform transition-transform duration-300 group-hover:scale-105" 
-                  style={{ mixBlendMode: 'normal', clipPath: 'inset(0 0 18% 0)' }}
-                  priority
-                />
+                <div 
+                  className="absolute h-[115%] aspect-[2752/1536] flex items-center justify-center pointer-events-none"
+                  style={{ clipPath: 'inset(0 0 15% 0)' }}
+                >
+                  <Image 
+                    src="/assets/new-can-variant-1.png" 
+                    alt="Deep Purple Can" 
+                    fill
+                    sizes="(max-width: 1280px) 33vw, 100vw"
+                    className="object-cover block transform transition-transform duration-300 group-hover:scale-105" 
+                    style={{ mixBlendMode: 'normal' }}
+                    priority
+                  />
+                </div>
               </div>
               <div className="text-center">
                 <h3 className="text-3xl font-black text-[var(--color-dark)] uppercase tracking-tight mb-3">Deep Purple</h3>
@@ -64,15 +69,20 @@ export default function Home() {
             {/* Icy Silver */}
             <div className="flex flex-col items-center justify-between p-6 md:p-8 rounded-[32px] bg-white shadow-sm border border-black/5 hover:shadow-2xl transition-shadow duration-500 group">
               <div className="w-full max-w-[320px] h-[380px] lg:h-[420px] relative flex items-center justify-center overflow-hidden mb-6">
-                <Image 
-                  src="/assets/new-can-variant-2.png" 
-                  alt="Icy Silver Can" 
-                  fill
-                  sizes="(max-width: 1280px) 33vw, 100vw"
-                  className="object-cover block transform transition-transform duration-300 group-hover:scale-105" 
-                  style={{ mixBlendMode: 'normal', clipPath: 'inset(0 0 18% 0)' }}
-                  priority
-                />
+                <div 
+                  className="absolute h-[115%] aspect-[2752/1536] flex items-center justify-center pointer-events-none"
+                  style={{ clipPath: 'inset(0 0 15% 0)' }}
+                >
+                  <Image 
+                    src="/assets/new-can-variant-2.png" 
+                    alt="Icy Silver Can" 
+                    fill
+                    sizes="(max-width: 1280px) 33vw, 100vw"
+                    className="object-cover block transform transition-transform duration-300 group-hover:scale-105" 
+                    style={{ mixBlendMode: 'normal' }}
+                    priority
+                  />
+                </div>
               </div>
               <div className="text-center">
                 <h3 className="text-3xl font-black text-[var(--color-dark)] uppercase tracking-tight mb-3">Icy Silver</h3>
@@ -83,15 +93,20 @@ export default function Home() {
             {/* Full Black */}
             <div className="flex flex-col items-center justify-between p-6 md:p-8 rounded-[32px] bg-white shadow-sm border border-black/5 hover:shadow-2xl transition-shadow duration-500 group">
               <div className="w-full max-w-[320px] h-[380px] lg:h-[420px] relative flex items-center justify-center overflow-hidden mb-6">
-                <Image 
-                  src="/assets/new-can-variant-3.png" 
-                  alt="Full Black Can" 
-                  fill
-                  sizes="(max-width: 1280px) 33vw, 100vw"
-                  className="object-cover block transform transition-transform duration-300 group-hover:scale-105" 
-                  style={{ mixBlendMode: 'normal', clipPath: 'inset(0 0 18% 0)' }}
-                  priority
-                />
+                <div 
+                  className="absolute h-[115%] aspect-[2752/1536] flex items-center justify-center pointer-events-none"
+                  style={{ clipPath: 'inset(0 0 15% 0)' }}
+                >
+                  <Image 
+                    src="/assets/new-can-variant-3.png" 
+                    alt="Full Black Can" 
+                    fill
+                    sizes="(max-width: 1280px) 33vw, 100vw"
+                    className="object-cover block transform transition-transform duration-300 group-hover:scale-105" 
+                    style={{ mixBlendMode: 'normal' }}
+                    priority
+                  />
+                </div>
               </div>
               <div className="text-center">
                 <h3 className="text-3xl font-black text-[var(--color-dark)] uppercase tracking-tight mb-3">Full Black</h3>
