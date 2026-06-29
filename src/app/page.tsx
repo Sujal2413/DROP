@@ -1,5 +1,6 @@
 import HeroSection from '@/components/HeroSection';
 import Footer from '@/components/Footer';
+import Image from 'next/image';
 
 export default function Home() {
   return (
@@ -39,32 +40,63 @@ export default function Home() {
             AVAILABLE IN SILVER, BLACK, AND PURPLE.
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-6xl w-full mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-7xl mx-auto px-6 relative z-10">
+            
             {/* Deep Purple */}
-            <div className="flex flex-col items-center group">
-              <div className="relative w-full aspect-[1/1.5] mb-6 transition-transform duration-500 group-hover:-translate-y-4">
-                <img src="/assets/new-can-1.png" alt="Deep Purple Can" className="w-full h-full object-contain" style={{ clipPath: 'inset(0 0 15% 0)' }} />
+            <div className="flex flex-col items-center justify-center relative overflow-hidden group">
+              <div className="w-full max-w-[320px] aspect-[4/5] relative flex items-center justify-center">
+                <Image 
+                  src="/assets/new-can-1.png" 
+                  alt="Deep Purple Can" 
+                  fill
+                  sizes="(max-width: 1280px) 33vw, 100vw"
+                  className="object-contain block transform transition-transform duration-300 group-hover:scale-105" 
+                  style={{ mixBlendMode: 'normal', clipPath: 'inset(0 0 15% 0)' }}
+                  priority
+                />
               </div>
-              <h3 className="text-3xl font-bold text-[var(--color-dark)] mb-3">DEEP PURPLE</h3>
-              <p className="font-medium text-lg text-[var(--color-dark)] opacity-70">A bold, dark aesthetic for the night. Uncompromising hydration.</p>
+              <div className="text-center mt-6 z-10">
+                <h3 className="text-2xl md:text-3xl font-bold text-[var(--color-dark)] tracking-wider mb-2">DEEP PURPLE</h3>
+                <p className="font-medium text-sm md:text-lg text-[var(--color-dark)] opacity-70">A bold, dark aesthetic for the night. Uncompromising hydration.</p>
+              </div>
             </div>
             
             {/* Icy Silver */}
-            <div className="flex flex-col items-center group">
-              <div className="relative w-full aspect-[1/1.5] mb-6 transition-transform duration-500 group-hover:-translate-y-4">
-                <img src="/assets/new-can-2.png" alt="Icy Silver Can" className="w-full h-full object-contain" style={{ clipPath: 'inset(0 0 15% 0)' }} />
+            <div className="flex flex-col items-center justify-center relative overflow-hidden group">
+              <div className="w-full max-w-[320px] aspect-[4/5] relative flex items-center justify-center">
+                <Image 
+                  src="/assets/new-can-2.png" 
+                  alt="Icy Silver Can" 
+                  fill
+                  sizes="(max-width: 1280px) 33vw, 100vw"
+                  className="object-contain block transform transition-transform duration-300 group-hover:scale-105" 
+                  style={{ mixBlendMode: 'normal', clipPath: 'inset(0 0 15% 0)' }}
+                  priority
+                />
               </div>
-              <h3 className="text-3xl font-bold text-[var(--color-dark)] mb-3">ICY SILVER</h3>
-              <p className="font-medium text-lg text-[var(--color-dark)] opacity-70">Sleek, bright, and universally premium. The everyday classic.</p>
+              <div className="text-center mt-6 z-10">
+                <h3 className="text-2xl md:text-3xl font-bold text-[var(--color-dark)] tracking-wider mb-2">ICY SILVER</h3>
+                <p className="font-medium text-sm md:text-lg text-[var(--color-dark)] opacity-70">Sleek, bright, and universally premium. The everyday classic.</p>
+              </div>
             </div>
 
             {/* Full Black */}
-            <div className="flex flex-col items-center group">
-              <div className="relative w-full aspect-[1/1.5] mb-6 transition-transform duration-500 group-hover:-translate-y-4">
-                <img src="/assets/new-can-3.png" alt="Full Black Can" className="w-full h-full object-contain" style={{ clipPath: 'inset(0 0 15% 0)' }} />
+            <div className="flex flex-col items-center justify-center relative overflow-hidden group">
+              <div className="w-full max-w-[320px] aspect-[4/5] relative flex items-center justify-center">
+                <Image 
+                  src="/assets/new-can-3.png" 
+                  alt="Full Black Can" 
+                  fill
+                  sizes="(max-width: 1280px) 33vw, 100vw"
+                  className="object-contain block transform transition-transform duration-300 group-hover:scale-105" 
+                  style={{ mixBlendMode: 'normal', clipPath: 'inset(0 0 15% 0)' }}
+                  priority
+                />
               </div>
-              <h3 className="text-3xl font-bold text-[var(--color-dark)] mb-3">FULL BLACK</h3>
-              <p className="font-medium text-lg text-[var(--color-dark)] opacity-70">Matte, mysterious, absolute zero noise. Focus in a can.</p>
+              <div className="text-center mt-6 z-10">
+                <h3 className="text-2xl md:text-3xl font-bold text-[var(--color-dark)] tracking-wider mb-2">FULL BLACK</h3>
+                <p className="font-medium text-sm md:text-lg text-[var(--color-dark)] opacity-70">Matte, mysterious, absolute zero noise. Focus in a can.</p>
+              </div>
             </div>
           </div>
         </section>
