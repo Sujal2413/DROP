@@ -5,9 +5,9 @@ import Image from 'next/image';
 import gsap from 'gsap';
 
 const CANS = [
-  { id: 'purple', src: '/I_dont_want_the_reflection_202606290744.jpeg', alt: 'Deep Purple Can' },
-  { id: 'silver', src: '/I_dont_want_the_reflection_202606290744-2.jpeg', alt: 'Icy Silver Can' },
-  { id: 'black', src: '/assets/new-can-3.png', alt: 'Full Black Can' } // kept the 3rd one since only 2 were provided
+  { id: 'purple', src: '/assets/new-can-1.png', alt: 'Deep Purple Can' },
+  { id: 'silver', src: '/assets/new-can-2.png', alt: 'Icy Silver Can' },
+  { id: 'black', src: '/assets/new-can-3.png', alt: 'Full Black Can' }
 ];
 
 export default function AnimatedCan({ activeIndex }: { activeIndex: number }) {
@@ -87,6 +87,7 @@ export default function AnimatedCan({ activeIndex }: { activeIndex: number }) {
             priority
             sizes="(max-width: 768px) 90vw, 1000px"
             className="object-contain opacity-100 mix-blend-normal"
+            style={{ clipPath: 'inset(0 0 15% 0)' }}
           />
         </div>
       ))}
