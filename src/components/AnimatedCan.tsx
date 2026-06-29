@@ -100,7 +100,10 @@ export default function AnimatedCan({ activeIndex }: { activeIndex: number }) {
               priority
               sizes="(max-width: 768px) 90vw, 1000px"
               className="object-cover opacity-100"
-              style={{ mixBlendMode: 'normal' }}
+              style={{ 
+                mixBlendMode: 'normal',
+                filter: 'drop-shadow(0px 0px 1px rgba(0,0,0,0.2)) drop-shadow(0px 10px 30px rgba(0,0,0,0.15))'
+              }}
             />
           </div>
         </div>
