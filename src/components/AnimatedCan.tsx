@@ -89,16 +89,17 @@ export default function AnimatedCan({ activeIndex }: { activeIndex: number }) {
             pointerEvents: idx === activeIndex ? 'auto' : 'none' 
           }}
         >
-          <div className="relative w-full h-[90%] overflow-hidden flex items-center justify-center">
+          <div className="relative w-full h-[90%] flex items-center justify-center">
             <Image
               src={can.src}
               alt={can.alt}
               fill
               priority
               sizes="(max-width: 768px) 90vw, 1000px"
-              className="object-contain opacity-100 scale-[1.25] translate-y-[15%]"
+              className="object-cover opacity-100"
               style={{ 
-                mixBlendMode: 'normal'
+                mixBlendMode: 'normal',
+                clipPath: 'inset(0 0 16% 0)'
               }}
             />
           </div>
