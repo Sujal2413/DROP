@@ -76,7 +76,7 @@ export default function AnimatedCan({ activeIndex }: { activeIndex: number }) {
   return (
     <div
       ref={containerRef}
-      className="absolute right-[30%] translate-x-1/2 top-1/2 -translate-y-1/2 scale-95 z-[60] pointer-events-none flex flex-col items-center justify-center w-[90vw] md:w-[60vw] max-w-[1000px] aspect-[37/100] h-[clamp(600px,95vh,1200px)]"
+      className="absolute right-[30%] translate-x-1/2 top-1/2 -translate-y-[60%] scale-110 z-[60] pointer-events-none flex flex-col items-center justify-center w-[90vw] md:w-[60vw] max-w-[1000px] aspect-[37/100] h-[clamp(600px,95vh,1200px)]"
     >
       {CANS.map((can, idx) => (
         <div 
@@ -89,20 +89,17 @@ export default function AnimatedCan({ activeIndex }: { activeIndex: number }) {
             pointerEvents: idx === activeIndex ? 'auto' : 'none' 
           }}
         >
-          <div 
-            className="absolute h-full aspect-[2752/1536] flex items-center justify-center"
-            style={{ clipPath: 'inset(0 0 11% 0)' }}
-          >
+          <div className="relative w-full h-[90%] overflow-hidden flex items-center justify-center">
             <Image
               src={can.src}
               alt={can.alt}
               fill
               priority
               sizes="(max-width: 768px) 90vw, 1000px"
-              className="object-cover opacity-100"
+              className="object-contain opacity-100 scale-[1.25] translate-y-[15%]"
               style={{ 
                 mixBlendMode: 'normal',
-                filter: 'drop-shadow(0px 0px 1px rgba(0,0,0,0.2)) drop-shadow(0px 10px 30px rgba(0,0,0,0.15))'
+                filter: 'drop-shadow(0px 0px 1.5px rgba(0,0,0,0.5)) drop-shadow(0px 10px 30px rgba(0,0,0,0.15))'
               }}
             />
           </div>

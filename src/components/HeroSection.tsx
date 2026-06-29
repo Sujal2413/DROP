@@ -52,11 +52,16 @@ export default function HeroSection() {
       <HeroNavbar />
       <HeroParticles />
       
-      {/* Right Side Accent Background (Straight Split) */}
+      {/* Right Side Accent Background (Curve Split) */}
       <div 
-        className="absolute right-0 top-0 w-full md:w-[35%] lg:w-[30%] h-full transition-colors duration-1000 z-0"
+        className="absolute right-0 top-0 w-full md:w-[35%] lg:w-[30%] h-full rounded-l-[100px] sm:rounded-l-[150px] transition-colors duration-1000 z-0"
         style={{ backgroundColor: THEMES[activeIndex].accentBg }}
       >
+        {/* Semi-circle shape on the line */}
+        <div 
+          className="absolute left-0 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[30vh] h-[30vh] md:w-[40vh] md:h-[40vh] rounded-full z-0 transition-colors duration-1000"
+          style={{ backgroundColor: THEMES[activeIndex].accentBg, opacity: 0.7 }}
+        />
       </div>
 
       {/* Vertical Name Display */}
