@@ -44,14 +44,14 @@ export default function Home() {
             
             {/* Deep Purple */}
             <div className="flex flex-col items-center justify-center relative overflow-hidden group">
-              <div className="w-full max-w-[320px] aspect-[4/5] relative flex items-center justify-center">
+              <div className="w-full max-w-[320px] aspect-[4/5] relative flex items-center justify-center overflow-hidden">
                 <Image 
                   src="/assets/new-can-variant-1.png" 
                   alt="Deep Purple Can" 
                   fill
                   sizes="(max-width: 1280px) 33vw, 100vw"
-                  className="object-contain block transform transition-transform duration-300 group-hover:scale-105" 
-                  style={{ mixBlendMode: 'normal', clipPath: 'inset(0 0 15% 0)' }}
+                  className="object-contain block transform transition-transform duration-300 group-hover:scale-[1.25] scale-[1.2] translate-y-[10%]" 
+                  style={{ mixBlendMode: 'normal' }}
                   priority
                 />
               </div>
@@ -63,14 +63,14 @@ export default function Home() {
             
             {/* Icy Silver */}
             <div className="flex flex-col items-center justify-center relative overflow-hidden group">
-              <div className="w-full max-w-[320px] aspect-[4/5] relative flex items-center justify-center">
+              <div className="w-full max-w-[320px] aspect-[4/5] relative flex items-center justify-center overflow-hidden">
                 <Image 
                   src="/assets/new-can-variant-2.png" 
                   alt="Icy Silver Can" 
                   fill
                   sizes="(max-width: 1280px) 33vw, 100vw"
-                  className="object-contain block transform transition-transform duration-300 group-hover:scale-105" 
-                  style={{ mixBlendMode: 'normal', clipPath: 'inset(0 0 15% 0)' }}
+                  className="object-contain block transform transition-transform duration-300 group-hover:scale-[1.25] scale-[1.2] translate-y-[10%]" 
+                  style={{ mixBlendMode: 'normal' }}
                   priority
                 />
               </div>
@@ -82,14 +82,14 @@ export default function Home() {
 
             {/* Full Black */}
             <div className="flex flex-col items-center justify-center relative overflow-hidden group">
-              <div className="w-full max-w-[320px] aspect-[4/5] relative flex items-center justify-center">
+              <div className="w-full max-w-[320px] aspect-[4/5] relative flex items-center justify-center overflow-hidden">
                 <Image 
                   src="/assets/new-can-variant-3.png" 
                   alt="Full Black Can" 
                   fill
                   sizes="(max-width: 1280px) 33vw, 100vw"
-                  className="object-contain block transform transition-transform duration-300 group-hover:scale-105" 
-                  style={{ mixBlendMode: 'normal', clipPath: 'inset(0 0 15% 0)' }}
+                  className="object-contain block transform transition-transform duration-300 group-hover:scale-[1.25] scale-[1.2] translate-y-[10%]" 
+                  style={{ mixBlendMode: 'normal' }}
                   priority
                 />
               </div>

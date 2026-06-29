@@ -76,7 +76,7 @@ export default function AnimatedCan({ activeIndex }: { activeIndex: number }) {
   return (
     <div
       ref={containerRef}
-      className="absolute right-[30%] translate-x-1/2 top-1/2 -translate-y-[60%] scale-125 z-[60] pointer-events-none flex flex-col items-center justify-center w-[90vw] md:w-[60vw] max-w-[1000px] aspect-[37/100] h-[clamp(600px,95vh,1200px)]"
+      className="absolute right-[30%] translate-x-1/2 top-1/2 -translate-y-[60%] scale-150 z-[60] pointer-events-none flex flex-col items-center justify-center w-[90vw] md:w-[60vw] max-w-[1000px] aspect-[37/100] h-[clamp(600px,95vh,1200px)]"
     >
       {CANS.map((can, idx) => (
         <div 
@@ -89,15 +89,16 @@ export default function AnimatedCan({ activeIndex }: { activeIndex: number }) {
             pointerEvents: idx === activeIndex ? 'auto' : 'none' 
           }}
         >
-          <Image
-            src={can.src}
-            alt={can.alt}
-            fill
-            priority
-            sizes="(max-width: 768px) 90vw, 1000px"
-            className="object-contain opacity-100 mix-blend-normal"
-            style={{ clipPath: 'inset(0 0 15% 0)' }}
-          />
+          <div className="relative w-full h-[90%] overflow-hidden flex items-center justify-center">
+            <Image
+              src={can.src}
+              alt={can.alt}
+              fill
+              priority
+              sizes="(max-width: 768px) 90vw, 1000px"
+              className="object-contain opacity-100 mix-blend-normal scale-[1.2] translate-y-[10%]"
+            />
+          </div>
         </div>
       ))}
     </div>
