@@ -6,7 +6,7 @@ import gsap from 'gsap';
 
 const CANS = [
   { id: 'purple', src: '/assets/new-can-variant-1.png', alt: 'Deep Purple Can' },
-  { id: 'silver', src: '/assets/new-can-variant-2.png', alt: 'Icy Silver Can' },
+  { id: 'silver', src: '/assets/new-can-variant-2-noshadow.jpeg', alt: 'Icy Silver Can' },
   { id: 'black', src: '/assets/new-can-variant-3.png', alt: 'Full Black Can' }
 ];
 
@@ -98,8 +98,8 @@ export default function AnimatedCan({ activeIndex }: { activeIndex: number }) {
               sizes="(max-width: 768px) 90vw, 1000px"
               className="object-contain opacity-100 scale-[1.25] translate-y-[15%]"
               style={{ 
-                mixBlendMode: 'normal',
-                filter: 'drop-shadow(0px 0px 1.5px rgba(0,0,0,0.5)) drop-shadow(0px 10px 30px rgba(0,0,0,0.15))'
+                mixBlendMode: can.id === 'silver' ? 'multiply' : 'normal',
+                filter: can.id === 'silver' ? 'none' : 'drop-shadow(0px 0px 1.5px rgba(0,0,0,0.5)) drop-shadow(0px 10px 30px rgba(0,0,0,0.15))'
               }}
             />
           </div>
