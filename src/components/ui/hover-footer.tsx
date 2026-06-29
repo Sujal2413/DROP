@@ -88,8 +88,11 @@ export const TextHoverEffect = ({
         textAnchor="middle"
         dominantBaseline="middle"
         strokeWidth="0.3"
-        className="fill-transparent stroke-white/10 font-[Anton] text-7xl font-black tracking-tighter"
-        style={{ opacity: hovered ? 0.7 : 0 }}
+        className="fill-transparent stroke-[#8b5cf6]/40 font-[Anton] text-7xl font-black tracking-tighter transition-opacity duration-500"
+        style={{ 
+          opacity: hovered ? 0.8 : 0.6,
+          filter: "drop-shadow(0 0 40px rgba(139, 92, 246, 0.4))"
+        }}
       >
         {text}
       </text>
@@ -99,7 +102,7 @@ export const TextHoverEffect = ({
         textAnchor="middle"
         dominantBaseline="middle"
         strokeWidth="0.3"
-        className="fill-transparent stroke-white/30 font-[Anton] text-7xl font-black tracking-tighter"
+        className="fill-transparent stroke-[#8b5cf6]/60 font-[Anton] text-7xl font-black tracking-tighter"
         initial={{ strokeDashoffset: 1000, strokeDasharray: 1000 }}
         animate={{
           strokeDashoffset: 0,
