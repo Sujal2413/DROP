@@ -43,8 +43,8 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-7xl mx-auto px-6 relative z-10">
             
             {/* Deep Purple */}
-            <div className="flex flex-col items-center justify-between p-8 rounded-[40px] bg-white shadow-sm border border-black/5 hover:shadow-2xl transition-shadow duration-500 group">
-              <div className="w-full max-w-[320px] h-[500px] relative flex items-center justify-center overflow-hidden mb-6">
+            <div className="flex flex-col items-center justify-between p-6 md:p-8 rounded-[32px] bg-white shadow-sm border border-black/5 hover:shadow-2xl transition-shadow duration-500 group">
+              <div className="w-full max-w-[320px] h-[380px] lg:h-[420px] relative flex items-center justify-center overflow-hidden mb-6">
                 <Image 
                   src="/assets/new-can-variant-1.png" 
                   alt="Deep Purple Can" 
@@ -62,8 +62,8 @@ export default function Home() {
             </div>
             
             {/* Icy Silver */}
-            <div className="flex flex-col items-center justify-between p-8 rounded-[40px] bg-white shadow-sm border border-black/5 hover:shadow-2xl transition-shadow duration-500 group">
-              <div className="w-full max-w-[320px] h-[500px] relative flex items-center justify-center overflow-hidden mb-6">
+            <div className="flex flex-col items-center justify-between p-6 md:p-8 rounded-[32px] bg-white shadow-sm border border-black/5 hover:shadow-2xl transition-shadow duration-500 group">
+              <div className="w-full max-w-[320px] h-[380px] lg:h-[420px] relative flex items-center justify-center overflow-hidden mb-6">
                 <Image 
                   src="/assets/new-can-variant-2.png" 
                   alt="Icy Silver Can" 
@@ -81,8 +81,8 @@ export default function Home() {
             </div>
 
             {/* Full Black */}
-            <div className="flex flex-col items-center justify-between p-8 rounded-[40px] bg-white shadow-sm border border-black/5 hover:shadow-2xl transition-shadow duration-500 group">
-              <div className="w-full max-w-[320px] h-[500px] relative flex items-center justify-center overflow-hidden mb-6">
+            <div className="flex flex-col items-center justify-between p-6 md:p-8 rounded-[32px] bg-white shadow-sm border border-black/5 hover:shadow-2xl transition-shadow duration-500 group">
+              <div className="w-full max-w-[320px] h-[380px] lg:h-[420px] relative flex items-center justify-center overflow-hidden mb-6">
                 <Image 
                   src="/assets/new-can-variant-3.png" 
                   alt="Full Black Can" 
