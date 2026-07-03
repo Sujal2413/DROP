@@ -1,6 +1,13 @@
 @import "tailwindcss";
 
 @theme {
+  /* Story Page Colors */
+  --color-surface: #F6F4EB;
+  --color-on-surface: #1A1A1A;
+  --color-primary: #1A1A1A;
+  --color-on-primary: #F6F4EB;
+
+  
   --color-cream: #F6F4EB;
   --color-red: #D32F2F;
   --color-mustard: #FBC02D;

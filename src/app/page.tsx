@@ -1,115 +1,139 @@
+'use client';
+
+import React from 'react';
 import HeroSection from '@/components/HeroSection';
 import Footer from '@/components/Footer';
+import HydrationSection from '@/components/HydrationSection';
+import LoginPage from '@/components/LoginPage';
+import { useCart } from '@/context/CartContext';
 import Image from 'next/image';
 
 export default function Home() {
+  const { isLoggedIn, addToCart } = useCart();
+
+  if (!isLoggedIn) {
+    return <LoginPage />;
+  }
+
+  const products = [
+    {
+      id: 'purple',
+      name: 'Deep Purple',
+      flavor: 'Mint Water',
+      desc: 'Refreshing mint-infused still water designed to cool and soothe.',
+      image: '/assets/new-can-variant-1.png',
+      bg: 'bg-[#1A0B2E]/90',
+      border: 'border-[#E9D5FF]/20',
+      text: 'text-[#E9D5FF]',
+      scale: 'scale-[1.1]',
+      filter: 'drop-shadow(0px 8px 24px rgba(0,0,0,0.5))'
+    },
+    {
+      id: 'black',
+      name: 'Full Black',
+      flavor: 'Athlete Edition',
+      desc: 'High-performance hydration rich in natural trace minerals.',
+      image: '/assets/new-can-variant-3.png',
+      bg: 'bg-[#0A0A0A]/90',
+      border: 'border-white/10',
+      text: 'text-white',
+      scale: 'scale-[1.1]',
+      filter: 'drop-shadow(0px 8px 24px rgba(0,0,0,0.5))'
+    },
+    {
+      id: 'gold',
+      name: 'Pure Gold',
+      flavor: 'Clove Water',
+      desc: 'Infused with aromatic clove extracts to restore natural vitality.',
+      image: '/assets/new-can-variant-2-final.png',
+      bg: 'bg-[#1C170E]/90',
+      border: 'border-[#C9A84C]/20',
+      text: 'text-[#C9A84C]',
+      scale: 'scale-[1.1]',
+      filter: 'drop-shadow(0px 8px 24px rgba(0,0,0,0.5))'
+    },
+    {
+      id: 'silver',
+      name: 'Pure Silver',
+      flavor: 'Sparkling Water',
+      desc: 'Crisp, carbonated water for pure effervescent refreshment.',
+      image: '/assets/new-can-2.png',
+      bg: 'bg-[#15181B]/90',
+      border: 'border-[#E2E8F0]/20',
+      text: 'text-[#E2E8F0]',
+      scale: 'scale-[1.1]',
+      filter: 'drop-shadow(0px 8px 24px rgba(0,0,0,0.5))'
+    }
+  ];
+
   return (
     <>
       <HeroSection />
 
       <main className="relative z-10">
-        {/* Section 2: Features / Products */}
-        <section id="products" className="min-h-screen bg-[var(--color-red)] text-[var(--color-cream)] p-8 flex flex-col justify-center relative z-10">
-          <h1 className="text-[clamp(4rem,15vw,12rem)] text-center opacity-90 mb-16 leading-[0.9]">
-            HYDRATION
-          </h1>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto w-full">
-            <div id="story" className="bg-[var(--color-mustard)] text-[var(--color-dark)] p-8 rounded-xl -rotate-2 shadow-[5px_5px_0px_var(--color-dark)] md:pr-[25vw] lg:pr-[20vw]">
-              <h2 className="text-3xl font-bold mb-4">PURE SOURCE</h2>
-              <p className="font-sans text-lg font-medium leading-relaxed">
-                500ml of still water. No additives, no noise. Just crisp hydration in a hyper-realistic shell.
-              </p>
-            </div>
-            
-            <div id="sustainability" className="bg-[var(--color-dark)] text-[var(--color-cream)] p-8 rounded-xl rotate-2 shadow-[5px_5px_0px_var(--color-dark)] md:pl-[25vw] lg:pl-[20vw] md:mt-16">
-              <h2 className="text-3xl font-bold mb-4">0.0% ABV</h2>
-              <p className="font-sans text-lg font-medium leading-relaxed">
-                Because it's water. Drink it anywhere, anytime. Stay sharp.
-              </p>
-            </div>
-          </div>
-        </section>
+        <HydrationSection />
 
         {/* Section 3: Lineup */}
-        <section className="min-h-screen bg-[var(--color-cream)] py-24 px-8 text-center flex flex-col justify-center items-center relative z-10">
-          <h1 className="text-[clamp(3rem,10vw,8rem)] text-[var(--color-dark)] mb-8 leading-[0.9]">
+        <section id="products" className="min-h-screen bg-[var(--color-cream)] py-28 px-6 text-center flex flex-col justify-center items-center relative z-10">
+          <h2 className="text-[clamp(3.5rem,8vw,6.5rem)] text-[var(--color-dark)] mb-4 font-black tracking-tight leading-none uppercase">
             YEAR ROUND
-          </h1>
-          <p className="text-2xl font-bold text-[var(--color-red)] tracking-wider mb-20">
-            AVAILABLE IN SILVER, BLACK, AND PURPLE.
+          </h2>
+          <p className="text-lg md:text-xl font-bold text-[var(--color-red)] tracking-[0.2em] mb-20 uppercase">
+            Available in Mint, Athlete, Clove, and Sparkling.
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-7xl mx-auto px-6 relative z-10">
-            
-            {/* Deep Purple */}
-            <div className="flex flex-col items-center justify-between p-6 md:p-8 rounded-[32px] bg-white shadow-sm border border-black/5 hover:shadow-2xl transition-shadow duration-500 group">
-              <div className="w-full max-w-[320px] h-[380px] lg:h-[420px] relative flex items-center justify-center overflow-hidden mb-6">
-                <Image 
-                  src="/assets/new-can-variant-1.png" 
-                  alt="Deep Purple Can" 
-                  fill
-                  sizes="(max-width: 1280px) 33vw, 100vw"
-                  className="object-cover block transform transition-transform duration-300 group-hover:scale-105" 
-                  style={{ 
-                    mixBlendMode: 'normal',
-                    clipPath: 'inset(0 0 11.5% 0)',
-                    filter: 'drop-shadow(0px 0px 1.5px rgba(0,0,0,0.5)) drop-shadow(0px 10px 30px rgba(0,0,0,0.15))'
-                  }}
-                  priority
-                />
-              </div>
-              <div className="text-center">
-                <h3 className="text-3xl font-black text-[var(--color-dark)] uppercase tracking-tight mb-3">Deep Purple</h3>
-                <p className="text-[var(--color-dark)] opacity-70 leading-relaxed font-medium">A bold, dark aesthetic for the night. Uncompromising hydration.</p>
-              </div>
-            </div>
-            
-            {/* Icy Silver */}
-            <div className="flex flex-col items-center justify-between p-6 md:p-8 rounded-[32px] bg-white shadow-sm border border-black/5 hover:shadow-2xl transition-shadow duration-500 group">
-              <div className="w-full max-w-[320px] h-[380px] lg:h-[420px] relative flex items-center justify-center overflow-hidden mb-6">
-                <Image 
-                  src="/assets/new-can-variant-2.png" 
-                  alt="Icy Silver Can" 
-                  fill
-                  sizes="(max-width: 1280px) 33vw, 100vw"
-                  className="object-cover block transform transition-transform duration-300 group-hover:scale-105" 
-                  style={{ 
-                    mixBlendMode: 'normal',
-                    clipPath: 'inset(0 0 11.5% 0)',
-                    filter: 'drop-shadow(0px 0px 1.5px rgba(0,0,0,0.5)) drop-shadow(0px 10px 30px rgba(0,0,0,0.15))'
-                  }}
-                  priority
-                />
-              </div>
-              <div className="text-center">
-                <h3 className="text-3xl font-black text-[var(--color-dark)] uppercase tracking-tight mb-3">Icy Silver</h3>
-                <p className="text-[var(--color-dark)] opacity-70 leading-relaxed font-medium">Sleek, bright, and universally premium. The everyday classic.</p>
-              </div>
-            </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 xl:gap-10 max-w-[90rem] mx-auto px-4 relative z-10 w-full">
+            {products.map((p) => (
+              <div 
+                key={p.id} 
+                className={`group relative rounded-[32px] overflow-hidden border ${p.border} ${p.bg} shadow-2xl transition-all duration-500 hover:-translate-y-2 flex flex-col h-[520px] p-6`}
+              >
+                {/* Image Pedestal / Container */}
+                <div className="w-full h-[240px] relative overflow-hidden flex items-center justify-center mb-6 bg-black/10 rounded-2xl">
+                  <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/30 opacity-0 group-hover:opacity-100 transition-all duration-500 rounded-2xl" />
+                  <div className="relative w-full h-[85%] transition-transform duration-700 group-hover:scale-105">
+                    <Image 
+                      src={p.image} 
+                      alt={p.name} 
+                      fill
+                      priority
+                      sizes="(max-width: 768px) 100vw, 300px"
+                      className={`object-contain object-center ${p.scale}`} 
+                      style={{ filter: p.filter }}
+                    />
+                  </div>
+                </div>
 
-            {/* Full Black */}
-            <div className="flex flex-col items-center justify-between p-6 md:p-8 rounded-[32px] bg-white shadow-sm border border-black/5 hover:shadow-2xl transition-shadow duration-500 group">
-              <div className="w-full max-w-[320px] h-[380px] lg:h-[420px] relative flex items-center justify-center overflow-hidden mb-6">
-                <Image 
-                  src="/assets/new-can-variant-3.png" 
-                  alt="Full Black Can" 
-                  fill
-                  sizes="(max-width: 1280px) 33vw, 100vw"
-                  className="object-cover block transform transition-transform duration-300 group-hover:scale-105" 
-                  style={{ 
-                    mixBlendMode: 'normal',
-                    clipPath: 'inset(0 0 11.5% 0)',
-                    filter: 'drop-shadow(0px 0px 1.5px rgba(0,0,0,0.5)) drop-shadow(0px 10px 30px rgba(0,0,0,0.15))'
-                  }}
-                  priority
-                />
+                {/* Details */}
+                <div className="flex flex-col flex-grow text-center items-center justify-between">
+                  <div>
+                    <h3 className={`text-2xl font-black uppercase tracking-tight ${p.text}`}>
+                      {p.name}
+                    </h3>
+                    <p className="text-[#C9A84C] font-bold text-sm tracking-wider uppercase mt-1">
+                      {p.flavor}
+                    </p>
+                    <p className="text-white/60 text-xs mt-3 px-2 font-medium leading-relaxed">
+                      {p.desc}
+                    </p>
+                  </div>
+
+                  {/* Show Interest Button */}
+                  <button 
+                    onClick={() => addToCart({
+                      id: p.id,
+                      name: p.name,
+                      flavor: p.flavor,
+                      price: 'SURVEY ITEM',
+                      image: p.image
+                    })}
+                    className="w-full mt-6 py-3.5 bg-[#C9A84C] hover:bg-[#B0913B] text-black font-extrabold tracking-widest text-[10px] rounded-full shadow-lg shadow-black/30 transition-all duration-300 uppercase active:scale-95 cursor-pointer"
+                  >
+                    Show Interest
+                  </button>
+                </div>
               </div>
-              <div className="text-center">
-                <h3 className="text-3xl font-black text-[var(--color-dark)] uppercase tracking-tight mb-3">Full Black</h3>
-                <p className="text-[var(--color-dark)] opacity-70 leading-relaxed font-medium">Matte, mysterious, absolute zero noise. Focus in a can.</p>
-              </div>
-            </div>
+            ))}
           </div>
         </section>
       </main>

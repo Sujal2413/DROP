@@ -7,9 +7,10 @@ import AnimatedCan from './AnimatedCan';
 import HeroParticles from './HeroParticles';
 
 const THEMES = [
-  { id: 'purple', name: 'DEEP PURPLE', bg: '#1A0B2E', accentBg: '#2D1B4E', text: '#E9D5FF' },
-  { id: 'silver', name: 'ICY SILVER', bg: '#F8F4E6', accentBg: '#E8E2D2', text: '#B11212' },
-  { id: 'black', name: 'FULL BLACK', bg: '#0A0A0A', accentBg: '#1A1A1A', text: '#FFFFFF' }
+  { id: 'purple', name: 'MINT WATER', bg: '#1A0B2E', accentBg: '#2D1B4E', text: '#E9D5FF' },
+  { id: 'gold', name: 'CLOVE WATER', bg: '#1C1408', accentBg: '#2A1F0E', text: '#C9A84C' },
+  { id: 'black', name: 'ATHLETE EDITION', bg: '#0A0A0A', accentBg: '#1A1A1A', text: '#FFFFFF' },
+  { id: 'silver', name: 'SPARKLING WATER', bg: '#15181B', accentBg: '#23272C', text: '#E2E8F0' }
 ];
 
 export default function HeroSection() {
@@ -18,10 +19,10 @@ export default function HeroSection() {
   const taglineRef = useRef<HTMLParagraphElement>(null);
 
   useEffect(() => {
-    // Auto-cycle cans every 5 seconds
+    // Auto-cycle cans every 3.5 seconds
     const interval = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % 3);
-    }, 5000);
+      setActiveIndex((prev) => (prev + 1) % 4);
+    }, 3500);
     return () => clearInterval(interval);
   }, []);
 
@@ -47,25 +48,25 @@ export default function HeroSection() {
   return (
     <section 
       className="relative w-screen min-h-[100svh] overflow-hidden transition-colors duration-1000 flex items-center"
-      style={{ backgroundColor: THEMES[activeIndex].bg }}
+      style={{ backgroundColor: THEMES[activeIndex].bg, clipPath: 'inset(0)' }}
     >
-      <HeroNavbar />
+      <HeroNavbar activeIndex={activeIndex} />
       <HeroParticles />
       
-      {/* Right Side Accent Background (Curve Split) */}
+      {/* Right Side/Bottom Accent Background (Curve Split) */}
       <div 
-        className="absolute right-0 top-0 w-full md:w-[35%] lg:w-[30%] h-full rounded-l-[100px] sm:rounded-l-[150px] transition-colors duration-1000 z-0"
+        className="absolute right-0 bottom-0 md:top-0 w-full md:w-[35%] lg:w-[30%] h-[40%] md:h-full rounded-t-[50px] md:rounded-t-none md:rounded-l-[100px] sm:rounded-l-[150px] transition-colors duration-1000 z-0"
         style={{ backgroundColor: THEMES[activeIndex].accentBg }}
       >
         {/* Semi-circle shape on the line */}
         <div 
-          className="absolute left-0 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[30vh] h-[30vh] md:w-[40vh] md:h-[40vh] rounded-full z-0 transition-colors duration-1000"
+          className="absolute left-1/2 top-0 md:left-0 md:top-1/2 -translate-x-1/2 -translate-y-1/2 w-[20vh] h-[20vh] md:w-[40vh] md:h-[40vh] rounded-full z-0 transition-colors duration-1000"
           style={{ backgroundColor: THEMES[activeIndex].accentBg, opacity: 0.7 }}
         />
       </div>
 
-      {/* Vertical Name Display */}
-      <div className="absolute right-4 md:right-12 top-1/2 -translate-y-1/2 z-[1] pointer-events-none overflow-hidden h-[80vh] flex items-center justify-center">
+      {/* Vertical Name Display - Hidden on mobile for cleaner layout */}
+      <div className="absolute right-4 md:right-12 top-1/2 -translate-y-1/2 z-[1] pointer-events-none overflow-hidden h-[80vh] hidden md:flex items-center justify-center">
         <h2 
           className="text-[10vh] md:text-[15vh] font-bold tracking-tighter opacity-10 transition-colors duration-1000 whitespace-nowrap"
           style={{ 
@@ -79,8 +80,8 @@ export default function HeroSection() {
         </h2>
       </div>
 
-      {/* Left Content Container */}
-      <div className="relative z-[50] w-full md:w-[45%] px-8 md:pl-16 lg:pl-24 flex flex-col items-start justify-center pt-20 pointer-events-auto">
+      {/* Content Container (Centered & spaced vertically on mobile to prevent overlapping the absolute can) */}
+      <div className="relative z-[50] w-full md:w-[45%] px-8 md:pl-16 lg:pl-24 flex flex-col items-center md:items-start justify-between md:justify-center min-h-[85vh] md:min-h-0 md:h-auto pt-24 pb-12 md:py-0 text-center md:text-left mx-auto md:mx-0 pointer-events-auto">
         
         {/* Headline */}
         <h1 
@@ -88,7 +89,7 @@ export default function HeroSection() {
           className="opacity-0 transition-colors duration-1000 mb-6"
           style={{
             fontFamily: '"Anton", "Bebas Neue", "Druk Condensed", Impact, sans-serif',
-            fontSize: 'clamp(4rem, 12vw, 10rem)',
+            fontSize: 'clamp(3rem, 10vw, 8rem)',
             color: THEMES[activeIndex].text,
             fontWeight: 900,
             letterSpacing: '-0.03em',
@@ -100,10 +101,14 @@ export default function HeroSection() {
         </h1>
 
         {/* Buttons */}
-        <div className="mt-10 flex flex-col sm:flex-row gap-4">
+        <div className="mt-6 md:mt-10 flex flex-col sm:flex-row gap-4 w-full justify-center md:justify-start items-center">
           <button 
             onClick={() => alert("Pre-order modal coming soon!")} 
-            className="px-8 py-4 bg-black text-white border border-white/20 font-bold tracking-widest text-sm rounded-full shadow-lg hover:scale-105 transition-transform"
+            className="px-8 py-4 w-full sm:w-auto font-bold tracking-widest text-sm rounded-full shadow-lg hover:scale-105 active:scale-95 transition-all duration-500"
+            style={{ 
+              backgroundColor: THEMES[activeIndex].id === 'gold' ? '#C9A84C' : THEMES[activeIndex].id === 'purple' ? '#E9D5FF' : '#FFFFFF',
+              color: THEMES[activeIndex].id === 'gold' ? '#1C1408' : THEMES[activeIndex].id === 'purple' ? '#1A0B2E' : '#0A0A0A'
+            }}
           >
             PRE-ORDER NOW
           </button>
@@ -111,8 +116,8 @@ export default function HeroSection() {
             href="https://forms.gle/oBq4GbBTc3AeaJSJ6"
             target="_blank"
             rel="noopener noreferrer"
-            className="px-8 py-4 bg-transparent border-2 border-black/20 text-current font-bold tracking-widest text-sm rounded-full hover:bg-black/5 transition-all text-center flex items-center justify-center"
-            style={{ borderColor: THEMES[activeIndex].text === '#B11212' ? 'rgba(177, 18, 18, 0.3)' : 'rgba(255,255,255,0.3)', color: THEMES[activeIndex].text }}
+            className="px-8 py-4 w-full sm:w-auto bg-transparent border-2 font-bold tracking-widest text-sm rounded-full hover:bg-white/5 transition-all duration-500 text-center flex items-center justify-center"
+            style={{ borderColor: `${THEMES[activeIndex].text}40`, color: THEMES[activeIndex].text }}
           >
             FILL INTEREST FORM
           </a>
@@ -121,7 +126,7 @@ export default function HeroSection() {
         {/* Sleek Footnote */}
         <div 
           ref={taglineRef}
-          className="mt-16 font-semibold tracking-[0.2em] text-sm md:text-base opacity-0 transition-colors duration-1000 flex items-center gap-4"
+          className="mt-12 md:mt-16 font-semibold tracking-[0.2em] text-sm md:text-base opacity-0 transition-colors duration-1000 flex items-center justify-center md:justify-start gap-4"
           style={{ color: THEMES[activeIndex].text }}
         >
           <span className="opacity-70">500ML</span>

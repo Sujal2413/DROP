@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>The Origin of DROP</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600&amp;family=Syne:wght@700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ffd79b",
+                        "on-primary-container": "#6b4900",
+                        "tertiary-fixed": "#ffdad6",
+                        "primary-fixed": "#ffdeac",
+                        "inverse-on-surface": "#313030",
+                        "surface-container-low": "#1c1b1b",
+                        "outline-variant": "#514532",
+                        "surface-container": "#201f1f",
+                        "tertiary-container": "#ffaca4",
+                        "secondary-fixed-dim": "#bac3ff",
+                        "on-secondary-fixed-variant": "#293ca0",
+                        "inverse-primary": "#7e5700",
+                        "on-surface": "#e5e2e1",
+                        "on-primary-fixed": "#281900",
+                        "on-tertiary-container": "#a30013",
+                        "secondary-fixed": "#dee0ff",
+                        "error": "#ffb4ab",
+                        "surface-container-high": "#2a2a2a",
+                        "surface-container-highest": "#353534",
+                        "on-error-container": "#ffdad6",
+                        "inverse-surface": "#e5e2e1",
+                        "primary-container": "#ffb300",
+                        "on-secondary-fixed": "#00105c",
+                        "surface-bright": "#393939",
+                        "on-secondary": "#08218a",
+                        "outline": "#9e8e78",
+                        "secondary-container": "#2c3ea3",
+                        "on-background": "#e5e2e1",
+                        "secondary": "#bac3ff",
+                        "on-secondary-container": "#a8b4ff",
+                        "tertiary": "#ffd3cf",
+                        "on-primary-fixed-variant": "#604100",
+                        "background": "#131313",
+                        "on-tertiary-fixed-variant": "#930010",
+                        "surface-tint": "#ffba38",
+                        "tertiary-fixed-dim": "#ffb3ac",
+                        "on-tertiary": "#680008",
+                        "on-surface-variant": "#d6c4ac",
+                        "primary-fixed-dim": "#ffba38",
+                        "surface": "#131313",
+                        "on-tertiary-fixed": "#410003",
+                        "on-primary": "#432c00",
+                        "surface-dim": "#131313",
+                        "on-error": "#690005",
+                        "surface-variant": "#353534",
+                        "surface-container-lowest": "#0e0e0e",
+                        "error-container": "#93000a"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    spacing: {
+                        "gutter": "24px",
+                        "container-max": "1280px",
+                        "unit": "8px",
+                        "margin-mobile": "20px",
+                        "margin-desktop": "64px"
+                    },
+                    fontFamily: {
+                        "display-lg": ["Syne", "sans-serif"],
+                        "body-lg": ["Plus Jakarta Sans", "sans-serif"],
+                        "body-md": ["Plus Jakarta Sans", "sans-serif"],
+                        "headline-md": ["Syne", "sans-serif"],
+                        "label-md": ["Plus Jakarta Sans", "sans-serif"],
+                        "display-lg-mobile": ["Syne", "sans-serif"],
+                        "headline-lg": ["Syne", "sans-serif"]
+                    },
+                    fontSize: {
+                        "display-lg": ["72px", { lineHeight: "80px", letterSpacing: "-0.02em", fontWeight: "800" }],
+                        "body-lg": ["18px", { lineHeight: "28px", fontWeight: "400" }],
+                        "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+                        "headline-md": ["32px", { lineHeight: "40px", fontWeight: "700" }],
+                        "label-md": ["14px", { lineHeight: "20px", letterSpacing: "0.05em", fontWeight: "600" }],
+                        "display-lg-mobile": ["40px", { lineHeight: "44px", letterSpacing: "-0.01em", fontWeight: "800" }],
+                        "headline-lg": ["48px", { lineHeight: "56px", fontWeight: "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(32px);
+            -webkit-backdrop-filter: blur(32px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .premium-border {
+            border: 2px solid theme('colors.primary-container');
+        }
+        .grid-line-h {
+            border-bottom: 1px solid rgba(63, 81, 181, 0.2); /* Deep Indigo */
+        }
+        .grid-line-v {
+            border-right: 1px solid rgba(63, 81, 181, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased overflow-x-hidden selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-white/10 backdrop-blur-md border-b border-secondary/20">
+<div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 max-w-container-max mx-auto">
+<div class="font-display-lg-mobile text-display-lg-mobile text-primary font-extrabold tracking-tight">
+                DROP
+            </div>
+<ul class="hidden md:flex gap-8 font-body-md text-body-md uppercase tracking-wider">
+<li class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer duration-300">Heritage</li>
+<li class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer duration-300">Comparison</li>
+<li class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer duration-300">Purity</li>
+<li class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer duration-300">Wellness</li>
+</ul>
+<button class="bg-primary-container text-on-primary-container font-label-md text-label-md uppercase px-6 py-3 hover:bg-surface-tint transition-colors cursor-pointer duration-300">
+                GET DROP
+            </button>
+</div>
+</nav>
+<main>
+<!-- Hero Section: The DROP Story -->
+<section class="relative min-h-screen flex items-center justify-center pt-24 pb-16 px-margin-mobile md:px-margin-desktop grid-line-h">
+<!-- Atmospheric background (Deep Indigo to Black) -->
+<div class="absolute inset-0 bg-gradient-to-br from-[#121212] via-[#121212] to-[#3F51B5]/20 -z-10"></div>
+<div class="max-w-container-max w-full grid grid-cols-1 md:grid-cols-12 gap-gutter relative z-10">
+<div class="col-span-1 md:col-span-12 lg:col-span-8 flex flex-col justify-center">
+<h1 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-on-background mb-8">
+<span class="text-primary-container">THE ORIGIN</span><br/>
+                        OF PURE VITALITY.
+                    </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mb-12">
+                        Rooted in ancient Indian wellness traditions, refined by modern high-performance science. Drop is not an energy drink. It is pure, potent hydration designed to elevate your natural state without the crash of synthetic stimulants.
+                    </p>
+<div class="flex gap-4">
+<button class="bg-primary-container text-on-primary-container font-label-md text-label-md uppercase px-8 py-4 hover:bg-surface-tint transition-colors">
+                            Explore Purity
+                        </button>
+</div>
+</div>
+<!-- Hero Imagery Area -->
+<div class="col-span-1 md:col-span-12 lg:col-span-4 mt-12 lg:mt-0 relative hidden md:block">
+<!-- Glassmorphic decorative element -->
+<div class="glass-card absolute inset-0 rounded-xl transform rotate-6 scale-105 opacity-50 z-0"></div>
+<div class="w-full h-[600px] rounded-xl overflow-hidden relative z-10 premium-border" data-alt="A macro, slow-motion splash of crystal clear water against a deep black void. Bright, vibrant streaks of marigold and saffron light reflect inside the water droplets, creating a highly cinematic, premium, high-contrast modern Indian aesthetic." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBhBGCApgfnnQoTF5MNY2NnkDaSnVDxIYhNH-Y86vFf9vuVagJ3eN9s5iXzZksErqQIwf3c2UcXT5V4S5ymIO6SDWpvsxhlt_13A8W6NA-8Z2iWUYFHFMXr43ql4Lrx1IuCOtidG5x7i7zHDMGoxvl1Sw1gKgYnKrdhsTJ6HuL41wNVIMfCKphL1S8e7BfNg5ZckVx6wsJ5hm1cmAg_WqZ6y8TmqlkUWeUZ_gOe8BlanemO9zu7sL1kgzmui3vrR3pTk24tau91LpmV')"></div>
+</div>
+</div>
+</section>
+<!-- Section 2: The Modern Chaos (Comparison) -->
+<section class="py-24 px-margin-mobile md:px-margin-desktop bg-surface-container-lowest grid-line-h">
+<div class="max-w-container-max mx-auto">
+<div class="mb-16 md:grid md:grid-cols-12 gap-gutter">
+<div class="col-span-12 md:col-span-6">
+<h2 class="font-headline-lg text-headline-lg text-on-background uppercase">The Modern Chaos</h2>
+<div class="h-1 w-16 bg-on-tertiary-container mt-4 mb-6"></div>
+</div>
+<div class="col-span-12 md:col-span-6 flex items-end">
+<p class="font-body-lg text-body-lg text-on-surface-variant">
+                            The industry standard relies on synthetic spikes, heavy sugars, and artificial preservation. We present the contrast.
+                        </p>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<!-- Competitor 1 -->
+<div class="p-8 border border-outline-variant bg-surface-container-low rounded-lg opacity-80 filter grayscale hover:grayscale-0 transition-all duration-500">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">RB</h3>
+<p class="font-label-md text-label-md text-on-tertiary-container uppercase tracking-widest mb-6">High Sugar / Crash</p>
+<ul class="space-y-4 font-body-md text-body-md text-on-surface-variant">
+<li class="flex items-start gap-2"><span class="text-on-tertiary-container mt-1">✕</span> Synthetic Taurine</li>
+<li class="flex items-start gap-2"><span class="text-on-tertiary-container mt-1">✕</span> Artificial Colors</li>
+<li class="flex items-start gap-2"><span class="text-on-tertiary-container mt-1">✕</span> 27g Processed Sugar</li>
+</ul>
+</div>
+<!-- Competitor 2 -->
+<div class="p-8 border border-outline-variant bg-surface-container-low rounded-lg opacity-80 filter grayscale hover:grayscale-0 transition-all duration-500">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">MN</h3>
+<p class="font-label-md text-label-md text-on-tertiary-container uppercase tracking-widest mb-6">Chemical Spike</p>
+<ul class="space-y-4 font-body-md text-body-md text-on-surface-variant">
+<li class="flex items-start gap-2"><span class="text-on-tertiary-container mt-1">✕</span> Excessive Caffeine</li>
+<li class="flex items-start gap-2"><span class="text-on-tertiary-container mt-1">✕</span> Preservatives</li>
+<li class="flex items-start gap-2"><span class="text-on-tertiary-container mt-1">✕</span> 54g Processed Sugar</li>
+</ul>
+</div>
+<!-- Competitor 3 -->
+<div class="p-8 border border-outline-variant bg-surface-container-low rounded-lg opacity-80 filter grayscale hover:grayscale-0 transition-all duration-500">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">CE</h3>
+<p class="font-label-md text-label-md text-on-tertiary-container uppercase tracking-widest mb-6">Artificial Sweetness</p>
+<ul class="space-y-4 font-body-md text-body-md text-on-surface-variant">
+<li class="flex items-start gap-2"><span class="text-on-tertiary-container mt-1">✕</span> Artificial Flavors</li>
+<li class="flex items-start gap-2"><span class="text-on-tertiary-container mt-1">✕</span> Carbonation Bloat</li>
+<li class="flex items-start gap-2"><span class="text-on-tertiary-container mt-1">✕</span> Synthetic Dyes</li>
+</ul>
+</div>
+<!-- DROP (The Standard) -->
+<div class="glass-card premium-border p-8 rounded-lg relative overflow-hidden transform md:-translate-y-4 shadow-2xl">
+<!-- Inner glow -->
+<div class="absolute inset-0 bg-primary/5 z-0 pointer-events-none"></div>
+<div class="relative z-10">
+<h3 class="font-headline-md text-headline-md text-primary-container mb-2">DROP</h3>
+<p class="font-label-md text-label-md text-primary uppercase tracking-widest mb-6">Pure Clarity</p>
+<ul class="space-y-4 font-body-md text-body-md text-on-background">
+<li class="flex items-start gap-2">
+<div class="w-2 h-2 mt-2 bg-surface-tint rotate-45 shrink-0"></div>
+                                    Himalayan Mineral Base
+                                </li>
+<li class="flex items-start gap-2">
+<div class="w-2 h-2 mt-2 bg-surface-tint rotate-45 shrink-0"></div>
+                                    Natural Electrolytes
+                                </li>
+<li class="flex items-start gap-2">
+<div class="w-2 h-2 mt-2 bg-surface-tint rotate-45 shrink-0"></div>
+                                    Zero Processed Sugars
+                                </li>
+<li class="flex items-start gap-2">
+<div class="w-2 h-2 mt-2 bg-surface-tint rotate-45 shrink-0"></div>
+                                    Ayurvedic Adaptogens
+                                </li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 3: The Purity Contrast -->
+<section class="py-32 px-margin-mobile md:px-margin-desktop relative overflow-hidden bg-white">
+<!-- This section breaks the dark mode temporarily for stark contrast -->
+<div class="max-w-container-max mx-auto text-center relative z-10">
+<h2 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-[#121212] mb-8 uppercase tracking-tighter">
+                    The Antidote<br/>to Chaos.
+                </h2>
+<p class="font-body-lg text-body-lg text-[#3F51B5] max-w-xl mx-auto font-medium">
+                    Stripping away the unnecessary to reveal absolute structural integrity and hydration perfection.
+                </p>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest w-full py-12 border-t border-primary/20">
+<div class="flex flex-col items-center gap-unit px-margin-desktop text-center max-w-container-max mx-auto">
+<div class="font-display-lg text-display-lg text-primary mb-8">
+                DROP
+            </div>
+<ul class="flex flex-wrap justify-center gap-8 font-body-md text-body-md mb-8">
+<li class="text-on-surface-variant hover:text-primary hover:text-primary transition-all scale-105 transition-transform cursor-pointer">The Story</li>
+<li class="text-on-surface-variant hover:text-primary hover:text-primary transition-all scale-105 transition-transform cursor-pointer">Purity Standards</li>
+<li class="text-on-surface-variant hover:text-primary hover:text-primary transition-all scale-105 transition-transform cursor-pointer">Ingredients</li>
+<li class="text-on-surface-variant hover:text-primary hover:text-primary transition-all scale-105 transition-transform cursor-pointer">Contact Us</li>
+</ul>
+<div class="font-body-md text-body-md text-on-surface-variant opacity-60 uppercase tracking-widest text-sm">
+                © 2024 DROP HYDRATION. ROOTED IN HERITAGE, REFINED BY SCIENCE.
+            </div>
+</div>
+</footer>
+</body></html>

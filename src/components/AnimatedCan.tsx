@@ -1,19 +1,46 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import gsap from 'gsap';
 
+// CANS defines the display scaling and filter effects for each variant.
+// NOTE: Cans have different image aspect ratios (purple/black are landscape 2752x1536; gold is portrait 603x1537; silver is portrait 1206x1474).
+// The scale values are mathematically calibrated to ensure their visual height and width on screen are identical.
+// Do not modify these scale ratios.
 const CANS = [
-  { id: 'purple', src: '/assets/new-can-variant-1.png', alt: 'Deep Purple Can' },
-  { id: 'silver', src: '/assets/new-can-variant-2.png', alt: 'Icy Silver Can' },
-  { id: 'black', src: '/assets/new-can-variant-3.png', alt: 'Full Black Can' }
+  { 
+    id: 'purple', src: '/assets/new-can-variant-1.png', alt: 'Deep Purple Can', scale: 1.6,
+    filter: 'drop-shadow(0px 0px 1.5px rgba(0,0,0,0.5)) drop-shadow(0px 10px 30px rgba(0,0,0,0.15))'
+  },
+  { 
+    id: 'gold', src: '/assets/new-can-variant-2-final.png', alt: 'Pure Gold Can', scale: 1.6,
+    filter: 'drop-shadow(0px 0px 1.5px rgba(0,0,0,0.5)) drop-shadow(0px 10px 30px rgba(0,0,0,0.15))'
+  },
+  { 
+    id: 'black', src: '/assets/new-can-variant-3.png', alt: 'Full Black Can', scale: 1.6,
+    filter: 'drop-shadow(0px 0px 1.5px rgba(0,0,0,0.5)) drop-shadow(0px 10px 30px rgba(0,0,0,0.15))'
+  },
+  {
+    id: 'silver', src: '/assets/new-can-2.png', alt: 'Sparkling Water Can', scale: 1.6,
+    filter: 'drop-shadow(0px 0px 1.5px rgba(0,0,0,0.5)) drop-shadow(0px 10px 30px rgba(0,0,0,0.15))'
+  }
 ];
 
 export default function AnimatedCan({ activeIndex }: { activeIndex: number }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const canRefs = useRef<(HTMLDivElement | null)[]>([]);
   const prevIndexRef = useRef<number>(activeIndex);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
   const isFirstRender = useRef(true);
 
   useEffect(() => {
@@ -76,31 +103,33 @@ export default function AnimatedCan({ activeIndex }: { activeIndex: number }) {
   return (
     <div
       ref={containerRef}
-      className="absolute right-[30%] translate-x-1/2 top-1/2 -translate-y-[60%] scale-110 z-[60] pointer-events-none flex flex-col items-center justify-center w-[90vw] md:w-[60vw] max-w-[1000px] aspect-[37/100] h-[clamp(600px,95vh,1200px)]"
+      className="absolute right-1/2 translate-x-1/2 top-[52%] -translate-y-1/2 md:right-[30%] md:translate-x-1/2 md:top-1/2 md:-translate-y-1/2 z-[60] pointer-events-none flex flex-col items-center justify-center w-[50vw] md:w-[40vw] max-w-[900px] aspect-[37/100] h-[clamp(450px,75vh,1100px)] overflow-visible"
     >
       {CANS.map((can, idx) => (
         <div 
           key={can.id}
           ref={(el) => { canRefs.current[idx] = el; }}
-          className="absolute w-full h-full"
+          className="absolute w-full h-full overflow-visible"
           style={{ 
             perspective: 1000, 
             opacity: idx === activeIndex ? 1 : 0, 
             pointerEvents: idx === activeIndex ? 'auto' : 'none' 
           }}
         >
-          <div className="relative w-full h-full flex items-center justify-center">
+          <div className="relative w-full h-[100%] flex items-center justify-center overflow-visible">
             <Image
               src={can.src}
               alt={can.alt}
               fill
               priority
-              sizes="(max-width: 768px) 90vw, 1000px"
-              className="object-cover opacity-100"
+              quality={100}
+              sizes={can.id === 'gold' ? '(max-width: 768px) 30vw, 500px' : '(max-width: 768px) 50vw, 900px'}
+              className="object-contain object-center opacity-100"
               style={{ 
                 mixBlendMode: 'normal',
-                clipPath: 'inset(0 0 11.5% 0)',
-                filter: 'drop-shadow(0px 0px 1.5px rgba(0,0,0,0.5)) drop-shadow(0px 10px 30px rgba(0,0,0,0.15))'
+                filter: can.filter,
+                transform: `scale(${isMobile ? can.scale * 0.7 : can.scale})`,
+                imageRendering: can.id === 'gold' ? 'high-quality' as React.CSSProperties['imageRendering'] : undefined
               }}
             />
           </div>
