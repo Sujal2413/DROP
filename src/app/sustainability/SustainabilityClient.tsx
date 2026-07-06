@@ -56,7 +56,7 @@ export default function SustainabilityClient() {
           <motion.div 
             whileHover={{ scale: 1.02 }}
             transition={{ type: "spring", stiffness: 300, damping: 20 }}
-            className="bg-[var(--color-red)] text-white p-6 md:p-8 border-2 border-black shadow-[5px_5px_0px_black] hover:shadow-[8px_8px_0px_black] flex flex-col justify-between mt-6 md:mt-12 cursor-default"
+            className="bg-[var(--color-red)] text-white p-6 md:p-8 border-2 border-black shadow-[5px_5px_0px_black] hover:shadow-[8px_8px_0px_black] flex flex-col justify-between cursor-default"
           >
             <h2 className="text-2xl md:text-3xl font-black uppercase tracking-tight mb-6 text-black drop-shadow-[1px_1px_0px_white]">Low Carbon Loop</h2>
             <p className="text-base md:text-lg font-bold leading-relaxed">
@@ -73,7 +73,7 @@ export default function SustainabilityClient() {
           </div>
 
           {/* Card 4 */}
-          <div className="bg-black text-white p-6 md:p-8 border-2 border-black shadow-[5px_5px_0px_var(--color-red)] hover:-translate-y-2 hover:shadow-[8px_8px_0px_var(--color-red)] transition-all duration-300 flex flex-col justify-between mt-6 md:mt-12">
+          <div className="bg-black text-white p-6 md:p-8 border-2 border-black shadow-[5px_5px_0px_var(--color-red)] hover:-translate-y-2 hover:shadow-[8px_8px_0px_var(--color-red)] transition-all duration-300 flex flex-col justify-between">
             <h2 className="text-2xl md:text-3xl font-black uppercase tracking-tight mb-6">Take Action</h2>
             <p className="text-base md:text-lg font-bold leading-relaxed mb-6">
               By choosing DROP, you are actively scaling production to drive down the cost of aluminum, helping phase out single-use plastics forever.
