@@ -75,7 +75,7 @@ export default function StoryClient() {
             {/* Right: Framed artwork representation */}
             <div className="relative h-[300px] md:h-[500px] w-full rounded-2xl overflow-hidden border border-[#D4AF37]/20 shadow-inner bg-[#F5F2EB] z-10">
               <Image
-                src="/images/drop_water_origin.png"
+                src="/images/drop_water_origin.jpg"
                 alt="Macro photography of pure water with clove infusion ripples"
                 fill
                 priority
@@ -196,7 +196,7 @@ export default function StoryClient() {
                     alt="DROP Pure Gold Clove Water Can"
                     fill
                     sizes="(max-width: 768px) 100vw, 50vw"
-                    className="object-contain drop-shadow-[0_25px_45px_rgba(0,0,0,0.5)] scale-[1.35] md:scale-[1.55] transition-transform duration-700 group-hover:scale-[1.65]"
+                    className="object-contain drop-shadow-[0_25px_45px_rgba(0,0,0,0.5)] scale-[1.1] md:scale-[1.2] transition-transform duration-700 group-hover:scale-[1.25]"
                   />
                 </motion.div>
               </Link>
@@ -300,7 +300,7 @@ export default function StoryClient() {
                   alt="DROP Full Black Can"
                   fill
                   sizes="(max-width: 768px) 300px, 400px"
-                  className="object-contain drop-shadow-[0_15px_35px_rgba(0,0,0,0.15)] scale-[2.2] md:scale-[2.6]"
+                  className="object-contain drop-shadow-[0_15px_35px_rgba(0,0,0,0.15)] scale-110 md:scale-125 transition-transform duration-500 group-hover:scale-150"
                 />
               </Link>
             </div>
