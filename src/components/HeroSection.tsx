@@ -46,20 +46,20 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <section 
+    <section
       className="relative w-screen min-h-[100svh] overflow-hidden transition-colors duration-1000 flex items-center"
       style={{ backgroundColor: THEMES[activeIndex].bg, clipPath: 'inset(0)' }}
     >
       <HeroNavbar activeIndex={activeIndex} />
       <HeroParticles />
-      
+
       {/* Right Side/Bottom Accent Background (Curve Split) */}
-      <div 
+      <div
         className="absolute right-0 bottom-0 md:top-0 w-full md:w-[35%] lg:w-[30%] h-[40%] md:h-full rounded-t-[50px] md:rounded-t-none md:rounded-l-[100px] sm:rounded-l-[150px] transition-colors duration-1000 z-0"
         style={{ backgroundColor: THEMES[activeIndex].accentBg }}
       >
         {/* Semi-circle shape on the line */}
-        <div 
+        <div
           className="absolute left-1/2 top-0 md:left-0 md:top-1/2 -translate-x-1/2 -translate-y-1/2 w-[20vh] h-[20vh] md:w-[40vh] md:h-[40vh] rounded-full z-0 transition-colors duration-1000"
           style={{ backgroundColor: THEMES[activeIndex].accentBg, opacity: 0.7 }}
         />
@@ -67,9 +67,9 @@ export default function HeroSection() {
 
       {/* Vertical Name Display - Hidden on mobile for cleaner layout */}
       <div className="absolute right-4 md:right-12 top-1/2 -translate-y-1/2 z-[1] pointer-events-none overflow-hidden h-[80vh] hidden md:flex items-center justify-center">
-        <h2 
+        <h2
           className="text-[10vh] md:text-[15vh] font-bold tracking-tighter opacity-10 transition-colors duration-1000 whitespace-nowrap"
-          style={{ 
+          style={{
             writingMode: 'vertical-rl',
             transform: 'rotate(180deg)',
             color: THEMES[activeIndex].text,
@@ -82,9 +82,9 @@ export default function HeroSection() {
 
       {/* Content Container (Centered & spaced vertically on mobile to prevent overlapping the absolute can) */}
       <div className="relative z-[50] w-full md:w-[45%] px-8 md:pl-16 lg:pl-24 flex flex-col items-center md:items-start justify-between md:justify-center min-h-[85vh] md:min-h-0 md:h-auto pt-24 pb-12 md:py-0 text-center md:text-left mx-auto md:mx-0 pointer-events-auto">
-        
+
         {/* Headline */}
-        <h1 
+        <h1
           ref={headlineRef}
           className="opacity-0 transition-colors duration-1000 mb-6"
           style={{
@@ -102,17 +102,17 @@ export default function HeroSection() {
 
         {/* Buttons */}
         <div className="mt-6 md:mt-10 flex flex-col sm:flex-row gap-4 w-full justify-center md:justify-start items-center">
-          <button 
-            onClick={() => alert("Pre-order modal coming soon!")} 
+          <button
+            onClick={() => alert("Pre-order modal coming soon!")}
             className="px-8 py-4 w-full sm:w-auto font-bold tracking-widest text-sm rounded-full shadow-lg hover:scale-105 active:scale-95 transition-all duration-500"
-            style={{ 
+            style={{
               backgroundColor: THEMES[activeIndex].id === 'gold' ? '#C9A84C' : THEMES[activeIndex].id === 'purple' ? '#E9D5FF' : '#FFFFFF',
               color: THEMES[activeIndex].id === 'gold' ? '#1C1408' : THEMES[activeIndex].id === 'purple' ? '#1A0B2E' : '#0A0A0A'
             }}
           >
             PRE-ORDER NOW
           </button>
-          <a 
+          <a
             href="https://forms.gle/oBq4GbBTc3AeaJSJ6"
             target="_blank"
             rel="noopener noreferrer"
@@ -122,9 +122,9 @@ export default function HeroSection() {
             FILL INTEREST FORM
           </a>
         </div>
-        
+
         {/* Sleek Footnote */}
-        <div 
+        <div
           ref={taglineRef}
           className="mt-12 md:mt-16 font-semibold tracking-[0.2em] text-sm md:text-base opacity-0 transition-colors duration-1000 flex items-center justify-center md:justify-start gap-4"
           style={{ color: THEMES[activeIndex].text }}

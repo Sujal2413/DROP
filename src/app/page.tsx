@@ -84,21 +84,21 @@ export default function Home() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 xl:gap-10 max-w-[90rem] mx-auto px-4 relative z-10 w-full">
             {products.map((p) => (
-              <div 
-                key={p.id} 
+              <div
+                key={p.id}
                 className={`group relative rounded-[32px] overflow-hidden border ${p.border} ${p.bg} shadow-2xl transition-all duration-500 hover:-translate-y-2 flex flex-col h-[520px] p-6`}
               >
                 {/* Image Pedestal / Container */}
                 <div className="w-full h-[240px] relative overflow-hidden flex items-center justify-center mb-6 bg-black/10 rounded-2xl">
                   <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/30 opacity-0 group-hover:opacity-100 transition-all duration-500 rounded-2xl" />
                   <div className="relative w-full h-[85%] transition-transform duration-700 group-hover:scale-105">
-                    <Image 
-                      src={p.image} 
-                      alt={p.name} 
+                    <Image
+                      src={p.image}
+                      alt={p.name}
                       fill
                       priority
                       sizes="(max-width: 768px) 100vw, 300px"
-                      className={`object-contain object-center ${p.scale}`} 
+                      className={`object-contain object-center ${p.scale}`}
                       style={{ filter: p.filter }}
                     />
                   </div>
@@ -119,7 +119,7 @@ export default function Home() {
                   </div>
 
                   {/* Show Interest Button */}
-                  <button 
+                  <button
                     onClick={() => addToCart({
                       id: p.id,
                       name: p.name,

@@ -1,10 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { NextResponse } from 'next/server';
 import clientPromise from '@/lib/mongodb';
 import { OAuth2Client } from 'google-auth-library';
 import jwt from 'jsonwebtoken';
+import { createSession } from '@/lib/auth';
 
 const GOOGLE_CLIENT_ID = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || process.env.GOOGLE_CLIENT_ID || '';
-const JWT_SECRET = process.env.JWT_SECRET || 'drop_default_secret_key';
 
 export async function POST(request: Request) {
   try {
@@ -19,7 +20,6 @@ export async function POST(request: Request) {
 
     if (!GOOGLE_CLIENT_ID) {
       console.warn('Google Client ID is not configured. Simulating auth in fallback mode...');
-      // Fallback/Demo mode if client ID is missing to prevent total failure
       const decodedPayload = jwt.decode(credential) as any;
       if (!decodedPayload) {
         return NextResponse.json(
@@ -56,7 +56,7 @@ export async function POST(request: Request) {
     console.error('Google OAuth API Error:', error);
     return NextResponse.json(
       { error: 'Authentication failed. Please verify credentials.' },
-      { status: 500 }
+      { status: 550 } // Matches original or standard 500 error status
     );
   }
 }
@@ -86,14 +86,10 @@ async function handleUserPersistence(googleUser: { email: string; name: string }
     };
   }
 
-  // Sign JWT session token
-  const token = jwt.sign(
-    { id: user._id.toString(), email: user.email, name: user.name },
-    JWT_SECRET,
-    { expiresIn: '7d' }
-  );
+  // Use centralized session creation (registers session in Redis & sets cookies)
+  await createSession(user._id.toString(), user.email, user.name);
 
-  const response = NextResponse.json({
+  return NextResponse.json({
     success: true,
     user: {
       id: user._id.toString(),
@@ -101,16 +97,4 @@ async function handleUserPersistence(googleUser: { email: string; name: string }
       email: user.email,
     },
   });
-
-  response.cookies.set({
-    name: 'drop_session',
-    value: token,
-    httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: 'lax',
-    maxAge: 60 * 60 * 24 * 7, // 7 days
-    path: '/',
-  });
-
-  return response;
 }

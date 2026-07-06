@@ -10,8 +10,15 @@ interface CartItem {
   image: string;
 }
 
+interface User {
+  id: string;
+  name: string;
+  email: string;
+}
+
 interface CartContextType {
   isLoggedIn: boolean;
+  user: User | null;
   login: () => void;
   logout: () => void;
   cart: CartItem[];
@@ -30,6 +37,7 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
   const [cart, setCart] = useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [showSurvey, setShowSurvey] = useState(false);
@@ -43,15 +51,27 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         const data = await res.json();
         if (data.authenticated) {
           setIsLoggedIn(true);
+          setUser(data.user || null);
           localStorage.setItem('drop_logged_in', 'true');
+          if (data.user) {
+            localStorage.setItem('drop_user', JSON.stringify(data.user));
+          }
         } else {
           setIsLoggedIn(false);
+          setUser(null);
           localStorage.removeItem('drop_logged_in');
+          localStorage.removeItem('drop_user');
         }
       } catch (err) {
         // Fallback to localStorage if offline or network error
         const loggedIn = localStorage.getItem('drop_logged_in') === 'true';
         setIsLoggedIn(loggedIn);
+        const storedUser = localStorage.getItem('drop_user');
+        if (storedUser) {
+          try {
+            setUser(JSON.parse(storedUser));
+          } catch (e) {}
+        }
       }
     };
     
@@ -80,7 +100,9 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       console.error('Failed to log out from backend', e);
     }
     localStorage.removeItem('drop_logged_in');
+    localStorage.removeItem('drop_user');
     setIsLoggedIn(false);
+    setUser(null);
     setCart([]);
     localStorage.removeItem('drop_cart');
   };
@@ -124,6 +146,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     <CartContext.Provider
       value={{
         isLoggedIn,
+        user,
         login,
         logout,
         cart,

@@ -5,6 +5,9 @@ import HeroNavbar from '@/components/HeroNavbar';
 import Footer from '@/components/Footer';
 import { useCart } from '@/context/CartContext';
 import LoginPage from '@/components/LoginPage';
+import Link from 'next/link';
+import ScrollToTop from '@/components/ScrollToTop';
+import { motion } from 'framer-motion';
 
 export default function SustainabilityPage() {
   const { isLoggedIn } = useCart();
@@ -14,125 +17,118 @@ export default function SustainabilityPage() {
   }
 
   return (
-    <div className="bg-[#0A0A0A] text-white min-h-screen relative overflow-x-hidden antialiased selection:bg-[#C9A84C] selection:text-black">
-      {/* Top Navbar */}
-      <HeroNavbar />
+    <div className="w-full relative bg-[var(--color-cream)] text-black font-sans selection:bg-black selection:text-white antialiased overflow-hidden min-h-screen border-x-8 border-black">
+      
+      {/* Dynamic Background Noise */}
+      <div 
+        className="absolute inset-0 pointer-events-none opacity-40 z-0" 
+        style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E")' }}
+      />
 
-      {/* Hero Section */}
-      <section className="relative min-h-[85vh] flex flex-col items-center justify-center text-center px-6 pt-32 pb-20 overflow-hidden">
-        {/* Glow Effects */}
-        <div className="absolute top-[10%] left-[20%] w-[50%] h-[50%] rounded-full bg-[#1A252C]/30 blur-[130px] pointer-events-none" />
-        <div className="absolute bottom-[10%] right-[10%] w-[45%] h-[45%] rounded-full bg-[#1A1815]/20 blur-[120px] pointer-events-none" />
+      {/* Navbar using Olive/Dark palette for black text on light background */}
+      <HeroNavbar activeIndex={4} />
 
-        <div className="relative z-10 max-w-5xl mx-auto flex flex-col items-center">
-          <span className="text-[#C9A84C] font-black text-xs tracking-[0.4em] uppercase mb-6 block animate-pulse">
-            DROP MANDATE
-          </span>
-          <h1 className="text-5xl md:text-8xl font-black tracking-tighter uppercase leading-[0.9] mb-8 font-sans">
-            PURE WATER.<br />
-            ZERO PLASTIC.
+      <main className="max-w-[1200px] mx-auto px-6 md:px-12 pt-32 pb-32 relative z-10">
+        
+        {/* Massive Headline */}
+        <header className="py-20 text-center">
+          <h1 className="text-[clamp(4rem,10vw,8rem)] font-black tracking-tighter uppercase leading-[0.85] mb-6 drop-shadow-[4px_4px_0px_var(--color-red)]">
+            NO PLASTIC.<br />
+            NO BULLSH*T.
           </h1>
-          <p className="text-white/60 text-lg md:text-xl font-medium max-w-2xl leading-relaxed">
-            Every year, billions of plastic bottles pollute our oceans and ecosystems. We chose aluminum — infinitely recyclable, structurally sound, and cold to the touch.
+          <p className="font-bold text-xl md:text-2xl uppercase tracking-widest max-w-2xl mx-auto border-4 border-black p-4 bg-white shadow-[6px_6px_0px_black] rotate-1">
+            Luxury hydration that doesn't cost the earth.
           </p>
-        </div>
-      </section>
+        </header>
 
-      {/* Grid: Narrative Panels (Bento Grid) */}
-      <section className="py-24 px-6 md:px-12 relative z-10 max-w-7xl mx-auto border-t border-white/5">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {/* Neo-brutalist Bento Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 mt-12 relative z-10">
           
           {/* Card 1 */}
-          <div className="md:col-span-2 bg-white/[0.02] border border-white/10 rounded-[32px] p-8 md:p-12 hover:border-[#C9A84C]/30 transition-all duration-500 flex flex-col justify-between group h-[400px] hover:shadow-[0_10px_30px_rgba(201,168,76,0.05)]">
-            <div className="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center mb-8 border border-white/10 group-hover:bg-[#C9A84C]/10 group-hover:border-[#C9A84C]/25 transition-all duration-500">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path>
-              </svg>
-            </div>
-            <div>
-              <h3 className="text-2xl font-black uppercase tracking-tight mb-4 text-[#C9A84C] group-hover:text-white transition-colors duration-500">
-                100% Recyclable Aluminum
-              </h3>
-              <p className="text-white/60 text-sm font-medium leading-relaxed max-w-lg">
-                Unlike plastic, which degrades and ends up in landfills, aluminum can be melted down and repurposed forever. 75% of all aluminum ever produced is still in use today.
-              </p>
-            </div>
-          </div>
+          <motion.div 
+            whileHover={{ scale: 1.02, rotate: 1 }}
+            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            className="bg-[var(--color-mustard)] text-black p-8 md:p-12 border-4 border-black shadow-[10px_10px_0px_black] hover:shadow-[15px_15px_0px_black] flex flex-col justify-between -rotate-2 cursor-default"
+          >
+            <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tight mb-8">100% Recyclable</h2>
+            <p className="text-lg md:text-xl font-bold leading-relaxed">
+              Plastic degrades. Aluminum endures. 75% of all aluminum ever produced is still in active use today. Choose the forever metal.
+            </p>
+          </motion.div>
 
           {/* Card 2 */}
-          <div className="bg-white/[0.02] border border-white/10 rounded-[32px] p-8 hover:border-[#C9A84C]/30 transition-all duration-500 flex flex-col justify-between group h-[400px] hover:shadow-[0_10px_30px_rgba(201,168,76,0.05)]">
-            <div className="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center mb-8 border border-white/10 group-hover:bg-[#C9A84C]/10 group-hover:border-[#C9A84C]/25 transition-all duration-500">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-              </svg>
-            </div>
-            <div>
-              <h3 className="text-2xl font-black uppercase tracking-tight mb-4 text-[#C9A84C] group-hover:text-white transition-colors duration-500">
-                Low Carbon Loop
-              </h3>
-              <p className="text-white/60 text-xs font-medium leading-relaxed">
-                By optimizing weight and transport logistics, we reduce emissions per transport loop, keeping our supply chains tight and efficient.
-              </p>
-            </div>
+          <motion.div 
+            whileHover={{ scale: 1.02, rotate: -2 }}
+            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            className="bg-[var(--color-red)] text-white p-8 md:p-12 border-4 border-black shadow-[10px_10px_0px_black] hover:shadow-[15px_15px_0px_black] flex flex-col justify-between rotate-1 mt-8 md:mt-16 cursor-default"
+          >
+            <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tight mb-8 text-black drop-shadow-[2px_2px_0px_white]">Low Carbon Loop</h2>
+            <p className="text-lg md:text-xl font-bold leading-relaxed">
+              Aluminum chills faster and weighs less. This means drastically fewer emissions during transport and refrigeration. Tight, localized, efficient.
+            </p>
           </div>
 
           {/* Card 3 */}
-          <div className="bg-white/[0.02] border border-white/10 rounded-[32px] p-8 hover:border-[#C9A84C]/30 transition-all duration-500 flex flex-col justify-between group h-[400px] hover:shadow-[0_10px_30px_rgba(201,168,76,0.05)]">
-            <div className="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center mb-8 border border-white/10 group-hover:bg-[#C9A84C]/10 group-hover:border-[#C9A84C]/25 transition-all duration-500">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-              </svg>
-            </div>
-            <div>
-              <h3 className="text-2xl font-black uppercase tracking-tight mb-4 text-[#C9A84C] group-hover:text-white transition-colors duration-500">
-                Responsible Sourcing
-              </h3>
-              <p className="text-white/60 text-xs font-medium leading-relaxed">
-                We only source water from springs that naturally replenish, never draining basins or disrupting surrounding habitats and ecosystems.
-              </p>
-            </div>
+          <div className="bg-blue-600 text-white p-8 md:p-12 border-4 border-black shadow-[10px_10px_0px_black] hover:-translate-y-2 hover:shadow-[15px_15px_0px_black] transition-all duration-300 flex flex-col justify-between rotate-2">
+            <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tight mb-8">Ethical Sourcing</h2>
+            <p className="text-lg md:text-xl font-bold leading-relaxed">
+              We only take what the earth freely yields. We source exclusively from naturally replenishing springs. No draining basins. No habitat destruction.
+            </p>
           </div>
 
           {/* Card 4 */}
-          <div className="md:col-span-2 bg-white/[0.02] border border-white/10 rounded-[32px] p-8 md:p-12 hover:border-[#C9A84C]/30 transition-all duration-500 flex flex-col justify-between group h-[400px] hover:shadow-[0_10px_30px_rgba(201,168,76,0.05)]">
-            <div className="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center mb-8 border border-white/10 group-hover:bg-[#C9A84C]/10 group-hover:border-[#C9A84C]/25 transition-all duration-500">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="12" cy="12" r="10"></circle>
-                <line x1="2" y1="12" x2="22" y2="12"></line>
-                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-              </svg>
-            </div>
-            <div>
-              <h3 className="text-2xl font-black uppercase tracking-tight mb-4 text-[#C9A84C] group-hover:text-white transition-colors duration-500">
-                Eco Partnership Survey
-              </h3>
-              <p className="text-white/60 text-sm font-medium leading-relaxed max-w-lg">
-                We treat our customers as partners in environmental change. By sharing interest in our canned products, you help us scale production, drive down aluminum costs, and phase out plastic.
-              </p>
-            </div>
+          <div className="bg-black text-white p-8 md:p-12 border-4 border-black shadow-[10px_10px_0px_var(--color-red)] hover:-translate-y-2 hover:shadow-[15px_15px_0px_var(--color-red)] transition-all duration-300 flex flex-col justify-between -rotate-1 mt-8 md:mt-16">
+            <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tight mb-8">Take Action</h2>
+            <p className="text-lg md:text-xl font-bold leading-relaxed mb-8">
+              By choosing DROP, you are actively scaling production to drive down the cost of aluminum, helping phase out single-use plastics forever.
+            </p>
+            <Link 
+              href="/#products"
+              className="w-full bg-white text-black py-4 text-center font-black uppercase tracking-widest border-2 border-transparent hover:border-white hover:bg-black hover:text-white transition-colors text-lg"
+            >
+              Shop The Cans
+            </Link>
           </div>
 
         </div>
-      </section>
 
-      {/* Bold CTA */}
-      <section className="py-32 px-6 text-center border-t border-white/5 relative z-10 max-w-4xl mx-auto flex flex-col items-center">
-        <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tight mb-6">
-          Ready to make<br />the transition?
-        </h2>
-        <p className="text-white/40 text-sm md:text-base font-medium max-w-md mb-10">
-          Support sustainable, plastic-free hydration. Join the survey to demonstrate interest and shape the future of DROP.
-        </p>
-        <a 
-          href="/#products"
-          className="px-10 py-5 bg-[#C9A84C] hover:bg-[#B0913B] text-black font-black tracking-widest text-xs rounded-full transition-all duration-300 uppercase shadow-lg shadow-[#C9A84C]/10 hover:shadow-[#C9A84C]/25 cursor-pointer active:scale-95 text-center inline-block"
-        >
-          View Canned Flavors
-        </a>
-      </section>
+      </main>
 
-      {/* Footer */}
-      <Footer />
+      {/* Ticker Tape */}
+      <style dangerouslySetInnerHTML={{__html: `
+        @keyframes custom-marquee {
+          0% { transform: translateX(0%); }
+          100% { transform: translateX(-50%); }
+        }
+        .animate-custom-marquee {
+          animation: custom-marquee 20s linear infinite;
+        }
+      `}} />
+      <div className="w-full overflow-hidden bg-black text-white py-4 border-y-4 border-black flex whitespace-nowrap">
+        <div className="animate-custom-marquee flex items-center gap-8 font-black uppercase tracking-widest text-lg">
+           {/* First Set */}
+           <span>★ DROP PLASTIC</span>
+           <span>★ FOREVER METAL</span>
+           <span>★ INFINITE RECYCLING</span>
+           <span>★ ZERO COMPROMISE</span>
+           <span>★ DROP PLASTIC</span>
+           <span>★ FOREVER METAL</span>
+           <span>★ INFINITE RECYCLING</span>
+           <span>★ ZERO COMPROMISE</span>
+           {/* Second Set (Duplicate for seamless loop) */}
+           <span>★ DROP PLASTIC</span>
+           <span>★ FOREVER METAL</span>
+           <span>★ INFINITE RECYCLING</span>
+           <span>★ ZERO COMPROMISE</span>
+           <span>★ DROP PLASTIC</span>
+           <span>★ FOREVER METAL</span>
+           <span>★ INFINITE RECYCLING</span>
+           <span>★ ZERO COMPROMISE</span>
+        </div>
+      </div>
+
+      <Footer theme="default" />
+      <ScrollToTop />
     </div>
   );
 }

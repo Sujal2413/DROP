@@ -1,39 +1,68 @@
 import React from "react";
+import Link from "next/link";
 import {
   Mail,
   Phone,
 } from "lucide-react";
 import { FooterBackgroundGradient, TextHoverEffect } from "@/components/ui/hover-footer";
 
-export default function Footer() {
+interface FooterProps {
+  theme?: "default" | "olive";
+}
+
+export default function Footer({ theme = "default" }: FooterProps) {
+  const isOlive = theme === "olive";
+  
+  const footerBg = isOlive ? "bg-[#1B2A22] border-[#D4AF37]/30" : "bg-[#0F0F11] border-white/10";
+  const titleText = isOlive ? "text-[#D4AF37]" : "text-white";
+  const descText = isOlive ? "text-[#D4AF37]/70" : "text-gray-400";
+  const bodyText = isOlive ? "text-[#D4AF37]/80" : "text-gray-300";
+  const linkHover = isOlive ? "hover:text-[#D4AF37]/100 text-[#D4AF37]/85" : "hover:text-white text-gray-300";
+  const iconColor = isOlive ? "#D4AF37" : "#8b5cf6";
+  const borderLine = isOlive ? "border-[#D4AF37]/20" : "border-white/10";
+  const socialText = isOlive ? "text-[#D4AF37]/60 hover:text-[#D4AF37]" : "text-gray-400 hover:text-white";
+  const copyText = isOlive ? "text-[#D4AF37]/50" : "text-gray-500";
+  const strokeMobile = isOlive ? "2px #D4AF37" : "2px white";
+
   const socialLinks = [
     { icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>, label: "Facebook", href: "https://www.facebook.com/share/14kfqixwQTn/?mibextid=wwXIfr" },
     { icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>, label: "Instagram", href: "https://www.instagram.com/dropwatercoigsh=cTFtemNscGpyNHBh&utm_source=qr" },
-    { icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5 0.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>, label: "X (Twitter)", href: "https://x.com/dropofficialw?s=11" },
+    { icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>, label: "X (Twitter)", href: "https://x.com/dropofficialw?s=11" },
   ];
 
   return (
-    <footer className="bg-[#0F0F11] relative h-fit overflow-hidden border-t border-white/10">
+    <footer className={`relative h-fit overflow-hidden border-t ${footerBg}`}>
       <div className="max-w-7xl mx-auto px-8 md:px-14 pt-20 pb-0 z-40 relative">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 lg:gap-16 pb-12">
           {/* Brand section */}
           <div className="flex flex-col space-y-4">
-            <h2 
-              className="text-white text-5xl font-black tracking-tighter"
-              style={{ fontFamily: '"Anton", "Bebas Neue", "Druk Condensed", Impact, sans-serif' }}
-            >
-              DROP.
-            </h2>
-            <p className="text-sm leading-relaxed text-gray-400 font-medium max-w-xs">
+            <Link href="/">
+              <h2 
+                className={`text-5xl font-black tracking-tighter cursor-pointer ${titleText}`}
+                style={{ fontFamily: '"Anton", "Bebas Neue", "Druk Condensed", Impact, sans-serif' }}
+              >
+                DROP.
+              </h2>
+            </Link>
+            <p className={`text-sm leading-relaxed font-medium max-w-xs ${descText}`}>
               Premium hydration designed for the modern lifestyle. AS. IT. SHOULD. BE.
             </p>
           </div>
 
           {/* About Us section */}
           <div>
-            <h4 className="text-white text-lg font-bold mb-6">About Us</h4>
-            <ul className="space-y-3 text-gray-300 font-medium text-sm">
-              <li>Founder - Sujal Patil</li>
+            <h4 className={`text-lg font-bold mb-6 ${titleText}`}>About Us</h4>
+            <ul className={`space-y-3 font-medium text-sm ${bodyText}`}>
+              <li>
+                <a 
+                  href="https://www.linkedin.com/in/sujal-patil-227681258/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="cursor-pointer hover:underline transition-all hover:text-[#D4AF37]"
+                >
+                  Founder - Sujal Patil
+                </a>
+              </li>
               <li>Co-founder - Atharva Pachkar</li>
               <li>Co-founder - Aayush Mokal</li>
             </ul>
@@ -41,30 +70,39 @@ export default function Footer() {
 
           {/* Contact section */}
           <div>
-            <h4 className="text-white text-lg font-bold mb-6">Contact Us</h4>
-            <ul className="space-y-4 text-sm font-medium text-gray-300">
+            <h4 className={`text-lg font-bold mb-6 ${titleText}`}>Contact Us</h4>
+            <ul className={`space-y-4 text-sm font-medium ${bodyText}`}>
               <li className="flex items-center space-x-3">
-                <Mail size={16} className="text-[#8b5cf6]" />
-                <a href="mailto:dropofficialmumbai@gmail.com" className="hover:text-white transition-colors">
-                  dropofficialmumbai@gmail.com
-                </a>
+                <Mail size={16} stroke={iconColor} />
+                <ObfuscatedContact
+                  type="email"
+                  encoded="ZHJvcG9mZmljaWFsbXVtYmFpQGdtYWlsLmNvbQ=="
+                  className={`transition-colors ${linkHover}`}
+                />
               </li>
-              <li className="flex items-center space-x-3">
-                <Phone size={16} className="text-[#8b5cf6]" />
-                <a href="tel:8976127355" className="hover:text-white transition-colors">
-                  8976127355
-                </a>
+              <li className="flex items-center space-x-3 whitespace-nowrap">
+                <Phone size={16} stroke={iconColor} />
+                <ObfuscatedContact
+                  type="phone"
+                  encoded="ODk3NjEyNzM1NQ=="
+                  className={`transition-colors ${linkHover}`}
+                />
               </li>
             </ul>
+            <noscript>
+              <p className={`text-xs mt-4 ${descText}`}>
+                Contact us through our social media channels below.
+              </p>
+            </noscript>
           </div>
         </div>
 
-        <hr className="border-t border-white/10 my-8 relative z-50" />
+        <hr className={`border-t my-8 relative z-50 ${borderLine}`} />
 
         {/* Footer bottom */}
         <div className="flex flex-col md:flex-row justify-between items-center text-sm space-y-4 md:space-y-0 relative z-50">
           {/* Social icons */}
-          <div className="flex space-x-6 text-gray-400">
+          <div className="flex space-x-6">
             {socialLinks.map(({ icon, label, href }) => (
               <a
                 key={label}
@@ -72,7 +110,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={label}
-                className="hover:text-white transition-colors"
+                className={`transition-colors ${socialText}`}
               >
                 {icon}
               </a>
@@ -80,7 +118,7 @@ export default function Footer() {
           </div>
 
           {/* Copyright */}
-          <p className="text-center md:text-left text-gray-500 font-medium">
+          <p className={`text-center md:text-left font-medium ${copyText}`}>
             &copy; {new Date().getFullYear()} DROP. All rights reserved.
           </p>
         </div>
@@ -88,7 +126,7 @@ export default function Footer() {
 
       {/* Text hover effect */}
       <div className="lg:flex hidden h-[30rem] -mt-20 -mb-24 relative z-10 pointer-events-auto">
-        <TextHoverEffect text="DROP." className="z-50" />
+        <TextHoverEffect text="DROP." className="z-50" theme={theme} />
       </div>
 
       {/* Fallback giant text for mobile */}
@@ -97,7 +135,7 @@ export default function Footer() {
           className="text-[clamp(8rem,25vw,20rem)] font-black tracking-tighter"
           style={{
             fontFamily: '"Anton", "Bebas Neue", "Druk Condensed", Impact, sans-serif',
-            WebkitTextStroke: '2px white',
+            WebkitTextStroke: strokeMobile,
             color: 'transparent'
           }}
         >
@@ -105,7 +143,36 @@ export default function Footer() {
         </h1>
       </div>
 
-      <FooterBackgroundGradient />
+      <FooterBackgroundGradient theme={theme} />
     </footer>
+  );
+}
+
+/**
+ * Renders an obfuscated contact link. The value is stored as a base64 string
+ * and decoded only at render time in the browser, so automated scrapers
+ * reading the raw HTML/SSR output will see only the encoded blob.
+ */
+function ObfuscatedContact({ type, encoded, className }: { type: 'email' | 'phone'; encoded: string; className?: string }) {
+  const [value, setValue] = React.useState<string | null>(null);
+
+  React.useEffect(() => {
+    try {
+      setValue(atob(encoded));
+    } catch {
+      // Fail silently — noscript fallback is available
+    }
+  }, [encoded]);
+
+  if (!value) {
+    return <span className={className}>Loading…</span>;
+  }
+
+  const href = type === 'email' ? `mailto:${value}` : `tel:${value}`;
+
+  return (
+    <a href={href} className={className}>
+      {value}
+    </a>
   );
 }

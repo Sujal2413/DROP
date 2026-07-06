@@ -58,7 +58,7 @@ export default function HydrationSection() {
   }, [selectedCard]);
 
   return (
-    <section id="products" className="min-h-screen bg-[var(--color-red)] text-[var(--color-cream)] p-8 flex flex-col justify-center relative z-10">
+    <section id="hydration" className="min-h-screen bg-[var(--color-red)] text-[var(--color-cream)] p-8 flex flex-col justify-center relative z-10">
       <h1 className="text-[clamp(4rem,15vw,12rem)] text-center opacity-90 mb-16 leading-[0.9]">
         HYDRATION
       </h1>

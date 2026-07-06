@@ -4,6 +4,8 @@ import Link from 'next/link';
 import { useCart } from '@/context/CartContext';
 import { useState } from 'react';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
+import LiveWaitlistCounter from './LiveWaitlistCounter';
 
 interface HeroNavbarProps {
   activeIndex?: number;
@@ -13,7 +15,8 @@ const THEMES = [
   { id: 'purple', text: '#E9D5FF', accentBg: '#2D1B4E' },
   { id: 'gold', text: '#C9A84C', accentBg: '#2A1F0E' },
   { id: 'black', text: '#FFFFFF', accentBg: '#1A1A1A' },
-  { id: 'silver', text: '#E2E8F0', accentBg: '#23272C' }
+  { id: 'silver', text: '#E2E8F0', accentBg: '#23272C' },
+  { id: 'olive', text: '#1B2A22', accentBg: '#FDFCF8' }
 ];
 
 export default function HeroNavbar({ activeIndex = 0 }: HeroNavbarProps) {
@@ -24,16 +27,27 @@ export default function HeroNavbar({ activeIndex = 0 }: HeroNavbarProps) {
     removeFromCart, 
     setShowSurvey, 
     clearCart,
-    logout 
+    logout,
+    user
   } = useCart();
   
   const [isUserOpen, setIsUserOpen] = useState(false);
+  const pathname = usePathname();
 
   // Default to white if activeIndex is not specified
   const theme = THEMES[activeIndex] || { id: 'default', text: '#FFFFFF', accentBg: '#1A1A1A' };
   const themeColor = theme.text;
 
-  const handleSendInterest = () => {
+  const handleSendInterest = async () => {
+    try {
+      await fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ items: cart, userId: user?.id, email: user?.email })
+      });
+    } catch (e) {
+      console.error('Failed to submit interest to backend', e);
+    }
     setIsCartOpen(false);
     clearCart();
     setShowSurvey(true);
@@ -42,9 +56,24 @@ export default function HeroNavbar({ activeIndex = 0 }: HeroNavbarProps) {
   return (
     <>
       <nav className="absolute top-0 left-0 w-full p-8 flex justify-between items-center z-[100] pointer-events-auto transition-colors duration-1000">
-        {/* Left: Logo */}
-        <div className="font-bold text-2xl tracking-tighter w-[200px] transition-colors duration-1000" style={{ color: themeColor }}>
-          <Link href="/" className="outline-none font-black">DROP.</Link>
+        {/* Left: Logo & Back Button */}
+        <div className="flex items-center gap-3 w-[200px]">
+          {pathname !== '/' && (
+            <Link 
+              href="/" 
+              className="hover:scale-110 active:scale-95 transition-transform flex items-center justify-center p-1"
+              style={{ color: themeColor }}
+              aria-label="Back to Home"
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="19" y1="12" x2="5" y2="12"></line>
+                <polyline points="12 19 5 12 12 5"></polyline>
+              </svg>
+            </Link>
+          )}
+          <div className="font-bold text-2xl tracking-tighter transition-colors duration-1000" style={{ color: themeColor }}>
+            <Link href="/" className="outline-none font-black">DROP.</Link>
+          </div>
         </div>
         
         {/* Center: Toggle-like Nav */}
@@ -56,7 +85,7 @@ export default function HeroNavbar({ activeIndex = 0 }: HeroNavbarProps) {
             backgroundColor: 'rgba(0, 0, 0, 0.2)'
           }}
         >
-          <Link href="#products" className="px-6 py-2 rounded-full hover:bg-white/10 transition-colors">PRODUCTS</Link>
+          <Link href="/#products" className="px-6 py-2 rounded-full hover:bg-white/10 transition-colors">PRODUCTS</Link>
           <Link href="/story" className="px-6 py-2 rounded-full hover:bg-white/10 transition-colors">STORY</Link>
           <Link href="/sustainability" className="px-6 py-2 rounded-full hover:bg-white/10 transition-colors">SUSTAINABILITY</Link>
         </div>
@@ -153,7 +182,8 @@ export default function HeroNavbar({ activeIndex = 0 }: HeroNavbarProps) {
             </div>
 
             {cart.length > 0 && (
-              <div className="border-t border-white/10 pt-6">
+              <div className="border-t border-white/10 pt-4">
+                <LiveWaitlistCounter />
                 <button 
                   onClick={handleSendInterest}
                   className="w-full py-4 bg-[#C9A84C] hover:bg-[#B0913B] text-black font-black tracking-widest text-xs rounded-full transition-all duration-300 uppercase shadow-lg shadow-[#C9A84C]/10 hover:shadow-[#C9A84C]/25 cursor-pointer active:scale-95 text-center block"
@@ -186,13 +216,10 @@ export default function HeroNavbar({ activeIndex = 0 }: HeroNavbarProps) {
               </div>
 
               <div className="text-center py-10 flex flex-col items-center">
-                <div className="w-20 h-20 rounded-full bg-white/5 border border-white/15 flex items-center justify-center mb-4">
-                  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                    <circle cx="12" cy="7" r="4"></circle>
-                  </svg>
+                <div className="w-20 h-20 rounded-full bg-white/5 border border-white/15 flex items-center justify-center mb-4 text-[#C9A84C]">
+                  <span className="text-4xl font-black">{user?.name ? user.name[0].toUpperCase() : 'D'}</span>
                 </div>
-                <h4 className="font-black text-lg uppercase tracking-wider text-white">Drop Enthusiast</h4>
+                <h4 className="font-black text-lg uppercase tracking-wider text-white">{user?.name || 'Drop Enthusiast'}</h4>
                 <p className="text-white/40 text-xs tracking-wider uppercase mt-1">Status: Active Surveyor</p>
               </div>
             </div>
