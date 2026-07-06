@@ -32,6 +32,7 @@ export default function HeroNavbar({ activeIndex = 0 }: HeroNavbarProps) {
   } = useCart();
   
   const [isUserOpen, setIsUserOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
 
   // Default to white if activeIndex is not specified
@@ -91,7 +92,7 @@ export default function HeroNavbar({ activeIndex = 0 }: HeroNavbarProps) {
         </div>
         
         {/* Right: User and Cart */}
-        <div className="flex justify-end gap-6 w-[200px]">
+        <div className="flex justify-end gap-3 md:gap-6 w-[200px] items-center">
           {/* User Button */}
           <button 
             onClick={() => setIsUserOpen(!isUserOpen)} 
@@ -124,6 +125,19 @@ export default function HeroNavbar({ activeIndex = 0 }: HeroNavbarProps) {
               )}
             </div>
             <span className="hidden md:inline transition-colors duration-1000">({cart.length})</span>
+          </button>
+
+          {/* Mobile Menu Button */}
+          <button 
+            onClick={() => setIsMobileMenuOpen(true)} 
+            className="md:hidden hover:scale-110 active:scale-95 transition-all relative p-1 cursor-pointer" 
+            aria-label="Menu"
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={themeColor} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="transition-colors duration-1000">
+              <line x1="3" x2="21" y1="6" y2="6"></line>
+              <line x1="3" x2="21" y1="12" y2="12"></line>
+              <line x1="3" x2="21" y1="18" y2="18"></line>
+            </svg>
           </button>
         </div>
       </nav>
@@ -234,6 +248,33 @@ export default function HeroNavbar({ activeIndex = 0 }: HeroNavbarProps) {
               >
                 Sign Out
               </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Mobile Nav Drawer */}
+      {isMobileMenuOpen && (
+        <div className="fixed inset-0 z-[200] flex justify-end pointer-events-auto">
+          {/* Backdrop */}
+          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setIsMobileMenuOpen(false)} />
+          
+          {/* Drawer Body */}
+          <div className="relative w-full max-w-sm bg-[#0F1112] border-l border-white/10 h-full flex flex-col shadow-2xl p-8 z-10 text-white">
+            <div className="flex justify-between items-center border-b border-white/10 pb-6 mb-8">
+              <h3 className="text-xl font-black tracking-widest uppercase">Menu</h3>
+              <button onClick={() => setIsMobileMenuOpen(false)} className="text-white/60 hover:text-white cursor-pointer">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+              </button>
+            </div>
+
+            <div className="flex flex-col gap-8 text-2xl font-black tracking-widest uppercase">
+              <Link href="/#hero" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#C9A84C] transition-colors border-b border-white/5 pb-4">Products</Link>
+              <Link href="/story" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#C9A84C] transition-colors border-b border-white/5 pb-4">Story</Link>
+              <Link href="/sustainability" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#C9A84C] transition-colors border-b border-white/5 pb-4">Sustainability</Link>
             </div>
           </div>
         </div>
