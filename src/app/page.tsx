@@ -25,7 +25,7 @@ export default function Home() {
       bg: 'bg-[#1A0B2E]/90',
       border: 'border-[#E9D5FF]/20',
       text: 'text-[#E9D5FF]',
-      scale: 'scale-[1.1]',
+      scale: 1.1,
       filter: 'drop-shadow(0px 8px 24px rgba(0,0,0,0.5))'
     },
     {
@@ -37,7 +37,7 @@ export default function Home() {
       bg: 'bg-[#0A0A0A]/90',
       border: 'border-white/10',
       text: 'text-white',
-      scale: 'scale-[1.1]',
+      scale: 1.06,
       filter: 'drop-shadow(0px 8px 24px rgba(0,0,0,0.5))'
     },
     {
@@ -49,7 +49,7 @@ export default function Home() {
       bg: 'bg-[#1C170E]/90',
       border: 'border-[#C9A84C]/20',
       text: 'text-[#C9A84C]',
-      scale: 'scale-[1.1]',
+      scale: 1.1,
       filter: 'drop-shadow(0px 8px 24px rgba(0,0,0,0.5))'
     },
     {
@@ -61,7 +61,7 @@ export default function Home() {
       bg: 'bg-[#15181B]/90',
       border: 'border-[#E2E8F0]/20',
       text: 'text-[#E2E8F0]',
-      scale: 'scale-[1.1]',
+      scale: 1.06,
       filter: 'drop-shadow(0px 8px 24px rgba(0,0,0,0.5))'
     }
   ];
@@ -98,8 +98,8 @@ export default function Home() {
                       fill
                       priority
                       sizes="(max-width: 768px) 100vw, 300px"
-                      className={`object-contain object-center ${p.scale}`}
-                      style={{ filter: p.filter }}
+                      className="object-contain object-center"
+                      style={{ filter: p.filter, transform: `scale(${p.scale})` }}
                     />
                   </div>
                 </div>

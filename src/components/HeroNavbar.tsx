@@ -85,7 +85,7 @@ export default function HeroNavbar({ activeIndex = 0 }: HeroNavbarProps) {
             backgroundColor: 'rgba(0, 0, 0, 0.2)'
           }}
         >
-          <Link href="/#products" className="px-6 py-2 rounded-full hover:bg-white/10 transition-colors">PRODUCTS</Link>
+          <Link href="/#hero" className="px-6 py-2 rounded-full hover:bg-white/10 transition-colors">PRODUCTS</Link>
           <Link href="/story" className="px-6 py-2 rounded-full hover:bg-white/10 transition-colors">STORY</Link>
           <Link href="/sustainability" className="px-6 py-2 rounded-full hover:bg-white/10 transition-colors">SUSTAINABILITY</Link>
         </div>

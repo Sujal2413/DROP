@@ -47,6 +47,7 @@ export default function HeroSection() {
 
   return (
     <section
+      id="hero"
       className="relative w-screen min-h-[100svh] overflow-hidden transition-colors duration-1000 flex items-center"
       style={{ backgroundColor: THEMES[activeIndex].bg, clipPath: 'inset(0)' }}
     >

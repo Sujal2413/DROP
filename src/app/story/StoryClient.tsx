@@ -300,7 +300,7 @@ export default function StoryClient() {
                   alt="DROP Full Black Can"
                   fill
                   sizes="(max-width: 768px) 300px, 400px"
-                  className="object-contain drop-shadow-[0_15px_35px_rgba(0,0,0,0.15)] scale-[1.2] md:scale-[1.4]"
+                  className="object-contain drop-shadow-[0_15px_35px_rgba(0,0,0,0.15)] scale-[2.2] md:scale-[2.6]"
                 />
               </Link>
             </div>

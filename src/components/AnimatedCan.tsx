@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import gsap from 'gsap';
 
 // CANS defines the display scaling and filter effects for each variant.
@@ -10,7 +11,7 @@ import gsap from 'gsap';
 // Do not modify these scale ratios.
 const CANS = [
   { 
-    id: 'purple', src: '/assets/new-can-variant-1.png?v=fixed', alt: 'Deep Purple Can', scale: 1.6,
+    id: 'purple', src: '/assets/new-can-variant-1.png', alt: 'Deep Purple Can', scale: 1.6,
     filter: 'drop-shadow(0 20px 30px rgba(0,0,0,0.8))'
   },
   { 
@@ -18,11 +19,11 @@ const CANS = [
     filter: 'drop-shadow(0px 0px 1.5px rgba(0,0,0,0.5)) drop-shadow(0px 10px 30px rgba(0,0,0,0.15))'
   },
   { 
-    id: 'black', src: '/assets/new-can-variant-3.png', alt: 'Full Black Can', scale: 1.6,
+    id: 'black', src: '/assets/new-can-variant-3.png', alt: 'Full Black Can', scale: 1.54,
     filter: 'drop-shadow(0px 0px 1.5px rgba(0,0,0,0.5)) drop-shadow(0px 10px 30px rgba(0,0,0,0.15))'
   },
   {
-    id: 'silver', src: '/assets/new-can-2.png', alt: 'Sparkling Water Can', scale: 1.6,
+    id: 'silver', src: '/assets/new-can-2.png', alt: 'Sparkling Water Can', scale: 1.55,
     filter: 'drop-shadow(0px 0px 1.5px rgba(0,0,0,0.5)) drop-shadow(0px 10px 30px rgba(0,0,0,0.15))'
   }
 ];
@@ -117,21 +118,23 @@ export default function AnimatedCan({ activeIndex }: { activeIndex: number }) {
           }}
         >
           <div className="relative w-full h-[100%] flex items-center justify-center overflow-visible">
-            <Image
-              src={can.src}
-              alt={can.alt}
-              fill
-              priority
-              quality={100}
-              sizes={can.id === 'gold' ? '(max-width: 768px) 30vw, 500px' : '(max-width: 768px) 50vw, 900px'}
-              className="object-contain object-center opacity-100"
-              style={{ 
-                mixBlendMode: 'normal',
-                filter: can.filter,
-                transform: `scale(${isMobile ? can.scale * 0.7 : can.scale})`,
-                imageRendering: can.id === 'gold' ? 'high-quality' as React.CSSProperties['imageRendering'] : undefined
-              }}
-            />
+            <Link href="/#products" className="relative w-full h-full block cursor-pointer">
+              <Image
+                src={can.src}
+                alt={can.alt}
+                fill
+                priority
+                quality={100}
+                sizes={can.id === 'gold' ? '(max-width: 768px) 30vw, 500px' : '(max-width: 768px) 50vw, 900px'}
+                className="object-contain object-center opacity-100"
+                style={{ 
+                  mixBlendMode: 'normal',
+                  filter: can.filter,
+                  transform: `scale(${isMobile ? can.scale * 0.7 : can.scale})`,
+                  imageRendering: can.id === 'gold' ? 'high-quality' as React.CSSProperties['imageRendering'] : undefined
+                }}
+              />
+            </Link>
           </div>
         </div>
       ))}
