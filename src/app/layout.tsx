@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Inter, Oswald, Playfair_Display, Space_Mono } from 'next/font/google';
 import './globals.css';
 
@@ -11,6 +11,9 @@ const spaceMono = Space_Mono({ weight: ['400', '700'], subsets: ['latin'], varia
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.dropwater.in'),
+  alternates: {
+    canonical: '/',
+  },
   title: {
     default: 'DROP. As It Should Be.',
     template: '%s | DROP.',
@@ -51,6 +54,13 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = {
+  themeColor: '#0F1112',
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -58,6 +68,25 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} ${oswald.variable} ${playfair.variable} ${spaceMono.variable}`}>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'Organization',
+              name: 'DROP',
+              url: 'https://www.dropwater.in',
+              logo: 'https://www.dropwater.in/apple-touch-icon.png',
+              sameAs: [
+                'https://www.instagram.com/dropwaterco',
+                'https://x.com/dropofficialw',
+                'https://www.facebook.com/share/14kfqixwQTn/?mibextid=wwXIfr'
+              ]
+            })
+          }}
+        />
+      </head>
       <body className="antialiased">
         <CartProvider>
           {children}

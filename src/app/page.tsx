@@ -66,8 +66,38 @@ export default function Home() {
     }
   ];
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    'itemListElement': products.map((p, index) => ({
+      '@type': 'ListItem',
+      'position': index + 1,
+      'item': {
+        '@type': 'Product',
+        'name': `DROP - ${p.name}`,
+        'image': `https://www.dropwater.in${p.image}`,
+        'description': p.desc,
+        'brand': {
+          '@type': 'Brand',
+          'name': 'DROP'
+        },
+        'offers': {
+          '@type': 'Offer',
+          'price': '0',
+          'priceCurrency': 'INR',
+          'availability': 'https://schema.org/PreOrder',
+          'url': 'https://www.dropwater.in'
+        }
+      }
+    }))
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <HeroSection />
 
       <main className="relative z-10">
