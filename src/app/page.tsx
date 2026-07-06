@@ -112,24 +112,24 @@ export default function Home() {
         <HydrationSection />
 
         {/* Section 3: Lineup */}
-        <section id="products" className="min-h-screen bg-[var(--color-cream)] py-32 px-6 text-center flex flex-col justify-center items-center relative z-10 font-sans">
-          <h2 className="text-[clamp(3rem,8vw,6rem)] text-[#1B2A22] mb-6 font-black tracking-tight leading-none uppercase font-serif">
+        <section id="products" className="min-h-screen bg-[var(--color-cream)] py-20 px-4 text-center flex flex-col justify-center relative z-10">
+          <h2 className="text-[clamp(4rem,15vw,12rem)] text-[#1B2A22] text-center opacity-90 mb-16 leading-[0.9]">
             The Collection
           </h2>
-          <p className="text-xs md:text-sm font-bold text-[#D4AF37] tracking-[0.3em] mb-24 uppercase">
-            Pure hydration in four essential states.
+          <p className="text-lg md:text-xl font-bold text-[var(--color-red)] tracking-[0.2em] mb-20 uppercase">
+            Available in Mint, Athlete, Clove, and Sparkling.
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 xl:gap-10 max-w-[90rem] mx-auto px-4 relative z-10 w-full">
             {products.map((p) => (
               <div
                 key={p.id}
-                className={`group relative rounded-[2rem] overflow-hidden border ${p.border} ${p.bg} shadow-xl transition-all duration-700 hover:-translate-y-3 flex flex-col h-[560px] p-8 hover:shadow-2xl backdrop-blur-md`}
+                className={`group relative rounded-[32px] overflow-hidden border ${p.border} ${p.bg} shadow-2xl transition-all duration-500 hover:-translate-y-2 flex flex-col h-[520px] p-6`}
               >
                 {/* Image Pedestal / Container */}
-                <div className="w-full h-[260px] relative overflow-hidden flex items-center justify-center mb-8 bg-gradient-to-b from-white/5 to-transparent rounded-2xl border border-white/5">
-                  <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/20 opacity-0 group-hover:opacity-100 transition-all duration-700 rounded-2xl" />
-                  <div className="relative w-full h-[90%] transition-transform duration-1000 group-hover:scale-[1.08] ease-out">
+                <div className="w-full h-[240px] relative overflow-hidden flex items-center justify-center mb-6 bg-black/10 rounded-2xl">
+                  <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/30 opacity-0 group-hover:opacity-100 transition-all duration-500 rounded-2xl" />
+                  <div className="relative w-full h-[85%] transition-transform duration-700 group-hover:scale-105">
                     <Image
                       src={p.image}
                       alt={p.name}
@@ -145,13 +145,13 @@ export default function Home() {
                 {/* Details */}
                 <div className="flex flex-col flex-grow text-center items-center justify-between">
                   <div>
-                    <h3 className={`text-2xl font-black uppercase tracking-widest ${p.text} font-serif`}>
+                    <h3 className={`text-2xl font-black uppercase tracking-tight ${p.text}`}>
                       {p.name}
                     </h3>
-                    <p className="text-[#D4AF37] font-semibold text-xs tracking-[0.2em] uppercase mt-2 opacity-90">
+                    <p className="text-[#C9A84C] font-bold text-sm tracking-wider uppercase mt-1">
                       {p.flavor}
                     </p>
-                    <p className="text-white/60 text-sm mt-4 px-2 font-light leading-relaxed">
+                    <p className="text-white/60 text-xs mt-3 px-2 font-medium leading-relaxed">
                       {p.desc}
                     </p>
                   </div>
@@ -165,7 +165,7 @@ export default function Home() {
                       price: 'SURVEY ITEM',
                       image: p.image
                     })}
-                    className={`w-full mt-8 py-4 bg-transparent border border-white/20 group-hover:bg-white/10 group-hover:border-white/40 ${p.text} font-bold tracking-[0.2em] text-[10px] md:text-xs rounded-full transition-all duration-500 uppercase active:scale-95 cursor-pointer backdrop-blur-sm shadow-lg hover:shadow-xl`}
+                    className="w-full mt-6 py-3.5 bg-[#C9A84C] hover:bg-[#B0913B] text-black font-extrabold tracking-widest text-[10px] rounded-full shadow-lg shadow-black/30 transition-all duration-300 uppercase active:scale-95 cursor-pointer"
                   >
                     Select Edition
                   </button>
