@@ -87,14 +87,15 @@ export default function HeroSection() {
         {/* Headline */}
         <h1
           ref={headlineRef}
-          className="opacity-0 transition-colors duration-1000 mb-6"
+          className="opacity-0 transition-colors duration-1000 mb-8"
           style={{
             fontFamily: '"Anton", "Bebas Neue", "Druk Condensed", Impact, sans-serif',
             fontSize: 'clamp(3rem, 10vw, 8rem)',
             color: THEMES[activeIndex].text,
             fontWeight: 900,
-            letterSpacing: '-0.03em',
-            lineHeight: 0.88,
+            letterSpacing: '0.02em',
+            lineHeight: 0.9,
+            textShadow: '0 10px 30px rgba(0,0,0,0.3)'
           }}
         >
           AS. IT.<br />
@@ -102,10 +103,10 @@ export default function HeroSection() {
         </h1>
 
         {/* Buttons */}
-        <div className="mt-6 md:mt-10 flex flex-col sm:flex-row gap-4 w-full justify-center md:justify-start items-center">
+        <div className="mt-8 md:mt-10 flex flex-col sm:flex-row gap-6 w-full justify-center md:justify-start items-center">
           <button
             onClick={() => alert("Pre-order modal coming soon!")}
-            className="px-8 py-4 w-full sm:w-auto font-bold tracking-widest text-sm rounded-full shadow-lg hover:scale-105 active:scale-95 transition-all duration-500"
+            className="px-10 py-4 w-full sm:w-auto font-bold tracking-[0.2em] text-xs rounded-full shadow-xl hover:shadow-2xl hover:-translate-y-1 active:translate-y-0 active:scale-95 transition-all duration-500 ring-1 ring-white/20 backdrop-blur-sm"
             style={{
               backgroundColor: THEMES[activeIndex].id === 'gold' ? '#C9A84C' : THEMES[activeIndex].id === 'purple' ? '#E9D5FF' : '#FFFFFF',
               color: THEMES[activeIndex].id === 'gold' ? '#1C1408' : THEMES[activeIndex].id === 'purple' ? '#1A0B2E' : '#0A0A0A'
@@ -117,8 +118,8 @@ export default function HeroSection() {
             href="https://forms.gle/oBq4GbBTc3AeaJSJ6"
             target="_blank"
             rel="noopener noreferrer"
-            className="px-8 py-4 w-full sm:w-auto bg-transparent border-2 font-bold tracking-widest text-sm rounded-full hover:bg-white/5 transition-all duration-500 text-center flex items-center justify-center"
-            style={{ borderColor: `${THEMES[activeIndex].text}40`, color: THEMES[activeIndex].text }}
+            className="px-10 py-4 w-full sm:w-auto bg-transparent border border-white/20 font-bold tracking-[0.2em] text-xs rounded-full hover:bg-white/10 hover:border-white/40 backdrop-blur-md transition-all duration-500 text-center flex items-center justify-center hover:-translate-y-1"
+            style={{ color: THEMES[activeIndex].text }}
           >
             FILL INTEREST FORM
           </a>
@@ -127,11 +128,11 @@ export default function HeroSection() {
         {/* Sleek Footnote */}
         <div
           ref={taglineRef}
-          className="mt-12 md:mt-16 font-semibold tracking-[0.2em] text-sm md:text-base opacity-0 transition-colors duration-1000 flex items-center justify-center md:justify-start gap-4"
+          className="mt-14 md:mt-16 font-semibold tracking-[0.3em] text-[10px] md:text-xs opacity-0 transition-colors duration-1000 flex items-center justify-center md:justify-start gap-6 uppercase"
           style={{ color: THEMES[activeIndex].text }}
         >
           <span className="opacity-70">500ML</span>
-          <span className="w-1 h-1 rounded-full bg-current opacity-40"></span>
+          <span className="w-1.5 h-1.5 rounded-full bg-current opacity-40 shadow-[0_0_10px_currentColor]"></span>
           <span className="opacity-70">STILL WATER</span>
         </div>
       </div>

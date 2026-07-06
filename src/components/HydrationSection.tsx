@@ -58,9 +58,9 @@ export default function HydrationSection() {
   }, [selectedCard]);
 
   return (
-    <section id="hydration" className="min-h-screen bg-[var(--color-red)] text-[var(--color-cream)] p-8 flex flex-col justify-center relative z-10">
-      <h1 className="text-[clamp(4rem,15vw,12rem)] text-center opacity-90 mb-16 leading-[0.9]">
-        HYDRATION
+    <section id="hydration" className="min-h-screen bg-[var(--color-red)] text-[var(--color-cream)] p-8 flex flex-col justify-center relative z-10 font-sans">
+      <h1 className="text-[clamp(3rem,10vw,8rem)] text-center opacity-90 mb-16 leading-[0.9] font-black tracking-tighter uppercase font-serif">
+        The Essential Element
       </h1>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 max-w-6xl mx-auto w-full px-6 relative z-10">
@@ -68,10 +68,15 @@ export default function HydrationSection() {
           <div 
             key={card.id}
             onClick={() => setSelectedCard(idx)}
-            className={`${card.bgColor} ${card.textColor} p-8 lg:p-12 rounded-xl ${card.rotation} ${card.margin} shadow-[5px_5px_0px_var(--color-dark)] hover:-translate-y-1 hover:rotate-0 transition-all duration-300 flex flex-col justify-center cursor-pointer hover:shadow-[8px_8px_0px_var(--color-dark)]`}
+            className={`${card.bgColor} ${card.textColor} p-8 lg:p-12 rounded-3xl border border-white/10 shadow-xl hover:-translate-y-2 transition-all duration-500 flex flex-col justify-center cursor-pointer hover:shadow-2xl group`}
           >
-            <h2 className="text-3xl font-bold mb-4 uppercase">{card.title}</h2>
-            <p className="font-sans text-lg lg:text-xl font-medium leading-relaxed">
+            <div className="flex justify-between items-start mb-6">
+              <h2 className="text-2xl md:text-3xl font-bold uppercase tracking-widest">{card.title}</h2>
+              <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-x-[-10px] group-hover:translate-x-0">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+              </span>
+            </div>
+            <p className="font-sans text-lg lg:text-xl font-light leading-relaxed opacity-90">
               {card.content}
             </p>
           </div>
@@ -80,22 +85,22 @@ export default function HydrationSection() {
 
       {/* Modal Popup */}
       <div 
-        className={`fixed inset-0 z-[100] flex items-center justify-center p-6 bg-black/60 backdrop-blur-sm transition-opacity duration-300 ${selectedCard !== null ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
+        className={`fixed inset-0 z-[100] flex items-center justify-center p-6 bg-black/80 backdrop-blur-md transition-opacity duration-500 ${selectedCard !== null ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
         onClick={() => setSelectedCard(null)}
       >
         {selectedCard !== null && (
           <div 
-            className={`${CARDS[selectedCard].bgColor} ${CARDS[selectedCard].textColor} p-10 lg:p-16 rounded-2xl shadow-[10px_10px_0px_var(--color-dark)] max-w-2xl w-full relative transform transition-all duration-500 ${selectedCard !== null ? 'scale-100 translate-y-0' : 'scale-95 translate-y-8'}`}
+            className={`${CARDS[selectedCard].bgColor} ${CARDS[selectedCard].textColor} p-10 lg:p-16 rounded-3xl shadow-2xl max-w-2xl w-full relative transform transition-all duration-700 ease-out border border-white/20 ${selectedCard !== null ? 'scale-100 translate-y-0 opacity-100' : 'scale-95 translate-y-12 opacity-0'}`}
             onClick={(e) => e.stopPropagation()}
           >
             <button 
               onClick={() => setSelectedCard(null)}
-              className="absolute top-4 right-4 p-2 rounded-full hover:bg-black/10 transition-colors"
+              className="absolute top-6 right-6 p-3 rounded-full hover:bg-black/10 transition-colors backdrop-blur-sm"
             >
-              <X size={28} />
+              <X size={24} />
             </button>
-            <h2 className="text-4xl lg:text-5xl font-black mb-6 uppercase tracking-tight">{CARDS[selectedCard].title}</h2>
-            <p className="font-sans text-xl lg:text-2xl font-medium leading-relaxed">
+            <h2 className="text-3xl lg:text-5xl font-black mb-8 uppercase tracking-tight font-serif">{CARDS[selectedCard].title}</h2>
+            <p className="font-sans text-xl lg:text-2xl font-light leading-relaxed opacity-90">
               {CARDS[selectedCard].content}
             </p>
           </div>
