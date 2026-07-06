@@ -11,10 +11,6 @@ import Image from 'next/image';
 export default function Home() {
   const { isLoggedIn, addToCart } = useCart();
 
-  if (!isLoggedIn) {
-    return <LoginPage />;
-  }
-
   const products = [
     {
       id: 'purple',
@@ -91,6 +87,18 @@ export default function Home() {
       }
     }))
   };
+
+  if (!isLoggedIn) {
+    return (
+      <>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+        <LoginPage />
+      </>
+    );
+  }
 
   return (
     <>
