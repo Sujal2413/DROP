@@ -10,8 +10,8 @@ import gsap from 'gsap';
 // Do not modify these scale ratios.
 const CANS = [
   { 
-    id: 'purple', src: '/assets/new-can-variant-1.png', alt: 'Deep Purple Can', scale: 1.6,
-    filter: 'drop-shadow(0px 0px 1.5px rgba(0,0,0,0.5)) drop-shadow(0px 10px 30px rgba(0,0,0,0.15))'
+    id: 'purple', src: '/assets/new-can-variant-1.png?v=fixed', alt: 'Deep Purple Can', scale: 1.6,
+    filter: 'drop-shadow(0 20px 30px rgba(0,0,0,0.8))'
   },
   { 
     id: 'gold', src: '/assets/new-can-variant-2-final.png', alt: 'Pure Gold Can', scale: 1.6,

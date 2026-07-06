@@ -449,7 +449,7 @@ function MaskedWordReveal({ text, className = "" }: { text: string; className?: 
       y: 0,
       transition: {
         duration: 0.8,
-        ease: [0.25, 0.1, 0.25, 1.0] // smooth cubic ease
+        ease: [0.25, 0.1, 0.25, 1.0] as const // smooth cubic ease
       }
     }
   };
