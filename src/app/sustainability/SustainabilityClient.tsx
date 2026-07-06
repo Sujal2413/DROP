@@ -19,11 +19,7 @@ export default function SustainabilityClient() {
   return (
     <div className="w-full relative bg-[var(--color-cream)] text-black font-sans selection:bg-black selection:text-white antialiased overflow-hidden min-h-screen border-x-2 border-black">
       
-      {/* Dynamic Background Noise */}
-      <div 
-        className="absolute inset-0 pointer-events-none opacity-40 z-0" 
-        style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E")' }}
-      />
+      {/* Dynamic Background Noise (Removed) */}
 
       {/* Navbar using Olive/Dark palette for black text on light background */}
       <HeroNavbar activeIndex={4} />
@@ -46,9 +42,9 @@ export default function SustainabilityClient() {
           
           {/* Card 1 */}
           <motion.div 
-            whileHover={{ scale: 1.02, rotate: 1 }}
+            whileHover={{ scale: 1.02 }}
             transition={{ type: "spring", stiffness: 300, damping: 20 }}
-            className="bg-[var(--color-mustard)] text-black p-6 md:p-8 border-2 border-black shadow-[5px_5px_0px_black] hover:shadow-[8px_8px_0px_black] flex flex-col justify-between -rotate-2 cursor-default"
+            className="bg-[var(--color-mustard)] text-black p-6 md:p-8 border-2 border-black shadow-[5px_5px_0px_black] hover:shadow-[8px_8px_0px_black] flex flex-col justify-between cursor-default"
           >
             <h2 className="text-2xl md:text-3xl font-black uppercase tracking-tight mb-6">100% Recyclable</h2>
             <p className="text-base md:text-lg font-bold leading-relaxed">
@@ -58,9 +54,9 @@ export default function SustainabilityClient() {
 
           {/* Card 2 */}
           <motion.div 
-            whileHover={{ scale: 1.02, rotate: -2 }}
+            whileHover={{ scale: 1.02 }}
             transition={{ type: "spring", stiffness: 300, damping: 20 }}
-            className="bg-[var(--color-red)] text-white p-6 md:p-8 border-2 border-black shadow-[5px_5px_0px_black] hover:shadow-[8px_8px_0px_black] flex flex-col justify-between rotate-1 mt-6 md:mt-12 cursor-default"
+            className="bg-[var(--color-red)] text-white p-6 md:p-8 border-2 border-black shadow-[5px_5px_0px_black] hover:shadow-[8px_8px_0px_black] flex flex-col justify-between mt-6 md:mt-12 cursor-default"
           >
             <h2 className="text-2xl md:text-3xl font-black uppercase tracking-tight mb-6 text-black drop-shadow-[1px_1px_0px_white]">Low Carbon Loop</h2>
             <p className="text-base md:text-lg font-bold leading-relaxed">
@@ -69,7 +65,7 @@ export default function SustainabilityClient() {
           </motion.div>
 
           {/* Card 3 */}
-          <div className="bg-blue-600 text-white p-6 md:p-8 border-2 border-black shadow-[5px_5px_0px_black] hover:-translate-y-2 hover:shadow-[8px_8px_0px_black] transition-all duration-300 flex flex-col justify-between rotate-2">
+          <div className="bg-blue-600 text-white p-6 md:p-8 border-2 border-black shadow-[5px_5px_0px_black] hover:-translate-y-2 hover:shadow-[8px_8px_0px_black] transition-all duration-300 flex flex-col justify-between">
             <h2 className="text-2xl md:text-3xl font-black uppercase tracking-tight mb-6">Ethical Sourcing</h2>
             <p className="text-base md:text-lg font-bold leading-relaxed">
               We only take what the earth freely yields. We source exclusively from naturally replenishing springs. No draining basins. No habitat destruction.
@@ -77,7 +73,7 @@ export default function SustainabilityClient() {
           </div>
 
           {/* Card 4 */}
-          <div className="bg-black text-white p-6 md:p-8 border-2 border-black shadow-[5px_5px_0px_var(--color-red)] hover:-translate-y-2 hover:shadow-[8px_8px_0px_var(--color-red)] transition-all duration-300 flex flex-col justify-between -rotate-1 mt-6 md:mt-12">
+          <div className="bg-black text-white p-6 md:p-8 border-2 border-black shadow-[5px_5px_0px_var(--color-red)] hover:-translate-y-2 hover:shadow-[8px_8px_0px_var(--color-red)] transition-all duration-300 flex flex-col justify-between mt-6 md:mt-12">
             <h2 className="text-2xl md:text-3xl font-black uppercase tracking-tight mb-6">Take Action</h2>
             <p className="text-base md:text-lg font-bold leading-relaxed mb-6">
               By choosing DROP, you are actively scaling production to drive down the cost of aluminum, helping phase out single-use plastics forever.
