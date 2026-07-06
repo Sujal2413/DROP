@@ -110,7 +110,6 @@ export async function createSession(userId: string, email: string, name: string)
     secure: isProd,
     sameSite: 'strict',
     path: '/',
-    maxAge: 15 * 60, // 15 mins
   });
 
   cookieStore.set({
@@ -120,7 +119,6 @@ export async function createSession(userId: string, email: string, name: string)
     secure: isProd,
     sameSite: 'strict',
     path: '/',
-    maxAge: 7 * 24 * 60 * 60, // 7 days
   });
 }
 
@@ -216,7 +214,6 @@ export async function verifySession(): Promise<SessionUser | null> {
           secure: isProd,
           sameSite: 'strict',
           path: '/',
-          maxAge: 15 * 60,
         });
 
         cookieStore.set({
@@ -226,7 +223,6 @@ export async function verifySession(): Promise<SessionUser | null> {
           secure: isProd,
           sameSite: 'strict',
           path: '/',
-          maxAge: 7 * 24 * 60 * 60,
         });
 
         return { id: userId, email, name };

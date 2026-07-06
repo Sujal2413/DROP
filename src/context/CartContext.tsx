@@ -52,21 +52,21 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         if (data.authenticated) {
           setIsLoggedIn(true);
           setUser(data.user || null);
-          localStorage.setItem('drop_logged_in', 'true');
+          sessionStorage.setItem('drop_logged_in', 'true');
           if (data.user) {
-            localStorage.setItem('drop_user', JSON.stringify(data.user));
+            sessionStorage.setItem('drop_user', JSON.stringify(data.user));
           }
         } else {
           setIsLoggedIn(false);
           setUser(null);
-          localStorage.removeItem('drop_logged_in');
-          localStorage.removeItem('drop_user');
+          sessionStorage.removeItem('drop_logged_in');
+          sessionStorage.removeItem('drop_user');
         }
       } catch (err) {
         // Fallback to localStorage if offline or network error
-        const loggedIn = localStorage.getItem('drop_logged_in') === 'true';
+        const loggedIn = sessionStorage.getItem('drop_logged_in') === 'true';
         setIsLoggedIn(loggedIn);
-        const storedUser = localStorage.getItem('drop_user');
+        const storedUser = sessionStorage.getItem('drop_user');
         if (storedUser) {
           try {
             setUser(JSON.parse(storedUser));
@@ -89,7 +89,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const login = () => {
-    localStorage.setItem('drop_logged_in', 'true');
+    sessionStorage.setItem('drop_logged_in', 'true');
     setIsLoggedIn(true);
   };
 
@@ -99,8 +99,8 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     } catch (e) {
       console.error('Failed to log out from backend', e);
     }
-    localStorage.removeItem('drop_logged_in');
-    localStorage.removeItem('drop_user');
+    sessionStorage.removeItem('drop_logged_in');
+    sessionStorage.removeItem('drop_user');
     setIsLoggedIn(false);
     setUser(null);
     setCart([]);
