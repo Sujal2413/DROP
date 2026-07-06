@@ -32,7 +32,7 @@ export default function SustainabilityClient() {
             NO PLASTIC.<br />
             NO BULLSH*T.
           </h1>
-          <p className="font-bold text-lg md:text-xl uppercase tracking-widest max-w-2xl mx-auto border-2 border-black p-3 bg-white shadow-[3px_3px_0px_black] rotate-1">
+          <p className="font-bold text-lg md:text-xl uppercase tracking-widest max-w-2xl mx-auto border-2 border-black p-3 bg-white shadow-[3px_3px_0px_black]">
             Luxury hydration that doesn't cost the earth.
           </p>
         </header>

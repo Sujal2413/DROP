@@ -26,7 +26,7 @@ export default function Footer({ theme = "default" }: FooterProps) {
 
   const socialLinks = [
     { icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>, label: "Facebook", href: "https://www.facebook.com/share/14kfqixwQTn/?mibextid=wwXIfr" },
-    { icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>, label: "Instagram", href: "https://www.instagram.com/dropwatercoigsh=cTFtemNscGpyNHBh&utm_source=qr" },
+    { icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>, label: "Instagram", href: "https://www.instagram.com/dropwaterco" },
     { icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>, label: "X (Twitter)", href: "https://x.com/dropofficialw?s=11" },
   ];
 
@@ -64,7 +64,16 @@ export default function Footer({ theme = "default" }: FooterProps) {
                 </a>
               </li>
               <li>Co-founder - Atharva Pachkar</li>
-              <li>Co-founder - Aayush Mokal</li>
+              <li>
+                <a 
+                  href="https://www.linkedin.com/in/aayush-mokal-56097a352?utm_source=share_via&utm_content=profile&utm_medium=member_android" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="cursor-pointer hover:underline transition-all hover:text-[#D4AF37]"
+                >
+                  Co-founder - Aayush Mokal
+                </a>
+              </li>
             </ul>
           </div>
 
