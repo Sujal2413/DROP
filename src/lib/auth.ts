@@ -244,21 +244,36 @@ export async function deleteSession() {
   const { accessTokenName, refreshTokenName } = getCookieNames();
   
   const accessToken = cookieStore.get(accessTokenName)?.value;
+  const refreshToken = cookieStore.get(refreshTokenName)?.value;
   const redis = getRedisClient();
 
-  if (accessToken) {
+  const tokenToDecode = accessToken || refreshToken;
+  if (tokenToDecode) {
     try {
-      const decoded = jwt.verify(accessToken, JWT_SECRET) as JWTPayload;
-      await redis.del(`user_session:${decoded.id}:${decoded.sessionId}`);
-      await redis.del(`refresh_token:${decoded.id}:${decoded.sessionId}`);
+      // Use jwt.decode instead of verify to extract sessionId even if expired
+      const decoded = jwt.decode(tokenToDecode) as JWTPayload;
+      if (decoded && decoded.id && decoded.sessionId) {
+        await redis.del(`user_session:${decoded.id}:${decoded.sessionId}`);
+        await redis.del(`refresh_token:${decoded.id}:${decoded.sessionId}`);
+      }
     } catch (err) {
       // Ignore token decoding errors on logout
     }
   }
 
+  const isProd = process.env.NODE_ENV === 'production';
+  const cookieOptions = {
+    path: '/',
+    secure: isProd,
+    sameSite: 'strict' as const,
+  };
+
+  // Forcefully overwrite cookies to expire them, along with using delete
+  cookieStore.set(accessTokenName, '', { ...cookieOptions, maxAge: 0 });
+  cookieStore.set(refreshTokenName, '', { ...cookieOptions, maxAge: 0 });
+  cookieStore.set('drop_session', '', { ...cookieOptions, maxAge: 0 });
+
   cookieStore.delete(accessTokenName);
   cookieStore.delete(refreshTokenName);
-  
-  // Also clear legacy session cookie if it exists
   cookieStore.delete('drop_session');
 }
