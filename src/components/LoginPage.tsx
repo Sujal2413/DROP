@@ -718,17 +718,17 @@ export default function LoginPage() {
             {/* Purple tall rectangle character - Back layer */}
             <div 
               ref={purpleRef}
-              className="absolute bottom-0 transition-all duration-700 ease-in-out"
+              className="absolute bottom-4 transition-all duration-700 ease-in-out"
               style={{
-                left: '70px',
-                width: '180px',
-                height: (isTyping || (password.length > 0 && !showPassword)) ? '440px' : '400px',
+                left: '110px',
+                width: '140px',
+                height: '300px',
                 zIndex: 1,
                 transform: (password.length > 0 && showPassword)
-                  ? `skewX(0deg)`
+                  ? `skewX(0deg) translateY(0px)`
                   : (isTyping || (password.length > 0 && !showPassword))
-                    ? `skewX(${(purplePos.bodySkew || 0) - 12}deg) translateX(40px)` 
-                    : `skewX(${purplePos.bodySkew || 0}deg)`,
+                    ? `skewX(${(purplePos.bodySkew || 0) - 12}deg) translateX(40px) translateY(-30px)` 
+                    : `skewX(${purplePos.bodySkew || 0}deg) translateY(0px)`,
                 transformOrigin: 'bottom center',
               }}
             >
@@ -738,11 +738,11 @@ export default function LoginPage() {
             {/* Black tall rectangle character - Middle layer */}
             <div 
               ref={blackRef}
-              className="absolute bottom-0 transition-all duration-700 ease-in-out"
+              className="absolute bottom-8 transition-all duration-700 ease-in-out"
               style={{
-                left: '240px',
-                width: '120px',
-                height: '310px',
+                left: '210px',
+                width: '130px',
+                height: '280px',
                 zIndex: 2,
                 transform: (password.length > 0 && showPassword)
                   ? `skewX(0deg)`
@@ -762,9 +762,9 @@ export default function LoginPage() {
               ref={orangeRef}
               className="absolute bottom-0 transition-all duration-700 ease-in-out"
               style={{
-                left: '0px',
-                width: '240px',
-                height: '200px',
+                left: '50px',
+                width: '150px',
+                height: '320px',
                 zIndex: 3,
                 transform: (password.length > 0 && showPassword) ? `skewX(0deg)` : `skewX(${orangePos.bodySkew || 0}deg)`,
                 transformOrigin: 'bottom center',
@@ -776,11 +776,11 @@ export default function LoginPage() {
             {/* Yellow tall rectangle character - Front right */}
             <div 
               ref={yellowRef}
-              className="absolute bottom-0 transition-all duration-700 ease-in-out"
+              className="absolute bottom-2 transition-all duration-700 ease-in-out"
               style={{
-                left: '310px',
+                left: '280px',
                 width: '140px',
-                height: '230px',
+                height: '300px',
                 zIndex: 4,
                 transform: (password.length > 0 && showPassword) ? `skewX(0deg)` : `skewX(${yellowPos.bodySkew || 0}deg)`,
                 transformOrigin: 'bottom center',
