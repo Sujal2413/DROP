@@ -24,3 +24,20 @@ dist-ssr
 *.sw?
 .vercel
 .next
+
+# Secrets and Confidential Files
+.env
+.env.development
+.env.production
+.env.test
+*.pem
+*.cert
+*.key
+*.p12
+secrets.json
+auth.json
+google-credentials.json
+firebase-adminsdk.json
+service-account*.json
+*.sqlite
+*.db

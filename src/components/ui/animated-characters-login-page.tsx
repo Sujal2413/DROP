@@ -333,8 +333,6 @@ function LoginPage() {
                 left: '70px',
                 width: '180px',
                 height: (isTyping || (password.length > 0 && !showPassword)) ? '440px' : '400px',
-                backgroundColor: '#6C3FF5',
-                borderRadius: '10px 10px 0 0',
                 zIndex: 1,
                 transform: (password.length > 0 && showPassword)
                   ? `skewX(0deg)`
@@ -344,35 +342,7 @@ function LoginPage() {
                 transformOrigin: 'bottom center',
               }}
             >
-              {/* Eyes */}
-              <div 
-                className="absolute flex gap-8 transition-all duration-700 ease-in-out"
-                style={{
-                  left: (password.length > 0 && showPassword) ? `${20}px` : isLookingAtEachOther ? `${55}px` : `${45 + positions.purple.faceX}px`,
-                  top: (password.length > 0 && showPassword) ? `${35}px` : isLookingAtEachOther ? `${65}px` : `${40 + positions.purple.faceY}px`,
-                }}
-              >
-                <EyeBall 
-                  size={18} 
-                  pupilSize={7} 
-                  maxDistance={5} 
-                  eyeColor="white" 
-                  pupilColor="#2D2D2D" 
-                  isBlinking={isPurpleBlinking}
-                  forceLookX={(password.length > 0 && showPassword) ? (isPurplePeeking ? 4 : -4) : isLookingAtEachOther ? 3 : undefined}
-                  forceLookY={(password.length > 0 && showPassword) ? (isPurplePeeking ? 5 : -4) : isLookingAtEachOther ? 4 : undefined}
-                />
-                <EyeBall 
-                  size={18} 
-                  pupilSize={7} 
-                  maxDistance={5} 
-                  eyeColor="white" 
-                  pupilColor="#2D2D2D" 
-                  isBlinking={isPurpleBlinking}
-                  forceLookX={(password.length > 0 && showPassword) ? (isPurplePeeking ? 4 : -4) : isLookingAtEachOther ? 3 : undefined}
-                  forceLookY={(password.length > 0 && showPassword) ? (isPurplePeeking ? 5 : -4) : isLookingAtEachOther ? 4 : undefined}
-                />
-              </div>
+              <img src="/assets/login-can-purple.png" alt="Purple Can" className="w-full h-full object-contain drop-shadow-xl" />
             </div>
 
             {/* Black tall rectangle character - Middle layer */}
@@ -383,8 +353,6 @@ function LoginPage() {
                 left: '240px',
                 width: '120px',
                 height: '310px',
-                backgroundColor: '#2D2D2D',
-                borderRadius: '8px 8px 0 0',
                 zIndex: 2,
                 transform: (password.length > 0 && showPassword)
                   ? `skewX(0deg)`
@@ -396,35 +364,7 @@ function LoginPage() {
                 transformOrigin: 'bottom center',
               }}
             >
-              {/* Eyes */}
-              <div 
-                className="absolute flex gap-6 transition-all duration-700 ease-in-out"
-                style={{
-                  left: (password.length > 0 && showPassword) ? `${10}px` : isLookingAtEachOther ? `${32}px` : `${26 + positions.black.faceX}px`,
-                  top: (password.length > 0 && showPassword) ? `${28}px` : isLookingAtEachOther ? `${12}px` : `${32 + positions.black.faceY}px`,
-                }}
-              >
-                <EyeBall 
-                  size={16} 
-                  pupilSize={6} 
-                  maxDistance={4} 
-                  eyeColor="white" 
-                  pupilColor="#2D2D2D" 
-                  isBlinking={isBlackBlinking}
-                  forceLookX={(password.length > 0 && showPassword) ? -4 : isLookingAtEachOther ? 0 : undefined}
-                  forceLookY={(password.length > 0 && showPassword) ? -4 : isLookingAtEachOther ? -4 : undefined}
-                />
-                <EyeBall 
-                  size={16} 
-                  pupilSize={6} 
-                  maxDistance={4} 
-                  eyeColor="white" 
-                  pupilColor="#2D2D2D" 
-                  isBlinking={isBlackBlinking}
-                  forceLookX={(password.length > 0 && showPassword) ? -4 : isLookingAtEachOther ? 0 : undefined}
-                  forceLookY={(password.length > 0 && showPassword) ? -4 : isLookingAtEachOther ? -4 : undefined}
-                />
-              </div>
+              <img src="/assets/login-can-black.png" alt="Black Can" className="w-full h-full object-contain drop-shadow-xl" />
             </div>
 
             {/* Orange semi-circle character - Front left */}
@@ -436,23 +376,11 @@ function LoginPage() {
                 width: '240px',
                 height: '200px',
                 zIndex: 3,
-                backgroundColor: '#FF9B6B',
-                borderRadius: '120px 120px 0 0',
                 transform: (password.length > 0 && showPassword) ? `skewX(0deg)` : `skewX(${positions.orange.bodySkew || 0}deg)`,
                 transformOrigin: 'bottom center',
               }}
             >
-              {/* Eyes - just pupils, no white */}
-              <div 
-                className="absolute flex gap-8 transition-all duration-200 ease-out"
-                style={{
-                  left: (password.length > 0 && showPassword) ? `${50}px` : `${82 + (positions.orange.faceX || 0)}px`,
-                  top: (password.length > 0 && showPassword) ? `${85}px` : `${90 + (positions.orange.faceY || 0)}px`,
-                }}
-              >
-                <Pupil size={12} maxDistance={5} pupilColor="#2D2D2D" forceLookX={(password.length > 0 && showPassword) ? -5 : undefined} forceLookY={(password.length > 0 && showPassword) ? -4 : undefined} />
-                <Pupil size={12} maxDistance={5} pupilColor="#2D2D2D" forceLookX={(password.length > 0 && showPassword) ? -5 : undefined} forceLookY={(password.length > 0 && showPassword) ? -4 : undefined} />
-              </div>
+              <img src="/assets/login-can-gold.png" alt="Gold Can" className="w-full h-full object-contain drop-shadow-xl" />
             </div>
 
             {/* Yellow tall rectangle character - Front right */}
@@ -463,32 +391,12 @@ function LoginPage() {
                 left: '310px',
                 width: '140px',
                 height: '230px',
-                backgroundColor: '#E8D754',
-                borderRadius: '70px 70px 0 0',
                 zIndex: 4,
                 transform: (password.length > 0 && showPassword) ? `skewX(0deg)` : `skewX(${positions.yellow.bodySkew || 0}deg)`,
                 transformOrigin: 'bottom center',
               }}
             >
-              {/* Eyes - just pupils, no white */}
-              <div 
-                className="absolute flex gap-6 transition-all duration-200 ease-out"
-                style={{
-                  left: (password.length > 0 && showPassword) ? `${20}px` : `${52 + (positions.yellow.faceX || 0)}px`,
-                  top: (password.length > 0 && showPassword) ? `${35}px` : `${40 + (positions.yellow.faceY || 0)}px`,
-                }}
-              >
-                <Pupil size={12} maxDistance={5} pupilColor="#2D2D2D" forceLookX={(password.length > 0 && showPassword) ? -5 : undefined} forceLookY={(password.length > 0 && showPassword) ? -4 : undefined} />
-                <Pupil size={12} maxDistance={5} pupilColor="#2D2D2D" forceLookX={(password.length > 0 && showPassword) ? -5 : undefined} forceLookY={(password.length > 0 && showPassword) ? -4 : undefined} />
-              </div>
-              {/* Horizontal line for mouth */}
-              <div 
-                className="absolute w-20 h-[4px] bg-[#2D2D2D] rounded-full transition-all duration-200 ease-out"
-                style={{
-                  left: (password.length > 0 && showPassword) ? `${10}px` : `${40 + (positions.yellow.faceX || 0)}px`,
-                  top: (password.length > 0 && showPassword) ? `${88}px` : `${88 + (positions.yellow.faceY || 0)}px`,
-                }}
-              />
+              <img src="/assets/login-can-silver.png" alt="Silver Can" className="w-full h-full object-contain drop-shadow-xl" />
             </div>
           </div>
         </div>
