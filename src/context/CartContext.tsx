@@ -47,7 +47,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     // Check session validity from backend cookie on mount
     const checkSession = async () => {
       try {
-        const res = await fetch('/api/auth/session');
+        const res = await fetch('/api/auth/session', { cache: 'no-store' });
         const data = await res.json();
         if (data.authenticated) {
           setIsLoggedIn(true);
