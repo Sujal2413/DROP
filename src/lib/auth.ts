@@ -268,12 +268,8 @@ export async function deleteSession() {
     sameSite: 'strict' as const,
   };
 
-  // Forcefully overwrite cookies to expire them, along with using delete
-  cookieStore.set(accessTokenName, '', { ...cookieOptions, maxAge: 0 });
-  cookieStore.set(refreshTokenName, '', { ...cookieOptions, maxAge: 0 });
-  cookieStore.set('drop_session', '', { ...cookieOptions, maxAge: 0 });
-
-  cookieStore.delete(accessTokenName);
-  cookieStore.delete(refreshTokenName);
-  cookieStore.delete('drop_session');
+  // Strictly use delete with exact options to avoid Next.js Set-Cookie header conflicts
+  cookieStore.delete({ name: accessTokenName, ...cookieOptions });
+  cookieStore.delete({ name: refreshTokenName, ...cookieOptions });
+  cookieStore.delete({ name: 'drop_session', ...cookieOptions });
 }
