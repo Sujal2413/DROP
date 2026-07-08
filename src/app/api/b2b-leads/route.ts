@@ -38,7 +38,7 @@ export async function POST(request: Request) {
     }
 
     const client = await clientPromise;
-    const db = client.db();
+    const db = client.db('drop_db');
     const b2bCollection = db.collection('b2b_leads');
 
     const entry = {
