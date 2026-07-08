@@ -96,7 +96,7 @@ export default function B2BSection() {
               lineHeight: 1,
             }}
           >
-            Plastic bottles look cheap on your counter. DROP. doesn&apos;t.
+            Your space deserves better than plastic. Stock DROP.
           </h2>
           <p className="text-white/50 text-sm md:text-base font-medium leading-relaxed max-w-xl mx-auto">
             Cafés, gyms, hotels, salons, co-working spaces, and events — stock DROP. for guests who notice the difference.
