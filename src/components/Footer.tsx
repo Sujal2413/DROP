@@ -109,7 +109,7 @@ export default function Footer({ theme = "default" }: FooterProps) {
         <hr className={`border-t my-8 relative z-50 ${borderLine}`} />
 
         {/* Footer bottom */}
-        <div className="flex flex-col md:flex-row justify-between items-center text-sm space-y-4 md:space-y-0 relative z-50">
+        <div className="flex flex-col md:flex-row justify-between items-center text-sm space-y-6 md:space-y-0 relative z-50">
           {/* Social icons */}
           <div className="flex space-x-6">
             {socialLinks.map(({ icon, label, href }) => (
@@ -126,10 +126,26 @@ export default function Footer({ theme = "default" }: FooterProps) {
             ))}
           </div>
 
-          {/* Copyright */}
-          <p className={`text-center md:text-left font-medium ${copyText}`}>
-            &copy; {new Date().getFullYear()} DROP. All rights reserved.
-          </p>
+          {/* Legal links */}
+          <div className="flex items-center gap-4">
+            <Link href="/privacy" className={`text-xs font-medium transition-colors ${linkHover}`}>
+              Privacy Policy
+            </Link>
+            <span className={`text-xs ${copyText}`}>·</span>
+            <Link href="/terms" className={`text-xs font-medium transition-colors ${linkHover}`}>
+              Terms of Service
+            </Link>
+          </div>
+
+          {/* Copyright + India */}
+          <div className="text-center md:text-right">
+            <p className={`font-medium ${copyText}`}>
+              &copy; {new Date().getFullYear()} DROP. All rights reserved.
+            </p>
+            <p className={`text-[10px] mt-1 font-medium tracking-wider uppercase ${copyText}`}>
+              DROP. — India — Coming Soon
+            </p>
+          </div>
         </div>
       </div>
 

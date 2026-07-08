@@ -33,6 +33,14 @@ export const metadata: Metadata = {
     description: 'Premium canned still water. Phasing out single-use plastics forever.',
     url: 'https://www.dropwater.in',
     siteName: 'DROP',
+    images: [
+      {
+        url: 'https://www.dropwater.in/assets/new-can-variant-1.png',
+        width: 1200,
+        height: 630,
+        alt: 'DROP. Premium Canned Water',
+      },
+    ],
     locale: 'en_US',
     type: 'website',
   },

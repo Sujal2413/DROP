@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useCart } from '@/context/CartContext';
 import { useState } from 'react';
 import Image from 'next/image';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import LiveWaitlistCounter from './LiveWaitlistCounter';
 
 interface HeroNavbarProps {
@@ -28,12 +28,14 @@ export default function HeroNavbar({ activeIndex = 0 }: HeroNavbarProps) {
     setShowSurvey, 
     clearCart,
     logout,
-    user
+    user,
+    isLoggedIn
   } = useCart();
   
   const [isUserOpen, setIsUserOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
+  const router = useRouter();
 
   // Default to white if activeIndex is not specified
   const theme = THEMES[activeIndex] || { id: 'default', text: '#FFFFFF', accentBg: '#1A1A1A' };
@@ -93,11 +95,17 @@ export default function HeroNavbar({ activeIndex = 0 }: HeroNavbarProps) {
         
         {/* Right: User and Cart */}
         <div className="flex justify-end gap-3 md:gap-6 w-[200px] items-center">
-          {/* User Button */}
+          {/* User Button — navigates to /account when not logged in, opens profile drawer when logged in */}
           <button 
-            onClick={() => setIsUserOpen(!isUserOpen)} 
+            onClick={() => {
+              if (isLoggedIn) {
+                setIsUserOpen(!isUserOpen);
+              } else {
+                router.push('/account');
+              }
+            }} 
             className="hover:scale-110 active:scale-95 transition-all relative p-1 cursor-pointer" 
-            aria-label="User Profile"
+            aria-label={isLoggedIn ? 'User Profile' : 'Sign In'}
           >
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={themeColor} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="transition-colors duration-1000">
               <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
