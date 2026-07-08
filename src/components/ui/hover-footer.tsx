@@ -97,20 +97,29 @@ export const TextHoverEffect = ({
           />
         </mask>
       </defs>
-      <text
+      <motion.text
         x="50%"
         y="50%"
         textAnchor="middle"
         dominantBaseline="middle"
         strokeWidth="0.3"
-        className={cn("fill-transparent font-[Anton] text-7xl font-black tracking-tighter transition-opacity duration-500", strokeColor40)}
-        style={{ 
-          opacity: hovered ? 0.8 : 0.6,
-          filter: `drop-shadow(0 0 40px ${shadowColor})`
+        className={cn("fill-transparent font-[Anton] text-7xl font-black tracking-tighter", strokeColor40)}
+        animate={{
+          opacity: [0.7, 1, 0.7],
+          filter: [
+            `drop-shadow(0 0 30px ${isOlive ? "rgba(212, 175, 55, 0.5)" : "rgba(139, 92, 246, 0.6)"})`,
+            `drop-shadow(0 0 80px ${isOlive ? "rgba(212, 175, 55, 0.9)" : "rgba(139, 92, 246, 1)"})`,
+            `drop-shadow(0 0 30px ${isOlive ? "rgba(212, 175, 55, 0.5)" : "rgba(139, 92, 246, 0.6)"})`
+          ]
+        }}
+        transition={{
+          duration: 3,
+          repeat: Infinity,
+          ease: "easeInOut"
         }}
       >
         {text}
-      </text>
+      </motion.text>
       <motion.text
         x="50%"
         y="50%"
