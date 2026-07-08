@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
+import { useRouter } from 'next/navigation';
 import { useCart } from '@/context/CartContext';
 import gsap from 'gsap';
 import { Eye, EyeOff, Mail, Sparkles } from 'lucide-react';
@@ -9,162 +10,11 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 
-// --- Cartoon Characters Helper Components ---
-
-interface PupilProps {
-  size?: number;
-  maxDistance?: number;
-  pupilColor?: string;
-  forceLookX?: number;
-  forceLookY?: number;
-}
-
-const Pupil = ({ 
-  size = 12, 
-  maxDistance = 5,
-  pupilColor = "black",
-  forceLookX,
-  forceLookY
-}: PupilProps) => {
-  const [mouseX, setMouseX] = useState<number>(0);
-  const [mouseY, setMouseY] = useState<number>(0);
-  const pupilRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMouseX(e.clientX);
-      setMouseY(e.clientY);
-    };
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, []);
-
-  const calculatePupilPosition = () => {
-    if (!pupilRef.current) return { x: 0, y: 0 };
-    if (forceLookX !== undefined && forceLookY !== undefined) {
-      return { x: forceLookX, y: forceLookY };
-    }
-
-    const pupil = pupilRef.current.getBoundingClientRect();
-    const pupilCenterX = pupil.left + pupil.width / 2;
-    const pupilCenterY = pupil.top + pupil.height / 2;
-
-    const deltaX = mouseX - pupilCenterX;
-    const deltaY = mouseY - pupilCenterY;
-    const distance = Math.min(Math.sqrt(deltaX ** 2 + deltaY ** 2), maxDistance);
-
-    const angle = Math.atan2(deltaY, deltaX);
-    const x = Math.cos(angle) * distance;
-    const y = Math.sin(angle) * distance;
-
-    return { x, y };
-  };
-
-  const pupilPosition = calculatePupilPosition();
-
-  return (
-    <div
-      ref={pupilRef}
-      className="rounded-full"
-      style={{
-        width: `${size}px`,
-        height: `${size}px`,
-        backgroundColor: pupilColor,
-        transform: `translate(${pupilPosition.x}px, ${pupilPosition.y}px)`,
-        transition: 'transform 0.1s ease-out',
-      }}
-    />
-  );
-};
-
-interface EyeBallProps {
-  size?: number;
-  pupilSize?: number;
-  maxDistance?: number;
-  eyeColor?: string;
-  pupilColor?: string;
-  isBlinking?: boolean;
-  forceLookX?: number;
-  forceLookY?: number;
-}
-
-const EyeBall = ({ 
-  size = 48, 
-  pupilSize = 16, 
-  maxDistance = 10,
-  eyeColor = "white",
-  pupilColor = "black",
-  isBlinking = false,
-  forceLookX,
-  forceLookY
-}: EyeBallProps) => {
-  const [mouseX, setMouseX] = useState<number>(0);
-  const [mouseY, setMouseY] = useState<number>(0);
-  const eyeRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMouseX(e.clientX);
-      setMouseY(e.clientY);
-    };
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, []);
-
-  const calculatePupilPosition = () => {
-    if (!eyeRef.current) return { x: 0, y: 0 };
-    if (forceLookX !== undefined && forceLookY !== undefined) {
-      return { x: forceLookX, y: forceLookY };
-    }
-
-    const eye = eyeRef.current.getBoundingClientRect();
-    const eyeCenterX = eye.left + eye.width / 2;
-    const eyeCenterY = eye.top + eye.height / 2;
-
-    const deltaX = mouseX - eyeCenterX;
-    const deltaY = mouseY - eyeCenterY;
-    const distance = Math.min(Math.sqrt(deltaX ** 2 + deltaY ** 2), maxDistance);
-
-    const angle = Math.atan2(deltaY, deltaX);
-    const x = Math.cos(angle) * distance;
-    const y = Math.sin(angle) * distance;
-
-    return { x, y };
-  };
-
-  const pupilPosition = calculatePupilPosition();
-
-  return (
-    <div
-      ref={eyeRef}
-      className="rounded-full flex items-center justify-center transition-all duration-150"
-      style={{
-        width: `${size}px`,
-        height: isBlinking ? '2px' : `${size}px`,
-        backgroundColor: eyeColor,
-        overflow: 'hidden',
-      }}
-    >
-      {!isBlinking && (
-        <div
-          className="rounded-full"
-          style={{
-            width: `${pupilSize}px`,
-            height: `${pupilSize}px`,
-            backgroundColor: pupilColor,
-            transform: `translate(${pupilPosition.x}px, ${pupilPosition.y}px)`,
-            transition: 'transform 0.1s ease-out',
-          }}
-        />
-      )}
-    </div>
-  );
-};
-
 // --- LoginPage Component ---
 
 export default function LoginPage() {
   const { login } = useCart();
+  const router = useRouter();
   const [isSignUp, setIsSignUp] = useState(false);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -314,6 +164,7 @@ export default function LoginPage() {
                 const data = await res.json();
                 if (res.ok && data.success) {
                   login();
+                  router.push('/');
                 } else {
                   setError(data.error || 'Google Authentication failed.');
                 }
@@ -437,12 +288,14 @@ export default function LoginPage() {
         });
         if (loginRes.ok) {
           login();
+          router.push('/');
         } else {
           setIsSignUp(false);
           setError('Registration successful! Please log in.');
         }
       } else {
         login();
+        router.push('/');
       }
     } catch (err) {
       setError(getFriendlyErrorMessage('Connection error.', 0));
@@ -523,6 +376,7 @@ export default function LoginPage() {
             .then(data => {
               if (data.success) {
                 login();
+                router.push('/');
               } else {
                 setError('Simulation login failed.');
               }
@@ -659,6 +513,7 @@ export default function LoginPage() {
             .then(data => {
               if (data.success) {
                 login();
+                router.push('/');
               } else {
                 setError('Simulation login failed.');
               }
@@ -732,20 +587,7 @@ export default function LoginPage() {
                 transformOrigin: 'bottom center',
               }}
             >
-              <img src="/assets/eyeless_login-can-purple.png" alt="Purple Can" className="absolute inset-0 w-full h-full object-fill drop-shadow-xl" />
-              {/* Native Eyes translated */}
-              <img 
-                src="/assets/eyes_login-can-purple.png" 
-                alt="Purple Eyes" 
-                className="absolute inset-0 w-full h-full object-fill z-10 transition-transform duration-75 ease-out" 
-                style={{
-                  transform: (password.length > 0 && showPassword) 
-                    ? `translate(${isPurplePeeking ? 4 : -10}px, ${isPurplePeeking ? 5 : -5}px)` 
-                    : isLookingAtEachOther 
-                      ? `translate(8px, 10px)` 
-                      : `translate(${(purplePos.faceX || 0) * 0.4}px, ${(purplePos.faceY || 0) * 0.4}px)`
-                }}
-              />
+              <img src="/assets/login-can-purple.png" alt="Purple Can" className="absolute inset-0 w-full h-full object-fill drop-shadow-xl" />
             </div>
 
             {/* Black tall rectangle character - Middle layer */}
@@ -767,20 +609,7 @@ export default function LoginPage() {
                 transformOrigin: 'bottom center',
               }}
             >
-              <img src="/assets/eyeless_login-can-black.png" alt="Black Can" className="absolute inset-0 w-full h-full object-fill drop-shadow-xl" />
-              {/* Native Eyes translated */}
-              <img 
-                src="/assets/eyes_login-can-black.png" 
-                alt="Black Eyes" 
-                className="absolute inset-0 w-full h-full object-fill z-10 transition-transform duration-75 ease-out" 
-                style={{
-                  transform: (password.length > 0 && showPassword) 
-                    ? `translate(-12px, -8px)` 
-                    : isLookingAtEachOther 
-                      ? `translate(5px, -15px)` 
-                      : `translate(${(blackPos.faceX || 0) * 0.4}px, ${(blackPos.faceY || 0) * 0.4}px)`
-                }}
-              />
+              <img src="/assets/login-can-black.png" alt="Black Can" className="absolute inset-0 w-full h-full object-fill drop-shadow-xl" />
             </div>
 
             {/* Orange semi-circle character - Front left */}
@@ -796,18 +625,7 @@ export default function LoginPage() {
                 transformOrigin: 'bottom center',
               }}
             >
-              <img src="/assets/eyeless_login-can-gold.png" alt="Gold Can" className="absolute inset-0 w-full h-full object-fill drop-shadow-xl" />
-              {/* Native Eyes translated */}
-              <img 
-                src="/assets/eyes_login-can-gold.png" 
-                alt="Gold Eyes" 
-                className="absolute inset-0 w-full h-full object-fill z-10 transition-transform duration-75 ease-out" 
-                style={{
-                  transform: (password.length > 0 && showPassword) 
-                    ? `translate(-20px, -10px)` 
-                    : `translate(${(orangePos.faceX || 0) * 0.4}px, ${(orangePos.faceY || 0) * 0.4}px)`
-                }}
-              />
+              <img src="/assets/login-can-gold.png" alt="Gold Can" className="absolute inset-0 w-full h-full object-fill drop-shadow-xl" />
             </div>
 
             {/* Yellow tall rectangle character - Front right */}
@@ -823,18 +641,7 @@ export default function LoginPage() {
                 transformOrigin: 'bottom center',
               }}
             >
-              <img src="/assets/eyeless_login-can-silver.png" alt="Silver Can" className="absolute inset-0 w-full h-full object-fill drop-shadow-xl" />
-              {/* Native Eyes translated */}
-              <img 
-                src="/assets/eyes_login-can-silver.png" 
-                alt="Silver Eyes" 
-                className="absolute inset-0 w-full h-full object-fill z-10 transition-transform duration-75 ease-out" 
-                style={{
-                  transform: (password.length > 0 && showPassword) 
-                    ? `translate(-20px, -10px)` 
-                    : `translate(${(yellowPos.faceX || 0) * 0.4}px, ${(yellowPos.faceY || 0) * 0.4}px)`
-                }}
-              />
+              <img src="/assets/login-can-silver.png" alt="Silver Can" className="absolute inset-0 w-full h-full object-fill drop-shadow-xl" />
             </div>
           </div>
         </div>
