@@ -82,8 +82,9 @@ export default function ProductShowcaseSection() {
           DROP. Still Water — 330ml
         </h2>
         <p className="text-white/60 text-base md:text-lg leading-relaxed font-medium max-w-2xl mx-auto mb-20">
-          Still water. Recyclable aluminium can. No plastic, no sugar, no flavour unless you want it —
-          mint, clove, and mineral infusions available. One SKU. Built right, before we build more.
+          Still water. Recyclable aluminium can. No plastic, no sugar, no flavour unless you want it —<br/>
+          <span className="text-white font-bold">mint, clove, and mineral infusions available.</span><br/>
+          One SKU. Built right, before we build more.
         </p>
 
         {/* Can renders */}

@@ -122,7 +122,7 @@ export default function WaitlistSection() {
                 onChange={(e) => setName(e.target.value)}
                 required
                 placeholder="Your name"
-                className="w-full px-5 py-4 bg-white/[0.04] border border-white/10 rounded-xl text-white text-sm font-medium placeholder:text-white/20 focus:outline-none focus:border-[#C9A84C]/50 focus:bg-white/[0.06] transition-all"
+                className="w-full py-4 bg-transparent border-b border-white/20 text-white text-sm font-medium placeholder:text-white/20 focus:outline-none focus:border-[#C9A84C] transition-all rounded-none"
               />
             </div>
 
@@ -135,7 +135,7 @@ export default function WaitlistSection() {
                 onChange={(e) => setEmail(e.target.value)}
                 required
                 placeholder="you@email.com"
-                className="w-full px-5 py-4 bg-white/[0.04] border border-white/10 rounded-xl text-white text-sm font-medium placeholder:text-white/20 focus:outline-none focus:border-[#C9A84C]/50 focus:bg-white/[0.06] transition-all"
+                className="w-full py-4 bg-transparent border-b border-white/20 text-white text-sm font-medium placeholder:text-white/20 focus:outline-none focus:border-[#C9A84C] transition-all rounded-none"
               />
             </div>
 
@@ -147,7 +147,7 @@ export default function WaitlistSection() {
                 value={city}
                 onChange={(e) => setCity(e.target.value)}
                 placeholder="Mumbai, Delhi, Bangalore..."
-                className="w-full px-5 py-4 bg-white/[0.04] border border-white/10 rounded-xl text-white text-sm font-medium placeholder:text-white/20 focus:outline-none focus:border-[#C9A84C]/50 focus:bg-white/[0.06] transition-all"
+                className="w-full py-4 bg-transparent border-b border-white/20 text-white text-sm font-medium placeholder:text-white/20 focus:outline-none focus:border-[#C9A84C] transition-all rounded-none"
               />
             </div>
 
@@ -157,7 +157,7 @@ export default function WaitlistSection() {
               <select
                 value={drinkContext}
                 onChange={(e) => setDrinkContext(e.target.value)}
-                className="w-full px-5 py-4 bg-white/[0.04] border border-white/10 rounded-xl text-white text-sm font-medium focus:outline-none focus:border-[#C9A84C]/50 focus:bg-white/[0.06] transition-all appearance-none cursor-pointer"
+                className="w-full py-4 bg-transparent border-b border-white/20 text-white text-sm font-medium focus:outline-none focus:border-[#C9A84C] transition-all appearance-none cursor-pointer rounded-none"
               >
                 <option value="" className="bg-[#0A0A0A]">Select an option</option>
                 {DRINK_OPTIONS.map((opt) => (
@@ -175,9 +175,16 @@ export default function WaitlistSection() {
             <button
               type="submit"
               disabled={status === 'loading'}
-              className="w-full py-4 bg-[#C9A84C] hover:bg-[#B0913B] disabled:opacity-50 disabled:cursor-not-allowed text-black font-black tracking-[0.2em] text-xs rounded-full shadow-lg shadow-[#C9A84C]/10 hover:shadow-[#C9A84C]/25 transition-all duration-300 uppercase active:scale-95 cursor-pointer"
+              className="group relative w-full py-4 bg-[#C9A84C] hover:bg-[#B0913B] disabled:opacity-50 disabled:cursor-not-allowed text-black font-black tracking-[0.2em] text-xs rounded-full shadow-lg shadow-[#C9A84C]/10 hover:shadow-[#C9A84C]/25 transition-all duration-300 uppercase active:scale-95 cursor-pointer overflow-hidden flex items-center justify-center"
             >
-              {status === 'loading' ? 'Joining...' : 'Join the List'}
+              <span className="relative z-10 transition-transform duration-300 group-hover:-translate-y-8">
+                {status === 'loading' ? 'Joining...' : 'Join the List'}
+              </span>
+              <span className="absolute inset-0 z-10 flex items-center justify-center gap-2 translate-y-8 transition-transform duration-300 group-hover:translate-y-0 text-black">
+                {/* Eyes Motif */}
+                <span className="w-2 h-2 bg-black rounded-full animate-pulse" />
+                <span className="w-2 h-2 bg-black rounded-full animate-pulse delay-75" />
+              </span>
             </button>
           </form>
         )}

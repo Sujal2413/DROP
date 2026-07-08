@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from 'next';
-import Script from 'next/script';
 import { Inter, Oswald, Playfair_Display, Space_Mono } from 'next/font/google';
 import './globals.css';
 
@@ -95,18 +94,6 @@ export default function RootLayout({
             })
           }}
         />
-        <Script
-          src={`https://www.googletagmanager.com/gtag/js?id=G-6FS7R0VS7Y`}
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-6FS7R0VS7Y');
-          `}
-        </Script>
       </head>
       <body className="antialiased">
         <CartProvider>

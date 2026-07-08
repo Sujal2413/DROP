@@ -125,7 +125,7 @@ export default function B2BSection() {
                 onChange={(e) => setBusinessName(e.target.value)}
                 required
                 placeholder="Your business name"
-                className="w-full px-5 py-4 bg-white/[0.04] border border-white/10 rounded-xl text-white text-sm font-medium placeholder:text-white/20 focus:outline-none focus:border-[#C9A84C]/50 focus:bg-white/[0.06] transition-all"
+                className="w-full py-4 bg-transparent border-b border-white/20 text-white text-sm font-medium placeholder:text-white/20 focus:outline-none focus:border-[#C9A84C] transition-all rounded-none"
               />
             </div>
 
@@ -138,7 +138,7 @@ export default function B2BSection() {
                 onChange={(e) => setContactName(e.target.value)}
                 required
                 placeholder="Your name"
-                className="w-full px-5 py-4 bg-white/[0.04] border border-white/10 rounded-xl text-white text-sm font-medium placeholder:text-white/20 focus:outline-none focus:border-[#C9A84C]/50 focus:bg-white/[0.06] transition-all"
+                className="w-full py-4 bg-transparent border-b border-white/20 text-white text-sm font-medium placeholder:text-white/20 focus:outline-none focus:border-[#C9A84C] transition-all rounded-none"
               />
             </div>
 
@@ -151,7 +151,7 @@ export default function B2BSection() {
                 onChange={(e) => setEmail(e.target.value)}
                 required
                 placeholder="business@email.com"
-                className="w-full px-5 py-4 bg-white/[0.04] border border-white/10 rounded-xl text-white text-sm font-medium placeholder:text-white/20 focus:outline-none focus:border-[#C9A84C]/50 focus:bg-white/[0.06] transition-all"
+                className="w-full py-4 bg-transparent border-b border-white/20 text-white text-sm font-medium placeholder:text-white/20 focus:outline-none focus:border-[#C9A84C] transition-all rounded-none"
               />
             </div>
 
@@ -162,7 +162,7 @@ export default function B2BSection() {
                 value={businessType}
                 onChange={(e) => setBusinessType(e.target.value)}
                 required
-                className="w-full px-5 py-4 bg-white/[0.04] border border-white/10 rounded-xl text-white text-sm font-medium focus:outline-none focus:border-[#C9A84C]/50 focus:bg-white/[0.06] transition-all appearance-none cursor-pointer"
+                className="w-full py-4 bg-transparent border-b border-white/20 text-white text-sm font-medium focus:outline-none focus:border-[#C9A84C] transition-all appearance-none cursor-pointer rounded-none"
               >
                 <option value="" className="bg-[#0F1112]">Select type</option>
                 {BUSINESS_TYPES.map((opt) => (
@@ -177,7 +177,7 @@ export default function B2BSection() {
               <select
                 value={monthlyVolume}
                 onChange={(e) => setMonthlyVolume(e.target.value)}
-                className="w-full px-5 py-4 bg-white/[0.04] border border-white/10 rounded-xl text-white text-sm font-medium focus:outline-none focus:border-[#C9A84C]/50 focus:bg-white/[0.06] transition-all appearance-none cursor-pointer"
+                className="w-full py-4 bg-transparent border-b border-white/20 text-white text-sm font-medium focus:outline-none focus:border-[#C9A84C] transition-all appearance-none cursor-pointer rounded-none"
               >
                 <option value="" className="bg-[#0F1112]">Select volume</option>
                 {VOLUME_OPTIONS.map((opt) => (

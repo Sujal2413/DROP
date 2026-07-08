@@ -31,7 +31,7 @@ export default function Footer({ theme = "default" }: FooterProps) {
   ];
 
   return (
-    <footer className={`relative h-fit overflow-hidden border-t ${footerBg}`}>
+    <footer className={`relative h-fit overflow-hidden border-t font-sans ${footerBg}`}>
       <div className="max-w-7xl mx-auto px-8 md:px-14 pt-20 pb-0 z-40 relative">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 lg:gap-16 pb-12">
           {/* Brand section */}

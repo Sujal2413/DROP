@@ -6,9 +6,6 @@ import Link from 'next/link';
 import gsap from 'gsap';
 
 // CANS defines the display scaling and filter effects for each variant.
-// NOTE: Cans have different image aspect ratios (purple/black are landscape 2752x1536; gold is portrait 603x1537; silver is portrait 1206x1474).
-// The scale values are mathematically calibrated to ensure their visual height and width on screen are identical.
-// Do not modify these scale ratios.
 const CANS = [
   { 
     id: 'purple', src: '/assets/new-can-variant-1.png', alt: 'Deep Purple Can', scale: 1.6,
@@ -19,11 +16,11 @@ const CANS = [
     filter: 'drop-shadow(0px 0px 1.5px rgba(0,0,0,0.5)) drop-shadow(0px 10px 30px rgba(0,0,0,0.15))'
   },
   { 
-    id: 'black', src: '/assets/new-can-variant-3.png', alt: 'Full Black Can', scale: 1.54,
+    id: 'black', src: '/assets/new-can-variant-3.png', alt: 'Full Black Can', scale: 1.6,
     filter: 'drop-shadow(0px 0px 1.5px rgba(0,0,0,0.5)) drop-shadow(0px 10px 30px rgba(0,0,0,0.15))'
   },
   {
-    id: 'silver', src: '/assets/new-can-2.png', alt: 'Sparkling Water Can', scale: 1.55,
+    id: 'silver', src: '/assets/new-can-2.png', alt: 'Sparkling Water Can', scale: 1.6,
     filter: 'drop-shadow(0px 0px 1.5px rgba(0,0,0,0.5)) drop-shadow(0px 10px 30px rgba(0,0,0,0.15))'
   }
 ];
@@ -125,13 +122,12 @@ export default function AnimatedCan({ activeIndex }: { activeIndex: number }) {
                 fill
                 priority
                 quality={100}
-                sizes={can.id === 'gold' ? '(max-width: 768px) 30vw, 500px' : '(max-width: 768px) 50vw, 900px'}
+                sizes="(max-width: 768px) 50vw, 900px"
                 className="object-contain object-center opacity-100"
                 style={{ 
                   mixBlendMode: 'normal',
                   filter: can.filter,
                   transform: `scale(${isMobile ? can.scale * 0.7 : can.scale})`,
-                  imageRendering: can.id === 'gold' ? 'high-quality' as React.CSSProperties['imageRendering'] : undefined
                 }}
               />
             </Link>
