@@ -37,7 +37,7 @@ export async function POST(request: Request) {
     }
 
     const client = await clientPromise;
-    const db = client.db('drop_db');
+    const db = client.db('Drop');
     const waitlistCollection = db.collection('waitlist');
 
     // Check if email already exists on waitlist
