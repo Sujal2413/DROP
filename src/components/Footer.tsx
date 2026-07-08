@@ -85,7 +85,7 @@ export default function Footer({ theme = "default" }: FooterProps) {
                 <Mail size={16} stroke={iconColor} />
                 <ObfuscatedContact
                   type="email"
-                  encoded="ZHJvcG9mZmljaWFsbXVtYmFpQGdtYWlsLmNvbQ=="
+                  encoded="Zm91bmRlckBkcm9wd2F0ZXIuaW4="
                   className={`transition-colors ${linkHover}`}
                 />
               </li>
