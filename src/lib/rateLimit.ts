@@ -23,14 +23,19 @@ export async function rateLimit(
   const currentKey = `rate_limit:${key}`;
 
   try {
-    const hits = await redis.incr(currentKey);
+    const now = Date.now();
+    const windowStart = now - (windowSeconds * 1000);
 
-    if (hits === 1) {
-      await redis.expire(currentKey, windowSeconds);
-    }
+    // Remove older entries outside the window
+    await redis.zremrangebyscore(currentKey, 0, windowStart);
+    // Add current request timestamp with a random component for uniqueness
+    await redis.zadd(currentKey, now, `${now}-${Math.random()}`);
+    // Count hits in the current window
+    const hits = await redis.zcard(currentKey);
+    // Set expiry on the set to avoid leaking memory
+    await redis.expire(currentKey, windowSeconds);
 
-    const ttl = await redis.ttl(currentKey);
-    const reset = Math.max(0, ttl);
+    const reset = windowSeconds;
 
     if (hits > limit) {
       return {

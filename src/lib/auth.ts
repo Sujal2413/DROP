@@ -4,23 +4,30 @@ import jwt from 'jsonwebtoken';
 import Redis from 'ioredis';
 import crypto from 'crypto';
 
-const JWT_SECRET = process.env.JWT_SECRET || 'drop_premium_survey_jwt_secret_key_2026';
-const REDIS_URL = process.env.REDIS_URL || 'redis://127.0.0.1:6379';
+const JWT_SECRET = process.env.JWT_SECRET;
+const REDIS_URL = process.env.REDIS_URL;
+
+if (!JWT_SECRET) {
+  throw new Error('FATAL: JWT_SECRET environment variable is not set. Refusing to start with insecure defaults.');
+}
+if (!REDIS_URL) {
+  throw new Error('FATAL: REDIS_URL environment variable is not set. Session management requires Redis.');
+}
 
 let redisClient: Redis | null = null;
 
 export function getRedisClient(): Redis {
   if (!redisClient) {
-    redisClient = new Redis(REDIS_URL, {
-      maxRetriesPerRequest: 1,
-      connectTimeout: 2000,
+    redisClient = new Redis(REDIS_URL!, {
+      maxRetriesPerRequest: 3,
+      connectTimeout: 5000,
       retryStrategy: (times) => {
-        // Stop retrying after 3 attempts in development to avoid blocking
-        if (times > 3) {
+        if (times > 5) {
           return null;
         }
-        return Math.min(times * 100, 2000);
-      }
+        return Math.min(times * 200, 3000);
+      },
+      ...(process.env.NODE_ENV === 'production' && { tls: {} }),
     });
     
     redisClient.on('error', (err) => {
@@ -28,6 +35,20 @@ export function getRedisClient(): Redis {
     });
   }
   return redisClient;
+}
+
+/**
+ * Non-blocking alternative to KEYS + DEL. Uses SCAN to iterate without blocking Redis.
+ */
+async function scanAndDelete(redis: Redis, pattern: string): Promise<void> {
+  let cursor = '0';
+  do {
+    const [nextCursor, keys] = await redis.scan(cursor, 'MATCH', pattern, 'COUNT', 100);
+    cursor = nextCursor;
+    if (keys.length > 0) {
+      await redis.del(...keys);
+    }
+  } while (cursor !== '0');
 }
 
 export interface SessionUser {
@@ -58,18 +79,13 @@ export async function createSession(userId: string, email: string, name: string)
 
   try {
     // 1. Single Active Session (SAS): Invalidate all existing sessions for this user
+    // Using SCAN instead of KEYS to avoid blocking Redis
     const sessionPattern = `user_session:${userId}:*`;
-    const existingKeys = await redis.keys(sessionPattern);
-    if (existingKeys.length > 0) {
-      await redis.del(...existingKeys);
-    }
+    await scanAndDelete(redis, sessionPattern);
     
     // 2. Delete existing refresh tokens for this user
     const refreshPattern = `refresh_token:${userId}:*`;
-    const existingRefreshKeys = await redis.keys(refreshPattern);
-    if (existingRefreshKeys.length > 0) {
-      await redis.del(...existingRefreshKeys);
-    }
+    await scanAndDelete(redis, refreshPattern);
 
     // 3. Store active session flag in Redis (expires in 7 days)
     await redis.set(`user_session:${userId}:${sessionId}`, 'active', 'EX', 7 * 24 * 60 * 60);
@@ -80,13 +96,13 @@ export async function createSession(userId: string, email: string, name: string)
   // 4. Generate Tokens
   const accessToken = jwt.sign(
     { id: userId, email, name, sessionId },
-    JWT_SECRET,
+    JWT_SECRET!,
     { expiresIn: '15m' }
   );
 
   const refreshToken = jwt.sign(
     { id: userId, email, name, sessionId },
-    JWT_SECRET,
+    JWT_SECRET!,
     { expiresIn: '7d' }
   );
 
@@ -110,6 +126,7 @@ export async function createSession(userId: string, email: string, name: string)
     secure: isProd,
     sameSite: 'strict',
     path: '/',
+    maxAge: 15 * 60, // 15 minutes — matches JWT expiration
   });
 
   cookieStore.set({
@@ -119,6 +136,7 @@ export async function createSession(userId: string, email: string, name: string)
     secure: isProd,
     sameSite: 'strict',
     path: '/',
+    maxAge: 7 * 24 * 60 * 60, // 7 days — matches JWT expiration
   });
 }
 
@@ -138,7 +156,7 @@ export async function verifySession(): Promise<SessionUser | null> {
   // Case A: Access Token exists, try to verify it
   if (accessToken) {
     try {
-      const decoded = jwt.verify(accessToken, JWT_SECRET) as JWTPayload;
+      const decoded = jwt.verify(accessToken, JWT_SECRET!) as JWTPayload;
       
       try {
         // Verify session is still active in Redis
@@ -165,7 +183,7 @@ export async function verifySession(): Promise<SessionUser | null> {
   // Case B: Access Token expired/missing, check Refresh Token
   if (refreshToken) {
     try {
-      const decoded = jwt.verify(refreshToken, JWT_SECRET) as JWTPayload;
+      const decoded = jwt.verify(refreshToken, JWT_SECRET!) as JWTPayload;
       const { id: userId, email, name, sessionId } = decoded;
 
       try {
@@ -193,12 +211,12 @@ export async function verifySession(): Promise<SessionUser | null> {
         // 4. Token Rotation (RTR): Session is valid, generate new set of tokens
         const newAccessToken = jwt.sign(
           { id: userId, email, name, sessionId },
-          JWT_SECRET,
+          JWT_SECRET!,
           { expiresIn: '15m' }
         );
         const newRefreshToken = jwt.sign(
           { id: userId, email, name, sessionId },
-          JWT_SECRET,
+          JWT_SECRET!,
           { expiresIn: '7d' }
         );
 
@@ -214,6 +232,7 @@ export async function verifySession(): Promise<SessionUser | null> {
           secure: isProd,
           sameSite: 'strict',
           path: '/',
+          maxAge: 15 * 60,
         });
 
         cookieStore.set({
@@ -223,6 +242,7 @@ export async function verifySession(): Promise<SessionUser | null> {
           secure: isProd,
           sameSite: 'strict',
           path: '/',
+          maxAge: 7 * 24 * 60 * 60,
         });
 
         return { id: userId, email, name };

@@ -4,7 +4,6 @@ import React from 'react';
 import HeroSection from '@/components/HeroSection';
 import ExplainerSection from '@/components/ExplainerSection';
 import WaitlistSection from '@/components/WaitlistSection';
-import B2BSection from '@/components/B2BSection';
 import ProductShowcaseSection from '@/components/ProductShowcaseSection';
 import WhyAluminiumSection from '@/components/WhyAluminiumSection';
 import Footer from '@/components/Footer';
@@ -58,7 +57,7 @@ export default function Home() {
         },
         'offers': {
           '@type': 'Offer',
-          'price': '0',
+          'price': '80',
           'priceCurrency': 'INR',
           'availability': 'https://schema.org/PreOrder',
           'url': 'https://www.dropwater.in'
@@ -81,7 +80,6 @@ export default function Home() {
       <main className="relative z-10">
         <ExplainerSection />
         <WaitlistSection />
-        <B2BSection />
         <ProductShowcaseSection />
         <WhyAluminiumSection />
       </main>

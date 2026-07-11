@@ -1,7 +1,16 @@
 import { MongoClient } from 'mongodb';
 
-const uri = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/drop-db';
-const options = {};
+const uri = process.env.MONGODB_URI?.trim();
+
+if (!uri) {
+  throw new Error('FATAL: MONGODB_URI environment variable is not set. Database connection requires a valid URI.');
+}
+
+const options = {
+  maxPoolSize: 10,
+  serverSelectionTimeoutMS: 5000,
+  socketTimeoutMS: 45000,
+};
 
 let client: MongoClient;
 let clientPromise: Promise<MongoClient>;

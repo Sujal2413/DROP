@@ -26,11 +26,12 @@ export async function POST(request: Request) {
 
     const { businessName, contactName, email, businessType, monthlyVolume } = parseResult.data;
 
-    // 2. Rate Limiting (5 per hour per IP)
-    const ip = request.headers.get('x-forwarded-for') || '127.0.0.1';
-    const limitResult = await rateLimit(`b2b:${ip}`, 5, 3600);
+    // 2. Rate Limiting (5 per hour per IP + 3 per hour per email)
+    const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || '127.0.0.1';
+    const ipLimit = await rateLimit(`b2b:${ip}`, 5, 3600);
+    const emailLimit = await rateLimit(`b2b:email:${email}`, 3, 3600);
 
-    if (!limitResult.success) {
+    if (!ipLimit.success || !emailLimit.success) {
       return NextResponse.json(
         { error: 'Too many submissions. Please try again later.' },
         { status: 429 }

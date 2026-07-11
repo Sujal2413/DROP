@@ -82,10 +82,19 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               '@context': 'https://schema.org',
-              '@type': 'Organization',
+              '@type': ['Organization', 'LocalBusiness'],
               name: 'DROP',
               url: 'https://www.dropwater.in',
               logo: 'https://www.dropwater.in/apple-touch-icon.png',
+              telephone: '+918976127355',
+              email: 'contactus@dropwater.in',
+              address: {
+                '@type': 'PostalAddress',
+                streetAddress: 'Bandra West',
+                addressLocality: 'Mumbai',
+                postalCode: '400050',
+                addressCountry: 'IN'
+              },
               sameAs: [
                 'https://www.instagram.com/dropwaterco',
                 'https://x.com/dropofficialw',

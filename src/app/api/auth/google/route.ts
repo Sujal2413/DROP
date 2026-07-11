@@ -2,7 +2,6 @@
 import { NextResponse } from 'next/server';
 import clientPromise from '@/lib/mongodb';
 import { OAuth2Client } from 'google-auth-library';
-import jwt from 'jsonwebtoken';
 import { createSession } from '@/lib/auth';
 
 const GOOGLE_CLIENT_ID = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || process.env.GOOGLE_CLIENT_ID || '';
@@ -19,18 +18,11 @@ export async function POST(request: Request) {
     }
 
     if (!GOOGLE_CLIENT_ID) {
-      console.warn('Google Client ID is not configured. Simulating auth in fallback mode...');
-      const decodedPayload = jwt.decode(credential) as any;
-      if (!decodedPayload) {
-        return NextResponse.json(
-          { error: 'Invalid Google token.' },
-          { status: 400 }
-        );
-      }
-      return await handleUserPersistence({
-        email: decodedPayload.email,
-        name: decodedPayload.name || 'Google User',
-      });
+      console.error('GOOGLE_CLIENT_ID is not configured. Google Sign-In is unavailable.');
+      return NextResponse.json(
+        { error: 'Google Sign-In is currently unavailable. Please try again later.' },
+        { status: 503 }
+      );
     }
 
     // Verify token using official Google client library
@@ -56,7 +48,7 @@ export async function POST(request: Request) {
     console.error('Google OAuth API Error:', error);
     return NextResponse.json(
       { error: 'Authentication failed. Please verify credentials.' },
-      { status: 550 } // Matches original or standard 500 error status
+      { status: 500 }
     );
   }
 }

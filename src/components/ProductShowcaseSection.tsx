@@ -8,10 +8,10 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 const CANS = [
-  { id: 'purple', name: 'Mint', image: '/assets/new-can-variant-1.png', color: '#E9D5FF' },
-  { id: 'black', name: 'Athlete', image: '/assets/new-can-variant-3.png', color: '#FFFFFF' },
-  { id: 'gold', name: 'Clove', image: '/assets/new-can-variant-2-final.png', color: '#C9A84C' },
-  { id: 'silver', name: 'Sparkling', image: '/assets/new-can-2.png', color: '#E2E8F0' },
+  { id: 'purple', name: 'Mint Infusion', desc: 'Soothes digestion and naturally cools the body. No artificial cooling agents.', image: '/assets/new-can-variant-1.png', color: '#E9D5FF' },
+  { id: 'black', name: 'Athlete Edition', desc: 'Enhanced with trace minerals for rapid cellular hydration and recovery.', image: '/assets/new-can-variant-3.png', color: '#FFFFFF' },
+  { id: 'gold', name: 'Clove Infusion', desc: 'A subtle, earthy warmth that aids immunity and restores natural vitality.', image: '/assets/new-can-variant-2-final.png', color: '#C9A84C' },
+  { id: 'silver', name: 'Sparkling', desc: 'Crisp, perfectly carbonated effervescence for a sharper mouthfeel.', image: '/assets/new-can-2.png', color: '#E2E8F0' },
 ];
 
 export default function ProductShowcaseSection() {
@@ -79,7 +79,7 @@ export default function ProductShowcaseSection() {
             lineHeight: 0.95,
           }}
         >
-          DROP. Still Water — 330ml
+          DROP. Still Water — 500ML
         </h2>
         <p className="text-white/60 text-base md:text-lg leading-relaxed font-medium max-w-2xl mx-auto mb-20">
           Still water. Recyclable aluminium can. No plastic, no sugar, no flavour unless you want it —<br/>
@@ -96,17 +96,22 @@ export default function ProductShowcaseSection() {
                   src={can.image}
                   alt={`DROP. ${can.name}`}
                   fill
-                  sizes="(max-width: 768px) 50vw, 25vw"
+                  sizes="(max-width: 768px) 50vw, (max-width: 1200px) 25vw, 300px"
                   className="object-contain transition-transform duration-700 group-hover:scale-105"
                   style={{ filter: 'drop-shadow(0px 8px 24px rgba(0,0,0,0.5))' }}
                 />
               </div>
-              <span
-                className="text-xs font-black tracking-[0.3em] uppercase"
-                style={{ color: can.color }}
-              >
-                {can.name}
-              </span>
+              <div className="mt-4 text-center px-2">
+                <h3
+                  className="text-sm font-black tracking-[0.2em] uppercase mb-2"
+                  style={{ color: can.color }}
+                >
+                  {can.name}
+                </h3>
+                <p className="text-white/50 text-[10px] md:text-xs font-medium leading-relaxed max-w-[200px] mx-auto">
+                  {can.desc}
+                </p>
+              </div>
             </div>
           ))}
         </div>

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
+import { useCart } from '@/context/CartContext';
 import HeroNavbar from './HeroNavbar';
 import AnimatedCan from './AnimatedCan';
 import HeroParticles from './HeroParticles';
@@ -14,6 +15,7 @@ const THEMES = [
 ];
 
 export default function HeroSection() {
+  const { setIsCartOpen } = useCart();
   const [activeIndex, setActiveIndex] = useState(0);
   const headlineRef = useRef<HTMLHeadingElement>(null);
   const taglineRef = useRef<HTMLParagraphElement>(null);
@@ -102,33 +104,40 @@ export default function HeroSection() {
           SHOULD. BE.
         </h1>
 
-        {/* Buttons */}
-        <div className="mt-8 md:mt-10 flex flex-col sm:flex-row gap-6 w-full justify-center md:justify-start items-center">
-          <button
-            onClick={() => alert("Pre-order modal coming soon!")}
-            className="px-10 py-4 w-full sm:w-auto font-bold tracking-[0.2em] text-xs rounded-full shadow-xl hover:shadow-2xl hover:-translate-y-1 active:translate-y-0 active:scale-95 transition-all duration-500 ring-1 ring-white/20 backdrop-blur-sm"
-            style={{
-              backgroundColor: THEMES[activeIndex].id === 'gold' ? '#C9A84C' : THEMES[activeIndex].id === 'purple' ? '#E9D5FF' : '#FFFFFF',
-              color: THEMES[activeIndex].id === 'gold' ? '#1C1408' : THEMES[activeIndex].id === 'purple' ? '#1A0B2E' : '#0A0A0A'
-            }}
-          >
-            PRE-ORDER NOW
-          </button>
-          <a
-            href="https://forms.gle/oBq4GbBTc3AeaJSJ6"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-10 py-4 w-full sm:w-auto bg-transparent border border-white/20 font-bold tracking-[0.2em] text-xs rounded-full hover:bg-white/10 hover:border-white/40 backdrop-blur-md transition-all duration-500 text-center flex items-center justify-center hover:-translate-y-1"
-            style={{ color: THEMES[activeIndex].text }}
-          >
-            FILL INTEREST FORM
-          </a>
+        {/* Buttons and Pricing Anchors */}
+        <div className="mt-8 md:mt-10 flex flex-col items-center md:items-start gap-4 w-full">
+          <div className="flex flex-col sm:flex-row gap-4 w-full justify-center md:justify-start items-center">
+            <button
+              onClick={() => setIsCartOpen(true)}
+              className="px-10 py-4 w-full sm:w-auto font-bold tracking-[0.2em] text-xs rounded-full shadow-xl hover:shadow-2xl hover:-translate-y-1 active:translate-y-0 active:scale-95 transition-all duration-500 ring-1 ring-white/20 backdrop-blur-sm"
+              style={{
+                backgroundColor: THEMES[activeIndex].id === 'gold' ? '#C9A84C' : THEMES[activeIndex].id === 'purple' ? '#E9D5FF' : '#FFFFFF',
+                color: THEMES[activeIndex].id === 'gold' ? '#1C1408' : THEMES[activeIndex].id === 'purple' ? '#1A0B2E' : '#0A0A0A'
+              }}
+            >
+              PRE-ORDER NOW
+            </button>
+            
+            <a
+              href="/#products"
+              className="px-10 py-4 w-full sm:w-auto bg-transparent border border-white/20 font-bold tracking-[0.2em] text-xs rounded-full hover:bg-white/10 hover:border-white/40 backdrop-blur-md transition-all duration-500 text-center flex items-center justify-center hover:-translate-y-1"
+              style={{ color: THEMES[activeIndex].text }}
+            >
+              EXPLORE FLAVORS
+            </a>
+          </div>
+          
+          <div className="flex gap-4 items-center text-[10px] sm:text-xs font-bold tracking-widest uppercase opacity-80 mt-2" style={{ color: THEMES[activeIndex].text }}>
+            <span>₹80 / 500ml Can</span>
+            <span className="w-1 h-1 rounded-full bg-current opacity-40"></span>
+            <span>Launching Q3 2026</span>
+          </div>
         </div>
 
         {/* Sleek Footnote */}
         <div
           ref={taglineRef}
-          className="mt-14 md:mt-16 font-semibold tracking-[0.3em] text-[10px] md:text-xs opacity-0 transition-colors duration-1000 flex items-center justify-center md:justify-start gap-6 uppercase"
+          className="mt-10 md:mt-14 font-semibold tracking-[0.3em] text-[10px] md:text-xs opacity-0 transition-colors duration-1000 flex items-center justify-center md:justify-start gap-6 uppercase"
           style={{ color: THEMES[activeIndex].text }}
         >
           <span className="opacity-70">500ML</span>

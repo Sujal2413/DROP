@@ -137,7 +137,7 @@ export default function StoryClient() {
       </main>
 
       {/* Footer */}
-      <Footer theme="dark" />
+      <Footer theme="default" />
       <ScrollToTop />
     </div>
   );

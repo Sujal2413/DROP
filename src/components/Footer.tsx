@@ -3,6 +3,7 @@ import Link from "next/link";
 import {
   Mail,
   Phone,
+  MapPin,
 } from "lucide-react";
 import { FooterBackgroundGradient, TextHoverEffect } from "@/components/ui/hover-footer";
 
@@ -82,27 +83,25 @@ export default function Footer({ theme = "default" }: FooterProps) {
             <h4 className={`text-lg font-bold mb-6 ${titleText}`}>Contact Us</h4>
             <ul className={`space-y-4 text-sm font-medium ${bodyText}`}>
               <li className="flex items-center space-x-3">
+                <MapPin size={16} stroke={iconColor} className="shrink-0" />
+                <span className={descText}>
+                  Bandra West, Mumbai<br />
+                  MH 400050, India
+                </span>
+              </li>
+              <li className="flex items-center space-x-3">
                 <Mail size={16} stroke={iconColor} />
-                <ObfuscatedContact
-                  type="email"
-                  encoded="Y29udGFjdHVzQGRyb3B3YXRlci5pbg=="
-                  className={`transition-colors ${linkHover}`}
-                />
+                <a href="mailto:contactus@dropwater.in" className={`transition-colors ${linkHover}`}>
+                  contactus@dropwater.in
+                </a>
               </li>
               <li className="flex items-center space-x-3 whitespace-nowrap">
                 <Phone size={16} stroke={iconColor} />
-                <ObfuscatedContact
-                  type="phone"
-                  encoded="ODk3NjEyNzM1NQ=="
-                  className={`transition-colors ${linkHover}`}
-                />
+                <a href="tel:+918976127355" className={`transition-colors ${linkHover}`}>
+                  +91 8976127355
+                </a>
               </li>
             </ul>
-            <noscript>
-              <p className={`text-xs mt-4 ${descText}`}>
-                Contact us through our social media channels below.
-              </p>
-            </noscript>
           </div>
         </div>
 
@@ -128,6 +127,10 @@ export default function Footer({ theme = "default" }: FooterProps) {
 
           {/* Legal links */}
           <div className="flex items-center gap-4">
+            <Link href="/b2b" className={`text-xs font-bold uppercase tracking-widest transition-colors text-[#D4AF37] hover:text-white`}>
+              For Business
+            </Link>
+            <span className={`text-xs ${copyText}`}>·</span>
             <Link href="/privacy" className={`text-xs font-medium transition-colors ${linkHover}`}>
               Privacy Policy
             </Link>
@@ -173,31 +176,3 @@ export default function Footer({ theme = "default" }: FooterProps) {
   );
 }
 
-/**
- * Renders an obfuscated contact link. The value is stored as a base64 string
- * and decoded only at render time in the browser, so automated scrapers
- * reading the raw HTML/SSR output will see only the encoded blob.
- */
-function ObfuscatedContact({ type, encoded, className }: { type: 'email' | 'phone'; encoded: string; className?: string }) {
-  const [value, setValue] = React.useState<string | null>(null);
-
-  React.useEffect(() => {
-    try {
-      setValue(atob(encoded));
-    } catch {
-      // Fail silently — noscript fallback is available
-    }
-  }, [encoded]);
-
-  if (!value) {
-    return <span className={className}>Loading…</span>;
-  }
-
-  const href = type === 'email' ? `mailto:${value}` : `tel:${value}`;
-
-  return (
-    <a href={href} className={className}>
-      {value}
-    </a>
-  );
-}

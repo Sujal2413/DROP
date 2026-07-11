@@ -25,11 +25,12 @@ export async function POST(request: Request) {
 
     const { name, email, city, drinkContext } = parseResult.data;
 
-    // 2. Rate Limiting (10 per hour per IP)
-    const ip = request.headers.get('x-forwarded-for') || '127.0.0.1';
-    const limitResult = await rateLimit(`waitlist:${ip}`, 10, 3600);
+    // 2. Rate Limiting (10 per hour per IP + 5 per hour per email)
+    const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || '127.0.0.1';
+    const ipLimit = await rateLimit(`waitlist:${ip}`, 10, 3600);
+    const emailLimit = await rateLimit(`waitlist:email:${email}`, 5, 3600);
 
-    if (!limitResult.success) {
+    if (!ipLimit.success || !emailLimit.success) {
       return NextResponse.json(
         { error: 'Too many submissions. Please try again later.' },
         { status: 429 }

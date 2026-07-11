@@ -180,7 +180,7 @@ export default function HeroNavbar({ activeIndex = 0 }: HeroNavbarProps) {
                     <div key={item.id} className="flex gap-4 p-4 bg-white/[0.02] border border-white/5 rounded-2xl items-center justify-between">
                       <div className="flex items-center gap-4">
                         <div className="w-14 h-14 relative bg-black/30 rounded-xl overflow-hidden flex items-center justify-center">
-                          <Image src={item.image} alt={item.name} fill className="object-contain p-1" />
+                          <Image src={item.image} alt={item.name} fill sizes="56px" className="object-contain p-1" />
                         </div>
                         <div>
                           <h4 className="font-black text-sm uppercase">{item.name}</h4>

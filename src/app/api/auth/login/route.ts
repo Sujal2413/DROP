@@ -28,7 +28,7 @@ export async function POST(request: Request) {
     const { email, password } = parseResult.data;
 
     // 2. Rate Limiting based on IP and Email to protect against brute-force
-    const ip = request.headers.get('x-forwarded-for') || '127.0.0.1';
+    const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || '127.0.0.1';
     const limitResult = await rateLimit(`login:${ip}:${email}`, 5, 300); // 5 attempts per 5 mins
     
     if (!limitResult.success) {

@@ -7,15 +7,18 @@ import { rateLimit } from '@/lib/rateLimit';
 
 // Zod schema for registration validation
 const registerSchema = z.object({
-  name: z.string().min(2).max(100).trim().transform((val) => val.replace(/[<>]/g, '')), // Basic HTML tag strip
-  email: z.string().email().toLowerCase().trim(),
-  password: z.string().min(6).max(100),
+  name: z.string().min(2).max(100).trim().transform((val) => val.replace(/[<>]/g, '')),
+  email: z.string().email().max(254).toLowerCase().trim(),
+  password: z.string().min(8, 'Password must be at least 8 characters.').max(100)
+    .regex(/[a-z]/, 'Password must contain a lowercase letter.')
+    .regex(/[A-Z]/, 'Password must contain an uppercase letter.')
+    .regex(/[0-9]/, 'Password must contain a number.'),
 });
 
 export async function POST(request: Request) {
   try {
     // 1. Rate Limiting based on IP
-    const ip = request.headers.get('x-forwarded-for') || '127.0.0.1';
+    const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || '127.0.0.1';
     const limitResult = await rateLimit(`register:${ip}`, 5, 300); // 5 attempts per 5 minutes
     
     if (!limitResult.success) {
@@ -50,7 +53,7 @@ export async function POST(request: Request) {
       const hasPassword = typeof existingPassword === 'string' && existingPassword.length > 0;
 
       if (!hasPassword) {
-        const salt = await bcrypt.genSalt(10);
+        const salt = await bcrypt.genSalt(12);
         const hashedPassword = await bcrypt.hash(password, salt);
 
         await usersCollection.updateOne(
@@ -77,8 +80,7 @@ export async function POST(request: Request) {
       );
     }
 
-    // Hash the password
-    const salt = await bcrypt.genSalt(10);
+    const salt = await bcrypt.genSalt(12);
     const hashedPassword = await bcrypt.hash(password, salt);
 
     // Save user
