@@ -3,19 +3,11 @@
 import React from 'react';
 import HeroNavbar from '@/components/HeroNavbar';
 import Footer from '@/components/Footer';
-import { useCart } from '@/context/CartContext';
-import LoginPage from '@/components/LoginPage';
 import Link from 'next/link';
 import ScrollToTop from '@/components/ScrollToTop';
 import { motion } from 'framer-motion';
 
 export default function SustainabilityClient() {
-  const { isLoggedIn } = useCart();
-
-  if (!isLoggedIn) {
-    return <LoginPage />;
-  }
-
   return (
     <div className="w-full relative bg-[var(--color-cream)] text-black font-sans selection:bg-black selection:text-white antialiased overflow-hidden min-h-screen border-x-2 border-black">
       
