@@ -4,21 +4,27 @@ import jwt from 'jsonwebtoken';
 import Redis from 'ioredis';
 import crypto from 'crypto';
 
-const JWT_SECRET = process.env.JWT_SECRET;
-const REDIS_URL = process.env.REDIS_URL;
+const getJwtSecret = () => {
+  const secret = process.env.JWT_SECRET;
+  if (!secret) {
+    throw new Error('FATAL: JWT_SECRET environment variable is not set. Refusing to start with insecure defaults.');
+  }
+  return secret;
+};
 
-if (!JWT_SECRET) {
-  throw new Error('FATAL: JWT_SECRET environment variable is not set. Refusing to start with insecure defaults.');
-}
-if (!REDIS_URL) {
-  throw new Error('FATAL: REDIS_URL environment variable is not set. Session management requires Redis.');
-}
+const getRedisUrl = () => {
+  const url = process.env.REDIS_URL;
+  if (!url) {
+    throw new Error('FATAL: REDIS_URL environment variable is not set. Session management requires Redis.');
+  }
+  return url;
+};
 
 let redisClient: Redis | null = null;
 
 export function getRedisClient(): Redis {
   if (!redisClient) {
-    redisClient = new Redis(REDIS_URL!, {
+    redisClient = new Redis(getRedisUrl(), {
       maxRetriesPerRequest: 3,
       connectTimeout: 5000,
       retryStrategy: (times) => {
@@ -96,13 +102,13 @@ export async function createSession(userId: string, email: string, name: string)
   // 4. Generate Tokens
   const accessToken = jwt.sign(
     { id: userId, email, name, sessionId },
-    JWT_SECRET!,
+    getJwtSecret(),
     { expiresIn: '15m' }
   );
 
   const refreshToken = jwt.sign(
     { id: userId, email, name, sessionId },
-    JWT_SECRET!,
+    getJwtSecret(),
     { expiresIn: '7d' }
   );
 
@@ -156,7 +162,7 @@ export async function verifySession(): Promise<SessionUser | null> {
   // Case A: Access Token exists, try to verify it
   if (accessToken) {
     try {
-      const decoded = jwt.verify(accessToken, JWT_SECRET!) as JWTPayload;
+      const decoded = jwt.verify(accessToken, getJwtSecret()) as JWTPayload;
       
       try {
         // Verify session is still active in Redis
@@ -183,7 +189,7 @@ export async function verifySession(): Promise<SessionUser | null> {
   // Case B: Access Token expired/missing, check Refresh Token
   if (refreshToken) {
     try {
-      const decoded = jwt.verify(refreshToken, JWT_SECRET!) as JWTPayload;
+      const decoded = jwt.verify(refreshToken, getJwtSecret()) as JWTPayload;
       const { id: userId, email, name, sessionId } = decoded;
 
       try {
@@ -211,12 +217,12 @@ export async function verifySession(): Promise<SessionUser | null> {
         // 4. Token Rotation (RTR): Session is valid, generate new set of tokens
         const newAccessToken = jwt.sign(
           { id: userId, email, name, sessionId },
-          JWT_SECRET!,
+          getJwtSecret(),
           { expiresIn: '15m' }
         );
         const newRefreshToken = jwt.sign(
           { id: userId, email, name, sessionId },
-          JWT_SECRET!,
+          getJwtSecret(),
           { expiresIn: '7d' }
         );
 
