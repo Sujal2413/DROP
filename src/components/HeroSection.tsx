@@ -126,12 +126,6 @@ export default function HeroSection() {
               EXPLORE FLAVORS
             </a>
           </div>
-          
-          <div className="flex gap-4 items-center text-[10px] sm:text-xs font-bold tracking-widest uppercase opacity-80 mt-2" style={{ color: THEMES[activeIndex].text }}>
-            <span>500ml can</span>
-            <span className="w-1 h-1 rounded-full bg-current opacity-40"></span>
-            <span>Launching 2027</span>
-          </div>
         </div>
 
         {/* Sleek Footnote */}
@@ -143,6 +137,8 @@ export default function HeroSection() {
           <span className="opacity-70">500ML</span>
           <span className="w-1.5 h-1.5 rounded-full bg-current opacity-40 shadow-[0_0_10px_currentColor]"></span>
           <span className="opacity-70">STILL WATER</span>
+          <span className="w-1.5 h-1.5 rounded-full bg-current opacity-40 shadow-[0_0_10px_currentColor]"></span>
+          <span className="opacity-70">LAUNCHING 2027</span>
         </div>
       </div>
 
