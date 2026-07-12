@@ -7,10 +7,10 @@ import Footer from '@/components/Footer';
 
 export default function ContactPage() {
   return (
-    <div className="bg-[#0A0A0A] min-h-screen text-white">
+    <div className="bg-[#0A0A0A] min-h-screen text-white flex flex-col">
       <HeroNavbar activeIndex={2} /> {/* Black theme */}
       
-      <main className="pt-24 md:pt-32 pb-12">
+      <main className="pt-24 md:pt-32 pb-12 flex-grow">
         <div className="max-w-4xl mx-auto px-8 md:px-16 text-center mb-12">
           <h1 className="text-4xl md:text-6xl font-black tracking-tighter mb-6 uppercase" style={{ fontFamily: '"Anton", "Bebas Neue", "Druk Condensed", Impact, sans-serif' }}>
             Elevate Your Space
