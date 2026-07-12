@@ -126,7 +126,7 @@ export default function LeadForm({ config }: { config: LeadFormConfig }) {
         </p>
       )}
 
-      <div className={config.layout === 'grid' ? 'md:col-span-2' : ''}>
+      <div className={config.layout === 'grid' ? 'md:col-span-2 pt-4' : 'pt-4'}>
         {config.buttonTheme === 'outline' ? (
           <button
             type="submit"
