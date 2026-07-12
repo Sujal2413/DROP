@@ -7,7 +7,7 @@ export const WaitlistSchema = z.object({
   drinkContext: z.enum(['Gym', 'Café', 'Home', 'Work', 'Events', 'Other']).optional().or(z.literal('')),
 });
 
-export const B2BLeadSchema = z.object({
+export const ContactLeadSchema = z.object({
   businessName: z.string().min(1, 'Business name is required').max(200).trim().transform((val) => val.replace(/[<>]/g, '')),
   contactName: z.string().min(1, 'Contact name is required').max(100).trim().transform((val) => val.replace(/[<>]/g, '')),
   email: z.string().email('Invalid email address').toLowerCase().trim(),

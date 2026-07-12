@@ -1,14 +1,14 @@
 import { NextResponse } from 'next/server';
-import { B2BLeadSchema } from '@/lib/validations';
+import { ContactLeadSchema } from '@/lib/validations';
 import { rateLimit } from '@/lib/rateLimit';
-import { B2BService } from '@/services/b2b.service';
+import { ContactService } from '@/services/contact.service';
 
 export async function POST(request: Request) {
   try {
     const body = await request.json();
 
     // 1. Zod Validation
-    const parseResult = B2BLeadSchema.safeParse(body);
+    const parseResult = ContactLeadSchema.safeParse(body);
     if (!parseResult.success) {
       console.error('Contact API 400 Error (Validation Failed):', parseResult.error.issues);
       return NextResponse.json(
@@ -32,14 +32,14 @@ export async function POST(request: Request) {
     }
 
     // 3. Service Layer
-    const result = await B2BService.submitLead(parseResult.data);
+    const result = await ContactService.submitLead(parseResult.data);
 
     return NextResponse.json({
       success: result.success,
       message: result.message,
     }, { status: result.status });
   } catch (error) {
-    console.error('B2B Lead API Error:', error);
+    console.error('Contact Lead API Error:', error);
     return NextResponse.json(
       { error: 'Internal server error.' },
       { status: 500 }

@@ -1,6 +1,6 @@
-import { B2BRepository } from '@/repositories/b2b.repository';
+import { ContactRepository } from '@/repositories/contact.repository';
 
-export class B2BService {
+export class ContactService {
   static async submitLead(data: { businessName: string; contactName: string; email: string; businessType: string; monthlyVolume?: string }) {
     const entry = {
       ...data,
@@ -9,7 +9,7 @@ export class B2BService {
       createdAt: new Date(),
     };
 
-    await B2BRepository.addLead(entry);
+    await ContactRepository.addLead(entry);
 
     return {
       success: true,

@@ -1,6 +1,6 @@
 import clientPromise from '@/lib/mongodb';
 
-export class B2BRepository {
+export class ContactRepository {
   private static readonly collectionName = 'b2b_leads';
 
   static async getCollection() {

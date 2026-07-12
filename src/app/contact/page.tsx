@@ -2,10 +2,10 @@
 
 import React from 'react';
 import HeroNavbar from '@/components/HeroNavbar';
-import B2BSection from '@/components/B2BSection';
+import ContactSection from '@/components/ContactSection';
 import Footer from '@/components/Footer';
 
-export default function B2BPage() {
+export default function ContactPage() {
   return (
     <div className="bg-[#0A0A0A] min-h-screen text-white">
       <HeroNavbar activeIndex={2} /> {/* Black theme */}
@@ -22,7 +22,7 @@ export default function B2BPage() {
           </p>
         </div>
         
-        <B2BSection />
+        <ContactSection />
       </main>
       
       <Footer />
