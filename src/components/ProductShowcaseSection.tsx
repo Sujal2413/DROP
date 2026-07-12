@@ -64,7 +64,7 @@ export default function ProductShowcaseSection() {
   return (
     <section
       ref={sectionRef}
-      id="product"
+      id="products"
       className="relative bg-[#0A0A0A] py-28 md:py-36 px-8 md:px-16 overflow-hidden"
     >
       <div className="max-w-5xl mx-auto text-center relative z-10">

@@ -107,19 +107,19 @@ export default function HeroSection() {
         {/* Buttons and Pricing Anchors */}
         <div className="mt-8 md:mt-10 flex flex-col items-center md:items-start gap-4 w-full">
           <div className="flex flex-col sm:flex-row gap-4 w-full justify-center md:justify-start items-center">
-            <button
-              onClick={() => setIsCartOpen(true)}
-              className="px-10 py-4 w-full sm:w-auto font-bold tracking-[0.2em] text-xs rounded-full shadow-xl hover:shadow-2xl hover:-translate-y-1 active:translate-y-0 active:scale-95 transition-all duration-500 ring-1 ring-white/20 backdrop-blur-sm"
+            <a
+              href="#waitlist"
+              className="px-10 py-4 w-full sm:w-auto font-bold tracking-[0.2em] text-xs rounded-full shadow-xl hover:shadow-2xl hover:-translate-y-1 active:translate-y-0 active:scale-95 transition-all duration-500 ring-1 ring-white/20 backdrop-blur-sm text-center block"
               style={{
                 backgroundColor: THEMES[activeIndex].id === 'gold' ? '#C9A84C' : THEMES[activeIndex].id === 'purple' ? '#E9D5FF' : '#FFFFFF',
                 color: THEMES[activeIndex].id === 'gold' ? '#1C1408' : THEMES[activeIndex].id === 'purple' ? '#1A0B2E' : '#0A0A0A'
               }}
             >
               PRE-ORDER NOW
-            </button>
+            </a>
             
             <a
-              href="/#products"
+              href="#products"
               className="px-10 py-4 w-full sm:w-auto bg-transparent border border-white/20 font-bold tracking-[0.2em] text-xs rounded-full hover:bg-white/10 hover:border-white/40 backdrop-blur-md transition-all duration-500 text-center flex items-center justify-center hover:-translate-y-1"
               style={{ color: THEMES[activeIndex].text }}
             >
@@ -128,9 +128,9 @@ export default function HeroSection() {
           </div>
           
           <div className="flex gap-4 items-center text-[10px] sm:text-xs font-bold tracking-widest uppercase opacity-80 mt-2" style={{ color: THEMES[activeIndex].text }}>
-            <span>₹80 / 500ml Can</span>
+            <span>500ml can</span>
             <span className="w-1 h-1 rounded-full bg-current opacity-40"></span>
-            <span>Launching Q3 2026</span>
+            <span>Launching 2027</span>
           </div>
         </div>
 

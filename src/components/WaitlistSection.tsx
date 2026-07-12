@@ -75,10 +75,10 @@ export default function WaitlistSection() {
             Be first to try it.
           </h2>
           <p className="text-white/50 text-sm md:text-base font-medium tracking-wide">
-            Launching Q3 2026. The first batch goes to the list.
+            Launching 2027. The first batch goes to the list.
           </p>
           <div className="inline-block mt-4 px-4 py-1.5 rounded-full border border-[#C9A84C]/30 bg-[#C9A84C]/10 text-[#C9A84C] text-[10px] md:text-xs font-bold tracking-widest uppercase">
-            ₹80 / 500ML Can
+            500ML CAN
           </div>
         </div>
 
