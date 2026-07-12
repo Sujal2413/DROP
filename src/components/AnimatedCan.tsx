@@ -120,7 +120,7 @@ export default function AnimatedCan({ activeIndex }: { activeIndex: number }) {
                 src={can.src}
                 alt={can.alt}
                 fill
-                priority
+                priority={idx === 0}
                 quality={100}
                 sizes="(max-width: 768px) 50vw, 900px"
                 className="object-contain object-center opacity-100"

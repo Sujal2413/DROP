@@ -127,7 +127,7 @@ export default function Footer({ theme = "default" }: FooterProps) {
 
           {/* Legal links */}
           <div className="flex items-center gap-4">
-            <Link href="/b2b" className={`text-xs font-bold uppercase tracking-widest transition-colors text-[#D4AF37] hover:text-white`}>
+            <Link href="/contact" className={`text-xs font-bold uppercase tracking-widest transition-colors text-[#D4AF37] hover:text-white`}>
               For Business
             </Link>
             <span className={`text-xs ${copyText}`}>·</span>
