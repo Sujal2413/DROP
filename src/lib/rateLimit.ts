@@ -1,5 +1,13 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { getRedisClient } from './auth';
+import Redis from 'ioredis';
+
+let redisClient: Redis | null = null;
+
+export const getRedisClient = () => {
+  if (!redisClient) {
+    redisClient = new Redis(process.env.REDIS_URL || '');
+  }
+  return redisClient;
+};
 
 export interface RateLimitResult {
   success: boolean;

@@ -10,17 +10,7 @@ interface CartItem {
   image: string;
 }
 
-interface User {
-  id: string;
-  name: string;
-  email: string;
-}
-
 interface CartContextType {
-  isLoggedIn: boolean;
-  user: User | null;
-  login: () => void;
-  logout: () => void;
   cart: CartItem[];
   addToCart: (item: CartItem) => void;
   removeFromCart: (id: string) => void;
@@ -36,47 +26,12 @@ interface CartContextType {
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [user, setUser] = useState<User | null>(null);
   const [cart, setCart] = useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [showSurvey, setShowSurvey] = useState(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
   useEffect(() => {
-    // Check session validity from backend cookie on mount
-    const checkSession = async () => {
-      try {
-        const res = await fetch('/api/auth/session', { cache: 'no-store' });
-        const data = await res.json();
-        if (data.authenticated) {
-          setIsLoggedIn(true);
-          setUser(data.user || null);
-          sessionStorage.setItem('drop_logged_in', 'true');
-          if (data.user) {
-            sessionStorage.setItem('drop_user', JSON.stringify(data.user));
-          }
-        } else {
-          setIsLoggedIn(false);
-          setUser(null);
-          sessionStorage.removeItem('drop_logged_in');
-          sessionStorage.removeItem('drop_user');
-        }
-      } catch (err) {
-        // Fallback to localStorage if offline or network error
-        const loggedIn = sessionStorage.getItem('drop_logged_in') === 'true';
-        setIsLoggedIn(loggedIn);
-        const storedUser = sessionStorage.getItem('drop_user');
-        if (storedUser) {
-          try {
-            setUser(JSON.parse(storedUser));
-          } catch (e) {}
-        }
-      }
-    };
-    
-    checkSession();
-
     // Retrieve cart items from localStorage on mount
     const savedCart = localStorage.getItem('drop_cart');
     if (savedCart) {
@@ -88,27 +43,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     }
   }, []);
 
-  const login = () => {
-    sessionStorage.setItem('drop_logged_in', 'true');
-    setIsLoggedIn(true);
-  };
-
-  const logout = async () => {
-    try {
-      await fetch('/api/auth/logout', { method: 'POST' });
-    } catch (e) {
-      console.error('Failed to log out from backend', e);
-    }
-    sessionStorage.removeItem('drop_logged_in');
-    sessionStorage.removeItem('drop_user');
-    setIsLoggedIn(false);
-    setUser(null);
-    setCart([]);
-    localStorage.removeItem('drop_cart');
-  };
-
   const addToCart = (item: CartItem) => {
-    // Check if item is already in cart to avoid duplicates for survey purposes
     if (cart.some((cartItem) => cartItem.id === item.id)) {
       showToast(`${item.name} is already in interest list!`);
       setIsCartOpen(true);
@@ -119,7 +54,6 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     setCart(updatedCart);
     localStorage.setItem('drop_cart', JSON.stringify(updatedCart));
 
-    // Show visual toast notification and open cart sidebar
     showToast(`Added ${item.name} to interest cart!`);
     setIsCartOpen(true);
   };
@@ -145,10 +79,6 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   return (
     <CartContext.Provider
       value={{
-        isLoggedIn,
-        user,
-        login,
-        logout,
         cart,
         addToCart,
         removeFromCart,

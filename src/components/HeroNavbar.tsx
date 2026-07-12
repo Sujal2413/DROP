@@ -26,13 +26,9 @@ export default function HeroNavbar({ activeIndex = 0 }: HeroNavbarProps) {
     setIsCartOpen, 
     removeFromCart, 
     setShowSurvey, 
-    clearCart,
-    logout,
-    user,
-    isLoggedIn
+    clearCart
   } = useCart();
   
-  const [isUserOpen, setIsUserOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
@@ -46,7 +42,7 @@ export default function HeroNavbar({ activeIndex = 0 }: HeroNavbarProps) {
       await fetch('/api/checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ items: cart, userId: user?.id, email: user?.email })
+        body: JSON.stringify({ items: cart })
       });
     } catch (e) {
       console.error('Failed to submit interest to backend', e);
@@ -93,26 +89,8 @@ export default function HeroNavbar({ activeIndex = 0 }: HeroNavbarProps) {
           <Link href="/sustainability" className="px-6 py-2 rounded-full hover:bg-white/10 transition-colors">SUSTAINABILITY</Link>
         </div>
         
-        {/* Right: User and Cart */}
+        {/* Right: Cart & Mobile Menu */}
         <div className="flex justify-end gap-3 md:gap-6 w-[200px] items-center">
-          {/* User Button — navigates to /account when not logged in, opens profile drawer when logged in */}
-          <button 
-            onClick={() => {
-              if (isLoggedIn) {
-                setIsUserOpen(!isUserOpen);
-              } else {
-                router.push('/account');
-              }
-            }} 
-            className="hover:scale-110 active:scale-95 transition-all relative p-1 cursor-pointer" 
-            aria-label={isLoggedIn ? 'User Profile' : 'Sign In'}
-          >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={themeColor} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="transition-colors duration-1000">
-              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-              <circle cx="12" cy="7" r="4"></circle>
-            </svg>
-          </button>
-
           {/* Cart Button */}
           <button 
             onClick={() => setIsCartOpen(!isCartOpen)} 
@@ -214,49 +192,6 @@ export default function HeroNavbar({ activeIndex = 0 }: HeroNavbarProps) {
                 </button>
               </div>
             )}
-          </div>
-        </div>
-      )}
-
-      {/* User Panel Drawer */}
-      {isUserOpen && (
-        <div className="fixed inset-0 z-[200] flex justify-end pointer-events-auto">
-          {/* Backdrop */}
-          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setIsUserOpen(false)} />
-          
-          {/* Drawer Body */}
-          <div className="relative w-full max-w-sm bg-[#0F1112] border-l border-white/10 h-full flex flex-col justify-between shadow-2xl p-8 z-10 text-white">
-            <div>
-              <div className="flex justify-between items-center border-b border-white/10 pb-6 mb-6">
-                <h3 className="text-xl font-black tracking-widest uppercase">User Profile</h3>
-                <button onClick={() => setIsUserOpen(false)} className="text-white/60 hover:text-white cursor-pointer">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <line x1="18" y1="6" x2="6" y2="18"></line>
-                    <line x1="6" y1="6" x2="18" y2="18"></line>
-                  </svg>
-                </button>
-              </div>
-
-              <div className="text-center py-10 flex flex-col items-center">
-                <div className="w-20 h-20 rounded-full bg-white/5 border border-white/15 flex items-center justify-center mb-4 text-[#C9A84C]">
-                  <span className="text-4xl font-black">{user?.name ? user.name[0].toUpperCase() : 'D'}</span>
-                </div>
-                <h4 className="font-black text-lg uppercase tracking-wider text-white">{user?.name || 'Drop Enthusiast'}</h4>
-                <p className="text-white/40 text-xs tracking-wider uppercase mt-1">Status: Active Surveyor</p>
-              </div>
-            </div>
-
-            <div className="border-t border-white/10 pt-6">
-              <button 
-                onClick={() => {
-                  setIsUserOpen(false);
-                  logout();
-                }}
-                className="w-full py-4 border border-red-500/30 hover:bg-red-500/10 text-red-500 font-extrabold tracking-widest text-xs rounded-full transition-all duration-300 uppercase cursor-pointer text-center block"
-              >
-                Sign Out
-              </button>
-            </div>
           </div>
         </div>
       )}
