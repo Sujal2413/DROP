@@ -131,7 +131,7 @@ export default function HeroSection() {
         {/* Sleek Footnote */}
         <div
           ref={taglineRef}
-          className="mt-10 md:mt-14 font-semibold tracking-[0.3em] text-[10px] md:text-xs opacity-0 transition-colors duration-1000 flex items-center justify-center md:justify-start gap-6 uppercase"
+          className="mt-6 md:mt-8 font-semibold tracking-[0.3em] text-[10px] md:text-xs opacity-0 transition-colors duration-1000 flex items-center justify-center md:justify-start gap-6 uppercase"
           style={{ color: THEMES[activeIndex].text }}
         >
           <span className="opacity-70">500ML</span>
