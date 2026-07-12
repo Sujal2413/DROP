@@ -61,13 +61,7 @@ export async function rateLimit(
       reset,
     };
   } catch (err: any) {
-    // Fail open in case Redis is down to avoid blocking legitimate users, but log it
-    console.error('Rate limiting failed, allowed query through:', err.message);
-    return {
-      success: true,
-      limit,
-      remaining: 1,
-      reset: 0,
-    };
+    console.error('Rate limiting failed (Redis unreachable):', err.message);
+    throw new Error('Rate limiting service unavailable.');
   }
 }

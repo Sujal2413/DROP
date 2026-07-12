@@ -10,6 +10,7 @@ export async function POST(request: Request) {
     // 1. Zod Validation
     const parseResult = WaitlistSchema.safeParse(body);
     if (!parseResult.success) {
+      console.error('Waitlist 400 Error (Validation Failed):', parseResult.error.issues);
       return NextResponse.json(
         { error: parseResult.error.issues[0].message },
         { status: 400 }
@@ -18,12 +19,12 @@ export async function POST(request: Request) {
 
     const { email } = parseResult.data;
 
-    // 2. Rate Limiting (10 per hour per IP + 5 per hour per email)
+    // 2. Rate Limiting (5 requests / min / IP)
     const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || '127.0.0.1';
-    const ipLimit = await rateLimit(`waitlist:${ip}`, 10, 3600);
-    const emailLimit = await rateLimit(`waitlist:email:${email}`, 5, 3600);
+    const limitResult = await rateLimit(`waitlist:${ip}`, 5, 60);
 
-    if (!ipLimit.success || !emailLimit.success) {
+    if (!limitResult.success) {
+      console.error(`Waitlist 429 Error: Rate limit exceeded for IP ${ip}`);
       return NextResponse.json(
         { error: 'Too many submissions. Please try again later.' },
         { status: 429 }

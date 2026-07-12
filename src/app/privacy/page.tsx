@@ -47,10 +47,10 @@ export default function PrivacyPage() {
               When you use our website or sign up for our waitlist, we may collect the following personal information:
             </p>
             <ul className="list-disc pl-6 space-y-1 mt-2">
-              <li>Name and email address (provided during waitlist signup or account creation)</li>
+              <li>Name and email address (provided during waitlist signup)</li>
               <li>City and preferences (optional, provided during waitlist signup)</li>
               <li>Business details (for B2B enquiries: business name, type, contact information)</li>
-              <li>Usage data and cookies (pages visited, time spent, browser type)</li>
+              <li>Basic usage data (pages visited, browser type)</li>
             </ul>
           </section>
 
@@ -75,21 +75,21 @@ export default function PrivacyPage() {
 
           <section>
             <h2 className="text-white text-lg font-black uppercase tracking-wider mb-3">4. Third-Party Services</h2>
-            <p>We may use the following third-party services:</p>
+            <p>We use the following essential services to operate our website:</p>
             <ul className="list-disc pl-6 space-y-1 mt-2">
-              <li>Google OAuth and Apple Sign-In for authentication</li>
               <li>Vercel for website hosting and deployment</li>
-              <li>MongoDB Atlas for database services</li>
+              <li>MongoDB Atlas for secure database storage</li>
+              <li>Upstash Redis for security rate-limiting</li>
             </ul>
-            <p className="mt-2">
-              These services have their own privacy policies. We do not sell or share your personal data with third parties for marketing purposes.
+            <p className="mt-2 text-[#C9A84C] font-bold">
+              We do not sell or share your personal data with third parties. We do not use any third-party marketing or tracking SDKs.
             </p>
           </section>
 
           <section>
             <h2 className="text-white text-lg font-black uppercase tracking-wider mb-3">5. Cookies</h2>
             <p>
-              We use essential cookies for session management and authentication. These are strictly necessary for the website to function and cannot be disabled. We do not use third-party tracking cookies for advertising purposes.
+              We do not use any third-party tracking cookies or marketing cookies. Any cookies used are strictly essential for website functionality and security rate-limiting.
             </p>
           </section>
 

@@ -48,7 +48,7 @@ export default function B2BSection() {
     setStatus('loading');
 
     try {
-      const res = await fetch('/api/b2b-leads', {
+      const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ businessName, contactName, email, businessType, monthlyVolume }),

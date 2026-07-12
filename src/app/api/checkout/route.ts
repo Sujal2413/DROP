@@ -19,9 +19,9 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: parseResult.error.issues[0].message }, { status: 400 });
     }
     
-    // 2. Rate Limiting (max 3 per hour per IP)
+    // 2. Rate Limiting (5 requests / min / IP)
     const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || '127.0.0.1';
-    const limitResult = await rateLimit(`checkout:${ip}`, 3, 3600);
+    const limitResult = await rateLimit(`checkout:${ip}`, 5, 60);
     
     if (!limitResult.success) {
       return NextResponse.json(
