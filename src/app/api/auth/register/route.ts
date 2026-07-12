@@ -1,19 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { NextResponse } from 'next/server';
-import clientPromise from '@/lib/mongodb';
-import bcrypt from 'bcryptjs';
-import { z } from 'zod';
+import { RegisterSchema } from '@/lib/validations';
 import { rateLimit } from '@/lib/rateLimit';
-
-// Zod schema for registration validation
-const registerSchema = z.object({
-  name: z.string().min(2).max(100).trim().transform((val) => val.replace(/[<>]/g, '')),
-  email: z.string().email().max(254).toLowerCase().trim(),
-  password: z.string().min(8, 'Password must be at least 8 characters.').max(100)
-    .regex(/[a-z]/, 'Password must contain a lowercase letter.')
-    .regex(/[A-Z]/, 'Password must contain an uppercase letter.')
-    .regex(/[0-9]/, 'Password must contain a number.'),
-});
+import { AuthService } from '@/services/auth.service';
 
 export async function POST(request: Request) {
   try {
@@ -30,7 +19,7 @@ export async function POST(request: Request) {
 
     // 2. Input Parsing and Sanitization with Zod
     const body = await request.json();
-    const parseResult = registerSchema.safeParse(body);
+    const parseResult = RegisterSchema.safeParse(body);
     
     if (!parseResult.success) {
       const errorMsg = parseResult.error.issues.map(err => err.message).join('. ');
@@ -40,66 +29,18 @@ export async function POST(request: Request) {
       );
     }
 
-    const { name, email, password } = parseResult.data;
-
-    const client = await clientPromise;
-    const db = client.db();
-    const usersCollection = db.collection('users');
-
-    // Check if user already exists
-    const existingUser = await usersCollection.findOne({ email });
-    if (existingUser) {
-      const existingPassword = existingUser.password;
-      const hasPassword = typeof existingPassword === 'string' && existingPassword.length > 0;
-
-      if (!hasPassword) {
-        const salt = await bcrypt.genSalt(12);
-        const hashedPassword = await bcrypt.hash(password, salt);
-
-        await usersCollection.updateOne(
-          { _id: existingUser._id },
-          {
-            $set: {
-              name: existingUser.name || name,
-              password: hashedPassword,
-              passwordEnabledAt: new Date(),
-              updatedAt: new Date(),
-            },
-          }
-        );
-
-        return NextResponse.json(
-          { message: 'Password login enabled successfully.' },
-          { status: 200 }
-        );
-      }
-
-      return NextResponse.json(
-        { error: 'User with this email already exists.' },
-        { status: 409 }
-      );
-    }
-
-    const salt = await bcrypt.genSalt(12);
-    const hashedPassword = await bcrypt.hash(password, salt);
-
-    // Save user
-    const newUser = {
-      name,
-      email,
-      password: hashedPassword,
-      provider: 'credentials',
-      createdAt: new Date(),
-    };
-
-    await usersCollection.insertOne(newUser);
+    // 3. Service Layer
+    const result = await AuthService.register(parseResult.data);
 
     return NextResponse.json(
-      { message: 'User registered successfully.' },
-      { status: 201 }
+      { message: result.message },
+      { status: result.status }
     );
   } catch (error: any) {
     console.error('Registration API Error:', error);
+    if (error.message === 'User with this email already exists.') {
+      return NextResponse.json({ error: error.message }, { status: 409 });
+    }
     return NextResponse.json(
       { error: 'Internal server error.' },
       { status: 500 }

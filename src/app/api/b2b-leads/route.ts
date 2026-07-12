@@ -1,15 +1,7 @@
 import { NextResponse } from 'next/server';
-import clientPromise from '@/lib/mongodb';
-import { z } from 'zod';
+import { B2BLeadSchema } from '@/lib/validations';
 import { rateLimit } from '@/lib/rateLimit';
-
-const B2BLeadSchema = z.object({
-  businessName: z.string().min(1, 'Business name is required').max(200).trim().transform((val) => val.replace(/[<>]/g, '')),
-  contactName: z.string().min(1, 'Contact name is required').max(100).trim().transform((val) => val.replace(/[<>]/g, '')),
-  email: z.string().email('Invalid email address').toLowerCase().trim(),
-  businessType: z.enum(['Café', 'Gym', 'Hotel', 'Salon', 'Co-working', 'Event', 'Other']),
-  monthlyVolume: z.enum(['<100 cans', '100–500', '500–1000', '1000+']).optional().or(z.literal('')),
-});
+import { B2BService } from '@/services/b2b.service';
 
 export async function POST(request: Request) {
   try {
@@ -24,7 +16,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const { businessName, contactName, email, businessType, monthlyVolume } = parseResult.data;
+    const { email } = parseResult.data;
 
     // 2. Rate Limiting (5 per hour per IP + 3 per hour per email)
     const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || '127.0.0.1';
@@ -38,26 +30,13 @@ export async function POST(request: Request) {
       );
     }
 
-    const client = await clientPromise;
-    const db = client.db('Drop');
-    const b2bCollection = db.collection('b2b_leads');
-
-    const entry = {
-      businessName,
-      contactName,
-      email,
-      businessType,
-      monthlyVolume: monthlyVolume || '',
-      lead_type: 'b2b',
-      createdAt: new Date(),
-    };
-
-    await b2bCollection.insertOne(entry);
+    // 3. Service Layer
+    const result = await B2BService.submitLead(parseResult.data);
 
     return NextResponse.json({
-      success: true,
-      message: "Request received. We'll be in touch with B2B details shortly.",
-    });
+      success: result.success,
+      message: result.message,
+    }, { status: result.status });
   } catch (error) {
     console.error('B2B Lead API Error:', error);
     return NextResponse.json(

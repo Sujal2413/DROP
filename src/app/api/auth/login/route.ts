@@ -1,23 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { NextResponse } from 'next/server';
-import clientPromise from '@/lib/mongodb';
-import bcrypt from 'bcryptjs';
-import { z } from 'zod';
+import { LoginSchema } from '@/lib/validations';
 import { rateLimit } from '@/lib/rateLimit';
-import { createSession } from '@/lib/auth';
-
-// Zod schema for login validation
-const loginSchema = z.object({
-  email: z.string().email().toLowerCase().trim(),
-  password: z.string().min(1, 'Password is required.'),
-});
+import { AuthService } from '@/services/auth.service';
 
 export async function POST(request: Request) {
   try {
     const body = await request.json();
     
     // 1. Zod input validation
-    const parseResult = loginSchema.safeParse(body);
+    const parseResult = LoginSchema.safeParse(body);
     if (!parseResult.success) {
       return NextResponse.json(
         { error: 'Please enter a valid email address and password.' },
@@ -38,50 +30,19 @@ export async function POST(request: Request) {
       );
     }
 
-    const client = await clientPromise;
-    const db = client.db();
-    const usersCollection = db.collection('users');
+    // 3. Service Layer
+    const result = await AuthService.login({ email, password });
 
-    // Find user
-    const user = await usersCollection.findOne({ email });
-    if (!user) {
-      return NextResponse.json(
-        { error: 'Invalid email or password.' },
-        { status: 401 }
-      );
-    }
-
-    // Allow password login for any account that has a stored password hash.
-    const storedPassword = user.password;
-    if (typeof storedPassword !== 'string' || storedPassword.length === 0) {
-      return NextResponse.json(
-        { error: 'This account does not have password login enabled. Please use Google/Apple.' },
-        { status: 400 }
-      );
-    }
-
-    // Match password
-    const isMatch = await bcrypt.compare(password, storedPassword);
-    if (!isMatch) {
-      return NextResponse.json(
-        { error: 'Invalid email or password.' },
-        { status: 401 }
-      );
-    }
-
-    // 3. Create Session with rotated JWTs and Redis SAS policy
-    await createSession(user._id.toString(), user.email, user.name);
-
-    return NextResponse.json({
-      success: true,
-      user: {
-        id: user._id.toString(),
-        name: user.name,
-        email: user.email,
-      },
-    });
+    return NextResponse.json(result, { status: 200 });
   } catch (error: any) {
     console.error('Login API Error:', error);
+    // Determine if it's a known error from the service
+    if (error.message === 'Invalid email or password.') {
+      return NextResponse.json({ error: error.message }, { status: 401 });
+    }
+    if (error.message === 'This account does not have password login enabled. Please use Google/Apple.') {
+      return NextResponse.json({ error: error.message }, { status: 400 });
+    }
     return NextResponse.json(
       { error: 'Internal server error.' },
       { status: 500 }
