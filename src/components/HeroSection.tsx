@@ -134,7 +134,7 @@ export default function HeroSection() {
           className="mt-6 md:mt-8 font-semibold tracking-[0.3em] text-[10px] md:text-xs opacity-0 transition-colors duration-1000 flex items-center justify-center md:justify-start gap-6 uppercase"
           style={{ color: THEMES[activeIndex].text }}
         >
-          <span className="opacity-70">300ML & 500ML</span>
+          <span className="opacity-70">330ML & 500ML</span>
           <span className="w-1.5 h-1.5 rounded-full bg-current opacity-40 shadow-[0_0_10px_currentColor]"></span>
           <span className="opacity-70">STILL WATER</span>
           <span className="w-1.5 h-1.5 rounded-full bg-current opacity-40 shadow-[0_0_10px_currentColor]"></span>
