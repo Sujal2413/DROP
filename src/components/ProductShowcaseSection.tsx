@@ -79,7 +79,7 @@ export default function ProductShowcaseSection() {
             lineHeight: 0.95,
           }}
         >
-          DROP. Still Water — 500ML
+          DROP. Still Water — 300ML & 500ML
         </h2>
         <p className="text-white/60 text-base md:text-lg leading-relaxed font-medium max-w-2xl mx-auto mb-20">
           Still water. Recyclable aluminium can. No plastic, no sugar, no flavour unless you want it —<br/>
