@@ -69,15 +69,15 @@ export default function ExplainerSection() {
             lineHeight: 0.95,
           }}
         >
-          Water. Reconsidered.
+          Drop Water. Reconsidered.
         </h2>
         <p
           ref={bodyRef}
           className="opacity-0 text-white/70 text-lg md:text-xl leading-relaxed font-medium max-w-2xl mx-auto"
         >
-          No sugar. No flavour. No noise. DROP. is still water in a recyclable
+          No sugar. No flavour. No noise. <strong>Drop Water</strong> is premium packaged drinking water in a recyclable
           aluminium can — infused with mint, clove, or natural minerals for those
-          who want more. Not another plastic bottle. A better standard.
+          who want superior quality hydration. Not another plastic bottle. A better standard.
         </p>
       </div>
     </section>

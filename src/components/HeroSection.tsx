@@ -100,6 +100,7 @@ export default function HeroSection() {
             textShadow: '0 10px 30px rgba(0,0,0,0.3)'
           }}
         >
+          <span className="sr-only">Drop Water - </span>
           AS. IT.<br />
           SHOULD. BE.
         </h1>

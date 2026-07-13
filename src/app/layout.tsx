@@ -15,24 +15,24 @@ export const metadata: Metadata = {
     canonical: '/',
   },
   title: {
-    default: 'DROP. As It Should Be.',
-    template: '%s | DROP.',
+    default: 'Drop Water | Premium Canned Water',
+    template: '%s | Drop Water',
   },
-  description: 'Premium canned still water. Infused with mint, clove, or natural minerals. Phasing out single-use plastics forever.',
-  keywords: ['Premium Canned Water', 'Canned Still Water', 'Aluminum Canned Water', 'DROP Water', 'Mint Water', 'Clove Water', 'Eco Friendly Water'],
-  authors: [{ name: 'DROP team' }],
-  creator: 'DROP',
-  publisher: 'DROP',
+  description: 'Drop Water - Premium canned still water. Infused with mint, clove, or natural minerals. Phasing out single-use plastics forever.',
+  keywords: ['Drop Water', 'drop water', 'DROP Water', 'Premium Canned Water', 'Canned Still Water', 'Aluminum Canned Water', 'Mint Water', 'Clove Water', 'Eco Friendly Water'],
+  authors: [{ name: 'Drop Water team' }],
+  creator: 'Drop Water',
+  publisher: 'Drop Water',
   formatDetection: {
     email: false,
     address: false,
     telephone: false,
   },
   openGraph: {
-    title: 'DROP. As It Should Be.',
-    description: 'Premium canned still water. Phasing out single-use plastics forever.',
+    title: 'Drop Water | Premium Canned Water. As It Should Be.',
+    description: 'Drop Water - Premium canned still water. Phasing out single-use plastics forever.',
     url: 'https://www.dropwater.in',
-    siteName: 'DROP',
+    siteName: 'Drop Water',
     images: [
       {
         url: 'https://www.dropwater.in/assets/new-can-variant-1.png',
@@ -46,8 +46,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'DROP. As It Should Be.',
-    description: 'Premium canned still water. Phasing out single-use plastics forever.',
+    title: 'Drop Water | Premium Canned Water',
+    description: 'Drop Water - Premium canned still water. Phasing out single-use plastics forever.',
   },
   robots: {
     index: true,
@@ -82,8 +82,9 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               '@context': 'https://schema.org',
-              '@type': ['Organization', 'LocalBusiness'],
-              name: 'DROP',
+              '@type': ['Organization', 'LocalBusiness', 'Brand'],
+              name: 'Drop Water',
+              alternateName: 'DROP',
               url: 'https://www.dropwater.in',
               logo: 'https://www.dropwater.in/apple-touch-icon.png',
               telephone: '+918976127355',

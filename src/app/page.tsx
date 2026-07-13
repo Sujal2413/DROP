@@ -53,7 +53,7 @@ export default function Home() {
         'description': p.desc,
         'brand': {
           '@type': 'Brand',
-          'name': 'DROP'
+          'name': 'Drop Water'
         },
         'offers': {
           '@type': 'Offer',

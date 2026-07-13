@@ -143,10 +143,10 @@ export default function Footer({ theme = "default" }: FooterProps) {
           {/* Copyright + India */}
           <div className="text-center md:text-right">
             <p className={`font-medium ${copyText}`}>
-              &copy; {new Date().getFullYear()} DROP. All rights reserved.
+              &copy; {new Date().getFullYear()} Drop Water. All rights reserved.
             </p>
             <p className={`text-[10px] mt-1 font-medium tracking-wider uppercase ${copyText}`}>
-              DROP. — India — Coming Soon
+              Drop Water — India — Coming Soon
             </p>
           </div>
         </div>
