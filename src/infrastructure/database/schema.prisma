@@ -1,0 +1,44 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model ConsumerLead {
+  id           String    @id @default(uuid())
+  name         String?
+  email        String    @unique
+  city         String?
+  drinkContext String?   @map("drink_context")
+  leadSource   String    @map("lead_source")
+  status       String    @default("active")
+  utmSource    String?   @map("utm_source")
+  utmMedium    String?   @map("utm_medium")
+  utmCampaign  String?   @map("utm_campaign")
+  consentAt    DateTime  @default(now()) @map("consent_at")
+  createdAt    DateTime  @default(now()) @map("created_at")
+  updatedAt    DateTime  @updatedAt @map("updated_at")
+
+  @@map("consumer_leads")
+}
+
+model BusinessEnquiry {
+  id                 String   @id @default(uuid())
+  businessName       String   @map("business_name")
+  contactName        String   @map("contact_name")
+  email              String
+  phone              String?
+  businessType       String   @map("business_type")
+  city               String?
+  monthlyRequirement String?  @map("monthly_requirement")
+  message            String?
+  enquirySource      String   @map("enquiry_source")
+  status             String   @default("new")
+  createdAt          DateTime @default(now()) @map("created_at")
+  updatedAt          DateTime @updatedAt @map("updated_at")
+
+  @@map("business_enquiries")
+}

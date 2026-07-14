@@ -11,7 +11,7 @@ const BUSINESS_TYPES = ['Café', 'Gym', 'Hotel', 'Salon', 'Co-working', 'Event',
 const VOLUME_OPTIONS = ['<100 cans', '100–500', '500–1000', '1000+'] as const;
 
 const contactConfig: LeadFormConfig = {
-  endpoint: '/api/contact',
+  endpoint: '/api/v1/business-enquiries',
   submitText: 'Request B2B Info',
   submitLoadingText: 'Sending...',
   successTitle: 'Request Received',
@@ -22,8 +22,11 @@ const contactConfig: LeadFormConfig = {
     { name: 'businessName', label: 'Business Name', type: 'text', required: true, placeholder: 'Your business name', colSpan: 2 },
     { name: 'contactName', label: 'Contact Name', type: 'text', required: true, placeholder: 'Your name' },
     { name: 'email', label: 'Email', type: 'email', required: true, placeholder: 'business@email.com' },
+    { name: 'phone', label: 'Phone Number', type: 'text', placeholder: '+91 XXXXX XXXXX' },
     { name: 'businessType', label: 'Business Type', type: 'select', required: true, options: BUSINESS_TYPES },
-    { name: 'monthlyVolume', label: 'Monthly Volume Interest', type: 'select', options: VOLUME_OPTIONS }
+    { name: 'city', label: 'City', type: 'text', placeholder: 'Mumbai, Delhi, etc.' },
+    { name: 'monthlyRequirement', label: 'Monthly Requirement', type: 'select', options: VOLUME_OPTIONS },
+    { name: 'message', label: 'Message / Notes', type: 'textarea', placeholder: 'Tell us about your space...', colSpan: 2 }
   ]
 };
 

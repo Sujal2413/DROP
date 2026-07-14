@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 
-export type FieldType = 'text' | 'email' | 'select';
+export type FieldType = 'text' | 'email' | 'select' | 'textarea';
 
 export interface FieldConfig {
   name: string;
@@ -54,7 +54,13 @@ export default function LeadForm({ config }: { config: LeadFormConfig }) {
         setFormData({});
       } else {
         setStatus('error');
-        setMessage(data.error || 'Something went wrong.');
+        // Handle validation errors from the unified backend API response format
+        if (data.error && data.error.fields) {
+          const errors = Object.values(data.error.fields).join(', ');
+          setMessage(`${data.error.message}: ${errors}`);
+        } else {
+          setMessage(data.error?.message || data.error || 'Something went wrong.');
+        }
       }
     } catch {
       setStatus('error');
@@ -89,6 +95,17 @@ export default function LeadForm({ config }: { config: LeadFormConfig }) {
         {status === 'error' ? message : ''}
       </div>
 
+      {/* Honeypot field for bot protection */}
+      <input
+        type="text"
+        name="website"
+        value={formData.website || ''}
+        onChange={(e) => handleChange('website', e.target.value)}
+        style={{ display: 'none' }}
+        tabIndex={-1}
+        autoComplete="off"
+      />
+
       {config.fields.map((field) => {
         const wrapperClass = field.colSpan === 2 ? 'md:col-span-2' : '';
         const inputClass = "w-full py-4 bg-transparent border-b border-white/20 text-white text-sm font-medium placeholder:text-white/20 focus:outline-none focus:border-[#C9A84C] focus:ring-2 focus:ring-[#C9A84C] transition-all rounded-none";
@@ -116,6 +133,18 @@ export default function LeadForm({ config }: { config: LeadFormConfig }) {
                   </option>
                 ))}
               </select>
+            ) : field.type === 'textarea' ? (
+              <textarea
+                id={fieldId}
+                name={field.name}
+                value={formData[field.name] || ''}
+                onChange={(e) => handleChange(field.name, e.target.value)}
+                required={field.required}
+                placeholder={field.placeholder}
+                rows={4}
+                className={`${inputClass} resize-none`}
+                disabled={status === 'loading'}
+              />
             ) : (
               <input
                 id={fieldId}

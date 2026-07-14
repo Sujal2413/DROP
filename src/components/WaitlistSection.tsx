@@ -17,7 +17,7 @@ const ALL_SIZES = Array.from(
 const SIZES_TEXT = ALL_SIZES.length > 0 ? `${ALL_SIZES.join(' & ')} CANS` : 'PREMIUM CANS';
 
 const waitlistConfig: LeadFormConfig = {
-  endpoint: '/api/waitlist',
+  endpoint: '/api/v1/waitlist',
   submitText: 'Join the List',
   submitLoadingText: 'Joining...',
   successTitle: 'You\'re In',

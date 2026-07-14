@@ -40,10 +40,10 @@ export default function Footer({ theme = "default" }: FooterProps) {
     setStatus('loading');
     
     try {
-      const res = await fetch('/api/v1/newsletter', {
+      const res = await fetch('/api/v1/interest', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email })
+        body: JSON.stringify({ email, leadSource: 'footer_interest' })
       });
       const data = await res.json();
       
@@ -53,7 +53,13 @@ export default function Footer({ theme = "default" }: FooterProps) {
         setEmail('');
       } else {
         setStatus('error');
-        setMessage(data.error || 'Something went wrong.');
+        // Handle validation errors from the unified backend API response format
+        if (data.error && data.error.fields) {
+          const errors = Object.values(data.error.fields).join(', ');
+          setMessage(`${data.error.message}: ${errors}`);
+        } else {
+          setMessage(data.error?.message || data.error || 'Something went wrong.');
+        }
       }
     } catch {
       setStatus('error');
@@ -76,7 +82,7 @@ export default function Footer({ theme = "default" }: FooterProps) {
         <div className="flex flex-col md:flex-row items-center justify-between bg-[#0F1112] rounded-sm p-8 md:p-12 mb-16 border border-white/10 shadow-2xl">
           <div className="md:w-1/2 mb-8 md:mb-0">
             <h3 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-2">Be first to taste it.</h3>
-            <p className="text-[#F9F9F9]/70 text-sm">Join the list and we&apos;ll let you know when we launch.</p>
+            <p className="text-[#F9F9F9]/70 text-sm">Join the list for quick updates (or join the full waitlist above for priority launch access).</p>
           </div>
           <div className="w-full md:w-1/2 flex justify-end">
             <form onSubmit={handleSubscribe} className="w-full max-w-md" noValidate>
