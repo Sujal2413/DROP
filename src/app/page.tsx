@@ -1,10 +1,8 @@
-'use client';
-
 import React from 'react';
 import HeroSection from '@/components/HeroSection';
 import FeatureSplitSection from '@/components/FeatureSplitSection';
-import MarqueeTicker from '@/components/MarqueeTicker';
 import VariantShowcase from '@/components/VariantShowcase';
+import WhyDropSection from '@/components/WhyDropSection';
 import WaitlistSection from '@/components/WaitlistSection';
 import Footer from '@/components/Footer';
 import { PRODUCTS } from '@/lib/data/products';
@@ -25,30 +23,25 @@ export default function Home() {
           '@type': 'Brand',
           'name': 'Drop Water'
         }
-        // Removed Offers/price as requested for Waitlist model
       }
     }))
   };
 
   return (
-    <>
+    <div className="bg-[#111111] min-h-screen font-sans selection:bg-[#C9A84C] selection:text-[#111111]">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-
-      {/* Hero — unchanged */}
-      <HeroSection />
-
-      {/* New conversion flow sections */}
       <main className="relative z-10 bg-[#F9F9F9]">
+        <HeroSection />
         <FeatureSplitSection />
-        <MarqueeTicker />
         <VariantShowcase />
+        <WhyDropSection />
         <WaitlistSection />
       </main>
 
-      <Footer />
-    </>
+      <Footer theme="olive" />
+    </div>
   );
 }

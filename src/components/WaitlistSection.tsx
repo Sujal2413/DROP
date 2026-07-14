@@ -4,10 +4,17 @@ import { useRef, useEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import LeadForm, { LeadFormConfig } from './ui/LeadForm';
+import { PRODUCTS } from '@/lib/data/products';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const DRINK_OPTIONS = ['Gym', 'Café', 'Home', 'Work', 'Events', 'Other'] as const;
+
+// Extract unique sizes from all products
+const ALL_SIZES = Array.from(
+  new Set(PRODUCTS.flatMap(p => p.availableSizes || []))
+).map(s => s.toUpperCase());
+const SIZES_TEXT = ALL_SIZES.length > 0 ? `${ALL_SIZES.join(' & ')} CANS` : 'PREMIUM CANS';
 
 const waitlistConfig: LeadFormConfig = {
   endpoint: '/api/waitlist',
@@ -57,9 +64,9 @@ export default function WaitlistSection() {
       className="relative bg-[#0A0A0A] py-24 sm:py-28 md:py-36 px-5 sm:px-8 md:px-16 overflow-hidden"
     >
       {/* Accent glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[min(600px,140vw)] h-[min(600px,140vw)] bg-[#5A0205]/[0.08] rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[min(600px,140vw)] h-[min(600px,140vw)] bg-[#C9A84C]/[0.06] rounded-full blur-[120px] pointer-events-none" />
 
-      <div ref={formRef} className="max-w-xl mx-auto relative z-10 opacity-0">
+      <div ref={formRef} className="max-w-xl mx-auto relative z-10">
         {/* Header */}
         <div className="text-center mb-12">
           <h2
@@ -77,8 +84,8 @@ export default function WaitlistSection() {
           <p className="text-white/50 text-sm md:text-base font-medium tracking-wide">
             Launching 2027. The first batch goes to the list.
           </p>
-          <div className="inline-block mt-4 px-4 py-1.5 rounded-full border border-[#fca5a5]/30 bg-[#fca5a5]/10 text-[#fca5a5] text-[10px] md:text-xs font-bold tracking-widest uppercase">
-            330ML & 500ML CANS
+          <div className="inline-block mt-4 px-4 py-1.5 rounded-full border border-[#C9A84C]/30 bg-[#C9A84C]/10 text-[#C9A84C] text-[10px] md:text-xs font-bold tracking-widest uppercase">
+            {SIZES_TEXT}
           </div>
         </div>
 

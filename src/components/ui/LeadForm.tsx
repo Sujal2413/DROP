@@ -64,14 +64,14 @@ export default function LeadForm({ config }: { config: LeadFormConfig }) {
 
   if (status === 'success') {
     return (
-      <div className="text-center py-16 px-8 border border-[#fca5a5]/20 rounded-3xl bg-[#fca5a5]/[0.03]" aria-live="polite">
-        <div className="w-16 h-16 bg-[#fca5a5]/10 border border-[#fca5a5]/30 rounded-full flex items-center justify-center mx-auto mb-6">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fca5a5" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <div className="text-center py-16 px-8 border border-[#C9A84C]/20 rounded-3xl bg-[#C9A84C]/[0.03]" aria-live="polite">
+        <div className="w-16 h-16 bg-[#C9A84C]/10 border border-[#C9A84C]/30 rounded-full flex items-center justify-center mx-auto mb-6">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
             <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
             <polyline points="22 4 12 14.01 9 11.01" />
           </svg>
         </div>
-        <h3 className="text-[#fca5a5] text-2xl font-black tracking-tight mb-3 uppercase">{config.successTitle}</h3>
+        <h3 className="text-[#C9A84C] text-2xl font-black tracking-tight mb-3 uppercase">{config.successTitle}</h3>
         <p className="text-white/60 font-medium text-sm">{message}</p>
       </div>
     );
@@ -91,12 +91,12 @@ export default function LeadForm({ config }: { config: LeadFormConfig }) {
 
       {config.fields.map((field) => {
         const wrapperClass = field.colSpan === 2 ? 'md:col-span-2' : '';
-        const inputClass = "w-full py-4 bg-transparent border-b border-white/20 text-white text-sm font-medium placeholder:text-white/20 focus:outline-none focus:border-[#fca5a5] focus:ring-2 focus:ring-[#fca5a5] transition-all rounded-none";
+        const inputClass = "w-full py-4 bg-transparent border-b border-white/20 text-white text-sm font-medium placeholder:text-white/20 focus:outline-none focus:border-[#C9A84C] focus:ring-2 focus:ring-[#C9A84C] transition-all rounded-none";
         const fieldId = `field-${field.name}`;
 
         return (
           <div key={field.name} className={wrapperClass}>
-            <label htmlFor={fieldId} className="block text-white/40 text-[10px] font-bold tracking-[0.2em] uppercase mb-2">
+            <label htmlFor={fieldId} className="block text-white/50 text-xs font-bold tracking-[0.2em] uppercase mb-2">
               {field.label} {field.required && '*'}
             </label>
 
@@ -144,7 +144,7 @@ export default function LeadForm({ config }: { config: LeadFormConfig }) {
           <button
             type="submit"
             disabled={status === 'loading'}
-            className="w-full py-4 bg-transparent border-2 border-[#fca5a5] hover:bg-[#fca5a5]/10 disabled:opacity-50 disabled:cursor-not-allowed text-[#fca5a5] font-black tracking-[0.2em] text-xs rounded-full transition-all duration-300 uppercase active:scale-95 cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#fca5a5]"
+            className="w-full py-4 bg-transparent border-2 border-[#C9A84C] hover:bg-[#C9A84C]/10 disabled:opacity-50 disabled:cursor-not-allowed text-[#C9A84C] font-black tracking-[0.2em] text-xs rounded-full transition-all duration-300 uppercase active:scale-95 cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#C9A84C]"
           >
             {status === 'loading' ? config.submitLoadingText : config.submitText}
           </button>
@@ -152,7 +152,7 @@ export default function LeadForm({ config }: { config: LeadFormConfig }) {
           <button
             type="submit"
             disabled={status === 'loading'}
-            className="group relative w-full py-4 bg-[#fca5a5] hover:bg-[#f87171] disabled:opacity-50 disabled:cursor-not-allowed text-black font-black tracking-[0.2em] text-xs rounded-full shadow-lg shadow-[#fca5a5]/10 hover:shadow-[#fca5a5]/25 transition-all duration-300 uppercase active:scale-95 cursor-pointer overflow-hidden flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-white"
+            className="group relative w-full py-4 bg-[#C9A84C] hover:bg-[#B0913B] disabled:opacity-50 disabled:cursor-not-allowed text-black font-black tracking-[0.2em] text-xs rounded-full shadow-lg shadow-[#C9A84C]/10 hover:shadow-[#C9A84C]/25 transition-all duration-300 uppercase active:scale-95 cursor-pointer overflow-hidden flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-white"
           >
             <span className="relative z-10 transition-transform duration-300 group-hover:-translate-y-8">
               {status === 'loading' ? config.submitLoadingText : config.submitText}

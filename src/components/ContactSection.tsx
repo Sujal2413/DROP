@@ -62,7 +62,7 @@ export default function ContactSection() {
       {/* Divider line */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-px bg-gradient-to-r from-transparent via-[#C9A84C]/30 to-transparent" />
 
-      <div ref={contentRef} className="max-w-2xl mx-auto relative z-10 opacity-0">
+      <div ref={contentRef} className="max-w-2xl mx-auto relative z-10">
         {/* Header */}
         <div className="text-center mb-14">
           <h2

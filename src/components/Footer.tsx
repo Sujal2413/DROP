@@ -5,9 +5,9 @@ import Link from "next/link";
 import {
   Mail,
   Phone,
-  MapPin,
+  MapPin
 } from "lucide-react";
-import { FooterBackgroundGradient, TextHoverEffect } from "@/components/ui/hover-footer";
+import { FooterBackgroundGradient } from "@/components/ui/hover-footer";
 
 interface FooterProps {
   theme?: "default" | "olive";
@@ -25,30 +25,47 @@ export default function Footer({ theme = "default" }: FooterProps) {
   const borderLine = isOlive ? "border-[#C9A84C]/20" : "border-white/10";
   const socialText = isOlive ? "text-[#C9A84C]/60 hover:text-[#C9A84C]" : "text-gray-400 hover:text-white";
   const copyText = isOlive ? "text-[#C9A84C]/50" : "text-gray-500";
-  const strokeMobile = isOlive ? "2px #C9A84C" : "2px white";
 
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [message, setMessage] = useState('');
 
   const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email || !email.includes('@')) {
       setStatus('error');
+      setMessage('Please enter a valid email address.');
       return;
     }
     setStatus('loading');
     
-    // Simulate API call for newsletter
-    setTimeout(() => {
-      setStatus('success');
-      setEmail('');
-    }, 1500);
+    try {
+      const res = await fetch('/api/v1/newsletter', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email })
+      });
+      const data = await res.json();
+      
+      if (res.ok && data.success) {
+        setStatus('success');
+        setMessage(data.message);
+        setEmail('');
+      } else {
+        setStatus('error');
+        setMessage(data.error || 'Something went wrong.');
+      }
+    } catch {
+      setStatus('error');
+      setMessage('Network error. Please try again.');
+    }
   };
 
-  const socialLinks = [
-    { icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>, label: "Facebook", href: "https://www.facebook.com/share/14kfqixwQTn/?mibextid=wwXIfr" },
-    { icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>, label: "Instagram", href: "https://www.instagram.com/dropwaterco" },
-    { icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>, label: "X (Twitter)", href: "https://x.com/dropofficialw?s=11" },
+  const navLinks = [
+    { label: "Products", href: "/#products" },
+    { label: "Our Story", href: "/story" },
+    { label: "Sustainability", href: "/sustainability" },
+    { label: "For Business", href: "/contact" },
   ];
 
   return (
@@ -84,9 +101,9 @@ export default function Footer({ theme = "default" }: FooterProps) {
                 </button>
               </div>
               
-              <div aria-live="polite" className="mt-2 text-xs">
-                {status === 'error' && <p className="text-red-400">Please enter a valid email address.</p>}
-                {status === 'success' && <p className="text-[#C9A84C]">Thank you for subscribing!</p>}
+              <div aria-live="polite" className="mt-2 text-xs h-4">
+                {status === 'error' && <p className="text-red-400">{message}</p>}
+                {status === 'success' && <p className="text-[#C9A84C]">{message}</p>}
               </div>
             </form>
           </div>
@@ -108,31 +125,20 @@ export default function Footer({ theme = "default" }: FooterProps) {
             </p>
           </div>
 
-          {/* About Us section */}
+          {/* Navigation */}
           <div>
-            <h4 className={`text-lg font-bold mb-6 ${titleText}`}>About Us</h4>
+            <h4 className={`text-lg font-bold mb-6 ${titleText}`}>Navigation</h4>
             <ul className={`space-y-3 font-medium text-sm ${bodyText}`}>
-              <li>
-                <a 
-                  href="https://www.linkedin.com/in/sujal-patil-227681258/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="cursor-pointer hover:underline transition-all hover:text-[#C9A84C] focus:outline-none focus:ring-2 focus:ring-[#C9A84C] rounded-sm p-1 -ml-1 inline-block"
-                >
-                  Founder - Sujal Patil
-                </a>
-              </li>
-              <li className="p-1 -ml-1">Co-founder - Atharva Pachkar</li>
-              <li>
-                <a 
-                  href="https://www.linkedin.com/in/aayush-mokal-56097a352?utm_source=share_via&utm_content=profile&utm_medium=member_android" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="cursor-pointer hover:underline transition-all hover:text-[#C9A84C] focus:outline-none focus:ring-2 focus:ring-[#C9A84C] rounded-sm p-1 -ml-1 inline-block"
-                >
-                  Co-founder - Aayush Mokal
-                </a>
-              </li>
+              {navLinks.map((link) => (
+                <li key={link.href}>
+                  <Link 
+                    href={link.href} 
+                    className={`cursor-pointer transition-colors ${linkHover} focus:outline-none focus:ring-2 focus:ring-[#C9A84C] rounded-sm p-1 -ml-1 inline-block`}
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -166,29 +172,22 @@ export default function Footer({ theme = "default" }: FooterProps) {
         <hr className={`border-t my-8 relative z-50 ${borderLine}`} />
 
         {/* Footer bottom */}
-        <div className="flex flex-col md:flex-row justify-between items-center text-sm space-y-6 md:space-y-0 relative z-50">
+        <div className="flex flex-col md:flex-row justify-between items-center text-sm space-y-6 md:space-y-0 relative z-50 pb-16">
           {/* Social icons */}
           <div className="flex space-x-6">
-            {socialLinks.map(({ icon, label, href }) => (
-              <a
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={label}
-                className={`transition-colors ${socialText} focus:outline-none focus:ring-2 focus:ring-[#C9A84C] rounded-sm p-1`}
-              >
-                {icon}
-              </a>
-            ))}
+            <a
+              href="https://www.instagram.com/dropwaterco"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+              className={`transition-colors ${socialText} focus:outline-none focus:ring-2 focus:ring-[#C9A84C] rounded-sm p-1`}
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+            </a>
           </div>
 
           {/* Legal links */}
           <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-center">
-            <Link href="/contact" className={`text-xs font-bold uppercase tracking-widest transition-colors text-[#C9A84C] hover:text-white focus:outline-none focus:ring-2 focus:ring-[#C9A84C] rounded-sm p-1`}>
-              For Business
-            </Link>
-            <span className={`text-xs ${copyText}`}>·</span>
             <Link href="/privacy" className={`text-xs font-medium transition-colors ${linkHover} focus:outline-none focus:ring-2 focus:ring-[#C9A84C] rounded-sm p-1`}>
               Privacy Policy
             </Link>
@@ -208,25 +207,6 @@ export default function Footer({ theme = "default" }: FooterProps) {
             </p>
           </div>
         </div>
-      </div>
-
-      {/* Text hover effect */}
-      <div className="lg:flex hidden h-[30rem] -mt-20 -mb-24 relative z-10 pointer-events-auto" aria-hidden="true">
-        <TextHoverEffect text="DROP." className="z-50" theme={theme} />
-      </div>
-
-      {/* Fallback giant text for mobile */}
-      <div className="flex lg:hidden absolute bottom-[-5vh] left-1/2 -translate-x-1/2 w-full text-center pointer-events-none opacity-[0.03] overflow-hidden select-none z-0" aria-hidden="true">
-        <h1 
-          className="text-[clamp(8rem,25vw,20rem)] font-black tracking-tighter"
-          style={{
-            fontFamily: '"Anton", "Bebas Neue", "Druk Condensed", Impact, sans-serif',
-            WebkitTextStroke: strokeMobile,
-            color: 'transparent'
-          }}
-        >
-          DROP.
-        </h1>
       </div>
 
       <FooterBackgroundGradient theme={theme} />
