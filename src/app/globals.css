@@ -1,17 +1,13 @@
 @import "tailwindcss";
 
 @theme {
-  /* Story Page Colors */
-  --color-surface: #F6F4EB;
-  --color-on-surface: #1A1A1A;
-  --color-primary: #1A1A1A;
-  --color-on-primary: #F6F4EB;
-
-  
-  --color-cream: #F6F4EB;
-  --color-red: #D32F2F;
-  --color-mustard: #FBC02D;
-  --color-dark: #1A1A1A;
+  /* Unified Brand System */
+  --color-canvas: #F9F9F9;
+  --color-surface: #F1F1F1;
+  --color-surface-dark: #0F1112;
+  --color-text: #111111;
+  --color-text-dark: #FFFFFF;
+  --color-accent: #C9A84C;
 }
 
 @layer base {
@@ -32,8 +28,8 @@
   }
 
   body {
-    background-color: var(--color-cream);
-    color: var(--color-dark);
+    background-color: var(--color-canvas);
+    color: var(--color-text);
     font-family: var(--font-body), sans-serif;
     overflow-x: hidden;
   }

@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from 'next';
 import { Inter, Oswald, Playfair_Display, Space_Mono } from 'next/font/google';
 import './globals.css';
 
-import { CartProvider } from '@/context/CartContext';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-body' });
 const oswald = Oswald({ subsets: ['latin'], variable: '--font-heading' });
@@ -66,7 +65,6 @@ export const viewport: Viewport = {
   themeColor: '#0F1112',
   width: 'device-width',
   initialScale: 1,
-  maximumScale: 1,
 };
 
 export default function RootLayout({
@@ -106,9 +104,7 @@ export default function RootLayout({
         />
       </head>
       <body className="antialiased">
-        <CartProvider>
           {children}
-        </CartProvider>
       </body>
     </html>
   );

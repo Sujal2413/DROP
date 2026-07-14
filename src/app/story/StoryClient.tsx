@@ -6,14 +6,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 import HeroNavbar from '@/components/HeroNavbar';
 import Footer from '@/components/Footer';
-import ScrollToTop from '@/components/ScrollToTop';
 
 export default function StoryClient() {
   const containerRef = useRef<HTMLDivElement>(null);
   const startRef = useRef<HTMLDivElement>(null);
 
   return (
-    <div ref={containerRef} className="w-full relative bg-[#0A0A0A] text-white font-sans antialiased selection:bg-[#C9A84C] selection:text-black">
+    <div ref={containerRef} className="w-full relative bg-[#0F1112] text-white font-sans antialiased selection:bg-[#C9A84C] selection:text-black">
       <HeroNavbar activeIndex={1} />
 
       {/* Ambient Orbs */}
@@ -34,16 +33,16 @@ export default function StoryClient() {
         
         {/* Intro */}
         <section className="min-h-[70svh] flex flex-col justify-center items-start pt-16 sm:pt-20">
-          <span className="text-[10px] tracking-[0.2em] text-[#C9A84C] uppercase font-bold mb-8">{'// THE GENESIS'}</span>
+          <span className="text-[10px] tracking-[0.2em] text-[#C9A84C] uppercase font-bold mb-8">{'// THE ORIGIN'}</span>
           <h1
             className="text-4xl sm:text-5xl md:text-8xl font-black leading-none mb-8 text-white"
             style={{ fontFamily: '"Anton", "Bebas Neue", "Druk Condensed", Impact, sans-serif', letterSpacing: 0 }}
           >
-            A SIMPLE HABIT.<br />
-            <span className="text-[#C9A84C]">A BIGGER QUESTION.</span>
+            A SIMPLE QUESTION.<br />
+            <span className="text-[#C9A84C]">A BETTER CAN.</span>
           </h1>
           <p className="text-lg md:text-xl text-white/60 max-w-2xl leading-relaxed font-medium">
-            Luxury is not found in excess, but in the essential. We redesigned the most fundamental element of life for those who demand ethical clarity without compromising on aesthetic prestige.
+            We started with a simple question: Why does the most essential thing we consume come in disposable plastic that pollutes our environment?
           </p>
         </section>
 
@@ -63,14 +62,14 @@ export default function StoryClient() {
               className="text-3xl sm:text-4xl md:text-6xl font-black text-white leading-none"
               style={{ fontFamily: '"Anton", "Bebas Neue", "Druk Condensed", Impact, sans-serif' }}
             >
-              It started with water.
+              It started with clove.
             </h2>
             <div className="space-y-6 text-white/60 text-base sm:text-lg leading-relaxed font-medium">
               <p>
-                Born from a desire to strip away the noise of the commercial beverage industry. We looked at the spring—not as a resource to be exploited, but as a legacy to be protected.
+                Our initial exploration began with clove and mint water. We realized that the smallest daily choices—like the water we drink—often say the most about how we live. 
               </p>
               <p>
-                It began with clove water. Paying attention to what goes into the body, and slowly realizing that the smallest daily choices often say the most about how we live. Why does the most essential thing we consume still feel so ordinary?
+                We wanted to move away from disposable plastic and build a product that matched the quality of the water inside it. The aluminum can was the obvious choice for its recyclability and durability.
               </p>
             </div>
           </div>
@@ -83,24 +82,23 @@ export default function StoryClient() {
               className="text-3xl sm:text-4xl md:text-6xl font-black text-[#C9A84C] leading-none"
               style={{ fontFamily: '"Anton", "Bebas Neue", "Druk Condensed", Impact, sans-serif' }}
             >
-              Just water.<br/>
-              <span className="text-white">Designed with intention.</span>
+              Building the future.
             </h2>
             <div className="space-y-6 text-white/60 text-base sm:text-lg leading-relaxed font-medium">
               <p>
-                Our vessel is a statement of permanence in a world of disposability. Crafted from 100% infinitely recyclable aluminum, it is designed to feel as substantial as the liquid it protects. No labels. No clutter. Just the essence.
+                We are currently in the pre-launch phase, building the infrastructure to bring DROP to the market in 2027. Our focus right now is on refining the product and establishing the right manufacturing partnerships to scale sustainably.
               </p>
             </div>
             
             <ul className="space-y-4 text-xs font-bold uppercase tracking-[0.16em] sm:tracking-widest text-white/40">
               <li className="flex items-start gap-4">
-                <div className="w-1.5 h-1.5 mt-1.5 bg-[#C9A84C] rounded-full shrink-0" /> ZERO PLASTIC LEACHING
-              </li>
-              <li className="flex items-start gap-4">
-                <div className="w-1.5 h-1.5 mt-1.5 bg-[#C9A84C] rounded-full shrink-0" /> THERMAL TEMPERATURE LOCK
-              </li>
-              <li className="flex items-start gap-4">
                 <div className="w-1.5 h-1.5 mt-1.5 bg-[#C9A84C] rounded-full shrink-0" /> MATTE ALUMINUM VESSEL
+              </li>
+              <li className="flex items-start gap-4">
+                <div className="w-1.5 h-1.5 mt-1.5 bg-[#C9A84C] rounded-full shrink-0" /> RECYCLABLE PACKAGING
+              </li>
+              <li className="flex items-start gap-4">
+                <div className="w-1.5 h-1.5 mt-1.5 bg-[#C9A84C] rounded-full shrink-0" /> PREMIUM INGREDIENTS
               </li>
             </ul>
           </div>
@@ -117,7 +115,7 @@ export default function StoryClient() {
 
         {/* Outro */}
         <section className="min-h-[60svh] flex flex-col justify-center items-center text-center space-y-10 sm:space-y-12">
-          <span className="text-[10px] tracking-[0.24em] sm:tracking-[0.4em] text-[#C9A84C] uppercase font-bold">{'// THE FINAL THOUGHT'}</span>
+          <span className="text-[10px] tracking-[0.24em] sm:tracking-[0.4em] text-[#C9A84C] uppercase font-bold">{'// BE PART OF IT'}</span>
           <h2
             className="text-3xl sm:text-4xl md:text-7xl font-black text-white max-w-4xl leading-[0.95] md:leading-[0.9]"
             style={{ fontFamily: '"Anton", "Bebas Neue", "Druk Condensed", Impact, sans-serif' }}
@@ -127,18 +125,16 @@ export default function StoryClient() {
           <div className="pt-8">
             <Link 
               href="/#waitlist"
-              className="inline-flex items-center justify-center px-8 sm:px-10 py-5 bg-transparent border border-white/20 hover:border-white text-white font-bold text-xs tracking-[0.16em] sm:tracking-widest uppercase transition-all rounded-none"
+              className="inline-flex items-center justify-center px-8 sm:px-10 py-5 bg-transparent border border-white/20 hover:border-white text-white font-bold text-xs tracking-[0.16em] sm:tracking-widest uppercase transition-all rounded-none focus:outline-none focus:ring-2 focus:ring-white"
             >
-              Join the Waitlist
+              Join the Launch List
             </Link>
           </div>
         </section>
 
       </main>
 
-      {/* Footer */}
-      <Footer theme="default" />
-      <ScrollToTop />
+      <Footer />
     </div>
   );
 }

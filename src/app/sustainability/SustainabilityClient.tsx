@@ -4,77 +4,64 @@ import React from 'react';
 import HeroNavbar from '@/components/HeroNavbar';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
-import ScrollToTop from '@/components/ScrollToTop';
-import { motion } from 'framer-motion';
 
 export default function SustainabilityClient() {
   return (
-    <div className="w-full relative bg-[var(--color-cream)] text-black font-sans selection:bg-black selection:text-white antialiased overflow-hidden min-h-screen border-x-2 border-black">
+    <div className="w-full relative bg-[var(--color-canvas)] text-[var(--color-text)] font-sans antialiased overflow-hidden min-h-screen">
       
-      {/* Dynamic Background Noise (Removed) */}
-
-      {/* Navbar using Olive/Dark palette for black text on light background */}
-      <HeroNavbar activeIndex={4} />
+      <HeroNavbar activeIndex={0} />
 
       <main className="max-w-[1200px] mx-auto px-5 sm:px-6 md:px-12 pt-28 sm:pt-32 pb-24 sm:pb-32 relative z-10">
         
-        {/* Massive Headline */}
+        {/* Minimalist Headline */}
         <header className="py-14 sm:py-20 text-center">
-          <h1 className="text-5xl sm:text-6xl md:text-7xl font-black tracking-tight uppercase leading-[0.9] sm:leading-[0.85] mb-6 drop-shadow-[2px_2px_0px_var(--color-red)]">
+          <h1 className="text-5xl sm:text-6xl md:text-7xl font-black tracking-tight uppercase leading-[0.9] sm:leading-[0.85] mb-6">
             NO PLASTIC.<br />
-            NO BULLSH*T.
+            NO COMPROMISE.
           </h1>
-          <p className="font-bold text-base sm:text-lg md:text-xl uppercase tracking-[0.14em] sm:tracking-widest max-w-2xl mx-auto border-2 border-black p-3 bg-white shadow-[3px_3px_0px_black]">
-            Luxury hydration that doesn&apos;t cost the earth.
+          <p className="font-bold text-base sm:text-lg md:text-xl uppercase tracking-[0.14em] sm:tracking-widest max-w-2xl mx-auto p-3 text-[var(--color-text)]/60">
+            A commitment to the forever metal.
           </p>
         </header>
 
-        {/* Neo-brutalist Bento Grid */}
+        {/* Elegant Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6 mt-8 relative z-10">
           
           {/* Card 1 */}
-          <motion.div 
-            whileHover={{ scale: 1.02 }}
-            transition={{ type: "spring", stiffness: 300, damping: 20 }}
-            className="bg-[var(--color-mustard)] text-black p-6 md:p-8 border-2 border-black shadow-[5px_5px_0px_black] hover:shadow-[8px_8px_0px_black] flex flex-col justify-between gap-8 cursor-default min-h-[260px] md:min-h-[320px]"
-          >
-            <h2 className="text-2xl md:text-3xl font-black uppercase tracking-tight mb-6">100% Recyclable</h2>
-            <p className="text-sm sm:text-base md:text-lg font-bold leading-relaxed">
-              Plastic degrades. Aluminum endures. 75% of all aluminum ever produced is still in active use today. Choose the forever metal.
+          <div className="bg-[#E5E5E5]/30 text-[#111111] p-8 md:p-12 flex flex-col justify-between gap-8 min-h-[320px] rounded-lg">
+            <h2 className="text-2xl md:text-3xl font-black uppercase tracking-tight mb-6">Designed for Recyclability</h2>
+            <p className="text-sm sm:text-base md:text-lg font-normal leading-relaxed text-[#111111]/80">
+              Plastic degrades. Aluminum endures. Nearly 75% of all aluminum ever produced is still in active use today. We chose the forever metal because it supports an infinite recycling loop.
             </p>
-          </motion.div>
+          </div>
 
           {/* Card 2 */}
-          <motion.div 
-            whileHover={{ scale: 1.02 }}
-            transition={{ type: "spring", stiffness: 300, damping: 20 }}
-            className="bg-[var(--color-red)] text-white p-6 md:p-8 border-2 border-black shadow-[5px_5px_0px_black] hover:shadow-[8px_8px_0px_black] flex flex-col justify-between gap-8 cursor-default min-h-[260px] md:min-h-[320px]"
-          >
-            <h2 className="text-2xl md:text-3xl font-black uppercase tracking-tight mb-6 text-black drop-shadow-[1px_1px_0px_white]">Low Carbon Loop</h2>
-            <p className="text-sm sm:text-base md:text-lg font-bold leading-relaxed">
-              Aluminum chills faster and weighs less. This means drastically fewer emissions during transport and refrigeration. Tight, localized, efficient.
+          <div className="bg-[#111111] text-[#F9F9F9] p-8 md:p-12 flex flex-col justify-between gap-8 min-h-[320px] rounded-lg">
+            <h2 className="text-2xl md:text-3xl font-black uppercase tracking-tight mb-6 text-[#C9A84C]">Logistical Efficiency</h2>
+            <p className="text-sm sm:text-base md:text-lg font-normal leading-relaxed text-white/80">
+              Aluminum weighs significantly less than glass and stacks efficiently. Our goal is to leverage this material advantage to reduce transport emissions as we scale.
             </p>
-          </motion.div>
+          </div>
 
           {/* Card 3 */}
-          <div className="bg-blue-600 text-white p-6 md:p-8 border-2 border-black shadow-[5px_5px_0px_black] hover:-translate-y-2 hover:shadow-[8px_8px_0px_black] transition-all duration-300 flex flex-col justify-between gap-8 min-h-[260px] md:min-h-[320px]">
-            <h2 className="text-2xl md:text-3xl font-black uppercase tracking-tight mb-6">Ethical Sourcing</h2>
-            <p className="text-sm sm:text-base md:text-lg font-bold leading-relaxed">
-              We only take what the earth freely yields. We source exclusively from naturally replenishing springs. No draining basins. No habitat destruction.
+          <div className="bg-[#111111] text-[#F9F9F9] p-8 md:p-12 flex flex-col justify-between gap-8 min-h-[320px] rounded-lg">
+            <h2 className="text-2xl md:text-3xl font-black uppercase tracking-tight mb-6">Protecting the Source</h2>
+            <p className="text-sm sm:text-base md:text-lg font-normal leading-relaxed text-white/80">
+              We are committed to sourcing exclusively from naturally replenishing springs, working with suppliers who prioritize the long-term health of local watersheds.
             </p>
           </div>
 
           {/* Card 4 */}
-          <div className="bg-black text-white p-6 md:p-8 border-2 border-black shadow-[5px_5px_0px_var(--color-red)] hover:-translate-y-2 hover:shadow-[8px_8px_0px_var(--color-red)] transition-all duration-300 flex flex-col justify-between gap-8 min-h-[260px] md:min-h-[320px]">
+          <div className="bg-[#E5E5E5]/30 text-[#111111] p-8 md:p-12 flex flex-col justify-between gap-8 min-h-[320px] rounded-lg">
             <h2 className="text-2xl md:text-3xl font-black uppercase tracking-tight mb-6">Take Action</h2>
-            <p className="text-sm sm:text-base md:text-lg font-bold leading-relaxed mb-6">
-              By choosing DROP, you are actively scaling production to drive down the cost of aluminum, helping phase out single-use plastics forever.
+            <p className="text-sm sm:text-base md:text-lg font-normal leading-relaxed text-[#111111]/80 mb-6">
+              By choosing aluminum over single-use plastic, you are voting for a circular economy. Join us in building the infrastructure for better hydration.
             </p>
             <Link 
-              href="/#products"
-              className="w-full bg-white text-black py-3 text-center font-black uppercase tracking-[0.14em] sm:tracking-widest border-2 border-transparent hover:border-white hover:bg-black hover:text-white transition-colors text-sm sm:text-base"
+              href="/#waitlist"
+              className="w-full bg-[#111111] text-[#F9F9F9] py-4 text-center font-black uppercase tracking-[0.14em] sm:tracking-widest hover:bg-[#C9A84C] hover:text-[#111111] transition-colors text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-[#111111] focus:ring-offset-2 rounded-sm"
             >
-              Shop The Cans
+              Join The List
             </Link>
           </div>
 
@@ -82,41 +69,7 @@ export default function SustainabilityClient() {
 
       </main>
 
-      {/* Ticker Tape */}
-      <style dangerouslySetInnerHTML={{__html: `
-        @keyframes custom-marquee {
-          0% { transform: translateX(0%); }
-          100% { transform: translateX(-50%); }
-        }
-        .animate-custom-marquee {
-          animation: custom-marquee 20s linear infinite;
-        }
-      `}} />
-      <div className="w-full overflow-hidden bg-transparent text-black py-4 border-y-2 border-black flex whitespace-nowrap">
-        <div className="animate-custom-marquee flex items-center gap-8 font-black uppercase tracking-widest text-base">
-           {/* First Set */}
-           <span>★ DROP PLASTIC</span>
-           <span>★ FOREVER METAL</span>
-           <span>★ INFINITE RECYCLING</span>
-           <span>★ ZERO COMPROMISE</span>
-           <span>★ DROP PLASTIC</span>
-           <span>★ FOREVER METAL</span>
-           <span>★ INFINITE RECYCLING</span>
-           <span>★ ZERO COMPROMISE</span>
-           {/* Second Set (Duplicate for seamless loop) */}
-           <span>★ DROP PLASTIC</span>
-           <span>★ FOREVER METAL</span>
-           <span>★ INFINITE RECYCLING</span>
-           <span>★ ZERO COMPROMISE</span>
-           <span>★ DROP PLASTIC</span>
-           <span>★ FOREVER METAL</span>
-           <span>★ INFINITE RECYCLING</span>
-           <span>★ ZERO COMPROMISE</span>
-        </div>
-      </div>
-
-      <Footer theme="default" />
-      <ScrollToTop />
+      <Footer />
     </div>
   );
 }

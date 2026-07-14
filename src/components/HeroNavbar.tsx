@@ -1,11 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import { useCart } from '@/context/CartContext';
-import { useState } from 'react';
-import Image from 'next/image';
+import { useState, useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
-import LiveWaitlistCounter from './LiveWaitlistCounter';
 
 interface HeroNavbarProps {
   activeIndex?: number;
@@ -20,36 +17,38 @@ const THEMES = [
 ];
 
 export default function HeroNavbar({ activeIndex = 0 }: HeroNavbarProps) {
-  const { 
-    cart, 
-    isCartOpen, 
-    setIsCartOpen, 
-    removeFromCart, 
-    setShowSurvey, 
-    clearCart
-  } = useCart();
-  
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
+  const menuRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
 
   // Default to white if activeIndex is not specified
   const theme = THEMES[activeIndex] || { id: 'default', text: '#FFFFFF', accentBg: '#1A1A1A' };
   const themeColor = theme.text;
 
-  const handleSendInterest = async () => {
-    try {
-      await fetch('/api/checkout', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ items: cart })
-      });
-    } catch (e) {
-      console.error('Failed to submit interest to backend', e);
+  // Handle trap focus and escape to close
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (!isMobileMenuOpen) return;
+      if (e.key === 'Escape') {
+        setIsMobileMenuOpen(false);
+        triggerRef.current?.focus();
+      }
+    };
+
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+      document.addEventListener('keydown', handleKeyDown);
+      menuRef.current?.querySelector('button')?.focus();
+    } else {
+      document.body.style.overflow = 'unset';
     }
-    setIsCartOpen(false);
-    clearCart();
-    setShowSurvey(true);
-  };
+
+    return () => {
+      document.body.style.overflow = 'unset';
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isMobileMenuOpen]);
 
   return (
     <>
@@ -59,7 +58,7 @@ export default function HeroNavbar({ activeIndex = 0 }: HeroNavbarProps) {
           {pathname !== '/' && (
             <Link 
               href="/" 
-              className="hover:scale-110 active:scale-95 transition-transform flex items-center justify-center p-1"
+              className="hover:scale-110 active:scale-95 transition-transform flex items-center justify-center p-1 focus:outline-none focus:ring-2 focus:ring-white rounded-md"
               style={{ color: themeColor }}
               aria-label="Back to Home"
             >
@@ -70,7 +69,7 @@ export default function HeroNavbar({ activeIndex = 0 }: HeroNavbarProps) {
             </Link>
           )}
           <div className="font-bold text-xl sm:text-2xl tracking-tight transition-colors duration-1000" style={{ color: themeColor }}>
-            <Link href="/" className="outline-none font-black">DROP.</Link>
+            <Link href="/" className="outline-none focus:ring-2 focus:ring-white rounded-md font-black block p-1">DROP.</Link>
           </div>
         </div>
         
@@ -83,40 +82,31 @@ export default function HeroNavbar({ activeIndex = 0 }: HeroNavbarProps) {
             backgroundColor: 'rgba(0, 0, 0, 0.2)'
           }}
         >
-          <Link href="/#hero" className="px-6 py-2 rounded-full hover:bg-white/10 transition-colors">PRODUCTS</Link>
-          <Link href="/story" className="px-6 py-2 rounded-full hover:bg-white/10 transition-colors">STORY</Link>
-          <Link href="/sustainability" className="px-6 py-2 rounded-full hover:bg-white/10 transition-colors">SUSTAINABILITY</Link>
+          <Link href="/#products" className="px-6 py-2 rounded-full hover:bg-white/10 transition-colors focus:outline-none focus:ring-2 focus:ring-white">PRODUCTS</Link>
+          <Link href="/story" className="px-6 py-2 rounded-full hover:bg-white/10 transition-colors focus:outline-none focus:ring-2 focus:ring-white">STORY</Link>
+          <Link href="/sustainability" className="px-6 py-2 rounded-full hover:bg-white/10 transition-colors focus:outline-none focus:ring-2 focus:ring-white">SUSTAINABILITY</Link>
         </div>
         
-        {/* Right: Cart & Mobile Menu */}
+        {/* Right: Waitlist CTA & Mobile Menu */}
         <div className="flex justify-end gap-2 sm:gap-3 md:gap-6 w-auto md:w-[200px] shrink-0 items-center">
-          {/* Cart Button */}
-          <button 
-            onClick={() => setIsCartOpen(!isCartOpen)} 
-            className="hover:scale-110 active:scale-95 transition-all relative p-1 min-h-10 min-w-10 flex items-center justify-center gap-2 font-bold text-sm tracking-widest cursor-pointer" 
-            style={{ color: themeColor }}
-            aria-label="Cart"
+          <Link
+            href="/#waitlist"
+            className="hidden md:inline-flex px-4 py-2 text-[10px] font-black tracking-[0.2em] uppercase border transition-colors focus:outline-none focus:ring-2 focus:ring-white rounded-sm"
+            style={{ 
+              borderColor: `${themeColor}40`, 
+              color: themeColor,
+            }}
           >
-            <div className="relative">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={themeColor} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="transition-colors duration-1000">
-                <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path>
-                <path d="M3 6h18"></path>
-                <path d="M16 10a4 4 0 0 1-8 0"></path>
-              </svg>
-              {cart.length > 0 && (
-                <span className="absolute -top-1.5 -right-1.5 bg-[#C9A84C] text-black text-[9px] font-black w-4.5 h-4.5 rounded-full flex items-center justify-center border border-black animate-pulse shadow-md">
-                  {cart.length}
-                </span>
-              )}
-            </div>
-            <span className="hidden md:inline transition-colors duration-1000">({cart.length})</span>
-          </button>
+            Join List
+          </Link>
 
           {/* Mobile Menu Button */}
           <button 
+            ref={triggerRef}
             onClick={() => setIsMobileMenuOpen(true)} 
-            className="md:hidden hover:scale-110 active:scale-95 transition-all relative p-1 min-h-10 min-w-10 flex items-center justify-center cursor-pointer" 
+            className="md:hidden hover:scale-110 active:scale-95 transition-all relative p-1 min-h-10 min-w-10 flex items-center justify-center cursor-pointer focus:outline-none focus:ring-2 focus:ring-white rounded-md" 
             aria-label="Menu"
+            aria-expanded={isMobileMenuOpen}
           >
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={themeColor} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="transition-colors duration-1000">
               <line x1="3" x2="21" y1="6" y2="6"></line>
@@ -127,85 +117,21 @@ export default function HeroNavbar({ activeIndex = 0 }: HeroNavbarProps) {
         </div>
       </nav>
 
-      {/* Cart Drawer */}
-      {isCartOpen && (
-        <div className="fixed inset-0 z-[200] flex justify-end pointer-events-auto">
-          {/* Backdrop */}
-          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setIsCartOpen(false)} />
-          
-          {/* Drawer Body */}
-          <div className="relative w-full max-w-md bg-[#0F1112] border-l border-white/10 h-full flex flex-col justify-between shadow-2xl p-5 sm:p-8 z-10 text-white">
-            <div>
-              <div className="flex justify-between items-center border-b border-white/10 pb-6 mb-6">
-                <h3 className="text-xl font-black tracking-widest uppercase">Interest Cart</h3>
-                <button onClick={() => setIsCartOpen(false)} className="text-white/60 hover:text-white cursor-pointer">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <line x1="18" y1="6" x2="6" y2="18"></line>
-                    <line x1="6" y1="6" x2="18" y2="18"></line>
-                  </svg>
-                </button>
-              </div>
-
-              {cart.length === 0 ? (
-                <div className="text-center py-16 text-white/40 font-medium">
-                  <p className="mb-4 uppercase text-xs tracking-widest">No interest items added yet</p>
-                  <p className="text-[10px] leading-relaxed max-w-[240px] mx-auto">Click &quot;Show Interest&quot; on any flavor in the products section to add it here.</p>
-                </div>
-              ) : (
-                <div className="space-y-4 max-h-[60vh] overflow-y-auto pr-2">
-                  {cart.map((item) => (
-                    <div key={item.id} className="flex gap-3 sm:gap-4 p-4 bg-white/[0.02] border border-white/5 rounded-2xl items-center justify-between">
-                      <div className="flex items-center gap-3 sm:gap-4 min-w-0">
-                        <div className="w-14 h-14 relative bg-black/30 rounded-xl overflow-hidden flex items-center justify-center shrink-0">
-                          <Image src={item.image} alt={item.name} fill sizes="56px" className="object-contain p-1" />
-                        </div>
-                        <div className="min-w-0">
-                          <h4 className="font-black text-sm uppercase truncate">{item.name}</h4>
-                          <p className="text-[#C9A84C] text-[10px] font-bold uppercase tracking-wider mt-0.5 truncate">{item.flavor}</p>
-                        </div>
-                      </div>
-                      <button 
-                        onClick={() => removeFromCart(item.id)} 
-                        className="text-white/40 hover:text-red-500 transition-colors p-1 cursor-pointer"
-                        aria-label="Remove item"
-                      >
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                          <polyline points="3 6 5 6 21 6"></polyline>
-                          <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                        </svg>
-                      </button>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            {cart.length > 0 && (
-              <div className="border-t border-white/10 pt-4">
-                <LiveWaitlistCounter />
-                <button 
-                  onClick={handleSendInterest}
-                  className="w-full py-4 bg-[#C9A84C] hover:bg-[#B0913B] text-black font-black tracking-widest text-xs rounded-full transition-all duration-300 uppercase shadow-lg shadow-[#C9A84C]/10 hover:shadow-[#C9A84C]/25 cursor-pointer active:scale-95 text-center block"
-                >
-                  Send Interest
-                </button>
-              </div>
-            )}
-          </div>
-        </div>
-      )}
-
       {/* Mobile Nav Drawer */}
       {isMobileMenuOpen && (
-        <div className="fixed inset-0 z-[200] flex justify-end pointer-events-auto">
+        <div className="fixed inset-0 z-[200] flex justify-end pointer-events-auto" role="dialog" aria-modal="true" ref={menuRef}>
           {/* Backdrop */}
-          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setIsMobileMenuOpen(false)} />
+          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setIsMobileMenuOpen(false)} aria-hidden="true" />
           
           {/* Drawer Body */}
           <div className="relative w-full max-w-sm bg-[#0F1112] border-l border-white/10 h-full flex flex-col shadow-2xl p-5 sm:p-8 z-10 text-white">
             <div className="flex justify-between items-center border-b border-white/10 pb-6 mb-8">
               <h3 className="text-xl font-black tracking-widest uppercase">Menu</h3>
-              <button onClick={() => setIsMobileMenuOpen(false)} className="text-white/60 hover:text-white cursor-pointer">
+              <button 
+                onClick={() => setIsMobileMenuOpen(false)} 
+                className="text-white/60 hover:text-white cursor-pointer focus:outline-none focus:ring-2 focus:ring-white rounded-md p-1"
+                aria-label="Close menu"
+              >
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <line x1="18" y1="6" x2="6" y2="18"></line>
                   <line x1="6" y1="6" x2="18" y2="18"></line>
@@ -214,9 +140,16 @@ export default function HeroNavbar({ activeIndex = 0 }: HeroNavbarProps) {
             </div>
 
             <div className="flex flex-col gap-8 text-xl sm:text-2xl font-black tracking-[0.18em] sm:tracking-widest uppercase">
-              <Link href="/#hero" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#C9A84C] transition-colors border-b border-white/5 pb-4">Products</Link>
-              <Link href="/story" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#C9A84C] transition-colors border-b border-white/5 pb-4">Story</Link>
-              <Link href="/sustainability" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#C9A84C] transition-colors border-b border-white/5 pb-4">Sustainability</Link>
+              <Link href="/#products" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#C9A84C] transition-colors border-b border-white/5 pb-4 focus:outline-none focus:text-[#C9A84C]">Products</Link>
+              <Link href="/story" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#C9A84C] transition-colors border-b border-white/5 pb-4 focus:outline-none focus:text-[#C9A84C]">Story</Link>
+              <Link href="/sustainability" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#C9A84C] transition-colors border-b border-white/5 pb-4 focus:outline-none focus:text-[#C9A84C]">Sustainability</Link>
+              <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#C9A84C] transition-colors border-b border-white/5 pb-4 focus:outline-none focus:text-[#C9A84C]">For Business</Link>
+            </div>
+            
+            <div className="mt-auto pt-8 border-t border-white/10">
+               <Link href="/#waitlist" onClick={() => setIsMobileMenuOpen(false)} className="block w-full py-4 text-center bg-white text-black font-black tracking-widest text-xs uppercase hover:bg-[#C9A84C] transition-colors rounded-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-[#0F1112]">
+                 Join The List
+               </Link>
             </div>
           </div>
         </div>

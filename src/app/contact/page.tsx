@@ -1,13 +1,17 @@
-'use client';
-
 import React from 'react';
+import { Metadata } from 'next';
 import HeroNavbar from '@/components/HeroNavbar';
 import ContactSection from '@/components/ContactSection';
 import Footer from '@/components/Footer';
 
+export const metadata: Metadata = {
+  title: 'For Business | DROP Water',
+  description: 'Offer your guests a premium hydration experience. Partner with DROP for luxury canned water in your café, gym, or hotel.',
+};
+
 export default function ContactPage() {
   return (
-    <div className="bg-[#0A0A0A] min-h-screen text-white flex flex-col">
+    <div className="bg-[#0F1112] min-h-screen text-white flex flex-col">
       <HeroNavbar activeIndex={2} /> {/* Black theme */}
       
       <main className="pt-24 md:pt-32 pb-12 flex-grow">
@@ -18,7 +22,7 @@ export default function ContactPage() {
           <p className="text-white/60 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
             Plastic bottles don&apos;t belong in premium gyms, boutique hotels, or modern cafés. 
             Offer your guests a hydration experience that matches your brand&apos;s standards. 
-            Better margins, perfect cooler fit, and zero plastic waste.
+            Zero plastic waste. 100% infinitely recyclable.
           </p>
         </div>
         
