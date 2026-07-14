@@ -18,8 +18,8 @@ export default function VariantShowcase() {
       />
 
       {/* 1. Horizontal Drag-to-view Carousel */}
-      <div className="py-16 md:py-24 border-b border-[#E5E5E5]/30 relative z-10">
-        <div className="max-w-[1440px] mx-auto px-5 md:px-16 mb-12">
+      <div className="py-12 md:py-16 border-b border-[#E5E5E5]/30 relative z-10">
+        <div className="max-w-[1440px] mx-auto px-5 md:px-16 mb-8 md:mb-12">
           <h2 className="text-sm font-semibold tracking-[0.1em] text-[#111111]/50 uppercase mb-4">The Collection</h2>
           <p className="text-3xl md:text-5xl font-bold tracking-tight">Explore the Range</p>
         </div>
@@ -49,9 +49,9 @@ export default function VariantShowcase() {
         </div>
 
         {PRODUCTS.map((v) => (
-          <div key={v.slug} id={`variant-${v.slug}`} className="min-h-[60vh] flex flex-col md:flex-row items-center max-w-[1440px] mx-auto px-5 md:px-16 py-16 md:py-24 border-b border-[#E5E5E5]/30 scroll-mt-0">
+          <div key={v.slug} id={`variant-${v.slug}`} className="flex flex-col md:flex-row items-center max-w-[1440px] mx-auto px-5 md:px-16 py-12 md:py-16 border-b border-[#E5E5E5]/30 scroll-mt-0">
             {/* Image Column */}
-            <div className="w-full md:w-1/2 flex justify-center mb-16 md:mb-0">
+            <div className="w-full md:w-1/2 flex justify-center mb-12 md:mb-0">
                <div className="relative w-[300px] md:w-[450px] aspect-[1/2]">
                  <Image src={v.image} alt={v.displayName} fill sizes="(max-width: 768px) 300px, 450px" className="object-contain drop-shadow-2xl" />
                </div>

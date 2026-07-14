@@ -66,6 +66,6 @@ export const PRODUCTS: Product[] = [
     description: 'Infused with aromatic clove extracts to restore natural vitality.',
     designedFor: 'Vitality & Digestion',
     status: 'coming-soon',
-    image: '/assets/clove_can.jpeg',
+    image: '/assets/clove_can_transparent.png',
   }
 ];

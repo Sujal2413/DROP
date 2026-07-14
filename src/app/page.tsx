@@ -4,6 +4,7 @@ import React from 'react';
 import HeroSection from '@/components/HeroSection';
 import MarqueeTicker from '@/components/MarqueeTicker';
 import VariantShowcase from '@/components/VariantShowcase';
+import WaitlistSection from '@/components/WaitlistSection';
 import Footer from '@/components/Footer';
 import { PRODUCTS } from '@/lib/data/products';
 
@@ -42,6 +43,7 @@ export default function Home() {
       <main className="relative z-10 bg-[#F9F9F9]">
         <MarqueeTicker />
         <VariantShowcase />
+        <WaitlistSection />
       </main>
 
       <Footer />
