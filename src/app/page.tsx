@@ -2,6 +2,7 @@
 
 import React from 'react';
 import HeroSection from '@/components/HeroSection';
+import FeatureSplitSection from '@/components/FeatureSplitSection';
 import MarqueeTicker from '@/components/MarqueeTicker';
 import VariantShowcase from '@/components/VariantShowcase';
 import WaitlistSection from '@/components/WaitlistSection';
@@ -41,6 +42,7 @@ export default function Home() {
 
       {/* New conversion flow sections */}
       <main className="relative z-10 bg-[#F9F9F9]">
+        <FeatureSplitSection />
         <MarqueeTicker />
         <VariantShowcase />
         <WaitlistSection />
