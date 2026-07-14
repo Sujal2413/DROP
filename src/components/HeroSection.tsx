@@ -8,7 +8,7 @@ import HeroParticles from './HeroParticles';
 
 const THEMES = [
   { id: 'purple', name: 'MINT WATER', bg: '#1A0B2E', accentBg: '#2D1B4E', text: '#E9D5FF' },
-  { id: 'gold', name: 'CLOVE WATER', bg: '#1C1408', accentBg: '#2A1F0E', text: '#C9A84C' },
+  { id: 'red', name: 'CLOVE WATER', bg: '#450a0a', accentBg: '#7f1d1d', text: '#fca5a5' },
   { id: 'black', name: 'ATHLETE EDITION', bg: '#0A0A0A', accentBg: '#1A1A1A', text: '#FFFFFF' },
   { id: 'silver', name: 'SPARKLING WATER', bg: '#15181B', accentBg: '#23272C', text: '#E2E8F0' }
 ];
@@ -108,18 +108,18 @@ export default function HeroSection() {
           <div className="flex flex-col sm:flex-row gap-4 w-full justify-center md:justify-start items-center">
             <a
               href="#waitlist"
-              className="px-8 sm:px-10 py-4 w-full max-w-[20rem] sm:w-auto sm:max-w-none font-bold tracking-[0.16em] sm:tracking-[0.2em] text-xs rounded-full shadow-xl hover:shadow-2xl hover:-translate-y-1 active:translate-y-0 active:scale-95 transition-all duration-500 ring-1 ring-white/20 backdrop-blur-sm text-center block"
+              className="px-8 sm:px-10 py-4 w-full max-w-[20rem] sm:w-auto sm:max-w-none font-bold tracking-[0.16em] sm:tracking-[0.2em] text-xs rounded-full shadow-xl hover:shadow-2xl hover:-translate-y-1 active:translate-y-0 active:scale-95 transition-all duration-300 ring-1 ring-white/20 backdrop-blur-sm text-center block"
               style={{
-                backgroundColor: THEMES[activeIndex].id === 'gold' ? '#C9A84C' : THEMES[activeIndex].id === 'purple' ? '#E9D5FF' : '#FFFFFF',
-                color: THEMES[activeIndex].id === 'gold' ? '#1C1408' : THEMES[activeIndex].id === 'purple' ? '#1A0B2E' : '#0A0A0A'
+                backgroundColor: THEMES[activeIndex].id === 'red' ? '#fca5a5' : THEMES[activeIndex].id === 'purple' ? '#E9D5FF' : '#FFFFFF',
+                color: THEMES[activeIndex].id === 'red' ? '#450a0a' : THEMES[activeIndex].id === 'purple' ? '#1A0B2E' : '#0A0A0A'
               }}
             >
-              PRE-ORDER NOW
+              JOIN THE WAITLIST
             </a>
             
             <a
               href="#products"
-              className="px-8 sm:px-10 py-4 w-full max-w-[20rem] sm:w-auto sm:max-w-none bg-transparent border border-white/20 font-bold tracking-[0.16em] sm:tracking-[0.2em] text-xs rounded-full hover:bg-white/10 hover:border-white/40 backdrop-blur-md transition-all duration-500 text-center flex items-center justify-center hover:-translate-y-1"
+              className="px-8 sm:px-10 py-4 w-full max-w-[20rem] sm:w-auto sm:max-w-none bg-transparent border border-white/20 font-bold tracking-[0.16em] sm:tracking-[0.2em] text-xs rounded-full hover:bg-white/10 hover:border-white/40 backdrop-blur-md transition-all duration-300 text-center flex items-center justify-center hover:-translate-y-1 active:translate-y-0 active:scale-95"
               style={{ color: THEMES[activeIndex].text }}
             >
               EXPLORE FLAVORS

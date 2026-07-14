@@ -12,7 +12,7 @@ const CANS = [
     filter: 'drop-shadow(0 20px 30px rgba(0,0,0,0.8))'
   },
   { 
-    id: 'gold', src: '/assets/new-can-variant-2-final.png', alt: 'Pure Gold Can', scale: 1.6,
+    id: 'red', src: '/assets/clove_can.jpeg', alt: 'Clove Can', scale: 1.6,
     filter: 'drop-shadow(0px 0px 1.5px rgba(0,0,0,0.5)) drop-shadow(0px 10px 30px rgba(0,0,0,0.15))'
   },
   { 

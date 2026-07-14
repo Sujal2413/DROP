@@ -58,14 +58,14 @@ export const PRODUCTS: Product[] = [
   {
     slug: 'clove-water',
     displayName: 'DROP Clove Water',
-    variantName: 'Pure Gold',
+    variantName: 'Blood Red',
     waterType: 'Still Water',
     flavour: 'Clove',
     sizes: ['330ml'],
-    colourName: 'Gold',
+    colourName: 'Red',
     description: 'Infused with aromatic clove extracts to restore natural vitality.',
     designedFor: 'Vitality & Digestion',
     status: 'coming-soon',
-    image: '/assets/new-can-variant-2-final.png',
+    image: '/assets/clove_can.jpeg',
   }
 ];

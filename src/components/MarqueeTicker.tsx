@@ -2,13 +2,14 @@ import React from 'react';
 
 export default function MarqueeTicker() {
   const text = "AS. IT. SHOULD. BE. · NO PLASTIC. NO NOISE. · ";
+  const repeatedText = Array(10).fill(text).join('');
   return (
-    <div className="w-full bg-[#111111] text-[#F9F9F9] py-4 md:py-6 overflow-hidden flex whitespace-nowrap">
-      <div className="animate-marquee inline-block font-inter text-sm md:text-base tracking-[0.2em] font-medium uppercase">
-        {text}{text}{text}{text}
+    <div className="w-full bg-[#111111] text-[#F9F9F9] py-4 md:py-6 overflow-hidden flex whitespace-nowrap relative">
+      <div className="animate-marquee shrink-0 font-inter text-sm md:text-base tracking-[0.2em] font-medium uppercase inline-block">
+        {repeatedText}
       </div>
-      <div className="animate-marquee inline-block font-inter text-sm md:text-base tracking-[0.2em] font-medium uppercase absolute top-0">
-        {text}{text}{text}{text}
+      <div aria-hidden="true" className="animate-marquee shrink-0 font-inter text-sm md:text-base tracking-[0.2em] font-medium uppercase inline-block">
+        {repeatedText}
       </div>
       <style dangerouslySetInnerHTML={{__html: `
         @keyframes marquee {
@@ -16,7 +17,7 @@ export default function MarqueeTicker() {
           100% { transform: translateX(-100%); }
         }
         .animate-marquee {
-          animation: marquee 20s linear infinite;
+          animation: marquee 60s linear infinite;
         }
       `}} />
     </div>

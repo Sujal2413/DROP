@@ -58,7 +58,7 @@ export default function HeroNavbar({ activeIndex = 0 }: HeroNavbarProps) {
           {pathname !== '/' && (
             <Link 
               href="/" 
-              className="hover:scale-110 active:scale-95 transition-transform flex items-center justify-center p-1 focus:outline-none focus:ring-2 focus:ring-white rounded-md"
+              className="hover:scale-105 active:scale-95 transition-transform duration-200 flex items-center justify-center p-2 min-w-[44px] min-h-[44px] focus:outline-none focus:ring-2 focus:ring-white rounded-md"
               style={{ color: themeColor }}
               aria-label="Back to Home"
             >
@@ -75,23 +75,23 @@ export default function HeroNavbar({ activeIndex = 0 }: HeroNavbarProps) {
         
         {/* Center: Toggle-like Nav */}
         <div 
-          className="hidden md:flex gap-2 text-xs font-bold tracking-widest rounded-full p-1.5 border transition-all duration-1000 backdrop-blur-md"
+          className="hidden md:flex gap-2 text-xs font-bold tracking-widest rounded-full p-1.5 border transition-colors duration-1000 backdrop-blur-md"
           style={{ 
             borderColor: `${themeColor}20`, 
             color: themeColor,
             backgroundColor: 'rgba(0, 0, 0, 0.2)'
           }}
         >
-          <Link href="/#products" className="px-6 py-2 rounded-full hover:bg-white/10 transition-colors focus:outline-none focus:ring-2 focus:ring-white">PRODUCTS</Link>
-          <Link href="/story" className="px-6 py-2 rounded-full hover:bg-white/10 transition-colors focus:outline-none focus:ring-2 focus:ring-white">STORY</Link>
-          <Link href="/sustainability" className="px-6 py-2 rounded-full hover:bg-white/10 transition-colors focus:outline-none focus:ring-2 focus:ring-white">SUSTAINABILITY</Link>
+          <Link href="/#products" className="px-6 py-2 rounded-full hover:bg-white/10 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-white">PRODUCTS</Link>
+          <Link href="/story" className="px-6 py-2 rounded-full hover:bg-white/10 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-white">STORY</Link>
+          <Link href="/sustainability" className="px-6 py-2 rounded-full hover:bg-white/10 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-white">SUSTAINABILITY</Link>
         </div>
         
         {/* Right: Waitlist CTA & Mobile Menu */}
         <div className="flex justify-end gap-2 sm:gap-3 md:gap-6 w-auto md:w-[200px] shrink-0 items-center">
           <Link
             href="/#waitlist"
-            className="hidden md:inline-flex px-4 py-2 text-[10px] font-black tracking-[0.2em] uppercase border transition-colors focus:outline-none focus:ring-2 focus:ring-white rounded-sm"
+            className="hidden md:inline-flex px-4 py-2 text-[10px] font-black tracking-[0.2em] uppercase border transition-colors duration-1000 focus:outline-none focus:ring-2 focus:ring-white rounded-sm hover:bg-white/10"
             style={{ 
               borderColor: `${themeColor}40`, 
               color: themeColor,
@@ -104,7 +104,7 @@ export default function HeroNavbar({ activeIndex = 0 }: HeroNavbarProps) {
           <button 
             ref={triggerRef}
             onClick={() => setIsMobileMenuOpen(true)} 
-            className="md:hidden hover:scale-110 active:scale-95 transition-all relative p-1 min-h-10 min-w-10 flex items-center justify-center cursor-pointer focus:outline-none focus:ring-2 focus:ring-white rounded-md" 
+            className="md:hidden hover:scale-105 active:scale-95 transition-transform duration-200 relative p-2 min-h-[44px] min-w-[44px] flex items-center justify-center cursor-pointer focus:outline-none focus:ring-2 focus:ring-white rounded-md touch-manipulation" 
             aria-label="Menu"
             aria-expanded={isMobileMenuOpen}
           >
@@ -120,16 +120,32 @@ export default function HeroNavbar({ activeIndex = 0 }: HeroNavbarProps) {
       {/* Mobile Nav Drawer */}
       {isMobileMenuOpen && (
         <div className="fixed inset-0 z-[200] flex justify-end pointer-events-auto" role="dialog" aria-modal="true" ref={menuRef}>
+          <style dangerouslySetInnerHTML={{__html: `
+            @keyframes slideInRight {
+              from { transform: translateX(100%); }
+              to { transform: translateX(0); }
+            }
+            @keyframes fadeIn {
+              from { opacity: 0; }
+              to { opacity: 1; }
+            }
+            .animate-drawer {
+              animation: slideInRight 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            }
+            .animate-backdrop {
+              animation: fadeIn 0.3s ease-out forwards;
+            }
+          `}} />
           {/* Backdrop */}
-          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setIsMobileMenuOpen(false)} aria-hidden="true" />
+          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm animate-backdrop" onClick={() => setIsMobileMenuOpen(false)} aria-hidden="true" />
           
           {/* Drawer Body */}
-          <div className="relative w-full max-w-sm bg-[#0F1112] border-l border-white/10 h-full flex flex-col shadow-2xl p-5 sm:p-8 z-10 text-white">
+          <div className="relative w-full max-w-sm bg-[#0F1112] border-l border-white/10 h-full flex flex-col shadow-2xl p-5 sm:p-8 z-10 text-white animate-drawer">
             <div className="flex justify-between items-center border-b border-white/10 pb-6 mb-8">
               <h3 className="text-xl font-black tracking-widest uppercase">Menu</h3>
               <button 
                 onClick={() => setIsMobileMenuOpen(false)} 
-                className="text-white/60 hover:text-white cursor-pointer focus:outline-none focus:ring-2 focus:ring-white rounded-md p-1"
+                className="text-white/60 hover:text-white cursor-pointer focus:outline-none focus:ring-2 focus:ring-white rounded-md p-2 min-h-[44px] min-w-[44px] flex items-center justify-center transition-colors duration-200 touch-manipulation active:scale-95"
                 aria-label="Close menu"
               >
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -140,14 +156,14 @@ export default function HeroNavbar({ activeIndex = 0 }: HeroNavbarProps) {
             </div>
 
             <div className="flex flex-col gap-8 text-xl sm:text-2xl font-black tracking-[0.18em] sm:tracking-widest uppercase">
-              <Link href="/#products" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#C9A84C] transition-colors border-b border-white/5 pb-4 focus:outline-none focus:text-[#C9A84C]">Products</Link>
-              <Link href="/story" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#C9A84C] transition-colors border-b border-white/5 pb-4 focus:outline-none focus:text-[#C9A84C]">Story</Link>
-              <Link href="/sustainability" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#C9A84C] transition-colors border-b border-white/5 pb-4 focus:outline-none focus:text-[#C9A84C]">Sustainability</Link>
-              <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#C9A84C] transition-colors border-b border-white/5 pb-4 focus:outline-none focus:text-[#C9A84C]">For Business</Link>
+              <Link href="/#products" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#C9A84C] transition-colors duration-200 border-b border-white/5 pb-4 focus:outline-none focus:text-[#C9A84C] touch-manipulation">Products</Link>
+              <Link href="/story" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#C9A84C] transition-colors duration-200 border-b border-white/5 pb-4 focus:outline-none focus:text-[#C9A84C] touch-manipulation">Story</Link>
+              <Link href="/sustainability" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#C9A84C] transition-colors duration-200 border-b border-white/5 pb-4 focus:outline-none focus:text-[#C9A84C] touch-manipulation">Sustainability</Link>
+              <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#C9A84C] transition-colors duration-200 border-b border-white/5 pb-4 focus:outline-none focus:text-[#C9A84C] touch-manipulation">For Business</Link>
             </div>
             
             <div className="mt-auto pt-8 border-t border-white/10">
-               <Link href="/#waitlist" onClick={() => setIsMobileMenuOpen(false)} className="block w-full py-4 text-center bg-white text-black font-black tracking-widest text-xs uppercase hover:bg-[#C9A84C] transition-colors rounded-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-[#0F1112]">
+               <Link href="/#waitlist" onClick={() => setIsMobileMenuOpen(false)} className="block w-full py-4 text-center bg-white text-black font-black tracking-widest text-xs uppercase hover:bg-[#C9A84C] transition-colors duration-200 rounded-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-[#0F1112] active:scale-95 touch-manipulation">
                  Join The List
                </Link>
             </div>
