@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useCart } from '@/context/CartContext';
 import { useState } from 'react';
 import Image from 'next/image';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import LiveWaitlistCounter from './LiveWaitlistCounter';
 
 interface HeroNavbarProps {
@@ -31,7 +31,6 @@ export default function HeroNavbar({ activeIndex = 0 }: HeroNavbarProps) {
   
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
-  const router = useRouter();
 
   // Default to white if activeIndex is not specified
   const theme = THEMES[activeIndex] || { id: 'default', text: '#FFFFFF', accentBg: '#1A1A1A' };
@@ -54,9 +53,9 @@ export default function HeroNavbar({ activeIndex = 0 }: HeroNavbarProps) {
 
   return (
     <>
-      <nav className="absolute top-0 left-0 w-full p-8 flex justify-between items-center z-[100] pointer-events-auto transition-colors duration-1000">
+      <nav className="absolute top-0 left-0 w-full px-5 py-5 sm:px-8 sm:py-6 flex justify-between items-center z-[100] pointer-events-auto transition-colors duration-1000">
         {/* Left: Logo & Back Button */}
-        <div className="flex items-center gap-3 w-[200px]">
+        <div className="flex items-center gap-3 w-auto md:w-[200px] min-w-0">
           {pathname !== '/' && (
             <Link 
               href="/" 
@@ -70,7 +69,7 @@ export default function HeroNavbar({ activeIndex = 0 }: HeroNavbarProps) {
               </svg>
             </Link>
           )}
-          <div className="font-bold text-2xl tracking-tighter transition-colors duration-1000" style={{ color: themeColor }}>
+          <div className="font-bold text-xl sm:text-2xl tracking-tight transition-colors duration-1000" style={{ color: themeColor }}>
             <Link href="/" className="outline-none font-black">DROP.</Link>
           </div>
         </div>
@@ -90,11 +89,11 @@ export default function HeroNavbar({ activeIndex = 0 }: HeroNavbarProps) {
         </div>
         
         {/* Right: Cart & Mobile Menu */}
-        <div className="flex justify-end gap-3 md:gap-6 w-[200px] items-center">
+        <div className="flex justify-end gap-2 sm:gap-3 md:gap-6 w-auto md:w-[200px] shrink-0 items-center">
           {/* Cart Button */}
           <button 
             onClick={() => setIsCartOpen(!isCartOpen)} 
-            className="hover:scale-110 active:scale-95 transition-all relative p-1 flex items-center gap-2 font-bold text-sm tracking-widest cursor-pointer" 
+            className="hover:scale-110 active:scale-95 transition-all relative p-1 min-h-10 min-w-10 flex items-center justify-center gap-2 font-bold text-sm tracking-widest cursor-pointer" 
             style={{ color: themeColor }}
             aria-label="Cart"
           >
@@ -116,7 +115,7 @@ export default function HeroNavbar({ activeIndex = 0 }: HeroNavbarProps) {
           {/* Mobile Menu Button */}
           <button 
             onClick={() => setIsMobileMenuOpen(true)} 
-            className="md:hidden hover:scale-110 active:scale-95 transition-all relative p-1 cursor-pointer" 
+            className="md:hidden hover:scale-110 active:scale-95 transition-all relative p-1 min-h-10 min-w-10 flex items-center justify-center cursor-pointer" 
             aria-label="Menu"
           >
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={themeColor} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="transition-colors duration-1000">
@@ -135,7 +134,7 @@ export default function HeroNavbar({ activeIndex = 0 }: HeroNavbarProps) {
           <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setIsCartOpen(false)} />
           
           {/* Drawer Body */}
-          <div className="relative w-full max-w-md bg-[#0F1112] border-l border-white/10 h-full flex flex-col justify-between shadow-2xl p-8 z-10 text-white">
+          <div className="relative w-full max-w-md bg-[#0F1112] border-l border-white/10 h-full flex flex-col justify-between shadow-2xl p-5 sm:p-8 z-10 text-white">
             <div>
               <div className="flex justify-between items-center border-b border-white/10 pb-6 mb-6">
                 <h3 className="text-xl font-black tracking-widest uppercase">Interest Cart</h3>
@@ -150,19 +149,19 @@ export default function HeroNavbar({ activeIndex = 0 }: HeroNavbarProps) {
               {cart.length === 0 ? (
                 <div className="text-center py-16 text-white/40 font-medium">
                   <p className="mb-4 uppercase text-xs tracking-widest">No interest items added yet</p>
-                  <p className="text-[10px] leading-relaxed max-w-[240px] mx-auto">Click "Show Interest" on any flavor in the products section to add it here.</p>
+                  <p className="text-[10px] leading-relaxed max-w-[240px] mx-auto">Click &quot;Show Interest&quot; on any flavor in the products section to add it here.</p>
                 </div>
               ) : (
                 <div className="space-y-4 max-h-[60vh] overflow-y-auto pr-2">
                   {cart.map((item) => (
-                    <div key={item.id} className="flex gap-4 p-4 bg-white/[0.02] border border-white/5 rounded-2xl items-center justify-between">
-                      <div className="flex items-center gap-4">
-                        <div className="w-14 h-14 relative bg-black/30 rounded-xl overflow-hidden flex items-center justify-center">
+                    <div key={item.id} className="flex gap-3 sm:gap-4 p-4 bg-white/[0.02] border border-white/5 rounded-2xl items-center justify-between">
+                      <div className="flex items-center gap-3 sm:gap-4 min-w-0">
+                        <div className="w-14 h-14 relative bg-black/30 rounded-xl overflow-hidden flex items-center justify-center shrink-0">
                           <Image src={item.image} alt={item.name} fill sizes="56px" className="object-contain p-1" />
                         </div>
-                        <div>
-                          <h4 className="font-black text-sm uppercase">{item.name}</h4>
-                          <p className="text-[#C9A84C] text-[10px] font-bold uppercase tracking-wider mt-0.5">{item.flavor}</p>
+                        <div className="min-w-0">
+                          <h4 className="font-black text-sm uppercase truncate">{item.name}</h4>
+                          <p className="text-[#C9A84C] text-[10px] font-bold uppercase tracking-wider mt-0.5 truncate">{item.flavor}</p>
                         </div>
                       </div>
                       <button 
@@ -203,7 +202,7 @@ export default function HeroNavbar({ activeIndex = 0 }: HeroNavbarProps) {
           <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setIsMobileMenuOpen(false)} />
           
           {/* Drawer Body */}
-          <div className="relative w-full max-w-sm bg-[#0F1112] border-l border-white/10 h-full flex flex-col shadow-2xl p-8 z-10 text-white">
+          <div className="relative w-full max-w-sm bg-[#0F1112] border-l border-white/10 h-full flex flex-col shadow-2xl p-5 sm:p-8 z-10 text-white">
             <div className="flex justify-between items-center border-b border-white/10 pb-6 mb-8">
               <h3 className="text-xl font-black tracking-widest uppercase">Menu</h3>
               <button onClick={() => setIsMobileMenuOpen(false)} className="text-white/60 hover:text-white cursor-pointer">
@@ -214,7 +213,7 @@ export default function HeroNavbar({ activeIndex = 0 }: HeroNavbarProps) {
               </button>
             </div>
 
-            <div className="flex flex-col gap-8 text-2xl font-black tracking-widest uppercase">
+            <div className="flex flex-col gap-8 text-xl sm:text-2xl font-black tracking-[0.18em] sm:tracking-widest uppercase">
               <Link href="/#hero" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#C9A84C] transition-colors border-b border-white/5 pb-4">Products</Link>
               <Link href="/story" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#C9A84C] transition-colors border-b border-white/5 pb-4">Story</Link>
               <Link href="/sustainability" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#C9A84C] transition-colors border-b border-white/5 pb-4">Sustainability</Link>

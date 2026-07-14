@@ -37,7 +37,6 @@ export const TextHoverEffect = ({
   const isOlive = theme === "olive";
   const strokeColor40 = isOlive ? "stroke-[#D4AF37]/30" : "stroke-[#8b5cf6]/40";
   const strokeColor60 = isOlive ? "stroke-[#D4AF37]/50" : "stroke-[#8b5cf6]/60";
-  const shadowColor = isOlive ? "rgba(212, 175, 55, 0.2)" : "rgba(139, 92, 246, 0.4)";
 
   return (
     <svg

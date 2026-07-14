@@ -54,10 +54,10 @@ export default function WaitlistSection() {
     <section
       ref={sectionRef}
       id="waitlist"
-      className="relative bg-[#0A0A0A] py-28 md:py-36 px-8 md:px-16 overflow-hidden"
+      className="relative bg-[#0A0A0A] py-24 sm:py-28 md:py-36 px-5 sm:px-8 md:px-16 overflow-hidden"
     >
       {/* Accent glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#C9A84C]/[0.04] rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[min(600px,140vw)] h-[min(600px,140vw)] bg-[#C9A84C]/[0.04] rounded-full blur-[120px] pointer-events-none" />
 
       <div ref={formRef} className="max-w-xl mx-auto relative z-10 opacity-0">
         {/* Header */}
@@ -68,7 +68,7 @@ export default function WaitlistSection() {
               fontFamily: '"Anton", "Bebas Neue", "Druk Condensed", Impact, sans-serif',
               fontSize: 'clamp(2rem, 6vw, 3.5rem)',
               fontWeight: 900,
-              letterSpacing: '-0.01em',
+              letterSpacing: 0,
               lineHeight: 0.95,
             }}
           >

@@ -11,13 +11,13 @@ export default function ContactPage() {
       <HeroNavbar activeIndex={2} /> {/* Black theme */}
       
       <main className="pt-24 md:pt-32 pb-12 flex-grow">
-        <div className="max-w-4xl mx-auto px-8 md:px-16 text-center mb-12">
-          <h1 className="text-4xl md:text-6xl font-black tracking-tighter mb-6 uppercase" style={{ fontFamily: '"Anton", "Bebas Neue", "Druk Condensed", Impact, sans-serif' }}>
+        <div className="max-w-4xl mx-auto px-5 sm:px-8 md:px-16 text-center mb-12">
+          <h1 className="text-4xl md:text-6xl font-black tracking-tight mb-6 uppercase" style={{ fontFamily: '"Anton", "Bebas Neue", "Druk Condensed", Impact, sans-serif' }}>
             Elevate Your Space
           </h1>
-          <p className="text-white/60 text-lg max-w-2xl mx-auto leading-relaxed">
-            Plastic bottles don't belong in premium gyms, boutique hotels, or modern cafés. 
-            Offer your guests a hydration experience that matches your brand's standards. 
+          <p className="text-white/60 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
+            Plastic bottles don&apos;t belong in premium gyms, boutique hotels, or modern cafés. 
+            Offer your guests a hydration experience that matches your brand&apos;s standards. 
             Better margins, perfect cooler fit, and zero plastic waste.
           </p>
         </div>

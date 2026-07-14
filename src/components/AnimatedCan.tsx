@@ -101,7 +101,7 @@ export default function AnimatedCan({ activeIndex }: { activeIndex: number }) {
   return (
     <div
       ref={containerRef}
-      className="absolute right-1/2 translate-x-1/2 top-[42%] -translate-y-1/2 md:right-[30%] md:translate-x-1/2 md:top-1/2 md:-translate-y-1/2 z-[60] pointer-events-none flex flex-col items-center justify-center w-[50vw] md:w-[40vw] max-w-[900px] aspect-[37/100] h-[clamp(450px,75vh,1100px)] overflow-visible"
+      className="absolute right-1/2 translate-x-1/2 top-[47%] -translate-y-1/2 md:right-[30%] md:translate-x-1/2 md:top-1/2 md:-translate-y-1/2 z-[45] md:z-[60] pointer-events-none flex flex-col items-center justify-center w-[52vw] min-w-[150px] max-w-[210px] md:w-[40vw] md:max-w-[900px] aspect-[37/100] h-[min(52svh,430px)] min-h-[320px] md:h-[clamp(450px,75vh,1100px)] md:min-h-0 overflow-visible"
     >
       {CANS.map((can, idx) => (
         <div 
@@ -122,7 +122,7 @@ export default function AnimatedCan({ activeIndex }: { activeIndex: number }) {
                 fill
                 priority={idx === 0}
                 quality={100}
-                sizes="(max-width: 768px) 50vw, 900px"
+                sizes="(max-width: 768px) 55vw, 900px"
                 className="object-contain object-center opacity-100"
                 style={{ 
                   mixBlendMode: 'normal',

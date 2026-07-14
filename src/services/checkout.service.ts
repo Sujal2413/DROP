@@ -1,7 +1,15 @@
 import { OrderRepository } from '@/repositories/order.repository';
 
+interface CheckoutItem {
+  id: string;
+  name: string;
+  flavor: string;
+  price: string;
+  image: string;
+}
+
 export class CheckoutService {
-  static async registerInterest(data: { items: any[]; userId?: string; email?: string }) {
+  static async registerInterest(data: { items: CheckoutItem[]; userId?: string; email?: string }) {
     const newOrder = {
       userId: data.userId || 'anonymous',
       email: data.email || '',

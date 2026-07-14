@@ -1,4 +1,5 @@
 import clientPromise from '@/lib/mongodb';
+import type { Document } from 'mongodb';
 
 export class OrderRepository {
   private static readonly collectionName = 'orders';
@@ -8,7 +9,7 @@ export class OrderRepository {
     return client.db('Drop').collection(this.collectionName);
   }
 
-  static async createOrder(order: any) {
+  static async createOrder(order: Document) {
     const collection = await this.getCollection();
     return collection.insertOne(order);
   }

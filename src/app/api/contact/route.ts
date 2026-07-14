@@ -17,8 +17,6 @@ export async function POST(request: Request) {
       );
     }
 
-    const { email } = parseResult.data;
-
     // 2. Rate Limiting (5 requests / min / IP)
     const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || '127.0.0.1';
     const limitResult = await rateLimit(`contact:${ip}`, 5, 60);

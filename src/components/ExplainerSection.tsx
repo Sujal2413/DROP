@@ -52,7 +52,7 @@ export default function ExplainerSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative bg-[#0F0F11] py-32 md:py-40 px-8 md:px-16 flex items-center justify-center overflow-hidden"
+      className="relative bg-[#0F0F11] py-24 sm:py-28 md:py-40 px-5 sm:px-8 md:px-16 flex items-center justify-center overflow-hidden"
     >
       {/* Subtle background accent */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#C9A84C]/[0.02] to-transparent pointer-events-none" />
@@ -65,7 +65,7 @@ export default function ExplainerSection() {
             fontFamily: '"Anton", "Bebas Neue", "Druk Condensed", Impact, sans-serif',
             fontSize: 'clamp(2.5rem, 8vw, 5rem)',
             fontWeight: 900,
-            letterSpacing: '-0.02em',
+            letterSpacing: 0,
             lineHeight: 0.95,
           }}
         >

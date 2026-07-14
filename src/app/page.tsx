@@ -2,10 +2,9 @@
 
 import React from 'react';
 import HeroSection from '@/components/HeroSection';
-import ExplainerSection from '@/components/ExplainerSection';
-import WaitlistSection from '@/components/WaitlistSection';
-import ProductShowcaseSection from '@/components/ProductShowcaseSection';
-import WhyAluminiumSection from '@/components/WhyAluminiumSection';
+import PhotographyWall from '@/components/PhotographyWall';
+import MarqueeTicker from '@/components/MarqueeTicker';
+import VariantShowcase from '@/components/VariantShowcase';
 import Footer from '@/components/Footer';
 
 export default function Home() {
@@ -76,12 +75,11 @@ export default function Home() {
       {/* Hero — unchanged */}
       <HeroSection />
 
-      {/* New conversion flow sections */}
-      <main className="relative z-10">
-        <ExplainerSection />
-        <WaitlistSection />
-        <ProductShowcaseSection />
-        <WhyAluminiumSection />
+      {/* New conversion flow sections inspired by Slight Twist */}
+      <main className="relative z-10 bg-[#F9F9F9]">
+        <PhotographyWall />
+        <MarqueeTicker />
+        <VariantShowcase />
       </main>
 
       <Footer />

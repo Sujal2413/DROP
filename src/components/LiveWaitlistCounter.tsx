@@ -5,24 +5,23 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 export default function LiveWaitlistCounter({ initialCount = 4219 }: { initialCount?: number }) {
   const [count, setCount] = useState(initialCount);
-  const [hasMounted, setHasMounted] = useState(false);
 
   useEffect(() => {
-    setHasMounted(true);
-    
+    let timeoutId: ReturnType<typeof setTimeout>;
+
     // Randomly tick up by 1-3 every 15-45 seconds
     const tick = () => {
       const nextTickTime = Math.random() * 30000 + 15000;
-      setTimeout(() => {
+      timeoutId = setTimeout(() => {
         setCount(c => c + Math.floor(Math.random() * 3) + 1);
         tick();
       }, nextTickTime);
     };
 
     tick();
-  }, []);
 
-  if (!hasMounted) return null;
+    return () => clearTimeout(timeoutId);
+  }, []);
 
   return (
     <div className="flex items-center justify-center gap-2 text-[10px] font-bold tracking-widest uppercase py-4">

@@ -33,7 +33,21 @@ export default function Footer({ theme = "default" }: FooterProps) {
 
   return (
     <footer className={`relative h-fit overflow-hidden border-t font-sans ${footerBg}`}>
-      <div className="max-w-7xl mx-auto px-8 md:px-14 pt-20 pb-0 z-40 relative">
+      <div className="max-w-7xl mx-auto px-5 sm:px-8 md:px-14 pt-16 sm:pt-20 pb-0 z-40 relative">
+        {/* Newsletter Signup (Slight Twist pattern) */}
+        <div className="flex flex-col md:flex-row items-center justify-between bg-[#1A1C1C] rounded-sm p-8 md:p-12 mb-16 border border-white/10">
+          <div className="md:w-1/2 mb-8 md:mb-0">
+            <h3 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-2">Be first to taste it.</h3>
+            <p className="text-[#F9F9F9]/70 text-sm">Join the list and we'll let you know when we launch.</p>
+          </div>
+          <div className="w-full md:w-1/2 flex justify-end">
+            <form className="w-full max-w-md flex border-b border-[#F9F9F9]/30 focus-within:border-white transition-colors">
+              <input type="email" placeholder="Your email address" className="w-full bg-transparent text-white outline-none py-3 px-2 text-sm placeholder:text-[#F9F9F9]/30" />
+              <button type="button" className="text-xs font-bold tracking-widest uppercase text-white hover:text-[#C0C0C0] px-4">Subscribe</button>
+            </form>
+          </div>
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 lg:gap-16 pb-12">
           {/* Brand section */}
           <div className="flex flex-col space-y-4">
@@ -89,13 +103,13 @@ export default function Footer({ theme = "default" }: FooterProps) {
                   MH 400050, India
                 </span>
               </li>
-              <li className="flex items-center space-x-3">
+              <li className="flex items-center space-x-3 min-w-0">
                 <Mail size={16} stroke={iconColor} />
-                <a href="mailto:contactus@dropwater.in" className={`transition-colors ${linkHover}`}>
+                <a href="mailto:contactus@dropwater.in" className={`transition-colors break-all ${linkHover}`}>
                   contactus@dropwater.in
                 </a>
               </li>
-              <li className="flex items-center space-x-3 whitespace-nowrap">
+              <li className="flex items-center space-x-3">
                 <Phone size={16} stroke={iconColor} />
                 <a href="tel:+918976127355" className={`transition-colors ${linkHover}`}>
                   +91 8976127355
@@ -126,7 +140,7 @@ export default function Footer({ theme = "default" }: FooterProps) {
           </div>
 
           {/* Legal links */}
-          <div className="flex items-center gap-4">
+          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-center">
             <Link href="/contact" className={`text-xs font-bold uppercase tracking-widest transition-colors text-[#D4AF37] hover:text-white`}>
               For Business
             </Link>
@@ -175,4 +189,3 @@ export default function Footer({ theme = "default" }: FooterProps) {
     </footer>
   );
 }
-

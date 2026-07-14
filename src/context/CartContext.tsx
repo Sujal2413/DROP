@@ -32,15 +32,22 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
   useEffect(() => {
+    let timeoutId: ReturnType<typeof setTimeout> | undefined;
+
     // Retrieve cart items from localStorage on mount
     const savedCart = localStorage.getItem('drop_cart');
     if (savedCart) {
       try {
-        setCart(JSON.parse(savedCart));
+        const parsedCart = JSON.parse(savedCart) as CartItem[];
+        timeoutId = setTimeout(() => setCart(parsedCart), 0);
       } catch (e) {
         console.error('Failed to parse cart items', e);
       }
     }
+
+    return () => {
+      if (timeoutId) clearTimeout(timeoutId);
+    };
   }, []);
 
   const addToCart = (item: CartItem) => {

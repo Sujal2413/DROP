@@ -60,8 +60,9 @@ export async function rateLimit(
       remaining: limit - hits,
       reset,
     };
-  } catch (err: any) {
-    console.error('Rate limiting failed (Redis unreachable):', err.message);
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : 'Unknown Redis error';
+    console.error('Rate limiting failed (Redis unreachable):', message);
     throw new Error('Rate limiting service unavailable.');
   }
 }

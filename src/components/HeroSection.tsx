@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
-import { useCart } from '@/context/CartContext';
 import HeroNavbar from './HeroNavbar';
 import AnimatedCan from './AnimatedCan';
 import HeroParticles from './HeroParticles';
@@ -15,7 +14,6 @@ const THEMES = [
 ];
 
 export default function HeroSection() {
-  const { setIsCartOpen } = useCart();
   const [activeIndex, setActiveIndex] = useState(0);
   const headlineRef = useRef<HTMLHeadingElement>(null);
   const taglineRef = useRef<HTMLParagraphElement>(null);
@@ -50,7 +48,7 @@ export default function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative w-screen min-h-[100svh] overflow-hidden transition-colors duration-1000 flex items-center"
+      className="relative w-full min-h-[100svh] overflow-hidden transition-colors duration-1000 flex items-center"
       style={{ backgroundColor: THEMES[activeIndex].bg, clipPath: 'inset(0)' }}
     >
       <HeroNavbar activeIndex={activeIndex} />
@@ -58,7 +56,7 @@ export default function HeroSection() {
 
       {/* Right Side/Bottom Accent Background (Curve Split) */}
       <div
-        className="absolute right-0 bottom-0 md:top-0 w-full md:w-[35%] lg:w-[30%] h-[40%] md:h-full rounded-t-[50px] md:rounded-t-none md:rounded-l-[100px] sm:rounded-l-[150px] transition-colors duration-1000 z-0"
+        className="absolute right-0 bottom-0 md:top-0 w-full md:w-[35%] lg:w-[30%] h-[38%] md:h-full rounded-t-[42px] md:rounded-t-none md:rounded-l-[100px] sm:rounded-l-[150px] transition-colors duration-1000 z-0"
         style={{ backgroundColor: THEMES[activeIndex].accentBg }}
       >
         {/* Semi-circle shape on the line */}
@@ -84,7 +82,7 @@ export default function HeroSection() {
       </div>
 
       {/* Content Container (Centered & spaced vertically on mobile to prevent overlapping the absolute can) */}
-      <div className="relative z-[50] w-full md:w-[45%] px-8 md:pl-16 lg:pl-24 flex flex-col items-center md:items-start justify-between md:justify-center min-h-[85vh] md:min-h-0 md:h-auto pt-24 pb-12 md:py-0 text-center md:text-left mx-auto md:mx-0 pointer-events-auto">
+      <div className="relative z-[50] w-full md:w-[45%] px-5 sm:px-8 md:pl-16 lg:pl-24 flex flex-col items-center md:items-start justify-between md:justify-center gap-4 min-h-[86svh] md:min-h-0 md:h-auto pt-24 pb-8 sm:pb-12 md:py-0 text-center md:text-left mx-auto md:mx-0 pointer-events-auto">
 
         {/* Headline */}
         <h1
@@ -92,7 +90,7 @@ export default function HeroSection() {
           className="opacity-0 transition-colors duration-1000 mb-8"
           style={{
             fontFamily: '"Anton", "Bebas Neue", "Druk Condensed", Impact, sans-serif',
-            fontSize: 'clamp(3rem, 10vw, 8rem)',
+            fontSize: 'clamp(2.75rem, 15vw, 8rem)',
             color: THEMES[activeIndex].text,
             fontWeight: 900,
             letterSpacing: '0.02em',
@@ -110,7 +108,7 @@ export default function HeroSection() {
           <div className="flex flex-col sm:flex-row gap-4 w-full justify-center md:justify-start items-center">
             <a
               href="#waitlist"
-              className="px-10 py-4 w-full sm:w-auto font-bold tracking-[0.2em] text-xs rounded-full shadow-xl hover:shadow-2xl hover:-translate-y-1 active:translate-y-0 active:scale-95 transition-all duration-500 ring-1 ring-white/20 backdrop-blur-sm text-center block"
+              className="px-8 sm:px-10 py-4 w-full max-w-[20rem] sm:w-auto sm:max-w-none font-bold tracking-[0.16em] sm:tracking-[0.2em] text-xs rounded-full shadow-xl hover:shadow-2xl hover:-translate-y-1 active:translate-y-0 active:scale-95 transition-all duration-500 ring-1 ring-white/20 backdrop-blur-sm text-center block"
               style={{
                 backgroundColor: THEMES[activeIndex].id === 'gold' ? '#C9A84C' : THEMES[activeIndex].id === 'purple' ? '#E9D5FF' : '#FFFFFF',
                 color: THEMES[activeIndex].id === 'gold' ? '#1C1408' : THEMES[activeIndex].id === 'purple' ? '#1A0B2E' : '#0A0A0A'
@@ -121,7 +119,7 @@ export default function HeroSection() {
             
             <a
               href="#products"
-              className="px-10 py-4 w-full sm:w-auto bg-transparent border border-white/20 font-bold tracking-[0.2em] text-xs rounded-full hover:bg-white/10 hover:border-white/40 backdrop-blur-md transition-all duration-500 text-center flex items-center justify-center hover:-translate-y-1"
+              className="px-8 sm:px-10 py-4 w-full max-w-[20rem] sm:w-auto sm:max-w-none bg-transparent border border-white/20 font-bold tracking-[0.16em] sm:tracking-[0.2em] text-xs rounded-full hover:bg-white/10 hover:border-white/40 backdrop-blur-md transition-all duration-500 text-center flex items-center justify-center hover:-translate-y-1"
               style={{ color: THEMES[activeIndex].text }}
             >
               EXPLORE FLAVORS
@@ -132,7 +130,7 @@ export default function HeroSection() {
         {/* Sleek Footnote */}
         <div
           ref={taglineRef}
-          className="mt-6 md:mt-8 font-semibold tracking-[0.3em] text-[10px] md:text-xs opacity-0 transition-colors duration-1000 flex items-center justify-center md:justify-start gap-6 uppercase"
+          className="mt-4 md:mt-8 font-semibold tracking-[0.16em] sm:tracking-[0.24em] md:tracking-[0.3em] text-[10px] md:text-xs opacity-0 transition-colors duration-1000 flex flex-wrap items-center justify-center md:justify-start gap-x-4 gap-y-2 sm:gap-x-6 uppercase max-w-[19rem] sm:max-w-none"
           style={{ color: THEMES[activeIndex].text }}
         >
           <span className="opacity-70">330ML & 500ML</span>

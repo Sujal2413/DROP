@@ -36,7 +36,7 @@ export default function HeroParticles() {
   return (
     <div
       ref={containerRef}
-      className="absolute top-0 left-0 w-screen h-screen overflow-hidden pointer-events-none z-[40]"
+      className="absolute inset-0 overflow-hidden pointer-events-none z-[40]"
     >
       {[...Array(120)].map((_, i) => (
         <div

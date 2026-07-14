@@ -1,7 +1,7 @@
 'use client';
 
-import { motion, useInView } from 'framer-motion';
-import { useRef, useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
+import { useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import HeroNavbar from '@/components/HeroNavbar';
@@ -30,14 +30,14 @@ export default function StoryClient() {
         />
       </div>
 
-      <main className="max-w-7xl mx-auto px-6 md:px-16 pt-32 pb-24 space-y-32 relative z-10">
+      <main className="max-w-7xl mx-auto px-5 sm:px-6 md:px-16 pt-28 sm:pt-32 pb-20 sm:pb-24 space-y-24 md:space-y-32 relative z-10">
         
         {/* Intro */}
-        <section className="min-h-[70vh] flex flex-col justify-center items-start pt-20">
-          <span className="text-[10px] tracking-[0.2em] text-[#C9A84C] uppercase font-bold mb-8">// THE GENESIS</span>
+        <section className="min-h-[70svh] flex flex-col justify-center items-start pt-16 sm:pt-20">
+          <span className="text-[10px] tracking-[0.2em] text-[#C9A84C] uppercase font-bold mb-8">{'// THE GENESIS'}</span>
           <h1
-            className="text-5xl md:text-8xl font-black leading-none mb-8 text-white"
-            style={{ fontFamily: '"Anton", "Bebas Neue", "Druk Condensed", Impact, sans-serif', letterSpacing: '-0.02em' }}
+            className="text-4xl sm:text-5xl md:text-8xl font-black leading-none mb-8 text-white"
+            style={{ fontFamily: '"Anton", "Bebas Neue", "Druk Condensed", Impact, sans-serif', letterSpacing: 0 }}
           >
             A SIMPLE HABIT.<br />
             <span className="text-[#C9A84C]">A BIGGER QUESTION.</span>
@@ -48,7 +48,7 @@ export default function StoryClient() {
         </section>
 
         {/* Story Part 1 */}
-        <section ref={startRef} className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+        <section ref={startRef} className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
           <div className="order-2 md:order-1 relative w-full aspect-[4/5] md:aspect-square bg-white/[0.02] border border-white/5 rounded-3xl overflow-hidden flex items-center justify-center p-8">
             <Image
               src="/assets/new-can-variant-3.png"
@@ -60,12 +60,12 @@ export default function StoryClient() {
           </div>
           <div className="order-1 md:order-2 space-y-8">
             <h2 
-              className="text-4xl md:text-6xl font-black text-white leading-none"
+              className="text-3xl sm:text-4xl md:text-6xl font-black text-white leading-none"
               style={{ fontFamily: '"Anton", "Bebas Neue", "Druk Condensed", Impact, sans-serif' }}
             >
               It started with water.
             </h2>
-            <div className="space-y-6 text-white/60 text-lg leading-relaxed font-medium">
+            <div className="space-y-6 text-white/60 text-base sm:text-lg leading-relaxed font-medium">
               <p>
                 Born from a desire to strip away the noise of the commercial beverage industry. We looked at the spring—not as a resource to be exploited, but as a legacy to be protected.
               </p>
@@ -77,30 +77,30 @@ export default function StoryClient() {
         </section>
 
         {/* Story Part 2 */}
-        <section className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+        <section className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
           <div className="space-y-8">
             <h2 
-              className="text-4xl md:text-6xl font-black text-[#C9A84C] leading-none"
+              className="text-3xl sm:text-4xl md:text-6xl font-black text-[#C9A84C] leading-none"
               style={{ fontFamily: '"Anton", "Bebas Neue", "Druk Condensed", Impact, sans-serif' }}
             >
               Just water.<br/>
               <span className="text-white">Designed with intention.</span>
             </h2>
-            <div className="space-y-6 text-white/60 text-lg leading-relaxed font-medium">
+            <div className="space-y-6 text-white/60 text-base sm:text-lg leading-relaxed font-medium">
               <p>
                 Our vessel is a statement of permanence in a world of disposability. Crafted from 100% infinitely recyclable aluminum, it is designed to feel as substantial as the liquid it protects. No labels. No clutter. Just the essence.
               </p>
             </div>
             
-            <ul className="space-y-4 text-xs font-bold uppercase tracking-widest text-white/40">
-              <li className="flex items-center gap-4">
-                <div className="w-1.5 h-1.5 bg-[#C9A84C] rounded-full" /> ZERO PLASTIC LEACHING
+            <ul className="space-y-4 text-xs font-bold uppercase tracking-[0.16em] sm:tracking-widest text-white/40">
+              <li className="flex items-start gap-4">
+                <div className="w-1.5 h-1.5 mt-1.5 bg-[#C9A84C] rounded-full shrink-0" /> ZERO PLASTIC LEACHING
               </li>
-              <li className="flex items-center gap-4">
-                <div className="w-1.5 h-1.5 bg-[#C9A84C] rounded-full" /> THERMAL TEMPERATURE LOCK
+              <li className="flex items-start gap-4">
+                <div className="w-1.5 h-1.5 mt-1.5 bg-[#C9A84C] rounded-full shrink-0" /> THERMAL TEMPERATURE LOCK
               </li>
-              <li className="flex items-center gap-4">
-                <div className="w-1.5 h-1.5 bg-[#C9A84C] rounded-full" /> MATTE ALUMINUM VESSEL
+              <li className="flex items-start gap-4">
+                <div className="w-1.5 h-1.5 mt-1.5 bg-[#C9A84C] rounded-full shrink-0" /> MATTE ALUMINUM VESSEL
               </li>
             </ul>
           </div>
@@ -116,10 +116,10 @@ export default function StoryClient() {
         </section>
 
         {/* Outro */}
-        <section className="min-h-[60vh] flex flex-col justify-center items-center text-center space-y-12">
-          <span className="text-[10px] tracking-[0.4em] text-[#C9A84C] uppercase font-bold">// THE FINAL THOUGHT</span>
+        <section className="min-h-[60svh] flex flex-col justify-center items-center text-center space-y-10 sm:space-y-12">
+          <span className="text-[10px] tracking-[0.24em] sm:tracking-[0.4em] text-[#C9A84C] uppercase font-bold">{'// THE FINAL THOUGHT'}</span>
           <h2
-            className="text-4xl md:text-7xl font-black text-white max-w-4xl leading-[0.9]"
+            className="text-3xl sm:text-4xl md:text-7xl font-black text-white max-w-4xl leading-[0.95] md:leading-[0.9]"
             style={{ fontFamily: '"Anton", "Bebas Neue", "Druk Condensed", Impact, sans-serif' }}
           >
             WATER DOES NOT NEED TO BE LOUDER. IT NEEDS TO BE BETTER.
@@ -127,7 +127,7 @@ export default function StoryClient() {
           <div className="pt-8">
             <Link 
               href="/#waitlist"
-              className="inline-flex items-center justify-center px-10 py-5 bg-transparent border border-white/20 hover:border-white text-white font-bold text-xs tracking-widest uppercase transition-all rounded-none"
+              className="inline-flex items-center justify-center px-8 sm:px-10 py-5 bg-transparent border border-white/20 hover:border-white text-white font-bold text-xs tracking-[0.16em] sm:tracking-widest uppercase transition-all rounded-none"
             >
               Join the Waitlist
             </Link>

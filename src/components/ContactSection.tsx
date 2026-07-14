@@ -57,7 +57,7 @@ export default function ContactSection() {
     <section
       ref={sectionRef}
       id="contact"
-      className="relative bg-[#0F1112] py-28 md:py-36 px-8 md:px-16 overflow-hidden"
+      className="relative bg-[#0F1112] py-24 sm:py-28 md:py-36 px-5 sm:px-8 md:px-16 overflow-hidden"
     >
       {/* Divider line */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-px bg-gradient-to-r from-transparent via-[#C9A84C]/30 to-transparent" />
@@ -71,7 +71,7 @@ export default function ContactSection() {
               fontFamily: '"Anton", "Bebas Neue", "Druk Condensed", Impact, sans-serif',
               fontSize: 'clamp(1.5rem, 5vw, 2.8rem)',
               fontWeight: 900,
-              letterSpacing: '-0.01em',
+              letterSpacing: 0,
               lineHeight: 1,
             }}
           >

@@ -1,4 +1,5 @@
 import clientPromise from '@/lib/mongodb';
+import type { Document } from 'mongodb';
 
 export class WaitlistRepository {
   private static readonly collectionName = 'waitlist';
@@ -13,7 +14,7 @@ export class WaitlistRepository {
     return collection.findOne({ email });
   }
 
-  static async addEntry(entry: any) {
+  static async addEntry(entry: Document) {
     const collection = await this.getCollection();
     return collection.insertOne(entry);
   }

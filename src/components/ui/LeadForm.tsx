@@ -76,8 +76,8 @@ export default function LeadForm({ config }: { config: LeadFormConfig }) {
     );
   }
 
-  const formClassName = config.layout === 'grid' 
-    ? 'grid grid-cols-1 md:grid-cols-2 gap-5' 
+  const formClassName = config.layout === 'grid'
+    ? 'grid grid-cols-1 md:grid-cols-2 gap-5'
     : 'space-y-5';
 
   return (
@@ -85,13 +85,13 @@ export default function LeadForm({ config }: { config: LeadFormConfig }) {
       {config.fields.map((field) => {
         const wrapperClass = field.colSpan === 2 ? 'md:col-span-2' : '';
         const inputClass = "w-full py-4 bg-transparent border-b border-white/20 text-white text-sm font-medium placeholder:text-white/20 focus:outline-none focus:border-[#C9A84C] transition-all rounded-none";
-        
+
         return (
           <div key={field.name} className={wrapperClass}>
             <label className="block text-white/40 text-[10px] font-bold tracking-[0.2em] uppercase mb-2">
               {field.label} {field.required && '*'}
             </label>
-            
+
             {field.type === 'select' ? (
               <select
                 value={formData[field.name] || ''}

@@ -35,7 +35,7 @@ export default function WhyAluminiumSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative bg-[#0F1112] py-28 md:py-36 px-8 md:px-16 overflow-hidden"
+      className="relative bg-[#0F1112] py-24 sm:py-28 md:py-36 px-5 sm:px-8 md:px-16 overflow-hidden"
     >
       {/* Top divider */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
@@ -47,7 +47,7 @@ export default function WhyAluminiumSection() {
             fontFamily: '"Anton", "Bebas Neue", "Druk Condensed", Impact, sans-serif',
             fontSize: 'clamp(2rem, 6vw, 3.5rem)',
             fontWeight: 900,
-            letterSpacing: '-0.01em',
+            letterSpacing: 0,
             lineHeight: 0.95,
           }}
         >

@@ -65,7 +65,7 @@ export default function ProductShowcaseSection() {
     <section
       ref={sectionRef}
       id="products"
-      className="relative bg-[#0A0A0A] py-28 md:py-36 px-8 md:px-16 overflow-hidden"
+      className="relative bg-[#0A0A0A] py-24 sm:py-28 md:py-36 px-5 sm:px-8 md:px-16 overflow-hidden"
     >
       <div className="max-w-5xl mx-auto text-center relative z-10">
         <h2
@@ -75,23 +75,23 @@ export default function ProductShowcaseSection() {
             fontFamily: '"Anton", "Bebas Neue", "Druk Condensed", Impact, sans-serif',
             fontSize: 'clamp(2rem, 6vw, 4rem)',
             fontWeight: 900,
-            letterSpacing: '-0.02em',
+            letterSpacing: 0,
             lineHeight: 0.95,
           }}
         >
           DROP. Still Water — 330ML & 500ML
         </h2>
         <p className="text-white/60 text-base md:text-lg leading-relaxed font-medium max-w-2xl mx-auto mb-20">
-          Still water. Recyclable aluminium can. No plastic, no sugar, no flavour unless you want it —<br/>
-          <span className="text-white font-bold">mint, clove, and mineral infusions available.</span><br/>
+          Still water. Recyclable aluminium can. No plastic, no sugar, no flavour unless you want it —<br className="hidden md:block" />
+          <span className="text-white font-bold">mint, clove, and mineral infusions available.</span><br className="hidden md:block" />
           One SKU. Built right, before we build more.
         </p>
 
         {/* Can renders */}
-        <div ref={cansRef} className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
+        <div ref={cansRef} className="grid grid-cols-1 min-[420px]:grid-cols-2 md:grid-cols-4 gap-10 min-[420px]:gap-8 md:gap-12">
           {CANS.map((can) => (
             <div key={can.id} className="can-item opacity-0 flex flex-col items-center group">
-              <div className="relative w-full aspect-[3/5] mb-4">
+              <div className="relative w-full max-w-[13rem] min-[420px]:max-w-none mx-auto aspect-[3/5] mb-4">
                 <Image
                   src={can.image}
                   alt={`DROP. ${can.name}`}
