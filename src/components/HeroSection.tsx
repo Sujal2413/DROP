@@ -10,7 +10,7 @@ const THEMES = [
   { id: 'purple', name: 'MINT WATER', bg: '#1A0B2E', accentBg: '#2D1B4E', text: '#E9D5FF', dotColor: '#8b5cf6' },
   { id: 'red', name: 'CLOVE WATER', bg: '#3c0103', accentBg: '#5A0205', text: '#fca5a5', dotColor: '#ef4444' },
   { id: 'black', name: 'ATHLETE EDITION', bg: '#0A0A0A', accentBg: '#1A1A1A', text: '#FFFFFF', dotColor: '#52525b' },
-  { id: 'silver', name: 'SPARKLING WATER', bg: '#15181B', accentBg: '#23272C', text: '#E2E8F0', dotColor: '#cbd5e1' }
+  { id: 'silver', name: 'SPARKLING WATER', bg: '#08121C', accentBg: '#102A43', text: '#F0F4F8', dotColor: '#93C5FD' }
 ];
 
 export default function HeroSection() {
