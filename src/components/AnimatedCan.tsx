@@ -39,64 +39,88 @@ export default function AnimatedCan({ activeIndex }: { activeIndex: number }) {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
   const isFirstRender = useRef(true);
+
+  // Helper function to start floating loop on the active can
+  const startFloatingLoop = (el: HTMLDivElement | null) => {
+    if (!el) return;
+    gsap.killTweensOf(el); // Clear any active animations
+    
+    // Start continuous floating
+    gsap.to(el, {
+      y: -20,
+      rotationZ: 1,
+      rotationY: 15,
+      rotationX: 1,
+      duration: 5,
+      repeat: -1,
+      yoyo: true,
+      ease: 'sine.inOut',
+    });
+  };
 
   useEffect(() => {
     const prevIndex = prevIndexRef.current;
-    if (prevIndex === activeIndex && !isFirstRender.current) return;
-
-    // Kill all ongoing tweens to prevent overlapping animations when switching tabs
+    
+    // Kill any active transitions/tweens on all cans
     canRefs.current.forEach(can => {
       if (can) gsap.killTweensOf(can);
     });
 
     if (isFirstRender.current) {
       isFirstRender.current = false;
-      // Initial load: fade in the active can
-      gsap.fromTo(canRefs.current[activeIndex],
-        { opacity: 0, scale: 0.8, x: 100 },
-        { opacity: 1, scale: 1, x: 0, duration: 1.5, ease: 'power3.out' }
-      );
-    } else {
-      // Transition: circular rolling out to the left, circular rolling in from the right
-      const tl = gsap.timeline();
       
-      tl.to(canRefs.current[prevIndex], {
-        x: '-100vw',
-        y: -100, // Arc up
-        rotationZ: -90, // Roll to the left
-        opacity: 0,
-        duration: 1.2,
-        ease: 'power3.inOut'
-      }, 0);
+      // Ensure the initial active can is visible, centered and starts floating immediately
+      const activeCan = canRefs.current[activeIndex];
+      if (activeCan) {
+        gsap.fromTo(activeCan,
+          { opacity: 0, scale: 0.8, x: 100, y: 0, rotationZ: 0 },
+          { 
+            opacity: 1, 
+            scale: 1, 
+            x: 0, 
+            y: 0,
+            duration: 1.5, 
+            ease: 'power3.out',
+            onComplete: () => startFloatingLoop(activeCan)
+          }
+        );
+      }
+    } else {
+      // Transition: previous rolls out to the left, active rolls in from the right
+      const prevCan = canRefs.current[prevIndex];
+      const activeCan = canRefs.current[activeIndex];
 
-      tl.fromTo(canRefs.current[activeIndex],
-        { x: '100vw', y: 150, rotationZ: 90, opacity: 0 },
-        { x: 0, y: 0, rotationZ: 0, opacity: 1, duration: 1.2, ease: 'power3.out' },
-        0.2
-      );
+      if (prevCan) {
+        gsap.to(prevCan, {
+          x: '-100vw',
+          y: -100, // Arc up
+          rotationZ: -90, // Roll to the left
+          opacity: 0,
+          duration: 1.2,
+          ease: 'power3.inOut'
+        });
+      }
+
+      if (activeCan) {
+        gsap.fromTo(activeCan,
+          { x: '100vw', y: 150, rotationZ: 90, opacity: 0 },
+          { 
+            x: 0, 
+            y: 0, 
+            rotationZ: 0, 
+            opacity: 1, 
+            duration: 1.2, 
+            ease: 'power3.out',
+            onComplete: () => startFloatingLoop(activeCan)
+          }
+        );
+      }
     }
 
     prevIndexRef.current = activeIndex;
   }, [activeIndex]);
-
-  useEffect(() => {
-    // Continuous subtle floating loop with pronounced rotation
-    canRefs.current.forEach((can) => {
-      if (can) {
-        gsap.to(can, {
-          y: -20,
-          rotationZ: 1,
-          rotationY: 15, // Enhanced rotating motion
-          rotationX: 1,
-          duration: 5,
-          repeat: -1,
-          yoyo: true,
-          ease: 'sine.inOut',
-        });
-      }
-    });
-  }, []);
 
   return (
     <div
