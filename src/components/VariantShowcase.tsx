@@ -4,188 +4,162 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { PRODUCTS } from '@/lib/data/products';
-import { Particles } from '@/components/ui/particles';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export default function VariantShowcase() {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [isFading, setIsFading] = useState(false);
   const activeProduct = PRODUCTS[activeIndex];
 
   // Colors based on active product for subtle background accent
-  const getAccentColor = (slug: string) => {
+  const getGradient = (slug: string) => {
     switch (slug) {
-      case 'mint': return '#2D1B4E';
-      case 'athlete': return '#1A1A1A';
-      case 'sparkling': return '#23272C';
-      case 'clove': return '#5A0205';
-      default: return '#111111';
+      case 'mint': return 'radial-gradient(circle at 75% 50%, rgba(45,27,78,0.4) 0%, transparent 60%)';
+      case 'athlete': return 'radial-gradient(circle at 75% 50%, rgba(26,26,26,0.4) 0%, transparent 60%)';
+      case 'sparkling': return 'radial-gradient(circle at 75% 50%, rgba(35,39,44,0.4) 0%, transparent 60%)';
+      case 'clove': return 'radial-gradient(circle at 75% 50%, rgba(90,2,5,0.4) 0%, transparent 60%)';
+      default: return 'radial-gradient(circle at 75% 50%, rgba(17,17,17,0.4) 0%, transparent 60%)';
     }
   };
 
-  const handleSelect = (index: number) => {
-    if (index === activeIndex) return;
-    setIsFading(true);
-    setTimeout(() => {
-      setActiveIndex(index);
-      setIsFading(false);
-    }, 300); // 300ms crossfade
-  };
-
-  const nextProduct = () => {
-    handleSelect((activeIndex + 1) % PRODUCTS.length);
-  };
-
-  const prevProduct = () => {
-    handleSelect((activeIndex - 1 + PRODUCTS.length) % PRODUCTS.length);
-  };
-
   return (
-    <section id="products" className="w-full relative bg-[#F9F9F9] text-[#111111] font-sans border-b border-[#E5E5E5]/30 scroll-mt-24 overflow-hidden min-h-[80vh] flex items-center">
+    <section id="products" className="relative w-full bg-[#111111] text-[#F9F9F9] font-sans border-b border-[#E5E5E5]/10 min-h-screen flex overflow-hidden">
       
-      {/* Particles Background */}
-      <Particles
-        className="absolute inset-0 z-0 opacity-30 transition-colors duration-1000"
-        quantity={100}
-        ease={80}
-        color={getAccentColor(activeProduct.slug)}
-        refresh
-      />
+      {/* Background Gradient Transition */}
+      <AnimatePresence>
+        <motion.div
+          key={activeProduct.slug}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1 }}
+          className="absolute inset-0 z-0 pointer-events-none"
+          style={{ background: getGradient(activeProduct.slug) }}
+        />
+      </AnimatePresence>
 
-      <div className="max-w-[1440px] w-full mx-auto px-5 md:px-16 py-12 md:py-20 relative z-10">
+      <div className="max-w-[1600px] w-full mx-auto flex flex-col md:flex-row relative z-10">
         
-        {/* Desktop Layout (Hidden on mobile) */}
-        <div className="hidden md:flex flex-row items-center min-h-[60vh]">
-          {/* Left: Dynamic Can Image */}
-          <div className="w-1/2 flex justify-center relative">
-            {/* Background Glow */}
-            <div 
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] rounded-full blur-[100px] transition-all duration-700 opacity-20"
-              style={{ backgroundColor: getAccentColor(activeProduct.slug) }}
-            />
-            <div className={`relative w-[300px] lg:w-[400px] aspect-[1/2] transition-all duration-300 ${isFading ? 'opacity-0 scale-95 translate-y-4' : 'opacity-100 scale-100 translate-y-0'}`}>
-              <Image 
-                src={activeProduct.image} 
-                alt={activeProduct.displayName} 
-                fill 
-                className="object-contain drop-shadow-2xl" 
-                priority
-              />
-            </div>
-          </div>
-
-          {/* Right: Content & Selectors */}
-          <div className="w-1/2 flex flex-col justify-center pl-12 lg:pl-24">
-            
-            {/* Tab Selectors */}
-            <div className="flex flex-wrap gap-3 mb-12">
-              {PRODUCTS.map((p, idx) => (
+        {/* Left Sticky Column: Minimalist Vertical Tab List */}
+        <div className="w-full md:w-1/3 lg:w-1/4 pt-24 md:pt-40 px-8 md:px-16 flex flex-col md:border-r border-white/10 md:sticky md:top-0 h-auto md:h-screen">
+          <h2 className="text-sm font-bold tracking-[0.3em] uppercase text-white/50 mb-12">
+            The Collection
+          </h2>
+          
+          <div className="flex md:flex-col gap-4 overflow-x-auto md:overflow-visible pb-6 md:pb-0 scrollbar-hide">
+            {PRODUCTS.map((p, idx) => {
+              const isActive = activeIndex === idx;
+              return (
                 <button
-                  key={`tab-${p.slug}`}
-                  onClick={() => handleSelect(idx)}
-                  className={`px-5 py-2.5 text-xs font-bold tracking-widest uppercase rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#111111] focus:ring-offset-2 focus:ring-offset-[#F9F9F9] ${
-                    activeIndex === idx 
-                      ? 'bg-[#111111] text-white shadow-lg' 
-                      : 'bg-[#E5E5E5]/50 text-[#111111]/60 hover:bg-[#E5E5E5] hover:text-[#111111]'
+                  key={p.slug}
+                  onClick={() => setActiveIndex(idx)}
+                  onMouseEnter={() => setActiveIndex(idx)}
+                  className={`relative flex items-center p-4 rounded-xl transition-all duration-300 text-left focus:outline-none ${
+                    isActive 
+                      ? 'bg-white/5 backdrop-blur-md shadow-[inset_0_0_0_1px_rgba(255,255,255,0.1)]' 
+                      : 'hover:bg-white/[0.02]'
                   }`}
-                  aria-pressed={activeIndex === idx}
                 >
-                  {p.displayName.replace(' DROP', '')}
-                </button>
-              ))}
-            </div>
-
-            {/* Dynamic Content */}
-            <div className={`transition-all duration-300 ${isFading ? 'opacity-0 translate-y-4' : 'opacity-100 translate-y-0'}`}>
-              <h2 className="text-5xl lg:text-6xl font-bold tracking-tighter mb-6 leading-[1.1]">
-                {activeProduct.displayName}
-              </h2>
-              <div className="w-12 h-[2px] bg-[#111111] mb-6"></div>
-              <p className="text-xl lg:text-2xl font-medium leading-relaxed text-[#111111]/80 mb-4 max-w-xl">
-                {activeProduct.description}
-              </p>
-              <p className="text-sm font-bold tracking-widest uppercase text-[#111111]/50 mb-10">
-                Designed for: {activeProduct.designedFor}
-              </p>
-              
-              {activeProduct.status === 'available' || activeProduct.status === 'preorder' || activeProduct.status === 'coming-soon' ? (
-                <Link 
-                  href="/#waitlist" 
-                  className="inline-block bg-[#111111] text-[#F9F9F9] px-8 py-4 text-xs font-bold tracking-[0.2em] uppercase rounded-full hover:bg-[#C9A84C] hover:text-[#111111] shadow-xl hover:shadow-2xl hover:-translate-y-1 active:translate-y-0 active:scale-95 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#111111] focus:ring-offset-2"
-                >
-                  Join The List
-                </Link>
-              ) : (
-                <div className="flex gap-4 items-center">
-                  <span className="inline-block border border-[#111111]/20 text-[#111111] px-6 py-3 text-xs font-bold tracking-[0.15em] uppercase rounded-full bg-[#E5E5E5]/20">
-                    Coming Next
+                  <span className={`text-xl md:text-2xl font-black uppercase tracking-tight transition-colors duration-300 ${isActive ? 'text-white' : 'text-white/40'}`}>
+                    {p.displayName.replace(' DROP', '')}
                   </span>
-                  <Link href="/#waitlist" className="text-xs font-bold tracking-widest uppercase underline text-[#111111]/60 hover:text-[#111111] transition-colors">
-                    Get Notified
-                  </Link>
-                </div>
-              )}
-            </div>
+                  
+                  {isActive && (
+                    <motion.div 
+                      layoutId="activeTabIndicator"
+                      className="absolute left-0 top-1/4 bottom-1/4 w-[2px] bg-white rounded-r-full hidden md:block"
+                      transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                    />
+                  )}
+                </button>
+              );
+            })}
           </div>
         </div>
 
-        {/* Mobile Layout (Hidden on desktop) */}
-        <div className="md:hidden flex flex-col items-center pt-8">
+        {/* Right Dynamic Column */}
+        <div className="w-full md:w-2/3 lg:w-3/4 flex flex-col-reverse md:flex-row items-center justify-between px-8 md:px-16 py-12 md:py-32 relative">
           
-          <div className="flex justify-between w-full items-center mb-10 px-2">
-            <h2 className="text-xl font-bold tracking-tight uppercase">The Collection</h2>
-            <div className="text-xs font-bold tracking-widest text-[#111111]/60">
-              {activeIndex + 1} / {PRODUCTS.length}
-            </div>
-          </div>
-
-          {/* Swipeable Card Area (Simulated via controls for now, implementing native touch swipe would require more complex hooks, keeping it simple and accessible with buttons) */}
-          <div className="relative w-full flex items-center justify-center">
-            
-            <button 
-              onClick={prevProduct}
-              className="absolute left-0 z-20 p-2 bg-white/80 backdrop-blur-sm shadow-md rounded-full text-[#111111] hover:bg-white focus:outline-none focus:ring-2 focus:ring-[#111111]"
-              aria-label="Previous product"
-            >
-              <ChevronLeft size={24} />
-            </button>
-
-            <div className="w-[280px] sm:w-[320px] bg-white rounded-3xl shadow-2xl p-8 flex flex-col items-center relative overflow-hidden">
-               <div 
-                className="absolute top-0 left-0 w-full h-32 opacity-10 transition-colors duration-500"
-                style={{ background: `linear-gradient(to bottom, ${getAccentColor(activeProduct.slug)}, transparent)` }}
-               />
-               
-               <div className={`relative w-[180px] h-[360px] mb-8 transition-all duration-300 ${isFading ? 'opacity-0 scale-95' : 'opacity-100 scale-100'}`}>
-                 <Image src={activeProduct.image} alt={activeProduct.displayName} fill className="object-contain drop-shadow-xl" priority />
-               </div>
-
-               <div className={`flex flex-col items-center text-center transition-all duration-300 w-full ${isFading ? 'opacity-0 translate-y-4' : 'opacity-100 translate-y-0'}`}>
-                 <h3 className="text-2xl font-black tracking-tighter mb-3 leading-tight">{activeProduct.displayName}</h3>
-                 <p className="text-sm font-medium text-[#111111]/70 mb-4">{activeProduct.description}</p>
-                 <p className="text-[10px] font-bold tracking-widest uppercase text-[#111111]/40 mb-8 border-b border-[#E5E5E5] pb-4 w-full">
-                   For: {activeProduct.designedFor}
-                 </p>
-                 
-                 <Link 
+          {/* Text Content */}
+          <div className="w-full md:w-1/2 flex flex-col justify-center z-20 mt-12 md:mt-0">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeProduct.slug}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.4 }}
+              >
+                <h2 className="text-5xl lg:text-7xl font-bold tracking-tighter mb-6 leading-[1.1] uppercase" style={{ fontFamily: '"Anton", "Bebas Neue", "Druk Condensed", Impact, sans-serif' }}>
+                  {activeProduct.displayName}
+                </h2>
+                
+                <p className="text-lg lg:text-xl font-medium leading-relaxed text-white/70 mb-8 max-w-md">
+                  {activeProduct.description}
+                </p>
+                
+                <div className="flex flex-col gap-2 mb-10">
+                  <p className="text-xs font-bold tracking-[0.2em] uppercase text-white/40 border-b border-white/10 pb-4 mb-2 w-max">
+                    Designed for: {activeProduct.designedFor}
+                  </p>
+                  <p className="text-xs font-bold tracking-[0.2em] uppercase text-white/40 w-max">
+                    Size: {activeProduct.availableSizes?.[0]?.toUpperCase()} CAN
+                  </p>
+                </div>
+                
+                {activeProduct.status === 'available' || activeProduct.status === 'preorder' || activeProduct.status === 'coming-soon' ? (
+                  <Link 
                     href="/#waitlist" 
-                    className="w-full block text-center bg-[#111111] text-[#F9F9F9] py-4 text-xs font-bold tracking-[0.2em] uppercase rounded-full hover:bg-[#C9A84C] hover:text-[#111111] transition-all duration-300 active:scale-95 shadow-xl"
+                    className="inline-flex items-center justify-center bg-white text-black px-10 py-5 text-xs font-black tracking-[0.2em] uppercase rounded-full hover:bg-[#C9A84C] hover:text-black hover:-translate-y-1 active:translate-y-0 active:scale-95 transition-all duration-300 shadow-xl focus:outline-none w-max"
                   >
                     Join The List
                   </Link>
-               </div>
-            </div>
-
-            <button 
-              onClick={nextProduct}
-              className="absolute right-0 z-20 p-2 bg-white/80 backdrop-blur-sm shadow-md rounded-full text-[#111111] hover:bg-white focus:outline-none focus:ring-2 focus:ring-[#111111]"
-              aria-label="Next product"
-            >
-              <ChevronRight size={24} />
-            </button>
+                ) : (
+                  <div className="flex gap-4 items-center">
+                    <span className="inline-block border border-white/20 text-white px-8 py-4 text-xs font-bold tracking-[0.15em] uppercase rounded-full bg-white/5">
+                      Coming Next
+                    </span>
+                  </div>
+                )}
+              </motion.div>
+            </AnimatePresence>
           </div>
-        </div>
 
+          {/* Floating Can Render */}
+          <div className="w-full md:w-1/2 flex justify-center items-center relative h-[50vh] md:h-[70vh] z-10">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeProduct.slug}
+                initial={{ opacity: 0, x: 100, scale: 0.9, rotate: 10 }}
+                animate={{ 
+                  opacity: 1, 
+                  x: 0, 
+                  scale: 1, 
+                  rotate: 0,
+                  y: [0, -15, 0] // Subtle floating animation
+                }}
+                exit={{ opacity: 0, x: -100, scale: 0.9, rotate: -10 }}
+                transition={{ 
+                  duration: 0.6,
+                  y: {
+                    duration: 4,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }
+                }}
+                className="relative w-[300px] lg:w-[450px] aspect-[1/2]"
+              >
+                <Image 
+                  src={activeProduct.image} 
+                  alt={activeProduct.displayName} 
+                  fill 
+                  className="object-contain drop-shadow-2xl" 
+                  priority
+                />
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+        </div>
       </div>
     </section>
   );

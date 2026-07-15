@@ -22,13 +22,14 @@ export interface LeadFormConfig {
   successTitle: string;
   buttonTheme?: 'primary' | 'outline';
   layout?: 'stack' | 'grid';
-  selectBgColor?: string;
+  selectBgColor?: string; // Kept for backwards compatibility but not used in chip design
 }
 
 export default function LeadForm({ config }: { config: LeadFormConfig }) {
   const [formData, setFormData] = useState<Record<string, string>>({});
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [message, setMessage] = useState('');
+  const [focusedField, setFocusedField] = useState<string | null>(null);
 
   const handleChange = (name: string, value: string) => {
     setFormData(prev => ({ ...prev, [name]: value }));
@@ -84,8 +85,8 @@ export default function LeadForm({ config }: { config: LeadFormConfig }) {
   }
 
   const formClassName = config.layout === 'grid'
-    ? 'grid grid-cols-1 md:grid-cols-2 gap-5'
-    : 'space-y-5';
+    ? 'grid grid-cols-1 md:grid-cols-2 gap-x-5 gap-y-8'
+    : 'space-y-8';
 
   return (
     <form onSubmit={handleSubmit} className={formClassName} noValidate={false}>
@@ -108,41 +109,71 @@ export default function LeadForm({ config }: { config: LeadFormConfig }) {
 
       {config.fields.map((field) => {
         const wrapperClass = field.colSpan === 2 ? 'md:col-span-2' : '';
-        const inputClass = "w-full py-4 bg-transparent border-b border-white/20 text-white text-sm font-medium placeholder:text-white/20 focus:outline-none focus:border-[#C9A84C] focus:ring-2 focus:ring-[#C9A84C] transition-all rounded-none";
         const fieldId = `field-${field.name}`;
+        const isFocused = focusedField === field.name;
+        const hasValue = !!formData[field.name];
+        const isFloating = isFocused || hasValue;
+
+        if (field.type === 'select') {
+          return (
+            <div key={field.name} className={`${wrapperClass} flex flex-col gap-4 mt-2`}>
+              <label className="text-white/50 text-xs font-bold tracking-[0.2em] uppercase">
+                {field.label} {field.required && '*'}
+              </label>
+              <div className="flex flex-wrap gap-3">
+                {field.options?.map((opt) => {
+                  const isSelected = formData[field.name] === opt;
+                  return (
+                    <button
+                      type="button"
+                      key={opt}
+                      onClick={() => handleChange(field.name, opt)}
+                      className={`px-5 py-2.5 rounded-full text-xs font-bold tracking-widest uppercase transition-all duration-300 border focus:outline-none focus:ring-2 focus:ring-[#8b5cf6] ${
+                        isSelected 
+                          ? 'bg-[#8b5cf6] text-white border-[#8b5cf6] shadow-[0_0_15px_rgba(139,92,246,0.3)]' 
+                          : 'bg-transparent text-white/60 border-white/20 hover:border-white/50 hover:text-white'
+                      }`}
+                    >
+                      {opt}
+                    </button>
+                  );
+                })}
+              </div>
+              {/* Hidden input to store value for native required validation */}
+              <input 
+                type="hidden" 
+                name={field.name} 
+                value={formData[field.name] || ''} 
+                required={field.required} 
+              />
+            </div>
+          );
+        }
 
         return (
-          <div key={field.name} className={wrapperClass}>
-            <label htmlFor={fieldId} className="block text-white/50 text-xs font-bold tracking-[0.2em] uppercase mb-2">
+          <div key={field.name} className={`${wrapperClass} relative mt-2`}>
+            <label 
+              htmlFor={fieldId} 
+              className={`absolute left-0 transition-all duration-300 pointer-events-none text-xs font-bold tracking-[0.2em] uppercase ${
+                isFloating 
+                  ? '-top-6 text-[#8b5cf6]' 
+                  : 'top-4 text-white/40'
+              }`}
+            >
               {field.label} {field.required && '*'}
             </label>
 
-            {field.type === 'select' ? (
-              <select
-                id={fieldId}
-                name={field.name}
-                value={formData[field.name] || ''}
-                onChange={(e) => handleChange(field.name, e.target.value)}
-                required={field.required}
-                className={`${inputClass} appearance-none cursor-pointer`}
-              >
-                <option value="" style={{ backgroundColor: config.selectBgColor || '#000' }}>Select an option</option>
-                {field.options?.map((opt) => (
-                  <option key={opt} value={opt} style={{ backgroundColor: config.selectBgColor || '#000' }}>
-                    {opt}
-                  </option>
-                ))}
-              </select>
-            ) : field.type === 'textarea' ? (
+            {field.type === 'textarea' ? (
               <textarea
                 id={fieldId}
                 name={field.name}
                 value={formData[field.name] || ''}
                 onChange={(e) => handleChange(field.name, e.target.value)}
+                onFocus={() => setFocusedField(field.name)}
+                onBlur={() => setFocusedField(null)}
                 required={field.required}
-                placeholder={field.placeholder}
                 rows={4}
-                className={`${inputClass} resize-none`}
+                className="w-full py-4 bg-transparent border-b border-white/20 text-white text-sm font-medium focus:outline-none focus:border-[#8b5cf6] transition-all rounded-none resize-none shadow-[0_1px_0_rgba(139,92,246,0)] focus:shadow-[0_1px_0_rgba(139,92,246,1)]"
                 disabled={status === 'loading'}
               />
             ) : (
@@ -152,9 +183,10 @@ export default function LeadForm({ config }: { config: LeadFormConfig }) {
                 type={field.type}
                 value={formData[field.name] || ''}
                 onChange={(e) => handleChange(field.name, e.target.value)}
+                onFocus={() => setFocusedField(field.name)}
+                onBlur={() => setFocusedField(null)}
                 required={field.required}
-                placeholder={field.placeholder}
-                className={inputClass}
+                className="w-full py-4 bg-transparent border-b border-white/20 text-white text-sm font-medium focus:outline-none focus:border-[#8b5cf6] transition-all rounded-none shadow-[0_1px_0_rgba(139,92,246,0)] focus:shadow-[0_1px_0_rgba(139,92,246,1)]"
                 disabled={status === 'loading'}
               />
             )}
@@ -173,7 +205,7 @@ export default function LeadForm({ config }: { config: LeadFormConfig }) {
           <button
             type="submit"
             disabled={status === 'loading'}
-            className="w-full py-4 bg-transparent border-2 border-[#C9A84C] hover:bg-[#C9A84C]/10 disabled:opacity-50 disabled:cursor-not-allowed text-[#C9A84C] font-black tracking-[0.2em] text-xs rounded-full transition-all duration-300 uppercase active:scale-95 cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#C9A84C]"
+            className="w-full py-4 bg-transparent border-2 border-[#8b5cf6] hover:bg-[#8b5cf6]/10 disabled:opacity-50 disabled:cursor-not-allowed text-[#8b5cf6] font-black tracking-[0.2em] text-xs rounded-full transition-all duration-300 uppercase active:scale-95 cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#8b5cf6]"
           >
             {status === 'loading' ? config.submitLoadingText : config.submitText}
           </button>
@@ -181,14 +213,14 @@ export default function LeadForm({ config }: { config: LeadFormConfig }) {
           <button
             type="submit"
             disabled={status === 'loading'}
-            className="group relative w-full py-4 bg-[#C9A84C] hover:bg-[#B0913B] disabled:opacity-50 disabled:cursor-not-allowed text-black font-black tracking-[0.2em] text-xs rounded-full shadow-lg shadow-[#C9A84C]/10 hover:shadow-[#C9A84C]/25 transition-all duration-300 uppercase active:scale-95 cursor-pointer overflow-hidden flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-white"
+            className="group relative w-full py-4 bg-[#8b5cf6] hover:bg-[#7c3aed] disabled:opacity-50 disabled:cursor-not-allowed text-white font-black tracking-[0.2em] text-xs rounded-full shadow-lg shadow-[#8b5cf6]/20 hover:shadow-[#8b5cf6]/40 transition-all duration-300 uppercase active:scale-95 cursor-pointer overflow-hidden flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-white"
           >
             <span className="relative z-10 transition-transform duration-300 group-hover:-translate-y-8">
               {status === 'loading' ? config.submitLoadingText : config.submitText}
             </span>
-            <span className="absolute inset-0 z-10 flex items-center justify-center gap-2 translate-y-8 transition-transform duration-300 group-hover:translate-y-0 text-black">
-              <span className="w-2 h-2 bg-black rounded-full animate-pulse" />
-              <span className="w-2 h-2 bg-black rounded-full animate-pulse delay-75" />
+            <span className="absolute inset-0 z-10 flex items-center justify-center gap-2 translate-y-8 transition-transform duration-300 group-hover:translate-y-0 text-white">
+              <span className="w-2 h-2 bg-white rounded-full animate-pulse" />
+              <span className="w-2 h-2 bg-white rounded-full animate-pulse delay-75" />
             </span>
           </button>
         )}

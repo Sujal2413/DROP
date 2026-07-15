@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from "react";
+import React from "react";
 import Link from "next/link";
 import {
   Mail,
@@ -27,46 +27,6 @@ export default function Footer({ theme = "default" }: FooterProps) {
   const copyText = isOlive ? "text-[#C9A84C]/50" : "text-gray-500";
   const strokeMobile = isOlive ? "2px #C9A84C" : "2px white";
 
-  const [email, setEmail] = useState('');
-  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
-  const [message, setMessage] = useState('');
-
-  const handleSubscribe = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!email || !email.includes('@')) {
-      setStatus('error');
-      setMessage('Please enter a valid email address.');
-      return;
-    }
-    setStatus('loading');
-    
-    try {
-      const res = await fetch('/api/v1/interest', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, leadSource: 'footer_interest' })
-      });
-      const data = await res.json();
-      
-      if (res.ok && data.success) {
-        setStatus('success');
-        setMessage(data.message);
-        setEmail('');
-      } else {
-        setStatus('error');
-        if (data.error && data.error.fields) {
-          const errors = Object.values(data.error.fields).join(', ');
-          setMessage(`${data.error.message}: ${errors}`);
-        } else {
-          setMessage(data.error?.message || data.error || 'Something went wrong.');
-        }
-      }
-    } catch {
-      setStatus('error');
-      setMessage('Network error. Please try again.');
-    }
-  };
-
   const navLinks = [
     { label: "Products", href: "/#products" },
     { label: "Our Story", href: "/story" },
@@ -77,45 +37,8 @@ export default function Footer({ theme = "default" }: FooterProps) {
   return (
     <footer className={`relative h-fit overflow-hidden border-t font-sans ${footerBg}`}>
       <div className="max-w-7xl mx-auto px-5 sm:px-8 md:px-14 pt-16 sm:pt-20 pb-0 z-40 relative">
-        
-        {/* Newsletter Signup */}
-        <div className="flex flex-col md:flex-row items-center justify-between bg-[#0F1112] rounded-sm p-8 md:p-12 mb-16 border border-white/10 shadow-2xl relative z-10">
-          <div className="md:w-1/2 mb-8 md:mb-0">
-            <h3 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-2">Be first to taste it.</h3>
-            <p className="text-[#F9F9F9]/70 text-sm">Join the list for quick updates (or join the full waitlist above for priority launch access).</p>
-          </div>
-          <div className="w-full md:w-1/2 flex justify-end">
-            <form onSubmit={handleSubscribe} className="w-full max-w-md" noValidate>
-              <div className="flex flex-col sm:flex-row gap-4 border-b border-[#F9F9F9]/30 focus-within:border-[#8b5cf6] transition-colors pb-2">
-                <label htmlFor="newsletter-email" className="sr-only">Your email address</label>
-                <input 
-                  id="newsletter-email"
-                  type="email" 
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Your email address" 
-                  className="w-full bg-transparent text-white outline-none py-2 px-2 text-sm placeholder:text-[#F9F9F9]/30 focus:ring-0" 
-                  disabled={status === 'loading' || status === 'success'}
-                  aria-invalid={status === 'error'}
-                />
-                <button 
-                  type="submit" 
-                  className="text-xs font-bold tracking-widest uppercase text-[#8b5cf6] hover:text-white px-4 transition-colors disabled:opacity-50 shrink-0 focus:outline-none focus:ring-2 focus:ring-[#8b5cf6] rounded-sm"
-                  disabled={status === 'loading' || status === 'success'}
-                >
-                  {status === 'loading' ? 'Subscribing...' : status === 'success' ? 'Subscribed' : 'Subscribe'}
-                </button>
-              </div>
-              
-              <div aria-live="polite" className="mt-2 text-xs h-4">
-                {status === 'error' && <p className="text-red-400">{message}</p>}
-                {status === 'success' && <p className="text-[#8b5cf6]">{message}</p>}
-              </div>
-            </form>
-          </div>
-        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 lg:gap-16 pb-12 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 lg:gap-16 pb-12 relative z-10 mt-8">
           {/* Brand section */}
           <div className="flex flex-col space-y-4">
             <Link href="/" className="inline-block focus:outline-none focus:ring-2 focus:ring-[#8b5cf6] rounded-sm max-w-max p-1 -ml-1">
