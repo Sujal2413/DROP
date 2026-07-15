@@ -96,9 +96,10 @@ export default function ProductShowcaseSection() {
                   src={can.image}
                   alt={`DROP. ${can.name}`}
                   fill
-                  sizes="(max-width: 768px) 50vw, (max-width: 1200px) 25vw, 300px"
+                  sizes="(max-width: 420px) 60vw, (max-width: 768px) 40vw, (max-width: 1200px) 20vw, 250px"
                   className="object-contain transition-transform duration-700 group-hover:scale-105"
-                  style={{ filter: 'drop-shadow(0px 8px 24px rgba(0,0,0,0.5))' }}
+                  style={{ filter: 'drop-shadow(0px 5px 15px rgba(0,0,0,0.4))' }}
+                  quality={85}
                 />
               </div>
               <div className="mt-4 text-center px-2">

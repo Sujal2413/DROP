@@ -1,31 +1,32 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function ScrollToTop() {
   const [isVisible, setIsVisible] = useState(false);
+  const isVisibleRef = useRef(false);
 
   useEffect(() => {
     const toggleVisibility = () => {
-      // Show button when page is scrolled down 500px
-      if (window.scrollY > 500) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(false);
+      const shouldShow = window.scrollY > 500;
+      // Only trigger setState when the value actually changes
+      if (shouldShow !== isVisibleRef.current) {
+        isVisibleRef.current = shouldShow;
+        setIsVisible(shouldShow);
       }
     };
 
-    window.addEventListener('scroll', toggleVisibility);
+    window.addEventListener('scroll', toggleVisibility, { passive: true });
     return () => window.removeEventListener('scroll', toggleVisibility);
   }, []);
 
-  const scrollToTop = () => {
+  const scrollToTop = useCallback(() => {
     window.scrollTo({
       top: 0,
       behavior: 'smooth',
     });
-  };
+  }, []);
 
   return (
     <AnimatePresence>

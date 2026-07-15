@@ -3,10 +3,10 @@ import { Inter, Oswald, Playfair_Display, Space_Mono } from 'next/font/google';
 import './globals.css';
 
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-body' });
-const oswald = Oswald({ subsets: ['latin'], variable: '--font-heading' });
-const playfair = Playfair_Display({ subsets: ['latin'], variable: '--font-serif' });
-const spaceMono = Space_Mono({ weight: ['400', '700'], subsets: ['latin'], variable: '--font-mono' });
+const inter = Inter({ subsets: ['latin'], variable: '--font-body', display: 'swap' });
+const oswald = Oswald({ subsets: ['latin'], variable: '--font-heading', display: 'swap' });
+const playfair = Playfair_Display({ subsets: ['latin'], variable: '--font-serif', display: 'swap', preload: false });
+const spaceMono = Space_Mono({ weight: ['400'], subsets: ['latin'], variable: '--font-mono', display: 'swap', preload: false });
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.dropwater.in'),

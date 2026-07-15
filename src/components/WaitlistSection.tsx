@@ -64,7 +64,7 @@ export default function WaitlistSection() {
       className="relative bg-[#0A0A0A] py-24 sm:py-28 md:py-36 px-5 sm:px-8 md:px-16 overflow-hidden"
     >
       {/* Accent glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[min(600px,140vw)] h-[min(600px,140vw)] bg-[#C9A84C]/[0.06] rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[min(600px,140vw)] h-[min(600px,140vw)] bg-[#C9A84C]/[0.06] rounded-full blur-[40px] md:blur-[80px] pointer-events-none" />
 
       <div ref={formRef} className="max-w-xl mx-auto relative z-10">
         {/* Header */}

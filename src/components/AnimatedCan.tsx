@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import gsap from 'gsap';
@@ -9,19 +9,23 @@ import gsap from 'gsap';
 const CANS = [
   { 
     id: 'purple', src: '/assets/new-can-variant-1.png', alt: 'Deep Purple Can', scale: 1.6,
-    filter: 'drop-shadow(0 20px 30px rgba(0,0,0,0.8))'
+    filter: 'drop-shadow(0 20px 30px rgba(0,0,0,0.8))',
+    mobileFilter: 'drop-shadow(0 10px 15px rgba(0,0,0,0.5))'
   },
   { 
     id: 'red', src: '/assets/clove_can_transparent.png', alt: 'Clove Can', scale: 1.6,
-    filter: 'drop-shadow(0px 0px 1.5px rgba(0,0,0,0.5)) drop-shadow(0px 10px 30px rgba(0,0,0,0.15))'
+    filter: 'drop-shadow(0px 0px 1.5px rgba(0,0,0,0.5)) drop-shadow(0px 10px 30px rgba(0,0,0,0.15))',
+    mobileFilter: 'drop-shadow(0px 5px 15px rgba(0,0,0,0.3))'
   },
   { 
     id: 'black', src: '/assets/new-can-variant-3.png', alt: 'Full Black Can', scale: 1.6,
-    filter: 'drop-shadow(0px 0px 1.5px rgba(0,0,0,0.5)) drop-shadow(0px 10px 30px rgba(0,0,0,0.15))'
+    filter: 'drop-shadow(0px 0px 1.5px rgba(0,0,0,0.5)) drop-shadow(0px 10px 30px rgba(0,0,0,0.15))',
+    mobileFilter: 'drop-shadow(0px 5px 15px rgba(0,0,0,0.3))'
   },
   {
     id: 'silver', src: '/assets/new-can-2.png', alt: 'Sparkling Water Can', scale: 1.6,
-    filter: 'drop-shadow(0px 0px 1.5px rgba(0,0,0,0.5)) drop-shadow(0px 10px 30px rgba(0,0,0,0.15))'
+    filter: 'drop-shadow(0px 0px 1.5px rgba(0,0,0,0.5)) drop-shadow(0px 10px 30px rgba(0,0,0,0.15))',
+    mobileFilter: 'drop-shadow(0px 5px 15px rgba(0,0,0,0.3))'
   }
 ];
 
@@ -29,26 +33,32 @@ export default function AnimatedCan({ activeIndex }: { activeIndex: number }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const canRefs = useRef<(HTMLDivElement | null)[]>([]);
   const prevIndexRef = useRef<number>(activeIndex);
-  const [isMobile, setIsMobile] = useState(false);
+  const isFirstRender = useRef(true);
+  const isMobileRef = useRef(false);
+  const floatingTweenRef = useRef<gsap.core.Tween | null>(null);
 
+  // One-time mobile check via ref (no re-render)
   useEffect(() => {
+    isMobileRef.current = window.innerWidth < 768;
+    
     const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
+      isMobileRef.current = window.innerWidth < 768;
     };
-    handleResize();
-    window.addEventListener('resize', handleResize);
+    
+    window.addEventListener('resize', handleResize, { passive: true });
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const isFirstRender = useRef(true);
-
-  // Helper function to start floating loop on the active can
+  // Helper function to start floating loop on the active can (desktop only)
   const startFloatingLoop = (el: HTMLDivElement | null) => {
-    if (!el) return;
-    gsap.killTweensOf(el); // Clear any active animations
-    
-    // Start continuous floating
-    gsap.to(el, {
+    if (!el || isMobileRef.current) return;
+
+    // Kill previous floating tween
+    if (floatingTweenRef.current) {
+      floatingTweenRef.current.kill();
+    }
+
+    floatingTweenRef.current = gsap.to(el, {
       y: -20,
       rotationZ: 1,
       rotationY: 15,
@@ -67,11 +77,14 @@ export default function AnimatedCan({ activeIndex }: { activeIndex: number }) {
     canRefs.current.forEach(can => {
       if (can) gsap.killTweensOf(can);
     });
+    if (floatingTweenRef.current) {
+      floatingTweenRef.current.kill();
+      floatingTweenRef.current = null;
+    }
 
     if (isFirstRender.current) {
       isFirstRender.current = false;
       
-      // Ensure the initial active can is visible, centered and starts floating immediately
       const activeCan = canRefs.current[activeIndex];
       if (activeCan) {
         gsap.fromTo(activeCan,
@@ -81,37 +94,38 @@ export default function AnimatedCan({ activeIndex }: { activeIndex: number }) {
             scale: 1, 
             x: 0, 
             y: 0,
-            duration: 1.5, 
+            duration: isMobileRef.current ? 0.8 : 1.5, 
             ease: 'power3.out',
             onComplete: () => startFloatingLoop(activeCan)
           }
         );
       }
     } else {
-      // Transition: previous rolls out to the left, active rolls in from the right
       const prevCan = canRefs.current[prevIndex];
       const activeCan = canRefs.current[activeIndex];
+
+      const duration = isMobileRef.current ? 0.6 : 1.2;
 
       if (prevCan) {
         gsap.to(prevCan, {
           x: '-100vw',
-          y: -100, // Arc up
-          rotationZ: -90, // Roll to the left
+          y: isMobileRef.current ? -50 : -100,
+          rotationZ: isMobileRef.current ? -45 : -90,
           opacity: 0,
-          duration: 1.2,
+          duration,
           ease: 'power3.inOut'
         });
       }
 
       if (activeCan) {
         gsap.fromTo(activeCan,
-          { x: '100vw', y: 150, rotationZ: 90, opacity: 0 },
+          { x: '100vw', y: isMobileRef.current ? 80 : 150, rotationZ: isMobileRef.current ? 45 : 90, opacity: 0 },
           { 
             x: 0, 
             y: 0, 
             rotationZ: 0, 
             opacity: 1, 
-            duration: 1.2, 
+            duration, 
             ease: 'power3.out',
             onComplete: () => startFloatingLoop(activeCan)
           }
@@ -121,6 +135,18 @@ export default function AnimatedCan({ activeIndex }: { activeIndex: number }) {
 
     prevIndexRef.current = activeIndex;
   }, [activeIndex]);
+
+  // Cleanup all GSAP tweens on unmount
+  useEffect(() => {
+    return () => {
+      canRefs.current.forEach(can => {
+        if (can) gsap.killTweensOf(can);
+      });
+      if (floatingTweenRef.current) {
+        floatingTweenRef.current.kill();
+      }
+    };
+  }, []);
 
   return (
     <div
@@ -145,15 +171,30 @@ export default function AnimatedCan({ activeIndex }: { activeIndex: number }) {
                 alt={can.alt}
                 fill
                 priority={idx === 0}
-                quality={100}
-                sizes="(max-width: 768px) 55vw, 900px"
-                className="object-contain object-center opacity-100"
+                loading={idx === 0 ? 'eager' : 'lazy'}
+                quality={85}
+                sizes="(max-width: 768px) 210px, (max-width: 1200px) 40vw, 900px"
+                className="object-contain object-center"
                 style={{ 
                   mixBlendMode: 'normal',
-                  filter: can.filter,
-                  transform: `scale(${isMobile ? can.scale * 0.7 : can.scale})`,
+                  transform: `scale(${can.scale * 0.7})`,
                 }}
               />
+              {/* Desktop: use CSS media query for larger scale instead of JS state */}
+              <style dangerouslySetInnerHTML={{__html: `
+                @media (min-width: 768px) {
+                  [data-can-id="${can.id}"] img {
+                    transform: scale(${can.scale}) !important;
+                    filter: ${can.filter};
+                  }
+                }
+                @media (max-width: 767px) {
+                  [data-can-id="${can.id}"] img {
+                    filter: ${can.mobileFilter};
+                  }
+                }
+              `}} />
+              <span data-can-id={can.id} className="absolute inset-0 pointer-events-none" />
             </Link>
           </div>
         </div>

@@ -32,7 +32,8 @@ export const TextHoverEffect = ({
         });
       }
     }
-  }, [cursor]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cursor.x, cursor.y]);
 
   const isOlive = theme === "olive";
   const strokeColor40 = isOlive ? "stroke-[#D4AF37]/30" : "stroke-[#8b5cf6]/40";
@@ -107,11 +108,6 @@ export const TextHoverEffect = ({
         className={cn("fill-transparent font-[Anton] text-7xl font-black tracking-tighter", strokeColor40)}
         animate={{
           opacity: [0.7, 1, 0.7],
-          filter: [
-            `drop-shadow(0 0 30px ${isOlive ? "rgba(212, 175, 55, 0.5)" : "rgba(139, 92, 246, 0.6)"})`,
-            `drop-shadow(0 0 80px ${isOlive ? "rgba(212, 175, 55, 0.9)" : "rgba(139, 92, 246, 1)"})`,
-            `drop-shadow(0 0 30px ${isOlive ? "rgba(212, 175, 55, 0.5)" : "rgba(139, 92, 246, 0.6)"})`
-          ]
         }}
         transition={{
           duration: 3,

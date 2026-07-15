@@ -15,6 +15,21 @@
     scroll-behavior: smooth;
   }
   
+  /* Disable smooth scroll when reduced motion is preferred — avoids fighting native Safari momentum */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    
+    /* Kill all CSS animations and transitions globally for reduced motion */
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+  
   /* Input flash animation when waitlist section is targeted via anchor */
   #waitlist:target input,
   #waitlist:target select {
@@ -32,6 +47,8 @@
     color: var(--color-text);
     font-family: var(--font-body), sans-serif;
     overflow-x: hidden;
+    /* Ensure native touch scrolling on iOS */
+    -webkit-overflow-scrolling: touch;
   }
 
   h1, h2, h3 {

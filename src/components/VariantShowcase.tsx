@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { PRODUCTS } from '@/lib/data/products';
@@ -9,6 +9,27 @@ import { motion, AnimatePresence } from 'framer-motion';
 export default function VariantShowcase() {
   const [activeIndex, setActiveIndex] = useState(0);
   const activeProduct = PRODUCTS[activeIndex];
+  const sectionRef = useRef<HTMLElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Detect mobile once
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 768);
+  }, []);
+
+  // IntersectionObserver to track visibility
+  useEffect(() => {
+    if (!sectionRef.current) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      { threshold: 0.05 }
+    );
+    observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, []);
 
   // Rich, premium gradients tailored to each variant
   const getGradient = (slug: string) => {
@@ -44,9 +65,13 @@ export default function VariantShowcase() {
 
   const accentColor = getAccentColor(activeProduct.slug);
   const glowColor = getGlowColor(activeProduct.slug);
+  const prefersReducedMotion = typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+
+  // Determine float animation: only on desktop when visible and motion allowed
+  const shouldFloat = isVisible && !isMobile && !prefersReducedMotion;
 
   return (
-    <section id="products" className="relative w-full text-white font-sans min-h-screen flex overflow-hidden bg-[#050505]">
+    <section ref={sectionRef} id="products" className="relative w-full text-white font-sans min-h-screen flex overflow-hidden bg-[#050505]">
       
       {/* Background Gradient Transition */}
       <AnimatePresence>
@@ -61,22 +86,24 @@ export default function VariantShowcase() {
         />
       </AnimatePresence>
       
-      {/* Ambient Glow behind the can */}
-      <AnimatePresence>
-        <motion.div
-          key={`glow-${activeProduct.slug}`}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 1 }}
-          className="absolute right-0 top-1/2 -translate-y-1/2 w-[60vh] h-[60vh] rounded-full blur-[120px] pointer-events-none z-0"
-          style={{ background: glowColor }}
-        />
-      </AnimatePresence>
+      {/* Ambient Glow — desktop only, reduced blur */}
+      {!isMobile && (
+        <AnimatePresence>
+          <motion.div
+            key={`glow-${activeProduct.slug}`}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: isVisible ? 1 : 0 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1 }}
+            className="absolute right-0 top-1/2 -translate-y-1/2 w-[60vh] h-[60vh] rounded-full blur-[80px] pointer-events-none z-0"
+            style={{ background: glowColor }}
+          />
+        </AnimatePresence>
+      )}
 
       <div className="max-w-[1600px] w-full mx-auto flex flex-col md:flex-row relative z-10">
         
-        {/* Left Sticky Column: Glassmorphism Tab List */}
+        {/* Left Sticky Column: Tab List */}
         <div className="w-full md:w-1/3 lg:w-1/4 pt-24 md:pt-40 px-6 md:px-12 lg:px-16 flex flex-col md:border-r border-white/5 md:sticky md:top-0 h-auto md:h-screen z-20">
           <h2 className="text-xs font-bold tracking-[0.4em] uppercase text-white/40 mb-10 pl-4">
             The Collection
@@ -91,7 +118,7 @@ export default function VariantShowcase() {
                   onClick={() => setActiveIndex(idx)}
                   className={`relative flex items-center px-5 py-4 md:py-5 rounded-2xl transition-all duration-500 text-left focus:outline-none group overflow-hidden ${
                     isActive 
-                      ? 'bg-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.2)] border border-white/10 backdrop-blur-md' 
+                      ? 'bg-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.2)] border border-white/10' 
                       : 'hover:bg-white/5 border border-transparent'
                   }`}
                 >
@@ -182,7 +209,7 @@ export default function VariantShowcase() {
                     <div className="absolute inset-0 bg-white/20 translate-y-[100%] group-hover:translate-y-0 transition-transform duration-300 z-0"></div>
                   </Link>
                 ) : (
-                  <div className="inline-flex items-center justify-center px-8 py-4 text-xs font-bold tracking-[0.2em] uppercase rounded-full bg-white/5 border border-white/10 text-white/50 backdrop-blur-md">
+                  <div className="inline-flex items-center justify-center px-8 py-4 text-xs font-bold tracking-[0.2em] uppercase rounded-full bg-white/5 border border-white/10 text-white/50">
                     Coming Next
                   </div>
                 )}
@@ -199,23 +226,25 @@ export default function VariantShowcase() {
                 animate={{ 
                   opacity: 1, 
                   scale: 1, 
-                  y: [0, -20, 0], // Smooth continuous floating
-                  rotate: [0, 2, 0]
+                  y: shouldFloat ? [0, -20, 0] : 0,
+                  rotate: shouldFloat ? [0, 2, 0] : 0
                 }}
                 exit={{ opacity: 0, scale: 0.85, y: -50, rotate: 5 }}
                 transition={{ 
-                  duration: 0.8,
+                  duration: isMobile ? 0.4 : 0.8,
                   ease: "easeOut",
-                  y: {
-                    duration: 5,
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                  },
-                  rotate: {
-                    duration: 6,
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                  }
+                  ...(shouldFloat ? {
+                    y: {
+                      duration: 5,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    },
+                    rotate: {
+                      duration: 6,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }
+                  } : {})
                 }}
                 className="relative w-[280px] lg:w-[420px] aspect-[1/2]"
               >
@@ -223,8 +252,13 @@ export default function VariantShowcase() {
                   src={activeProduct.image} 
                   alt={activeProduct.displayName} 
                   fill 
-                  className="object-contain drop-shadow-[0_30px_40px_rgba(0,0,0,0.6)]" 
+                  className="object-contain" 
+                  sizes="(max-width: 768px) 280px, 420px"
+                  quality={85}
                   priority
+                  style={{
+                    filter: isMobile ? 'drop-shadow(0 15px 20px rgba(0,0,0,0.4))' : 'drop-shadow(0 30px 40px rgba(0,0,0,0.6))'
+                  }}
                 />
               </motion.div>
             </AnimatePresence>

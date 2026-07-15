@@ -66,7 +66,7 @@ export default function WhyDropSection() {
           {/* Box 2: The Can (Bottom Left, spans 7 cols) */}
           <div className="md:col-span-7 bg-[#23272C] rounded-3xl p-8 md:p-12 border border-white/10 flex flex-col justify-between group overflow-hidden relative">
             {/* Metallic Brushed Texture Background */}
-            <div className="absolute inset-0 opacity-40 pointer-events-none mix-blend-overlay" style={{ 
+            <div className="absolute inset-0 opacity-40 pointer-events-none" style={{ 
               backgroundImage: 'linear-gradient(90deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 20%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0) 80%, rgba(255,255,255,0.05) 100%)',
               backgroundSize: '200% 100%'
             }} />

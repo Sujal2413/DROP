@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Droplet, Recycle, Ban, Zap } from 'lucide-react';
@@ -10,20 +10,48 @@ const COL_1_ITEMS = [
   { src: '/assets/WhatsApp Image 2026-06-14 at 10.18.19.jpeg', alt: 'DROP water lifestyle 1', height: 280, width: 350 },
   { src: '/assets/WhatsApp Image 2026-06-14 at 10.24.14 (1).jpeg', alt: 'DROP water lifestyle 2', height: 440, width: 280 },
   { src: '/assets/clove_can.jpeg', alt: 'DROP water clove can', height: 320, width: 320 },
-  { src: '/assets/Screenshot 2026-06-30 at 10.42.52 AM.png', alt: 'DROP water screenshot 1', height: 350, width: 350 },
+  { src: '/assets/Screenshot 2026-06-30 at 10.42.52 AM.png', alt: 'DROP water screenshot 1', height: 350, width: 350 },
 ];
 
 const COL_2_ITEMS = [
-  { src: '/assets/Screenshot 2026-06-30 at 10.45.24 AM 2.png', alt: 'DROP water screenshot 2', height: 300, width: 380 },
+  { src: '/assets/Screenshot 2026-06-30 at 10.45.24 AM 2.png', alt: 'DROP water screenshot 2', height: 300, width: 380 },
   { src: '/assets/WhatsApp Image 2026-06-03 at 00.11.47.jpeg', alt: 'DROP water image 1', height: 420, width: 280 },
   { src: '/assets/WhatsApp Image 2026-06-03 at 00.47.41.jpeg', alt: 'DROP water image 2', height: 350, width: 300 },
   { src: '/assets/WhatsApp Image 2026-06-03 at 01.10.55.jpeg', alt: 'DROP water image 3', height: 280, width: 400 },
 ];
 
 export default function FeatureSplitSection() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const marquee1Ref = useRef<HTMLDivElement>(null);
+  const marquee2Ref = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  // Pause marquee animations when section is off-screen
+  useEffect(() => {
+    if (!sectionRef.current) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      { threshold: 0, rootMargin: '100px' }
+    );
+    observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (marquee1Ref.current) {
+      marquee1Ref.current.style.animationPlayState = isVisible ? 'running' : 'paused';
+    }
+    if (marquee2Ref.current) {
+      marquee2Ref.current.style.animationPlayState = isVisible ? 'running' : 'paused';
+    }
+  }, [isVisible]);
+
   return (
     <section 
       id="features" 
+      ref={sectionRef}
       className="relative w-full min-h-[100svh] bg-[#F4F4F3] text-[#111111] flex flex-col lg:flex-row overflow-hidden border-b border-[#E5E5E5]/30 z-10 m-0 p-0"
       style={{ marginTop: 0, marginBottom: 0 }}
     >
@@ -35,7 +63,7 @@ export default function FeatureSplitSection() {
           
           {/* Column/Row 1 */}
           <div className="w-full lg:w-1/2 h-1/2 lg:h-full overflow-hidden relative flex lg:block">
-            <div className="flex flex-row lg:flex-col gap-3 lg:gap-4 h-full lg:w-full animate-marquee-1 will-change-transform items-center lg:items-stretch">
+            <div ref={marquee1Ref} className="flex flex-row lg:flex-col gap-3 lg:gap-4 h-full lg:w-full animate-marquee-1 items-center lg:items-stretch">
               {[...COL_1_ITEMS, ...COL_1_ITEMS].map((item, i) => (
                 <div 
                   key={`col1-${i}`} 
@@ -49,10 +77,9 @@ export default function FeatureSplitSection() {
                     src={item.src} 
                     alt={item.alt} 
                     fill 
-                    sizes="(max-width: 1024px) 50vw, 50vw"
+                    sizes="(max-width: 1024px) 40vw, 25vw"
                     className="object-cover" 
-                    priority={i < 2}
-                    loading={i < 2 ? 'eager' : 'lazy'}
+                    loading="lazy"
                   />
                 </div>
               ))}
@@ -61,7 +88,7 @@ export default function FeatureSplitSection() {
           
           {/* Column/Row 2 */}
           <div className="w-full lg:w-1/2 h-1/2 lg:h-full overflow-hidden relative flex lg:block">
-            <div className="flex flex-row lg:flex-col gap-3 lg:gap-4 h-full lg:w-full animate-marquee-2 will-change-transform items-center lg:items-stretch">
+            <div ref={marquee2Ref} className="flex flex-row lg:flex-col gap-3 lg:gap-4 h-full lg:w-full animate-marquee-2 items-center lg:items-stretch">
               {[...COL_2_ITEMS, ...COL_2_ITEMS].map((item, i) => (
                 <div 
                   key={`col2-${i}`} 
@@ -75,10 +102,9 @@ export default function FeatureSplitSection() {
                     src={item.src} 
                     alt={item.alt} 
                     fill 
-                    sizes="(max-width: 1024px) 50vw, 50vw"
+                    sizes="(max-width: 1024px) 40vw, 25vw"
                     className="object-cover" 
-                    priority={i < 2}
-                    loading={i < 2 ? 'eager' : 'lazy'}
+                    loading="lazy"
                   />
                 </div>
               ))}

@@ -46,6 +46,8 @@ export default function HeroSection() {
       { y: 0, opacity: 1, duration: 1, ease: 'power2.out' },
       '-=0.8'
     );
+
+    return () => { tl.kill(); };
   }, []);
 
   const handleFlavorSelect = useCallback((index: number) => {
@@ -134,7 +136,7 @@ export default function HeroSection() {
           <div className="flex flex-col sm:flex-row gap-4 w-full justify-center md:justify-start items-center">
             <a
               href="#waitlist"
-              className="px-8 sm:px-10 py-4 w-full max-w-[20rem] sm:w-auto sm:max-w-none font-bold tracking-[0.16em] sm:tracking-[0.2em] text-xs rounded-full shadow-xl hover:shadow-2xl hover:-translate-y-1 active:translate-y-0 active:scale-95 transition-all duration-300 ring-1 ring-white/20 backdrop-blur-sm text-center block focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-transparent"
+              className="px-8 sm:px-10 py-4 w-full max-w-[20rem] sm:w-auto sm:max-w-none font-bold tracking-[0.16em] sm:tracking-[0.2em] text-xs rounded-full shadow-xl hover:shadow-2xl hover:-translate-y-1 active:translate-y-0 active:scale-95 transition-colors duration-300 ring-1 ring-white/20 text-center block focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-transparent"
               style={{
                 backgroundColor: currentTheme.id === 'red' ? '#fca5a5' : currentTheme.id === 'purple' ? '#E9D5FF' : '#FFFFFF',
                 color: currentTheme.id === 'red' ? '#450a0a' : currentTheme.id === 'purple' ? '#1A0B2E' : '#0A0A0A'
@@ -145,7 +147,7 @@ export default function HeroSection() {
             
             <a
               href="#products"
-              className="px-8 sm:px-10 py-4 w-full max-w-[20rem] sm:w-auto sm:max-w-none bg-transparent border border-white/20 font-bold tracking-[0.16em] sm:tracking-[0.2em] text-xs rounded-full hover:bg-white/10 hover:border-white/40 backdrop-blur-md transition-all duration-300 text-center flex items-center justify-center hover:-translate-y-1 active:translate-y-0 active:scale-95 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-transparent"
+              className="px-8 sm:px-10 py-4 w-full max-w-[20rem] sm:w-auto sm:max-w-none bg-transparent border border-white/20 font-bold tracking-[0.16em] sm:tracking-[0.2em] text-xs rounded-full hover:bg-white/10 hover:border-white/40 transition-colors duration-300 text-center flex items-center justify-center hover:-translate-y-1 active:translate-y-0 active:scale-95 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-transparent"
               style={{ color: currentTheme.text }}
             >
               EXPLORE FLAVORS

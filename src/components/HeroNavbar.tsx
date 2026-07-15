@@ -75,7 +75,7 @@ export default function HeroNavbar({ activeIndex = 0 }: HeroNavbarProps) {
         
         {/* Center: Toggle-like Nav */}
         <div 
-          className="hidden md:flex gap-2 text-xs font-bold tracking-widest rounded-full p-1.5 border transition-colors duration-1000 backdrop-blur-md"
+          className="hidden md:flex gap-2 text-xs font-bold tracking-widest rounded-full p-1.5 border transition-colors duration-1000"
           style={{ 
             borderColor: `${themeColor}20`, 
             color: themeColor,
