@@ -169,24 +169,24 @@ export default function FeatureSplitSection() {
         }
 
         .animate-marquee-1 {
-          animation: marqueeLeft 35s linear infinite;
+          animation: marqueeLeft 20s linear infinite;
         }
 
         .animate-marquee-2 {
-          animation: marqueeLeft 42s linear infinite;
+          animation: marqueeLeft 25s linear infinite;
           animation-direction: reverse;
         }
 
         @media (min-width: 1024px) {
           .animate-marquee-1 {
-            animation: marqueeDown 35s linear infinite;
+            animation: marqueeDown 20s linear infinite;
             animation-direction: normal;
           }
           
           .animate-marquee-2 {
-            animation: marqueeDown 45s linear infinite;
+            animation: marqueeDown 25s linear infinite;
             animation-direction: normal;
-            animation-delay: -15s;
+            animation-delay: -10s;
           }
         }
 
