@@ -6,17 +6,18 @@ import Link from 'next/link';
 import { Droplet, Recycle, Ban, Zap } from 'lucide-react';
 
 const COL_1_ITEMS = [
-  { src: '/assets/drop_can_condensation.png', alt: 'DROP premium aluminium can covered in ice-cold condensation', height: 380 },
-  { src: '/assets/drop_can_held.png', alt: 'DROP water can being held during a fitness workout', height: 280 },
-  { src: '/assets/drop_can_macro.png', alt: 'Macro water splash texture on cold brushed aluminium surface', height: 440 },
-  { src: '/assets/drop_can_urban.png', alt: 'DROP clean aluminium water can sitting on granite ledge in modern city', height: 320 },
+  { src: '/assets/Add_some_details_to_the_202606301348.jpeg', alt: 'DROP water details', height: 380, width: 280 },
+  { src: '/assets/WhatsApp Image 2026-06-14 at 10.18.19.jpeg', alt: 'DROP water lifestyle 1', height: 280, width: 350 },
+  { src: '/assets/WhatsApp Image 2026-06-14 at 10.24.14 (1).jpeg', alt: 'DROP water lifestyle 2', height: 440, width: 280 },
+  { src: '/assets/clove_can.jpeg', alt: 'DROP water clove can', height: 320, width: 320 },
+  { src: '/assets/Screenshot 2026-06-30 at 10.42.52 AM.png', alt: 'DROP water screenshot 1', height: 350, width: 350 },
 ];
 
 const COL_2_ITEMS = [
-  { src: '/assets/drop_can_ice.png', alt: 'DROP premium water can resting on fresh crushed ice', height: 300 },
-  { src: '/assets/drop_can_gym.png', alt: 'DROP water can next to a yoga mat in modern concrete gym', height: 420 },
-  { src: '/assets/drop_can_cafe.png', alt: 'DROP water can on outdoor cafe table concrete setting', height: 350 },
-  { src: '/assets/drop_can_condensation.png', alt: 'Macro close-up details of droplets on DROP water can', height: 280 },
+  { src: '/assets/Screenshot 2026-06-30 at 10.45.24 AM 2.png', alt: 'DROP water screenshot 2', height: 300, width: 380 },
+  { src: '/assets/WhatsApp Image 2026-06-03 at 00.11.47.jpeg', alt: 'DROP water image 1', height: 420, width: 280 },
+  { src: '/assets/WhatsApp Image 2026-06-03 at 00.47.41.jpeg', alt: 'DROP water image 2', height: 350, width: 300 },
+  { src: '/assets/WhatsApp Image 2026-06-03 at 01.10.55.jpeg', alt: 'DROP water image 3', height: 280, width: 400 },
 ];
 
 export default function FeatureSplitSection() {
@@ -27,26 +28,28 @@ export default function FeatureSplitSection() {
       style={{ marginTop: 0, marginBottom: 0 }}
     >
       
-      {/* Left side: Vertical Image Marquee */}
-      <div className="w-full lg:w-[49%] h-[60svh] lg:h-[100svh] relative overflow-hidden bg-[#EBEBEA] select-none pointer-events-none">
+      {/* Left side: Image Marquee (Horizontal on Mobile, Vertical on Desktop) */}
+      <div className="w-full lg:w-[49%] h-[50svh] lg:h-[100svh] relative overflow-hidden bg-[#EBEBEA] select-none pointer-events-none">
         
-        <div className="absolute inset-0 flex gap-3 lg:gap-4 p-3 lg:p-4 justify-center">
+        <div className="absolute inset-0 flex flex-col lg:flex-row gap-3 lg:gap-4 p-3 lg:p-4 justify-center">
           
-          {/* Column 1 (Moves top to bottom) */}
-          <div className="w-1/2 overflow-hidden relative h-full">
-            <div className="flex flex-col gap-3 lg:gap-4 w-full animate-marquee-down will-change-transform">
-              {/* Double render to guarantee seamless infinite scroll loop */}
+          {/* Column/Row 1 */}
+          <div className="w-full lg:w-1/2 h-1/2 lg:h-full overflow-hidden relative flex lg:block">
+            <div className="flex flex-row lg:flex-col gap-3 lg:gap-4 h-full lg:w-full animate-marquee-1 will-change-transform items-center lg:items-stretch">
               {[...COL_1_ITEMS, ...COL_1_ITEMS].map((item, i) => (
                 <div 
                   key={`col1-${i}`} 
-                  className="relative w-full overflow-hidden rounded-[20px] lg:rounded-[28px] bg-[#E1E1E0] shadow-sm shrink-0"
-                  style={{ height: `${item.height}px` }}
+                  className="marquee-item relative overflow-hidden rounded-[20px] lg:rounded-[28px] bg-[#E1E1E0] shadow-sm shrink-0"
+                  style={{ 
+                    '--item-w': `${item.width}px`,
+                    '--item-h': `${item.height}px`
+                  } as React.CSSProperties}
                 >
                   <Image 
                     src={item.src} 
                     alt={item.alt} 
                     fill 
-                    sizes="(max-width: 1024px) 25vw, 50vw"
+                    sizes="(max-width: 1024px) 50vw, 50vw"
                     className="object-cover" 
                     priority={i < 2}
                     loading={i < 2 ? 'eager' : 'lazy'}
@@ -56,20 +59,23 @@ export default function FeatureSplitSection() {
             </div>
           </div>
           
-          {/* Column 2 (Moves top to bottom, offset speed and delayed/staggered start) */}
-          <div className="w-1/2 overflow-hidden relative h-full">
-            <div className="flex flex-col gap-3 lg:gap-4 w-full animate-marquee-down-slow will-change-transform">
+          {/* Column/Row 2 */}
+          <div className="w-full lg:w-1/2 h-1/2 lg:h-full overflow-hidden relative flex lg:block">
+            <div className="flex flex-row lg:flex-col gap-3 lg:gap-4 h-full lg:w-full animate-marquee-2 will-change-transform items-center lg:items-stretch">
               {[...COL_2_ITEMS, ...COL_2_ITEMS].map((item, i) => (
                 <div 
                   key={`col2-${i}`} 
-                  className="relative w-full overflow-hidden rounded-[20px] lg:rounded-[28px] bg-[#E1E1E0] shadow-sm shrink-0"
-                  style={{ height: `${item.height}px` }}
+                  className="marquee-item relative overflow-hidden rounded-[20px] lg:rounded-[28px] bg-[#E1E1E0] shadow-sm shrink-0"
+                  style={{ 
+                    '--item-w': `${item.width}px`,
+                    '--item-h': `${item.height}px`
+                  } as React.CSSProperties}
                 >
                   <Image 
                     src={item.src} 
                     alt={item.alt} 
                     fill 
-                    sizes="(max-width: 1024px) 25vw, 50vw"
+                    sizes="(max-width: 1024px) 50vw, 50vw"
                     className="object-cover" 
                     priority={i < 2}
                     loading={i < 2 ? 'eager' : 'lazy'}
@@ -83,8 +89,8 @@ export default function FeatureSplitSection() {
       </div>
 
       {/* Right side: Content Block */}
-      <div className="w-full lg:w-[51%] flex flex-col justify-center px-6 py-16 md:px-16 lg:px-24 bg-[#F4F4F3] relative z-10">
-        <div className="max-w-[580px] w-full">
+      <div className="w-full lg:w-[51%] flex flex-col justify-center px-6 py-12 md:px-16 lg:px-24 bg-[#F4F4F3] relative z-10">
+        <div className="max-w-[580px] w-full mx-auto lg:mx-0">
           <h2 
             className="text-4xl md:text-5xl lg:text-7xl font-bold tracking-tighter leading-[1.05] mb-6 uppercase"
             style={{
@@ -97,7 +103,7 @@ export default function FeatureSplitSection() {
           </h2>
           
           <p className="text-base md:text-lg font-medium text-[#111111]/70 leading-relaxed mb-12">
-            Our purity comes from the power of pristine sources. We&apos;ve created a collection of premium functional waters for you, without a single compromise.
+            Our purity comes from the power of pristine sources. We've created a collection of premium functional waters for you, without a single compromise.
           </p>
 
           {/* Feature Grid */}
@@ -139,27 +145,55 @@ export default function FeatureSplitSection() {
         </div>
       </div>
 
-      {/* High-performance GPU-friendly vertical scrolling tracks CSS */}
       <style dangerouslySetInnerHTML={{__html: `
+        .marquee-item {
+          width: var(--item-w);
+          height: 100%;
+        }
+
+        @media (min-width: 1024px) {
+          .marquee-item {
+            width: 100%;
+            height: var(--item-h);
+          }
+        }
+
+        @keyframes marqueeLeft {
+          0% { transform: translate3d(0, 0, 0); }
+          100% { transform: translate3d(-50%, 0, 0); }
+        }
+
         @keyframes marqueeDown {
           0% { transform: translate3d(0, -50%, 0); }
           100% { transform: translate3d(0, 0%, 0); }
         }
-        
-        .animate-marquee-down {
-          animation: marqueeDown 28s linear infinite;
+
+        .animate-marquee-1 {
+          animation: marqueeLeft 35s linear infinite;
         }
 
-        .animate-marquee-down-slow {
-          animation: marqueeDown 36s linear infinite;
-          animation-delay: -18s; /* Staggers initial starting layout positions */
+        .animate-marquee-2 {
+          animation: marqueeLeft 42s linear infinite;
+          animation-direction: reverse;
         }
 
-        /* Respect accessibility prefers-reduced-motion and pause animation */
+        @media (min-width: 1024px) {
+          .animate-marquee-1 {
+            animation: marqueeDown 35s linear infinite;
+            animation-direction: normal;
+          }
+          
+          .animate-marquee-2 {
+            animation: marqueeDown 45s linear infinite;
+            animation-direction: normal;
+            animation-delay: -15s;
+          }
+        }
+
         @media (prefers-reduced-motion: reduce) {
-          .animate-marquee-down, .animate-marquee-down-slow {
+          .animate-marquee-1, .animate-marquee-2 {
             animation: none !important;
-            transform: translate3d(0, -25%, 0) !important;
+            transform: translate3d(0, 0, 0) !important;
           }
         }
       `}} />
