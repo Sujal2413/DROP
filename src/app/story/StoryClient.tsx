@@ -20,12 +20,12 @@ export default function StoryClient() {
         <motion.div
           animate={{ scale: [1, 1.1, 1], opacity: [0.1, 0.2, 0.1] }}
           transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-1/4 -left-1/4 w-[50vw] h-[50vw] bg-[#8b5cf6]/20 rounded-full blur-[150px]"
+          className="absolute top-1/4 -left-1/4 w-[50vw] h-[50vw] bg-[#8b5cf6]/20 rounded-full blur-[60px] md:blur-[150px]"
         />
         <motion.div
           animate={{ scale: [1, 1.2, 1], opacity: [0.05, 0.1, 0.05] }}
           transition={{ duration: 20, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-          className="absolute bottom-1/4 -right-1/4 w-[60vw] h-[60vw] bg-[#C9A84C]/20 rounded-full blur-[150px]"
+          className="absolute bottom-1/4 -right-1/4 w-[60vw] h-[60vw] bg-[#C9A84C]/20 rounded-full blur-[60px] md:blur-[150px]"
         />
       </div>
 
@@ -53,8 +53,9 @@ export default function StoryClient() {
               src="/assets/new-can-variant-3.png"
               alt="DROP Black Can"
               fill
-              className="object-contain scale-110 drop-shadow-[0_20px_40px_rgba(0,0,0,0.8)]"
-              sizes="(max-width: 768px) 100vw, 50vw"
+              quality={85}
+              className="object-contain scale-110 drop-shadow-[0_10px_20px_rgba(0,0,0,0.5)] md:drop-shadow-[0_20px_40px_rgba(0,0,0,0.8)]"
+              sizes="(max-width: 768px) 80vw, 50vw"
             />
           </div>
           <div className="order-1 md:order-2 space-y-8">
@@ -107,8 +108,9 @@ export default function StoryClient() {
               src="/assets/new-can-variant-2-final.png"
               alt="DROP Gold Can"
               fill
-              className="object-contain scale-125 drop-shadow-[0_20px_40px_rgba(0,0,0,0.8)]"
-              sizes="(max-width: 768px) 100vw, 50vw"
+              quality={85}
+              className="object-contain scale-125 drop-shadow-[0_10px_20px_rgba(0,0,0,0.5)] md:drop-shadow-[0_20px_40px_rgba(0,0,0,0.8)]"
+              sizes="(max-width: 768px) 80vw, 50vw"
             />
           </div>
         </section>

@@ -7,17 +7,17 @@ import { Droplet, Recycle, Ban, Zap } from 'lucide-react';
 
 const COL_1_ITEMS = [
   { src: '/assets/Add_some_details_to_the_202606301348.jpeg', alt: 'DROP water details', height: 380, width: 280 },
-  { src: '/assets/WhatsApp Image 2026-06-14 at 10.18.19.jpeg', alt: 'DROP water lifestyle 1', height: 280, width: 350 },
-  { src: '/assets/WhatsApp Image 2026-06-14 at 10.24.14 (1).jpeg', alt: 'DROP water lifestyle 2', height: 440, width: 280 },
+  { src: '/assets/lifestyle-4.jpeg', alt: 'DROP water lifestyle 1', height: 280, width: 350 },
+  { src: '/assets/lifestyle-5.jpeg', alt: 'DROP water lifestyle 2', height: 440, width: 280 },
   { src: '/assets/clove_can.jpeg', alt: 'DROP water clove can', height: 320, width: 320 },
-  { src: '/assets/Screenshot 2026-06-30 at 10.42.52 AM.png', alt: 'DROP water screenshot 1', height: 350, width: 350 },
+  { src: '/assets/screenshot-1.png', alt: 'DROP water screenshot 1', height: 350, width: 350 },
 ];
 
 const COL_2_ITEMS = [
-  { src: '/assets/Screenshot 2026-06-30 at 10.45.24 AM 2.png', alt: 'DROP water screenshot 2', height: 300, width: 380 },
-  { src: '/assets/WhatsApp Image 2026-06-03 at 00.11.47.jpeg', alt: 'DROP water image 1', height: 420, width: 280 },
-  { src: '/assets/WhatsApp Image 2026-06-03 at 00.47.41.jpeg', alt: 'DROP water image 2', height: 350, width: 300 },
-  { src: '/assets/WhatsApp Image 2026-06-03 at 01.10.55.jpeg', alt: 'DROP water image 3', height: 280, width: 400 },
+  { src: '/assets/screenshot-2.png', alt: 'DROP water screenshot 2', height: 300, width: 380 },
+  { src: '/assets/lifestyle-1.jpeg', alt: 'DROP water image 1', height: 420, width: 280 },
+  { src: '/assets/lifestyle-2.jpeg', alt: 'DROP water image 2', height: 350, width: 300 },
+  { src: '/assets/lifestyle-3.jpeg', alt: 'DROP water image 3', height: 280, width: 400 },
 ];
 
 export default function FeatureSplitSection() {
@@ -163,7 +163,7 @@ export default function FeatureSplitSection() {
           <div>
             <Link
               href="/#waitlist"
-              className="inline-block bg-[#D62828] text-white px-8 md:px-12 py-4 text-xs font-black tracking-[0.2em] uppercase rounded-full hover:bg-[#A81D1D] hover:-translate-y-1 active:translate-y-0 active:scale-95 transition-all duration-300 shadow-xl shadow-[#D62828]/20 focus:outline-none focus:ring-2 focus:ring-[#D62828] focus:ring-offset-2 focus:ring-offset-[#F4F4F3]"
+              className="inline-block bg-[#D62828] text-white px-8 md:px-12 py-4 text-xs font-black tracking-[0.2em] uppercase rounded-full hover:bg-[#A81D1D] hover:-translate-y-1 active:translate-y-0 active:scale-95 transition-all duration-300 shadow-xl shadow-[#D62828]/20 focus:outline-none focus:ring-2 focus:ring-[#D62828] focus:ring-offset-2 focus:ring-offset-[#F4F4F3] touch-manipulation"
             >
               Check Availability
             </Link>

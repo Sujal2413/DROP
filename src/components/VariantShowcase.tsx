@@ -116,7 +116,7 @@ export default function VariantShowcase() {
                 <button
                   key={p.slug}
                   onClick={() => setActiveIndex(idx)}
-                  className={`relative flex items-center px-5 py-4 md:py-5 rounded-2xl transition-all duration-500 text-left focus:outline-none group overflow-hidden ${
+                  className={`relative flex items-center px-5 py-4 md:py-5 rounded-2xl transition-all duration-500 text-left focus:outline-none group overflow-hidden touch-manipulation ${
                     isActive 
                       ? 'bg-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.2)] border border-white/10' 
                       : 'hover:bg-white/5 border border-transparent'
@@ -198,7 +198,7 @@ export default function VariantShowcase() {
                 {activeProduct.status === 'available' || activeProduct.status === 'preorder' || activeProduct.status === 'coming-soon' ? (
                   <Link 
                     href="/#waitlist" 
-                    className="inline-flex items-center justify-center px-10 py-5 text-xs font-black tracking-[0.2em] uppercase rounded-full hover:-translate-y-1 active:translate-y-0 active:scale-95 transition-all duration-300 shadow-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-transparent w-max group relative overflow-hidden"
+                    className="inline-flex items-center justify-center px-10 py-5 text-xs font-black tracking-[0.2em] uppercase rounded-full hover:-translate-y-1 active:translate-y-0 active:scale-95 transition-all duration-300 shadow-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-transparent w-max group relative overflow-hidden touch-manipulation"
                     style={{ 
                       backgroundColor: accentColor,
                       color: '#000000',
@@ -246,7 +246,7 @@ export default function VariantShowcase() {
                     }
                   } : {})
                 }}
-                className="relative w-[280px] lg:w-[420px] aspect-[1/2]"
+                className="relative w-full max-w-[280px] lg:max-w-none lg:w-[420px] aspect-[1/2]"
               >
                 <Image 
                   src={activeProduct.image} 

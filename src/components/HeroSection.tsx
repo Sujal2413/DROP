@@ -99,7 +99,7 @@ export default function HeroSection() {
         {/* Headline */}
         <h1
           ref={headlineRef}
-          className="opacity-0 transition-colors duration-1000 mb-8"
+          className="opacity-0 transition-colors duration-1000 mb-8 order-1"
           style={{
             fontFamily: '"Anton", "Bebas Neue", "Druk Condensed", Impact, sans-serif',
             fontSize: 'clamp(2.75rem, 15vw, 8rem)',
@@ -116,7 +116,7 @@ export default function HeroSection() {
         </h1>
 
         {/* Interactive Flavor Selectors */}
-        <div className="flex gap-4 items-center justify-center md:justify-start mb-4 z-[60] relative pointer-events-auto flavor-selector-btn">
+        <div className="flex gap-4 items-center justify-center md:justify-start mb-4 z-[60] relative pointer-events-auto flavor-selector-btn order-3 md:order-2 mt-4 md:mt-0">
           {THEMES.map((theme, idx) => (
             <button
               key={theme.id}
@@ -132,7 +132,7 @@ export default function HeroSection() {
         </div>
 
         {/* Buttons and Pricing Anchors */}
-        <div className="mt-4 md:mt-8 flex flex-col items-center md:items-start gap-4 w-full relative z-[60] pointer-events-auto">
+        <div className="mt-4 md:mt-8 flex flex-col items-center md:items-start gap-4 w-full relative z-[60] pointer-events-auto order-2 md:order-3">
           <div className="flex flex-col sm:flex-row gap-4 w-full justify-center md:justify-start items-center">
             <a
               href="#waitlist"
@@ -158,7 +158,7 @@ export default function HeroSection() {
         {/* Sleek Footnote */}
         <div
           ref={taglineRef}
-          className="mt-4 md:mt-8 font-semibold tracking-[0.16em] sm:tracking-[0.24em] md:tracking-[0.3em] text-[10px] md:text-xs opacity-0 transition-colors duration-1000 flex flex-wrap items-center justify-center md:justify-start gap-x-4 gap-y-2 sm:gap-x-6 uppercase max-w-[19rem] sm:max-w-none pointer-events-none"
+          className="mt-4 md:mt-8 font-semibold tracking-[0.16em] sm:tracking-[0.24em] md:tracking-[0.3em] text-[10px] md:text-xs opacity-0 transition-colors duration-1000 flex flex-wrap items-center justify-center md:justify-start gap-x-4 gap-y-2 sm:gap-x-6 uppercase max-w-[19rem] sm:max-w-none pointer-events-none order-4"
           style={{ color: currentTheme.text }}
         >
           <span className="opacity-70">330ML & 500ML</span>

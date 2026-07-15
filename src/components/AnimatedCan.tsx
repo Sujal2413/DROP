@@ -165,7 +165,7 @@ export default function AnimatedCan({ activeIndex }: { activeIndex: number }) {
           }}
         >
           <div className="relative w-full h-[100%] flex items-center justify-center overflow-visible">
-            <Link href="/#products" className="relative w-full h-full block cursor-pointer">
+            <Link data-can-id={can.id} href="/#products" className="relative w-full h-full block cursor-pointer">
               <Image
                 src={can.src}
                 alt={can.alt}
@@ -174,7 +174,7 @@ export default function AnimatedCan({ activeIndex }: { activeIndex: number }) {
                 loading={idx === 0 ? 'eager' : 'lazy'}
                 quality={85}
                 sizes="(max-width: 768px) 210px, (max-width: 1200px) 40vw, 900px"
-                className="object-contain object-center"
+                className="object-contain object-center transition-transform"
                 style={{ 
                   mixBlendMode: 'normal',
                   transform: `scale(${can.scale * 0.7})`,
@@ -194,7 +194,6 @@ export default function AnimatedCan({ activeIndex }: { activeIndex: number }) {
                   }
                 }
               `}} />
-              <span data-can-id={can.id} className="absolute inset-0 pointer-events-none" />
             </Link>
           </div>
         </div>

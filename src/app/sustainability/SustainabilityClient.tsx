@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import HeroNavbar from '@/components/HeroNavbar';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
@@ -8,6 +8,20 @@ import ScrollToTop from '@/components/ScrollToTop';
 import { motion } from 'framer-motion';
 
 export default function SustainabilityClient() {
+  const marqueeRef = useRef<HTMLDivElement>(null);
+  const [isMarqueeVisible, setIsMarqueeVisible] = useState(false);
+
+  useEffect(() => {
+    if (!marqueeRef.current) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsMarqueeVisible(entry.isIntersecting);
+      },
+      { threshold: 0 }
+    );
+    observer.observe(marqueeRef.current);
+    return () => observer.disconnect();
+  }, []);
   return (
     <div className="sustainability-page w-full relative bg-[var(--color-cream)] text-black font-sans selection:bg-black selection:text-white antialiased overflow-hidden min-h-screen border-x-2 border-black">
       
@@ -96,8 +110,11 @@ export default function SustainabilityClient() {
           animation: custom-marquee 20s linear infinite;
         }
       `}} />
-      <div className="w-full overflow-hidden bg-transparent text-black py-4 border-y-2 border-black flex whitespace-nowrap">
-        <div className="animate-custom-marquee flex items-center gap-8 font-black uppercase tracking-widest text-base">
+      <div ref={marqueeRef} className="w-full overflow-hidden bg-transparent text-black py-4 border-y-2 border-black flex whitespace-nowrap">
+        <div 
+          className="animate-custom-marquee flex items-center gap-8 font-black uppercase tracking-widest text-base"
+          style={{ animationPlayState: isMarqueeVisible ? 'running' : 'paused' }}
+        >
            {/* First Set */}
            <span>★ DROP PLASTIC</span>
            <span>★ FOREVER METAL</span>
