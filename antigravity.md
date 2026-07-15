@@ -1,0 +1,3 @@
+- * no code changes until I say  
+- * Dont write extra lines of code when the fix can be done in 5-10 lines 
+- * 
