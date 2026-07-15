@@ -41,7 +41,7 @@ export default function Home() {
         <WaitlistSection />
       </main>
 
-      <Footer theme="olive" />
+      <Footer theme="default" />
     </div>
   );
 }

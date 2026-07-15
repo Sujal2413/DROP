@@ -7,7 +7,7 @@ import {
   Phone,
   MapPin
 } from "lucide-react";
-import { FooterBackgroundGradient } from "@/components/ui/hover-footer";
+import { FooterBackgroundGradient, TextHoverEffect } from "@/components/ui/hover-footer";
 
 interface FooterProps {
   theme?: "default" | "olive";
@@ -16,15 +16,16 @@ interface FooterProps {
 export default function Footer({ theme = "default" }: FooterProps) {
   const isOlive = theme === "olive";
   
-  const footerBg = isOlive ? "bg-[#0F1112] border-[#C9A84C]/30" : "bg-[#0F1112] border-white/10";
+  const footerBg = isOlive ? "bg-[#0F1112] border-[#C9A84C]/30" : "bg-[#0F0F11] border-white/10";
   const titleText = isOlive ? "text-[#C9A84C]" : "text-white";
   const descText = isOlive ? "text-[#C9A84C]/70" : "text-gray-400";
   const bodyText = isOlive ? "text-[#C9A84C]/80" : "text-gray-300";
   const linkHover = isOlive ? "hover:text-[#C9A84C]/100 text-[#C9A84C]/85" : "hover:text-white text-gray-300";
-  const iconColor = isOlive ? "#C9A84C" : "#C9A84C";
+  const iconColor = isOlive ? "#C9A84C" : "#8b5cf6"; // Purple icons for default theme!
   const borderLine = isOlive ? "border-[#C9A84C]/20" : "border-white/10";
   const socialText = isOlive ? "text-[#C9A84C]/60 hover:text-[#C9A84C]" : "text-gray-400 hover:text-white";
   const copyText = isOlive ? "text-[#C9A84C]/50" : "text-gray-500";
+  const strokeMobile = isOlive ? "2px #C9A84C" : "2px white";
 
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
@@ -53,7 +54,6 @@ export default function Footer({ theme = "default" }: FooterProps) {
         setEmail('');
       } else {
         setStatus('error');
-        // Handle validation errors from the unified backend API response format
         if (data.error && data.error.fields) {
           const errors = Object.values(data.error.fields).join(', ');
           setMessage(`${data.error.message}: ${errors}`);
@@ -79,14 +79,14 @@ export default function Footer({ theme = "default" }: FooterProps) {
       <div className="max-w-7xl mx-auto px-5 sm:px-8 md:px-14 pt-16 sm:pt-20 pb-0 z-40 relative">
         
         {/* Newsletter Signup */}
-        <div className="flex flex-col md:flex-row items-center justify-between bg-[#0F1112] rounded-sm p-8 md:p-12 mb-16 border border-white/10 shadow-2xl">
+        <div className="flex flex-col md:flex-row items-center justify-between bg-[#0F1112] rounded-sm p-8 md:p-12 mb-16 border border-white/10 shadow-2xl relative z-10">
           <div className="md:w-1/2 mb-8 md:mb-0">
             <h3 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-2">Be first to taste it.</h3>
             <p className="text-[#F9F9F9]/70 text-sm">Join the list for quick updates (or join the full waitlist above for priority launch access).</p>
           </div>
           <div className="w-full md:w-1/2 flex justify-end">
             <form onSubmit={handleSubscribe} className="w-full max-w-md" noValidate>
-              <div className="flex flex-col sm:flex-row gap-4 border-b border-[#F9F9F9]/30 focus-within:border-[#C9A84C] transition-colors pb-2">
+              <div className="flex flex-col sm:flex-row gap-4 border-b border-[#F9F9F9]/30 focus-within:border-[#8b5cf6] transition-colors pb-2">
                 <label htmlFor="newsletter-email" className="sr-only">Your email address</label>
                 <input 
                   id="newsletter-email"
@@ -100,7 +100,7 @@ export default function Footer({ theme = "default" }: FooterProps) {
                 />
                 <button 
                   type="submit" 
-                  className="text-xs font-bold tracking-widest uppercase text-[#C9A84C] hover:text-white px-4 transition-colors disabled:opacity-50 shrink-0 focus:outline-none focus:ring-2 focus:ring-[#C9A84C] rounded-sm"
+                  className="text-xs font-bold tracking-widest uppercase text-[#8b5cf6] hover:text-white px-4 transition-colors disabled:opacity-50 shrink-0 focus:outline-none focus:ring-2 focus:ring-[#8b5cf6] rounded-sm"
                   disabled={status === 'loading' || status === 'success'}
                 >
                   {status === 'loading' ? 'Subscribing...' : status === 'success' ? 'Subscribed' : 'Subscribe'}
@@ -109,16 +109,16 @@ export default function Footer({ theme = "default" }: FooterProps) {
               
               <div aria-live="polite" className="mt-2 text-xs h-4">
                 {status === 'error' && <p className="text-red-400">{message}</p>}
-                {status === 'success' && <p className="text-[#C9A84C]">{message}</p>}
+                {status === 'success' && <p className="text-[#8b5cf6]">{message}</p>}
               </div>
             </form>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 lg:gap-16 pb-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 lg:gap-16 pb-12 relative z-10">
           {/* Brand section */}
           <div className="flex flex-col space-y-4">
-            <Link href="/" className="inline-block focus:outline-none focus:ring-2 focus:ring-[#C9A84C] rounded-sm max-w-max p-1 -ml-1">
+            <Link href="/" className="inline-block focus:outline-none focus:ring-2 focus:ring-[#8b5cf6] rounded-sm max-w-max p-1 -ml-1">
               <h2 
                 className={`text-5xl font-black tracking-tighter ${titleText}`}
                 style={{ fontFamily: '"Anton", "Bebas Neue", "Druk Condensed", Impact, sans-serif' }}
@@ -139,7 +139,7 @@ export default function Footer({ theme = "default" }: FooterProps) {
                 <li key={link.href}>
                   <Link 
                     href={link.href} 
-                    className={`cursor-pointer transition-colors ${linkHover} focus:outline-none focus:ring-2 focus:ring-[#C9A84C] rounded-sm p-1 -ml-1 inline-block`}
+                    className={`cursor-pointer transition-colors ${linkHover} focus:outline-none focus:ring-2 focus:ring-[#8b5cf6] rounded-sm p-1 -ml-1 inline-block`}
                   >
                     {link.label}
                   </Link>
@@ -161,13 +161,13 @@ export default function Footer({ theme = "default" }: FooterProps) {
               </li>
               <li className="flex items-center space-x-3 min-w-0">
                 <Mail size={16} stroke={iconColor} className="shrink-0" />
-                <a href="mailto:contactus@dropwater.in" className={`transition-colors break-all ${linkHover} focus:outline-none focus:ring-2 focus:ring-[#C9A84C] rounded-sm p-1 inline-block`}>
+                <a href="mailto:contactus@dropwater.in" className={`transition-colors break-all ${linkHover} focus:outline-none focus:ring-2 focus:ring-[#8b5cf6] rounded-sm p-1 inline-block`}>
                   contactus@dropwater.in
                 </a>
               </li>
               <li className="flex items-center space-x-3">
                 <Phone size={16} stroke={iconColor} className="shrink-0" />
-                <a href="tel:+918976127355" className={`transition-colors ${linkHover} focus:outline-none focus:ring-2 focus:ring-[#C9A84C] rounded-sm p-1 inline-block`}>
+                <a href="tel:+918976127355" className={`transition-colors ${linkHover} focus:outline-none focus:ring-2 focus:ring-[#8b5cf6] rounded-sm p-1 inline-block`}>
                   +91 8976127355
                 </a>
               </li>
@@ -186,7 +186,7 @@ export default function Footer({ theme = "default" }: FooterProps) {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram"
-              className={`transition-colors ${socialText} focus:outline-none focus:ring-2 focus:ring-[#C9A84C] rounded-sm p-1`}
+              className={`transition-colors ${socialText} focus:outline-none focus:ring-2 focus:ring-[#8b5cf6] rounded-sm p-1`}
             >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
             </a>
@@ -194,11 +194,11 @@ export default function Footer({ theme = "default" }: FooterProps) {
 
           {/* Legal links */}
           <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-center">
-            <Link href="/privacy" className={`text-xs font-medium transition-colors ${linkHover} focus:outline-none focus:ring-2 focus:ring-[#C9A84C] rounded-sm p-1`}>
+            <Link href="/privacy" className={`text-xs font-medium transition-colors ${linkHover} focus:outline-none focus:ring-2 focus:ring-[#8b5cf6] rounded-sm p-1`}>
               Privacy Policy
             </Link>
             <span className={`text-xs ${copyText}`}>·</span>
-            <Link href="/terms" className={`text-xs font-medium transition-colors ${linkHover} focus:outline-none focus:ring-2 focus:ring-[#C9A84C] rounded-sm p-1`}>
+            <Link href="/terms" className={`text-xs font-medium transition-colors ${linkHover} focus:outline-none focus:ring-2 focus:ring-[#8b5cf6] rounded-sm p-1`}>
               Terms of Service
             </Link>
           </div>
@@ -213,6 +213,25 @@ export default function Footer({ theme = "default" }: FooterProps) {
             </p>
           </div>
         </div>
+      </div>
+
+      {/* Text hover effect */}
+      <div className="lg:flex hidden h-[30rem] -mt-20 -mb-24 relative z-10 pointer-events-auto">
+        <TextHoverEffect text="DROP." className="z-50" theme={theme} />
+      </div>
+
+      {/* Fallback giant text for mobile */}
+      <div className="flex lg:hidden absolute bottom-[-5vh] left-1/2 -translate-x-1/2 w-full text-center pointer-events-none opacity-[0.03] overflow-hidden select-none z-0">
+        <h1 
+          className="text-[clamp(8rem,25vw,20rem)] font-black tracking-tighter"
+          style={{
+            fontFamily: '"Anton", "Bebas Neue", "Druk Condensed", Impact, sans-serif',
+            WebkitTextStroke: strokeMobile,
+            color: 'transparent'
+          }}
+        >
+          DROP.
+        </h1>
       </div>
 
       <FooterBackgroundGradient theme={theme} />
