@@ -31,6 +31,15 @@ export default function VariantShowcase() {
     return () => observer.disconnect();
   }, []);
 
+  // Auto-play logic to automatically cycle variants
+  useEffect(() => {
+    if (!isVisible) return;
+    const interval = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % PRODUCTS.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [isVisible]);
+
   // Premium, deep dark gradients
   const getGradient = (slug: string) => {
     switch (slug) {
@@ -240,8 +249,8 @@ export default function VariantShowcase() {
                   quality={95}
                   priority
                   style={{
-                    // High-end ambient shadow to ground the object instead of a glowing aura
-                    filter: 'drop-shadow(0 25px 25px rgba(0,0,0,0.5))'
+                    // High-end ambient shadow to ground the object instead of a glowing aura. Fixed 0px for Safari compatibility.
+                    filter: 'drop-shadow(0px 25px 25px rgba(0,0,0,0.5))'
                   }}
                 />
               </motion.div>
