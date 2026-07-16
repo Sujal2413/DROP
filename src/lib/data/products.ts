@@ -43,7 +43,7 @@ export const PRODUCTS: Product[] = [
     description: 'Crisp, cooling mint infusion crafted to refresh and reset.',
     designedFor: 'Recovery & Focus',
     status: 'preorder',
-    image: '/assets/new-can-variant-3.png',
+    image: '/assets/new-can-variant-1.png',
   },
   {
     id: 'athlete',
@@ -57,7 +57,7 @@ export const PRODUCTS: Product[] = [
     description: 'Zero-compromise performance hydration with elevated electrolytes.',
     designedFor: 'High-intensity Training',
     status: 'available',
-    image: '/assets/new-can-2.png',
+    image: '/assets/new-can-variant-3.png',
   },
   {
     id: 'clove',

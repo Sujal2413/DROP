@@ -31,43 +31,57 @@ export default function VariantShowcase() {
     return () => observer.disconnect();
   }, []);
 
-  // Rich, premium gradients tailored to each variant
+  // Premium, deep dark gradients
   const getGradient = (slug: string) => {
     switch (slug) {
-      case 'mint': return 'linear-gradient(145deg, #0F0518 0%, #2A1744 100%)';
-      case 'athlete': return 'linear-gradient(145deg, #050505 0%, #171717 100%)';
-      case 'sparkling': return 'linear-gradient(145deg, #03080F 0%, #0C2033 100%)';
-      case 'clove': return 'linear-gradient(145deg, #1A0102 0%, #4A0205 100%)';
-      default: return 'linear-gradient(145deg, #0A0A0A 0%, #1A1A1A 100%)';
+      case 'mint-water': return 'linear-gradient(180deg, #07030A 0%, #150A21 100%)';
+      case 'athlete-edition': return 'linear-gradient(180deg, #050505 0%, #111111 100%)';
+      case 'clove-water': return 'linear-gradient(180deg, #0A0203 0%, #1F0506 100%)';
+      case 'still-water':
+      default: return 'linear-gradient(180deg, #050709 0%, #0C1217 100%)';
     }
   };
 
-  // Vibrant accent colors for interactive elements
+  // High contrast accent colors
   const getAccentColor = (slug: string) => {
     switch (slug) {
-      case 'mint': return '#D6BCFA'; // Soft vibrant purple
-      case 'athlete': return '#F8FAFC'; // Crisp white
-      case 'sparkling': return '#BEE3F8'; // Soft cyan/blue
-      case 'clove': return '#FEB2B2'; // Soft vibrant red
-      default: return '#FFFFFF';
+      case 'mint-water': return '#D6BCFA'; // Soft vibrant purple
+      case 'athlete-edition': return '#F8FAFC'; // Crisp white
+      case 'clove-water': return '#FEB2B2'; // Soft vibrant red
+      case 'still-water':
+      default: return '#E2E8F0'; // Metallic silver
     }
   };
 
-  const getGlowColor = (slug: string) => {
+  // Dynamic typography for titles based on the product
+  const getFontFamily = (slug: string) => {
     switch (slug) {
-      case 'mint': return 'rgba(139, 92, 246, 0.4)';
-      case 'athlete': return 'rgba(255, 255, 255, 0.2)';
-      case 'sparkling': return 'rgba(147, 197, 253, 0.4)';
-      case 'clove': return 'rgba(239, 68, 68, 0.4)';
-      default: return 'rgba(255, 255, 255, 0.2)';
+      case 'mint-water': return 'var(--font-heading)'; // Oswald for modern display
+      case 'athlete-edition': return '"Anton", "Bebas Neue", "Druk Condensed", Impact, sans-serif'; // Sporty and bold
+      case 'clove-water': return 'var(--font-serif)'; // Elegant serif
+      case 'still-water':
+      default: return 'var(--font-body)'; // Clean geometric sans
+    }
+  };
+
+  // Custom text styling adjustments per font
+  const getTitleStyles = (slug: string) => {
+    const base = { fontFamily: getFontFamily(slug), color: getAccentColor(slug) };
+    switch (slug) {
+      case 'mint-water':
+        return { ...base, textTransform: 'uppercase' as const, letterSpacing: '0.02em', fontWeight: 600 };
+      case 'athlete-edition':
+        return { ...base, textTransform: 'uppercase' as const, letterSpacing: '-0.02em', fontWeight: 900, transform: 'scaleY(1.1)' };
+      case 'clove-water':
+        return { ...base, textTransform: 'none' as const, letterSpacing: '0', fontWeight: 400, fontStyle: 'italic' };
+      case 'still-water':
+      default:
+        return { ...base, textTransform: 'uppercase' as const, letterSpacing: '-0.04em', fontWeight: 800 };
     }
   };
 
   const accentColor = getAccentColor(activeProduct.slug);
-  const glowColor = getGlowColor(activeProduct.slug);
   const prefersReducedMotion = typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
-
-  // Determine float animation: only on desktop when visible and motion allowed
   const shouldFloat = isVisible && !isMobile && !prefersReducedMotion;
 
   return (
@@ -86,21 +100,6 @@ export default function VariantShowcase() {
         />
       </AnimatePresence>
       
-      {/* Ambient Glow — desktop only, reduced blur */}
-      {!isMobile && (
-        <AnimatePresence>
-          <motion.div
-            key={`glow-${activeProduct.slug}`}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: isVisible ? 1 : 0 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 1 }}
-            className="absolute right-0 top-1/2 -translate-y-1/2 w-[60vh] h-[60vh] rounded-full blur-[80px] pointer-events-none z-0"
-            style={{ background: glowColor }}
-          />
-        </AnimatePresence>
-      )}
-
       <div className="max-w-[1600px] w-full mx-auto flex flex-col md:flex-row relative z-10">
         
         {/* Left Sticky Column: Tab List */}
@@ -116,14 +115,14 @@ export default function VariantShowcase() {
                 <button
                   key={p.slug}
                   onClick={() => setActiveIndex(idx)}
-                  className={`relative flex items-center px-5 py-4 md:py-5 rounded-2xl transition-all duration-500 text-left focus:outline-none group overflow-hidden touch-manipulation ${
+                  className={`relative flex items-center px-5 py-4 md:py-5 rounded-2xl transition-all duration-500 text-left focus:outline-none group overflow-hidden touch-manipulation border ${
                     isActive 
-                      ? 'bg-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.2)] border border-white/10' 
-                      : 'hover:bg-white/5 border border-transparent'
+                      ? 'bg-white/5 border-white/10' 
+                      : 'border-transparent hover:bg-white/[0.02]'
                   }`}
                 >
                   <span 
-                    className={`text-lg md:text-xl font-black uppercase tracking-tight transition-colors duration-500 relative z-10 ${
+                    className={`text-sm md:text-base font-bold uppercase tracking-widest transition-colors duration-500 relative z-10 ${
                       isActive ? 'text-white' : 'text-white/30 group-hover:text-white/60'
                     }`}
                   >
@@ -133,17 +132,9 @@ export default function VariantShowcase() {
                   {isActive && (
                     <motion.div 
                       layoutId="activeTabIndicator"
-                      className="absolute left-0 top-0 bottom-0 w-1 rounded-r-full hidden md:block z-20"
+                      className="absolute left-0 top-0 bottom-0 w-[3px] hidden md:block z-20"
                       style={{ backgroundColor: getAccentColor(p.slug) }}
                       transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                    />
-                  )}
-                  
-                  {isActive && (
-                    <motion.div
-                      layoutId="activeTabBackground"
-                      className="absolute inset-0 bg-gradient-to-r from-white/5 to-transparent z-0"
-                      transition={{ duration: 0.5 }}
                     />
                   )}
                 </button>
@@ -166,50 +157,48 @@ export default function VariantShowcase() {
                 transition={{ duration: 0.5, ease: "easeOut" }}
               >
                 <h2 
-                  className="text-6xl lg:text-[5.5rem] font-bold tracking-tighter mb-6 leading-[0.95] uppercase" 
-                  style={{ 
-                    fontFamily: '"Anton", "Bebas Neue", "Druk Condensed", Impact, sans-serif',
-                    color: accentColor,
-                    textShadow: '0 10px 30px rgba(0,0,0,0.5)'
-                  }}
+                  className="text-5xl md:text-6xl lg:text-[6rem] mb-6 leading-[1.1] origin-left" 
+                  style={getTitleStyles(activeProduct.slug)}
                 >
-                  {activeProduct.displayName}
+                  {activeProduct.displayName.replace('DROP ', '')}
                 </h2>
                 
-                <p className="text-base lg:text-lg font-medium leading-relaxed text-white/60 mb-10 max-w-md">
+                <p className="text-base lg:text-lg font-light leading-relaxed text-white/70 mb-10 max-w-md">
                   {activeProduct.description}
                 </p>
                 
                 <div className="flex flex-col gap-4 mb-12">
-                  <div className="flex items-center gap-3">
-                    <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: accentColor }}></div>
-                    <p className="text-xs font-bold tracking-[0.25em] uppercase text-white/50">
-                      Designed for: <span className="text-white/90">{activeProduct.designedFor}</span>
-                    </p>
+                  <div className="flex items-center gap-4 border-b border-white/10 pb-4">
+                    <span className="text-xs font-bold tracking-[0.2em] uppercase text-white/40 w-32">
+                      Designed for
+                    </span>
+                    <span className="text-sm font-semibold tracking-wide text-white/90">
+                      {activeProduct.designedFor}
+                    </span>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: accentColor }}></div>
-                    <p className="text-xs font-bold tracking-[0.25em] uppercase text-white/50">
-                      Size: <span className="text-white/90">{activeProduct.availableSizes?.[0]?.toUpperCase()} CAN</span>
-                    </p>
+                  <div className="flex items-center gap-4">
+                    <span className="text-xs font-bold tracking-[0.2em] uppercase text-white/40 w-32">
+                      Format
+                    </span>
+                    <span className="text-sm font-semibold tracking-wide text-white/90">
+                      {activeProduct.availableSizes?.join(' / ').toUpperCase()} CAN
+                    </span>
                   </div>
                 </div>
                 
                 {activeProduct.status === 'available' || activeProduct.status === 'preorder' || activeProduct.status === 'coming-soon' ? (
                   <Link 
                     href="/#waitlist" 
-                    className="inline-flex items-center justify-center px-10 py-5 text-xs font-black tracking-[0.2em] uppercase rounded-full hover:-translate-y-1 active:translate-y-0 active:scale-95 transition-all duration-300 shadow-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-transparent w-max group relative overflow-hidden touch-manipulation"
+                    className="inline-flex items-center justify-center px-10 py-5 text-xs font-bold tracking-[0.2em] uppercase border hover:bg-white hover:text-black transition-all duration-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-transparent w-max group touch-manipulation"
                     style={{ 
-                      backgroundColor: accentColor,
-                      color: '#000000',
-                      boxShadow: `0 10px 25px -5px ${glowColor}`
+                      borderColor: accentColor,
+                      color: '#FFFFFF'
                     }}
                   >
-                    <span className="relative z-10">Join The List</span>
-                    <div className="absolute inset-0 bg-white/20 translate-y-[100%] group-hover:translate-y-0 transition-transform duration-300 z-0"></div>
+                    <span>Join The List</span>
                   </Link>
                 ) : (
-                  <div className="inline-flex items-center justify-center px-8 py-4 text-xs font-bold tracking-[0.2em] uppercase rounded-full bg-white/5 border border-white/10 text-white/50">
+                  <div className="inline-flex items-center justify-center px-10 py-5 text-xs font-bold tracking-[0.2em] uppercase border border-white/10 text-white/40">
                     Coming Next
                   </div>
                 )}
@@ -217,47 +206,42 @@ export default function VariantShowcase() {
             </AnimatePresence>
           </div>
 
-          {/* Floating Can Render */}
+          {/* Clean Floating Can Render - Removed the cheap white glow */}
           <div className="w-full md:w-1/2 flex justify-center items-center relative h-[45vh] md:h-[75vh] z-10">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeProduct.slug}
-                initial={{ opacity: 0, scale: 0.85, y: 50, rotate: -5 }}
+                initial={{ opacity: 0, scale: 0.9, y: 30 }}
                 animate={{ 
                   opacity: 1, 
                   scale: 1, 
-                  y: shouldFloat ? [0, -20, 0] : 0,
-                  rotate: shouldFloat ? [0, 2, 0] : 0
+                  y: shouldFloat ? [0, -15, 0] : 0,
                 }}
-                exit={{ opacity: 0, scale: 0.85, y: -50, rotate: 5 }}
+                exit={{ opacity: 0, scale: 0.95, y: -20 }}
                 transition={{ 
-                  duration: isMobile ? 0.4 : 0.8,
+                  duration: isMobile ? 0.4 : 0.7,
                   ease: "easeOut",
                   ...(shouldFloat ? {
                     y: {
-                      duration: 5,
-                      repeat: Infinity,
-                      ease: "easeInOut"
-                    },
-                    rotate: {
                       duration: 6,
                       repeat: Infinity,
                       ease: "easeInOut"
                     }
                   } : {})
                 }}
-                className="relative w-full max-w-[280px] lg:max-w-none lg:w-[420px] aspect-[1/2]"
+                className="relative w-full max-w-[250px] lg:max-w-[380px] aspect-[1/2]"
               >
                 <Image 
                   src={activeProduct.image} 
                   alt={activeProduct.displayName} 
                   fill 
                   className="object-contain" 
-                  sizes="(max-width: 768px) 280px, 420px"
-                  quality={85}
+                  sizes="(max-width: 768px) 250px, 380px"
+                  quality={95}
                   priority
                   style={{
-                    filter: isMobile ? 'drop-shadow(0 15px 20px rgba(0,0,0,0.4))' : 'drop-shadow(0 30px 40px rgba(0,0,0,0.6))'
+                    // High-end ambient shadow to ground the object instead of a glowing aura
+                    filter: 'drop-shadow(0 25px 25px rgba(0,0,0,0.5))'
                   }}
                 />
               </motion.div>
