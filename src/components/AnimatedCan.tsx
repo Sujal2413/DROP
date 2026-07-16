@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import gsap from 'gsap';
 
-// CANS defines the display scaling and filter effects for each variant.
+// CANS defines the display scaling and filter effects for each variant of can.
 const CANS = [
   { 
     id: 'purple', src: '/assets/new-can-variant-1.png', alt: 'Deep Purple Can', scale: 1.6,
