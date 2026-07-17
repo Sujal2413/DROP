@@ -238,25 +238,25 @@ export default function VariantShowcase() {
                     }
                   } : {})
                 }}
-                className={`relative shrink-0 w-full aspect-[1/2] ${
-                  activeProduct.slug === 'still-water' 
-                    ? 'max-w-[300px] lg:max-w-[440px]' 
-                    : 'max-w-[280px] lg:max-w-[420px]'
-                }`}
+                className={`relative shrink-0 w-full aspect-[1/2] max-w-[280px] lg:max-w-[420px]`}
               >
                 <Image 
                   src={activeProduct.image} 
                   alt={activeProduct.displayName} 
                   fill 
                   className="object-contain pointer-events-none" 
-                  sizes="(max-width: 768px) 300px, 440px"
-                  quality={95}
+                  sizes="(max-width: 768px) 600px, 880px"
+                  quality={100}
                   priority
                   style={{
                     // High-end ambient shadow to ground the object instead of a glowing aura. Fixed 0px for Safari compatibility.
                     filter: 'drop-shadow(0px 25px 25px rgba(0,0,0,0.5))',
-                    // Scale up landscape images (which have huge transparent side padding) to match the portrait image size
-                    transform: activeProduct.slug === 'athlete-edition' ? 'scale(1.1)' : 'scale(2.8)',
+                    // Scale up landscape images to match portrait dimensions, with a slightly reduced scale for the silver can
+                    transform: activeProduct.slug === 'athlete-edition' 
+                      ? 'scale(1.1)' 
+                      : activeProduct.slug === 'still-water'
+                      ? 'scale(2.4)' 
+                      : 'scale(2.8)',
                     transformOrigin: 'center'
                   }}
                 />

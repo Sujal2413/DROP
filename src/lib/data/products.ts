@@ -57,7 +57,7 @@ export const PRODUCTS: Product[] = [
     description: 'Zero-compromise performance hydration with elevated electrolytes.',
     designedFor: 'High-intensity Training',
     status: 'available',
-    image: '/assets/black_can_extracted.png',
+    image: '/assets/black_can_raw.png',
   },
   {
     id: 'clove',
