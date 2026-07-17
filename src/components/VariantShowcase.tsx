@@ -241,7 +241,7 @@ export default function VariantShowcase() {
                 style={{
                   filter: 'drop-shadow(0px 25px 25px rgba(0,0,0,0.5))',
                 }}
-                className={`relative shrink-0 w-full aspect-[1/2] max-w-[280px] lg:max-w-[420px]`}
+                className="relative shrink-0 w-[200px] h-[400px] md:w-[280px] md:h-[560px] lg:w-[420px] lg:h-[840px]"
               >
                 <Image 
                   src={activeProduct.image} 
