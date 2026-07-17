@@ -8,22 +8,22 @@ import gsap from 'gsap';
 // CANS defines the display scaling and filter effects for each variant of can.
 const CANS = [
   { 
-    id: 'purple', src: '/assets/new-can-variant-1.png', alt: 'Deep Purple Can', scale: 1.6,
+    id: 'purple', src: '/assets/new-can-variant-1.png', alt: 'Deep Purple Can', scale: 1.15,
     filter: 'drop-shadow(0 20px 30px rgba(0,0,0,0.8))',
     mobileFilter: 'drop-shadow(0 10px 15px rgba(0,0,0,0.5))'
   },
   { 
-    id: 'red', src: '/assets/clove_can_transparent.png', alt: 'Clove Can', scale: 1.6,
+    id: 'red', src: '/assets/clove_can_transparent.png', alt: 'Clove Can', scale: 1.15,
     filter: 'drop-shadow(0px 0px 1.5px rgba(0,0,0,0.5)) drop-shadow(0px 10px 30px rgba(0,0,0,0.15))',
     mobileFilter: 'drop-shadow(0px 5px 15px rgba(0,0,0,0.3))'
   },
   { 
-    id: 'black', src: '/assets/black_can_extracted.png', alt: 'Athlete Edition Can', scale: 1.6,
+    id: 'black', src: '/assets/black_can_extracted.png', alt: 'Athlete Edition Can', scale: 1.15,
     filter: 'drop-shadow(0px 0px 1.5px rgba(0,0,0,0.5)) drop-shadow(0px 10px 30px rgba(0,0,0,0.15))',
     mobileFilter: 'drop-shadow(0px 5px 15px rgba(0,0,0,0.3))'
   },
   {
-    id: 'silver', src: '/assets/new-can-2.png', alt: 'Sparkling Water Can', scale: 1.6,
+    id: 'silver', src: '/assets/new-can-2.png', alt: 'Sparkling Water Can', scale: 1.15,
     filter: 'drop-shadow(0px 0px 1.5px rgba(0,0,0,0.5)) drop-shadow(0px 10px 30px rgba(0,0,0,0.15))',
     mobileFilter: 'drop-shadow(0px 5px 15px rgba(0,0,0,0.3))'
   }
@@ -151,7 +151,7 @@ export default function AnimatedCan({ activeIndex }: { activeIndex: number }) {
   return (
     <div
       ref={containerRef}
-      className="absolute right-1/2 translate-x-1/2 top-[47%] -translate-y-1/2 md:right-[30%] md:translate-x-1/2 md:top-1/2 md:-translate-y-1/2 z-[45] md:z-[60] pointer-events-none flex flex-col items-center justify-center w-[52vw] min-w-[150px] max-w-[210px] md:w-[40vw] md:max-w-[900px] aspect-[37/100] h-[min(52svh,430px)] min-h-[320px] md:h-[clamp(450px,75vh,1100px)] md:min-h-0 overflow-visible"
+      className="absolute right-1/2 translate-x-1/2 top-[47%] -translate-y-1/2 md:right-[30%] md:translate-x-1/2 md:top-1/2 md:-translate-y-1/2 z-[45] md:z-[60] pointer-events-none flex flex-col items-center justify-center w-[52vw] min-w-[150px] max-w-[210px] md:w-[30vw] md:max-w-[500px] aspect-[37/100] h-[min(52svh,430px)] min-h-[320px] md:h-[clamp(400px,60vh,700px)] md:min-h-0 overflow-visible"
     >
       {CANS.map((can, idx) => (
         <div 
