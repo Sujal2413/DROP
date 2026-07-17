@@ -238,7 +238,7 @@ export default function VariantShowcase() {
                     }
                   } : {})
                 }}
-                className={`relative w-full aspect-[3/5] ${
+                className={`relative shrink-0 w-full aspect-[3/5] ${
                   activeProduct.slug === 'still-water' 
                     ? 'max-w-[320px] lg:max-w-[460px]' 
                     : 'max-w-[300px] lg:max-w-[440px]'
@@ -248,7 +248,7 @@ export default function VariantShowcase() {
                   src={activeProduct.image} 
                   alt={activeProduct.displayName} 
                   fill 
-                  className="object-contain" 
+                  className="object-cover" 
                   sizes="(max-width: 768px) 300px, 440px"
                   quality={95}
                   priority
