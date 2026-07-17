@@ -238,7 +238,7 @@ export default function VariantShowcase() {
                     }
                   } : {})
                 }}
-                className={`relative w-full aspect-[3/5] ${
+                className={`relative shrink-0 w-full aspect-[3/5] ${
                   activeProduct.slug === 'still-water' 
                     ? 'max-w-[320px] lg:max-w-[460px]' 
                     : 'max-w-[300px] lg:max-w-[440px]'
@@ -248,13 +248,16 @@ export default function VariantShowcase() {
                   src={activeProduct.image} 
                   alt={activeProduct.displayName} 
                   fill 
-                  className="object-contain" 
+                  className="object-contain pointer-events-none" 
                   sizes="(max-width: 768px) 300px, 440px"
                   quality={95}
                   priority
                   style={{
                     // High-end ambient shadow to ground the object instead of a glowing aura. Fixed 0px for Safari compatibility.
-                    filter: 'drop-shadow(0px 25px 25px rgba(0,0,0,0.5))'
+                    filter: 'drop-shadow(0px 25px 25px rgba(0,0,0,0.5))',
+                    // Scale up landscape images (which have huge transparent side padding) to match the portrait image size
+                    transform: activeProduct.slug === 'athlete-edition' ? 'scale(1.1)' : 'scale(2.8)',
+                    transformOrigin: 'center'
                   }}
                 />
               </motion.div>
