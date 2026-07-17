@@ -4,15 +4,17 @@ import React from 'react';
 
 export default function WhyDropSection() {
   return (
-    <section className="bg-[#050505] py-24 md:py-36 px-5 sm:px-8 md:px-16 text-[#F9F9F9] relative overflow-hidden">
-      {/* Background ambient lighting */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[80vw] h-[80vh] bg-[#C9A84C]/[0.02] blur-[120px] rounded-full pointer-events-none" />
+    <section className="bg-[#111111] py-24 md:py-36 px-5 sm:px-8 md:px-16 text-[#F9F9F9] relative overflow-hidden">
+      {/* Background visual texture */}
+      <div className="absolute top-0 left-0 w-full h-full opacity-[0.02] pointer-events-none" 
+           style={{ backgroundImage: 'radial-gradient(circle at 50% 0%, white 1px, transparent 1px)', backgroundSize: '40px 40px' }} 
+      />
 
       <div className="max-w-7xl mx-auto relative z-10">
         
         {/* Header */}
         <div className="mb-20 md:mb-28 max-w-2xl">
-          <h2 className="text-5xl md:text-7xl lg:text-[6rem] font-black tracking-tight mb-6 uppercase drop-shadow-md text-transparent bg-clip-text bg-gradient-to-b from-[#E5E5E5] to-[#888888]" style={{ fontFamily: '"Anton", "Bebas Neue", "Druk Condensed", Impact, sans-serif' }}>
+          <h2 className="text-5xl md:text-7xl font-black tracking-tight mb-6 uppercase text-[#C9A84C]" style={{ fontFamily: '"Anton", "Bebas Neue", "Druk Condensed", Impact, sans-serif' }}>
             Why DROP.
           </h2>
           <p className="text-[#F9F9F9]/70 text-lg md:text-xl font-medium leading-relaxed">
@@ -24,8 +26,8 @@ export default function WhyDropSection() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 auto-rows-[300px]">
           
           {/* Box 1: The Water (Top Left, spans 7 cols) */}
-          <div className="md:col-span-7 bg-white/[0.02] backdrop-blur-xl rounded-[2.5rem] p-8 md:p-12 border border-white/10 flex flex-col justify-between group overflow-hidden relative shadow-[0_20px_50px_rgba(0,0,0,0.5)] hover:border-white/20 transition-all duration-500">
-            <div className="absolute inset-0 bg-gradient-to-br from-white/[0.05] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+          <div className="md:col-span-7 bg-[#1A1A1A] rounded-3xl p-8 md:p-12 border border-white/5 flex flex-col justify-between group overflow-hidden relative">
+            <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
             
             {/* SVG Flow Diagram */}
             <div className="absolute right-0 top-0 w-1/2 h-full opacity-20 pointer-events-none flex items-center justify-end overflow-hidden">
@@ -48,8 +50,8 @@ export default function WhyDropSection() {
           </div>
 
           {/* Box 3: The Experience (Right, spans 5 cols, spans 2 rows) */}
-          <div className="md:col-span-5 md:row-span-2 bg-gradient-to-br from-[#E5E5E5] to-[#F9F9F9] text-[#111111] rounded-[2.5rem] p-8 md:p-12 border border-[#C0C0C0] flex flex-col justify-between group overflow-hidden relative shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
-            <div className="absolute inset-0 opacity-[0.05] mix-blend-overlay" style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/cubes.png")' }} />
+          <div className="md:col-span-5 md:row-span-2 bg-[#F9F9F9] text-[#111111] rounded-3xl p-8 md:p-12 border border-white/5 flex flex-col justify-between group overflow-hidden relative">
+            <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/cubes.png")' }} />
             
             <div className="z-10 relative">
               <span className="text-[#111111] font-black text-6xl tracking-tighter opacity-10 mb-4 block leading-none">03</span>
@@ -62,10 +64,10 @@ export default function WhyDropSection() {
           </div>
 
           {/* Box 2: The Can (Bottom Left, spans 7 cols) */}
-          <div className="md:col-span-7 bg-white/[0.02] backdrop-blur-xl rounded-[2.5rem] p-8 md:p-12 border border-white/10 flex flex-col justify-between group overflow-hidden relative shadow-[0_20px_50px_rgba(0,0,0,0.5)] hover:border-white/20 transition-all duration-500">
+          <div className="md:col-span-7 bg-[#23272C] rounded-3xl p-8 md:p-12 border border-white/10 flex flex-col justify-between group overflow-hidden relative">
             {/* Metallic Brushed Texture Background */}
-            <div className="absolute inset-0 opacity-20 pointer-events-none mix-blend-overlay" style={{ 
-              backgroundImage: 'linear-gradient(90deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 20%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0) 80%, rgba(255,255,255,0.1) 100%)',
+            <div className="absolute inset-0 opacity-40 pointer-events-none" style={{ 
+              backgroundImage: 'linear-gradient(90deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 20%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0) 80%, rgba(255,255,255,0.05) 100%)',
               backgroundSize: '200% 100%'
             }} />
             

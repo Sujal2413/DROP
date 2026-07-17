@@ -238,10 +238,10 @@ export default function VariantShowcase() {
                     }
                   } : {})
                 }}
-                className={`relative shrink-0 w-full aspect-[3/5] ${
+                className={`relative shrink-0 w-full aspect-[1/2] ${
                   activeProduct.slug === 'still-water' 
-                    ? 'max-w-[320px] lg:max-w-[460px]' 
-                    : 'max-w-[300px] lg:max-w-[440px]'
+                    ? 'max-w-[300px] lg:max-w-[440px]' 
+                    : 'max-w-[280px] lg:max-w-[420px]'
                 }`}
               >
                 <Image 
