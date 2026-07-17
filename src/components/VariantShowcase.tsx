@@ -3,22 +3,61 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { PRODUCTS } from '@/lib/data/products';
 import { motion, AnimatePresence } from 'framer-motion';
 
+export interface CollectionItem {
+  title: string;
+  description: string;
+  benefits: string;
+  format: string;
+  imageSrc: string;
+}
+
+export const collectionData: Record<'still' | 'mint' | 'athlete' | 'clove', CollectionItem> = {
+  still: {
+    title: 'STILL WATER',
+    description: 'Pure, crisp still water in a premium recyclable aluminium can. The standard for everyday hydration.',
+    benefits: 'Everyday Hydration',
+    format: '330ML / 500ML CAN',
+    imageSrc: '/assets/new-can-2.png',
+  },
+  mint: {
+    title: 'MINT WATER',
+    description: 'Crisp, cooling mint infusion crafted to refresh and reset.',
+    benefits: 'Recovery & Focus',
+    format: '330ML / 500ML CAN',
+    imageSrc: '/assets/new-can-variant-1.png',
+  },
+  athlete: {
+    title: 'ATHLETE EDITION',
+    description: 'Zero-compromise performance hydration with elevated electrolytes.',
+    benefits: 'High-intensity Training',
+    format: '330ML / 500ML CAN',
+    imageSrc: '/assets/black_can_raw.png',
+  },
+  clove: {
+    title: 'CLOVE WATER',
+    description: 'Infused with aromatic clove extracts to restore natural vitality.',
+    benefits: 'Vitality & Digestion',
+    format: '330ML / 500ML CAN',
+    imageSrc: '/assets/clove_can_transparent.png',
+  },
+};
+
+type CollectionKey = keyof typeof collectionData;
+const KEYS = Object.keys(collectionData) as CollectionKey[];
+
 export default function VariantShowcase() {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const activeProduct = PRODUCTS[activeIndex];
+  const [activeKey, setActiveKey] = useState<CollectionKey>('still');
+  const activeProduct = collectionData[activeKey];
   const sectionRef = useRef<HTMLElement>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
-  // Detect mobile once
   useEffect(() => {
     setIsMobile(window.innerWidth < 768);
   }, []);
 
-  // IntersectionObserver to track visibility
   useEffect(() => {
     if (!sectionRef.current) return;
     const observer = new IntersectionObserver(
@@ -31,99 +70,87 @@ export default function VariantShowcase() {
     return () => observer.disconnect();
   }, []);
 
-  // Auto-play logic to automatically cycle variants
   useEffect(() => {
     if (!isVisible) return;
     const interval = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % PRODUCTS.length);
+      setActiveKey((prev) => {
+        const currentIndex = KEYS.indexOf(prev);
+        const nextIndex = (currentIndex + 1) % KEYS.length;
+        return KEYS[nextIndex];
+      });
     }, 4000);
     return () => clearInterval(interval);
   }, [isVisible]);
 
-  // Premium, deep dark gradients
-  const getGradient = (slug: string) => {
-    switch (slug) {
-      case 'mint-water': return 'linear-gradient(180deg, #07030A 0%, #150A21 100%)';
-      case 'athlete-edition': return 'linear-gradient(180deg, #050505 0%, #111111 100%)';
-      case 'clove-water': return 'linear-gradient(180deg, #0A0203 0%, #1F0506 100%)';
-      case 'still-water':
+  const getGradient = (key: CollectionKey) => {
+    switch (key) {
+      case 'mint': return 'linear-gradient(180deg, #07030A 0%, #150A21 100%)';
+      case 'athlete': return 'linear-gradient(180deg, #050505 0%, #111111 100%)';
+      case 'clove': return 'linear-gradient(180deg, #0A0203 0%, #1F0506 100%)';
+      case 'still':
       default: return 'linear-gradient(180deg, #050709 0%, #0C1217 100%)';
     }
   };
 
-  // High contrast accent colors
-  const getAccentColor = (slug: string) => {
-    switch (slug) {
-      case 'mint-water': return '#D6BCFA'; // Soft vibrant purple
-      case 'athlete-edition': return '#F8FAFC'; // Crisp white
-      case 'clove-water': return '#FEB2B2'; // Soft vibrant red
-      case 'still-water':
-      default: return '#E2E8F0'; // Metallic silver
+  const getAccentColor = (key: CollectionKey) => {
+    switch (key) {
+      case 'mint': return '#D6BCFA';
+      case 'athlete': return '#F8FAFC';
+      case 'clove': return '#FEB2B2';
+      case 'still':
+      default: return '#E2E8F0';
     }
   };
 
-  // Dynamic typography for titles based on the product
-  const getFontFamily = (slug: string) => {
-    switch (slug) {
-      case 'mint-water': return 'var(--font-heading)'; // Oswald for modern display
-      case 'athlete-edition': return '"Anton", "Bebas Neue", "Druk Condensed", Impact, sans-serif'; // Sporty and bold
-      case 'clove-water': return 'var(--font-serif)'; // Elegant serif
-      case 'still-water':
-      default: return 'var(--font-body)'; // Clean geometric sans
-    }
-  };
-
-  // Custom text styling adjustments per font
-  const getTitleStyles = (slug: string) => {
-    const base = { fontFamily: getFontFamily(slug), color: getAccentColor(slug) };
-    switch (slug) {
-      case 'mint-water':
-        return { ...base, textTransform: 'uppercase' as const, letterSpacing: '0.02em', fontWeight: 600 };
-      case 'athlete-edition':
-        return { ...base, textTransform: 'uppercase' as const, letterSpacing: '-0.02em', fontWeight: 900, transform: 'scaleY(1.1)' };
-      case 'clove-water':
-        return { ...base, textTransform: 'none' as const, letterSpacing: '0', fontWeight: 400, fontStyle: 'italic' };
-      case 'still-water':
+  const getTitleStyles = (key: CollectionKey) => {
+    const base = { color: getAccentColor(key) };
+    switch (key) {
+      case 'mint':
+        return { ...base, fontFamily: 'var(--font-heading)', textTransform: 'uppercase' as const, letterSpacing: '0.02em', fontWeight: 600 };
+      case 'athlete':
+        return { ...base, fontFamily: '"Anton", "Bebas Neue", "Druk Condensed", Impact, sans-serif', textTransform: 'uppercase' as const, letterSpacing: '-0.02em', fontWeight: 900, transform: 'scaleY(1.1)' };
+      case 'clove':
+        return { ...base, fontFamily: 'var(--font-serif)', textTransform: 'none' as const, letterSpacing: '0', fontWeight: 400, fontStyle: 'italic' };
+      case 'still':
       default:
-        return { ...base, textTransform: 'uppercase' as const, letterSpacing: '-0.04em', fontWeight: 800 };
+        return { ...base, fontFamily: 'var(--font-body)', textTransform: 'uppercase' as const, letterSpacing: '-0.04em', fontWeight: 800 };
     }
   };
 
-  const accentColor = getAccentColor(activeProduct.slug);
+  const accentColor = getAccentColor(activeKey);
   const prefersReducedMotion = typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
   const shouldFloat = isVisible && !isMobile && !prefersReducedMotion;
 
   return (
     <section ref={sectionRef} id="products" className="relative w-full text-white font-sans min-h-screen flex overflow-hidden bg-[#050505]">
-      
-      {/* Background Gradient Transition */}
       <AnimatePresence>
         <motion.div
-          key={activeProduct.slug}
+          key={activeKey}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.8, ease: "easeInOut" }}
           className="absolute inset-0 z-0 pointer-events-none"
-          style={{ background: getGradient(activeProduct.slug) }}
+          style={{ background: getGradient(activeKey) }}
         />
       </AnimatePresence>
       
-      <div className="max-w-[1600px] w-full mx-auto flex flex-col md:flex-row relative z-10">
+      <div className="max-w-[1600px] w-full mx-auto flex flex-col md:flex-row relative z-10 overflow-hidden">
         
-        {/* Left Sticky Column: Tab List */}
-        <div className="w-full md:w-1/3 lg:w-1/4 pt-24 md:pt-40 px-6 md:px-12 lg:px-16 flex flex-col md:border-r border-white/5 md:sticky md:top-0 h-auto md:h-screen z-20">
+        {/* Left Sticky Tab Navigation */}
+        <aside className="w-full md:w-1/3 lg:w-1/4 pt-24 md:pt-40 px-6 md:px-12 lg:px-16 flex flex-col md:border-r border-white/5 md:sticky md:top-0 h-auto md:h-screen z-20">
           <h2 className="text-xs font-bold tracking-[0.4em] uppercase text-white/40 mb-10 pl-4">
             The Collection
           </h2>
           
           <div className="flex md:flex-col gap-3 overflow-x-auto md:overflow-visible pb-6 md:pb-0 scrollbar-hide">
-            {PRODUCTS.map((p, idx) => {
-              const isActive = activeIndex === idx;
+            {KEYS.map((key) => {
+              const p = collectionData[key];
+              const isActive = activeKey === key;
               return (
                 <button
-                  key={p.slug}
-                  onClick={() => setActiveIndex(idx)}
+                  key={key}
+                  onClick={() => setActiveKey(key)}
                   className={`relative flex items-center px-5 py-4 md:py-5 rounded-2xl transition-all duration-500 text-left focus:outline-none group overflow-hidden touch-manipulation border ${
                     isActive 
                       ? 'bg-white/5 border-white/10' 
@@ -135,14 +162,14 @@ export default function VariantShowcase() {
                       isActive ? 'text-white' : 'text-white/30 group-hover:text-white/60'
                     }`}
                   >
-                    {p.displayName.replace(' DROP', '')}
+                    {p.title}
                   </span>
                   
                   {isActive && (
                     <motion.div 
                       layoutId="activeTabIndicator"
                       className="absolute left-0 top-0 bottom-0 w-[3px] hidden md:block z-20"
-                      style={{ backgroundColor: getAccentColor(p.slug) }}
+                      style={{ backgroundColor: getAccentColor(key) }}
                       transition={{ type: "spring", stiffness: 300, damping: 30 }}
                     />
                   )}
@@ -150,27 +177,27 @@ export default function VariantShowcase() {
               );
             })}
           </div>
-        </div>
+        </aside>
 
-        {/* Right Dynamic Column */}
-        <div className="w-full md:w-2/3 lg:w-3/4 flex flex-col-reverse md:flex-row items-center justify-between px-6 md:px-12 lg:px-24 py-12 md:py-32 relative z-10">
+        {/* Right Dynamic Viewport */}
+        <main className="w-full md:w-2/3 lg:w-3/4 flex flex-col-reverse md:flex-row items-center justify-between px-6 md:px-12 lg:px-24 py-12 md:py-32 relative z-10 overflow-hidden">
           
           {/* Text Content */}
           <div className="w-full md:w-1/2 flex flex-col justify-center z-20 mt-16 md:mt-0">
             <AnimatePresence mode="wait">
               <motion.div
-                key={activeProduct.slug}
+                key={activeKey}
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: 20 }}
                 transition={{ duration: 0.5, ease: "easeOut" }}
               >
-                <h2 
+                <h1 
                   className="text-5xl md:text-6xl lg:text-[6rem] mb-6 leading-[1.1] origin-left" 
-                  style={getTitleStyles(activeProduct.slug)}
+                  style={getTitleStyles(activeKey)}
                 >
-                  {activeProduct.displayName.replace('DROP ', '')}
-                </h2>
+                  {activeProduct.title}
+                </h1>
                 
                 <p className="text-base lg:text-lg font-light leading-relaxed text-white/70 mb-10 max-w-md">
                   {activeProduct.description}
@@ -182,7 +209,7 @@ export default function VariantShowcase() {
                       Designed for
                     </span>
                     <span className="text-sm font-semibold tracking-wide text-white/90">
-                      {activeProduct.designedFor}
+                      {activeProduct.benefits}
                     </span>
                   </div>
                   <div className="flex items-center gap-4">
@@ -190,36 +217,30 @@ export default function VariantShowcase() {
                       Format
                     </span>
                     <span className="text-sm font-semibold tracking-wide text-white/90">
-                      {activeProduct.availableSizes?.join(' / ').toUpperCase()} CAN
+                      {activeProduct.format}
                     </span>
                   </div>
                 </div>
                 
-                {activeProduct.status === 'available' || activeProduct.status === 'preorder' || activeProduct.status === 'coming-soon' ? (
-                  <Link 
-                    href="/#waitlist" 
-                    className="inline-flex items-center justify-center px-10 py-5 text-xs font-bold tracking-[0.2em] uppercase border hover:bg-white hover:text-black transition-all duration-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-transparent w-max group touch-manipulation"
-                    style={{ 
-                      borderColor: accentColor,
-                      color: '#FFFFFF'
-                    }}
-                  >
-                    <span>Join The List</span>
-                  </Link>
-                ) : (
-                  <div className="inline-flex items-center justify-center px-10 py-5 text-xs font-bold tracking-[0.2em] uppercase border border-white/10 text-white/40">
-                    Coming Next
-                  </div>
-                )}
+                <Link 
+                  href="/#waitlist" 
+                  className="inline-flex items-center justify-center px-10 py-5 text-xs font-bold tracking-[0.2em] uppercase border hover:bg-white hover:text-black transition-all duration-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-transparent w-max group touch-manipulation"
+                  style={{ 
+                    borderColor: accentColor,
+                    color: '#FFFFFF'
+                  }}
+                >
+                  <span>Join The List</span>
+                </Link>
               </motion.div>
             </AnimatePresence>
           </div>
 
-          {/* Clean Floating Can Render - Removed the cheap white glow */}
-          <div className="w-full md:w-1/2 flex justify-center items-center relative h-[45vh] md:h-[75vh] z-10">
+          {/* Clean Floating Can Display Viewport */}
+          <div className="w-full md:w-1/2 flex justify-center items-center relative h-[45vh] md:h-[75vh] z-10 overflow-hidden">
             <AnimatePresence mode="wait">
               <motion.div
-                key={activeProduct.slug}
+                key={activeKey}
                 initial={{ opacity: 0, scale: 0.9, y: 30 }}
                 animate={{ 
                   opacity: 1, 
@@ -244,18 +265,17 @@ export default function VariantShowcase() {
                 className="relative shrink-0 w-[200px] h-[400px] md:w-[280px] md:h-[560px] lg:w-[420px] lg:h-[840px]"
               >
                 <Image 
-                  src={activeProduct.image} 
-                  alt={activeProduct.displayName} 
+                  src={activeProduct.imageSrc} 
+                  alt={activeProduct.title} 
                   fill 
                   className="object-contain pointer-events-none" 
                   sizes="(max-width: 768px) 600px, 880px"
                   quality={100}
                   priority
                   style={{
-                    // Scale up landscape images to match portrait dimensions, with a slightly reduced scale for the silver can
-                    transform: activeProduct.slug === 'athlete-edition' 
+                    transform: activeKey === 'athlete' 
                       ? 'scale(1.1)' 
-                      : activeProduct.slug === 'still-water'
+                      : activeKey === 'still'
                       ? 'scale(2.4)' 
                       : 'scale(2.8)',
                     transformOrigin: 'center'
@@ -265,7 +285,7 @@ export default function VariantShowcase() {
             </AnimatePresence>
           </div>
 
-        </div>
+        </main>
       </div>
     </section>
   );
