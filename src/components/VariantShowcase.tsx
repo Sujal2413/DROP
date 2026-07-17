@@ -1,46 +1,45 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export interface CollectionItem {
   title: string;
-  description: string;
+  desc: string;
   benefits: string;
   format: string;
-  imageSrc: string;
+  img: string;
 }
 
 export const collectionData: Record<'still' | 'mint' | 'athlete' | 'clove', CollectionItem> = {
   still: {
     title: 'STILL WATER',
-    description: 'Pure, crisp still water in a premium recyclable aluminium can. The standard for everyday hydration.',
+    desc: 'Pure, crisp still water in a premium recyclable aluminium can. The standard for everyday hydration.',
     benefits: 'Everyday Hydration',
     format: '330ML / 500ML CAN',
-    imageSrc: '/assets/new-can-2.png',
+    img: '/assets/new-can-2.png',
   },
   mint: {
     title: 'MINT WATER',
-    description: 'Crisp, cooling mint infusion crafted to refresh and reset.',
+    desc: 'Crisp, cooling mint infusion crafted to refresh and reset.',
     benefits: 'Recovery & Focus',
     format: '330ML / 500ML CAN',
-    imageSrc: '/assets/new-can-variant-1.png',
+    img: '/assets/new-can-variant-1.png',
   },
   athlete: {
     title: 'ATHLETE EDITION',
-    description: 'Zero-compromise performance hydration with elevated electrolytes.',
+    desc: 'Zero-compromise performance hydration with elevated electrolytes.',
     benefits: 'High-intensity Training',
     format: '330ML / 500ML CAN',
-    imageSrc: '/assets/black_can_raw.png',
+    img: '/assets/black_can_raw.png',
   },
   clove: {
     title: 'CLOVE WATER',
-    description: 'Infused with aromatic clove extracts to restore natural vitality.',
+    desc: 'Infused with aromatic clove extracts to restore natural vitality.',
     benefits: 'Vitality & Digestion',
     format: '330ML / 500ML CAN',
-    imageSrc: '/assets/clove_can_transparent.png',
+    img: '/assets/clove_can_transparent.png',
   },
 };
 
@@ -137,7 +136,7 @@ export default function VariantShowcase() {
       
       <div className="max-w-[1600px] w-full mx-auto flex flex-col md:flex-row relative z-10 overflow-hidden">
         
-        {/* Left Sticky Tab Navigation */}
+        {/* Left Sticky Tab Navigation (aside) */}
         <aside className="w-full md:w-1/3 lg:w-1/4 pt-24 md:pt-40 px-6 md:px-12 lg:px-16 flex flex-col md:border-r border-white/5 md:sticky md:top-0 h-auto md:h-screen z-20">
           <h2 className="text-xs font-bold tracking-[0.4em] uppercase text-white/40 mb-10 pl-4">
             The Collection
@@ -179,7 +178,7 @@ export default function VariantShowcase() {
           </div>
         </aside>
 
-        {/* Right Dynamic Viewport */}
+        {/* Right Dynamic Viewport (main) */}
         <main className="w-full md:w-2/3 lg:w-3/4 flex flex-col-reverse md:flex-row items-center justify-between px-6 md:px-12 lg:px-24 py-12 md:py-32 relative z-10 overflow-hidden">
           
           {/* Text Content */}
@@ -200,7 +199,7 @@ export default function VariantShowcase() {
                 </h1>
                 
                 <p className="text-base lg:text-lg font-light leading-relaxed text-white/70 mb-10 max-w-md">
-                  {activeProduct.description}
+                  {activeProduct.desc}
                 </p>
                 
                 <div className="flex flex-col gap-4 mb-12">
@@ -262,16 +261,12 @@ export default function VariantShowcase() {
                 style={{
                   filter: 'drop-shadow(0px 25px 25px rgba(0,0,0,0.5))',
                 }}
-                className="relative shrink-0 w-[200px] h-[400px] md:w-[280px] md:h-[560px] lg:w-[420px] lg:h-[840px]"
+                className="relative shrink-0 w-[200px] h-[400px] md:w-[280px] md:h-[560px] lg:w-[420px] lg:h-[840px] flex items-center justify-center"
               >
-                <Image 
-                  src={activeProduct.imageSrc} 
+                <img 
+                  src={activeProduct.img} 
                   alt={activeProduct.title} 
-                  fill 
-                  className="object-contain pointer-events-none" 
-                  sizes="(max-width: 768px) 600px, 880px"
-                  quality={100}
-                  priority
+                  className="w-full h-full object-contain pointer-events-none" 
                   style={{
                     transform: activeKey === 'athlete' 
                       ? 'scale(1.1)' 
