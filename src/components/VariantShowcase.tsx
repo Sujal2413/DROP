@@ -238,6 +238,9 @@ export default function VariantShowcase() {
                     }
                   } : {})
                 }}
+                style={{
+                  filter: 'drop-shadow(0px 25px 25px rgba(0,0,0,0.5))',
+                }}
                 className={`relative shrink-0 w-full aspect-[1/2] max-w-[280px] lg:max-w-[420px]`}
               >
                 <Image 
@@ -249,8 +252,6 @@ export default function VariantShowcase() {
                   quality={100}
                   priority
                   style={{
-                    // High-end ambient shadow to ground the object instead of a glowing aura. Fixed 0px for Safari compatibility.
-                    filter: 'drop-shadow(0px 25px 25px rgba(0,0,0,0.5))',
                     // Scale up landscape images to match portrait dimensions, with a slightly reduced scale for the silver can
                     transform: activeProduct.slug === 'athlete-edition' 
                       ? 'scale(1.1)' 
