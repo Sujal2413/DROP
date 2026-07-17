@@ -61,19 +61,19 @@ export default function WaitlistSection() {
     <section
       ref={sectionRef}
       id="waitlist"
-      className="relative bg-[#050505] py-24 sm:py-28 md:py-36 px-5 sm:px-8 md:px-16 overflow-hidden"
+      className="relative bg-[#0A0A0A] py-24 sm:py-28 md:py-36 px-5 sm:px-8 md:px-16 overflow-hidden"
     >
-      {/* Premium ambient glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[min(800px,150vw)] h-[min(800px,150vw)] bg-[#C9A84C]/[0.04] rounded-full blur-[80px] md:blur-[120px] pointer-events-none" />
+      {/* Accent glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[min(600px,140vw)] h-[min(600px,140vw)] bg-[#C9A84C]/[0.06] rounded-full blur-[40px] md:blur-[80px] pointer-events-none" />
 
-      <div ref={formRef} className="max-w-2xl mx-auto relative z-10 bg-white/[0.02] backdrop-blur-2xl border border-white/10 rounded-[2.5rem] p-8 sm:p-10 md:p-14 shadow-[0_30px_80px_rgba(0,0,0,0.8)]">
+      <div ref={formRef} className="max-w-xl mx-auto relative z-10">
         {/* Header */}
         <div className="text-center mb-12">
           <h2
-            className="mb-4 text-transparent bg-clip-text bg-gradient-to-b from-white to-white/60 drop-shadow-sm"
+            className="text-white mb-4"
             style={{
               fontFamily: '"Anton", "Bebas Neue", "Druk Condensed", Impact, sans-serif',
-              fontSize: 'clamp(2.5rem, 7vw, 4.5rem)',
+              fontSize: 'clamp(2rem, 6vw, 3.5rem)',
               fontWeight: 900,
               letterSpacing: 0,
               lineHeight: 0.95,
@@ -81,7 +81,7 @@ export default function WaitlistSection() {
           >
             Be first to try it.
           </h2>
-          <p className="text-white/60 text-sm md:text-base font-medium tracking-wide">
+          <p className="text-white/50 text-sm md:text-base font-medium tracking-wide">
             Launching 2027. The first batch goes to the list.
           </p>
           <div className="inline-block mt-4 px-4 py-1.5 rounded-full border border-[#C9A84C]/30 bg-[#C9A84C]/10 text-[#C9A84C] text-[10px] md:text-xs font-bold tracking-widest uppercase">
