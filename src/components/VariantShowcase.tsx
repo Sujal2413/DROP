@@ -238,14 +238,18 @@ export default function VariantShowcase() {
                     }
                   } : {})
                 }}
-                className="relative w-full max-w-[250px] lg:max-w-[380px] aspect-[1/2]"
+                className={`relative w-full aspect-[1/2] ${
+                  activeProduct.slug === 'still-water' 
+                    ? 'max-w-[300px] lg:max-w-[440px]' 
+                    : 'max-w-[280px] lg:max-w-[420px]'
+                }`}
               >
                 <Image 
                   src={activeProduct.image} 
                   alt={activeProduct.displayName} 
                   fill 
                   className="object-contain" 
-                  sizes="(max-width: 768px) 250px, 380px"
+                  sizes="(max-width: 768px) 300px, 440px"
                   quality={95}
                   priority
                   style={{

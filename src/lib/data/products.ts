@@ -43,7 +43,7 @@ export const PRODUCTS: Product[] = [
     description: 'Crisp, cooling mint infusion crafted to refresh and reset.',
     designedFor: 'Recovery & Focus',
     status: 'preorder',
-    image: '/assets/purple_can_extracted.png',
+    image: '/assets/new-can-variant-1.png',
   },
   {
     id: 'athlete',

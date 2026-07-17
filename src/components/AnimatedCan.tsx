@@ -18,7 +18,7 @@ const CANS = [
     mobileFilter: 'drop-shadow(0px 5px 15px rgba(0,0,0,0.3))'
   },
   { 
-    id: 'black', src: '/assets/new-can-variant-3.png', alt: 'Full Black Can', scale: 1.6,
+    id: 'black', src: '/assets/black_can_extracted.png', alt: 'Athlete Edition Can', scale: 1.6,
     filter: 'drop-shadow(0px 0px 1.5px rgba(0,0,0,0.5)) drop-shadow(0px 10px 30px rgba(0,0,0,0.15))',
     mobileFilter: 'drop-shadow(0px 5px 15px rgba(0,0,0,0.3))'
   },
