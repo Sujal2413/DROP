@@ -48,36 +48,36 @@ export default function SustainabilityClient() {
           <motion.div 
             whileHover={{ scale: 1.02 }}
             transition={{ type: "spring", stiffness: 300, damping: 20 }}
-            className="bg-[var(--color-mustard)] text-black p-6 md:p-8 border-2 border-black shadow-[5px_5px_0px_black] hover:shadow-[8px_8px_0px_black] flex flex-col justify-between cursor-default h-[280px] md:h-[320px]"
+            className="bg-[var(--color-mustard)] text-black p-6 md:p-8 border-2 border-black shadow-[5px_5px_0px_black] hover:shadow-[8px_8px_0px_black] flex flex-col justify-between cursor-default min-h-[280px] md:min-h-[320px]"
           >
             <h2 className="text-2xl md:text-3xl font-black uppercase tracking-tight mb-6">100% Recyclable</h2>
             <p className="text-base md:text-lg font-bold leading-relaxed">
               Plastic degrades. Aluminum endures. 75% of all aluminum ever produced is still in active use today. Choose the forever metal.
             </p>
           </motion.div>
-
+ 
           {/* Card 2 */}
           <motion.div 
             whileHover={{ scale: 1.02 }}
             transition={{ type: "spring", stiffness: 300, damping: 20 }}
-            className="bg-[var(--color-red)] text-white p-6 md:p-8 border-2 border-black shadow-[5px_5px_0px_black] hover:shadow-[8px_8px_0px_black] flex flex-col justify-between cursor-default h-[280px] md:h-[320px]"
+            className="bg-[var(--color-red)] text-white p-6 md:p-8 border-2 border-black shadow-[5px_5px_0px_black] hover:shadow-[8px_8px_0px_black] flex flex-col justify-between cursor-default min-h-[280px] md:min-h-[320px]"
           >
             <h2 className="text-2xl md:text-3xl font-black uppercase tracking-tight mb-6 text-black drop-shadow-[1px_1px_0px_white]">Low Carbon Loop</h2>
             <p className="text-base md:text-lg font-bold leading-relaxed">
               Aluminum chills faster and weighs less. This means drastically fewer emissions during transport and refrigeration. Tight, localized, efficient.
             </p>
           </motion.div>
-
+ 
           {/* Card 3 */}
-          <div className="bg-blue-600 text-white p-6 md:p-8 border-2 border-black shadow-[5px_5px_0px_black] hover:-translate-y-2 hover:shadow-[8px_8px_0px_black] transition-all duration-300 flex flex-col justify-between h-[280px] md:h-[320px]">
+          <div className="bg-blue-600 text-white p-6 md:p-8 border-2 border-black shadow-[5px_5px_0px_black] hover:-translate-y-2 hover:shadow-[8px_8px_0px_black] transition-all duration-300 flex flex-col justify-between min-h-[280px] md:min-h-[320px]">
             <h2 className="text-2xl md:text-3xl font-black uppercase tracking-tight mb-6">Ethical Sourcing</h2>
             <p className="text-base md:text-lg font-bold leading-relaxed">
               We only take what the earth freely yields. We source exclusively from naturally replenishing springs. No draining basins. No habitat destruction.
             </p>
           </div>
-
+ 
           {/* Card 4 */}
-          <div className="bg-black text-white p-6 md:p-8 border-2 border-black shadow-[5px_5px_0px_var(--color-red)] hover:-translate-y-2 hover:shadow-[8px_8px_0px_var(--color-red)] transition-all duration-300 flex flex-col justify-between h-[280px] md:h-[320px]">
+          <div className="bg-black text-white p-6 md:p-8 border-2 border-black shadow-[5px_5px_0px_var(--color-red)] hover:-translate-y-2 hover:shadow-[8px_8px_0px_var(--color-red)] transition-all duration-300 flex flex-col justify-between min-h-[280px] md:min-h-[320px]">
             <h2 className="text-2xl md:text-3xl font-black uppercase tracking-tight mb-6">Take Action</h2>
             <p className="text-base md:text-lg font-bold leading-relaxed mb-6">
               By choosing DROP, you are actively scaling production to drive down the cost of aluminum, helping phase out single-use plastics forever.
@@ -89,7 +89,7 @@ export default function SustainabilityClient() {
               Shop The Cans
             </Link>
           </div>
-
+ 
         </div>
 
       </main>

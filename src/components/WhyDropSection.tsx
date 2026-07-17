@@ -21,10 +21,10 @@ export default function WhyDropSection() {
         </div>
 
         {/* Bento Grid Layout */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 auto-rows-[300px]">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 md:auto-rows-[300px] auto-rows-auto">
           
           {/* Box 1: The Water (Top Left, spans 7 cols) */}
-          <div className="md:col-span-7 bg-white/[0.02] backdrop-blur-xl rounded-[2.5rem] p-8 md:p-12 border border-white/10 flex flex-col justify-between group overflow-hidden relative shadow-[0_20px_50px_rgba(0,0,0,0.5)] hover:border-white/20 transition-all duration-500">
+          <div className="md:col-span-7 bg-white/[0.02] backdrop-blur-xl rounded-[2.5rem] p-8 md:p-12 border border-white/10 flex flex-col justify-between group overflow-hidden relative shadow-[0_20px_50px_rgba(0,0,0,0.5)] hover:border-white/20 transition-all duration-500 min-h-[300px] md:min-h-0">
             <div className="absolute inset-0 bg-gradient-to-br from-white/[0.05] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
             
             {/* SVG Flow Diagram */}
@@ -48,7 +48,7 @@ export default function WhyDropSection() {
           </div>
 
           {/* Box 3: The Experience (Right, spans 5 cols, spans 2 rows) */}
-          <div className="md:col-span-5 md:row-span-2 bg-gradient-to-br from-[#E5E5E5] to-[#F9F9F9] text-[#111111] rounded-[2.5rem] p-8 md:p-12 border border-[#C0C0C0] flex flex-col justify-between group overflow-hidden relative shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+          <div className="md:col-span-5 md:row-span-2 bg-gradient-to-br from-[#E5E5E5] to-[#F9F9F9] text-[#111111] rounded-[2.5rem] p-8 md:p-12 border border-[#C0C0C0] flex flex-col justify-between group overflow-hidden relative shadow-[0_20px_50px_rgba(0,0,0,0.5)] min-h-[300px] md:min-h-0">
             <div className="absolute inset-0 opacity-[0.05] mix-blend-overlay" style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/cubes.png")' }} />
             
             <div className="z-10 relative">
@@ -62,7 +62,7 @@ export default function WhyDropSection() {
           </div>
 
           {/* Box 2: The Can (Bottom Left, spans 7 cols) */}
-          <div className="md:col-span-7 bg-white/[0.02] backdrop-blur-xl rounded-[2.5rem] p-8 md:p-12 border border-white/10 flex flex-col justify-between group overflow-hidden relative shadow-[0_20px_50px_rgba(0,0,0,0.5)] hover:border-white/20 transition-all duration-500">
+          <div className="md:col-span-7 bg-white/[0.02] backdrop-blur-xl rounded-[2.5rem] p-8 md:p-12 border border-white/10 flex flex-col justify-between group overflow-hidden relative shadow-[0_20px_50px_rgba(0,0,0,0.5)] hover:border-white/20 transition-all duration-500 min-h-[300px] md:min-h-0">
             {/* Metallic Brushed Texture Background */}
             <div className="absolute inset-0 opacity-20 pointer-events-none mix-blend-overlay" style={{ 
               backgroundImage: 'linear-gradient(90deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 20%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0) 80%, rgba(255,255,255,0.1) 100%)',

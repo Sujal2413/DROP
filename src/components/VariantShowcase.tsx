@@ -122,17 +122,17 @@ export default function VariantShowcase() {
 
   return (
     <section ref={sectionRef} id="products" className="relative w-full text-white font-sans min-h-screen flex overflow-hidden bg-[#050505]">
-      <AnimatePresence>
-        <motion.div
-          key={activeKey}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.8, ease: "easeInOut" }}
-          className="absolute inset-0 z-0 pointer-events-none"
-          style={{ background: getGradient(activeKey) }}
+      {/* Background Gradient Layers */}
+      {KEYS.map((key) => (
+        <div
+          key={key}
+          className="absolute inset-0 z-0 pointer-events-none transition-opacity duration-1000"
+          style={{
+            background: getGradient(key),
+            opacity: activeKey === key ? 1 : 0,
+          }}
         />
-      </AnimatePresence>
+      ))}
       
       <div className="max-w-[1600px] w-full mx-auto flex flex-col md:flex-row relative z-10 overflow-hidden">
         
@@ -192,7 +192,7 @@ export default function VariantShowcase() {
                 transition={{ duration: 0.5, ease: "easeOut" }}
               >
                 <h1 
-                  className="text-5xl md:text-6xl lg:text-[6rem] mb-6 leading-[1.1] origin-left" 
+                  className="text-5xl md:text-6xl lg:text-[6rem] mb-6 leading-[1.15] md:leading-[1.1] origin-left py-1" 
                   style={getTitleStyles(activeKey)}
                 >
                   {activeProduct.title}
@@ -237,51 +237,69 @@ export default function VariantShowcase() {
 
           {/* Clean Floating Can Display Viewport */}
           <div className="w-full md:w-1/2 flex justify-center items-center relative h-[45vh] md:h-[75vh] z-10 overflow-hidden">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeKey}
-                initial={{ opacity: 0, scale: 0.9, y: 30 }}
-                animate={{ 
-                  opacity: 1, 
-                  scale: 1, 
-                  y: shouldFloat ? [0, -15, 0] : 0,
-                }}
-                exit={{ opacity: 0, scale: 0.95, y: -20 }}
-                transition={{ 
-                  duration: isMobile ? 0.4 : 0.7,
-                  ease: "easeOut",
-                  ...(shouldFloat ? {
-                    y: {
-                      duration: 6,
-                      repeat: Infinity,
-                      ease: "easeInOut"
-                    }
-                  } : {})
-                }}
-                style={{
-                  filter: 'drop-shadow(0px 25px 25px rgba(0,0,0,0.5))',
-                }}
-                className="relative shrink-0 w-[200px] h-[400px] md:w-[280px] md:h-[560px] lg:w-[420px] lg:h-[840px] flex items-center justify-center"
-              >
-                <img 
-                  src={activeProduct.img} 
-                  alt={activeProduct.title} 
-                  className="w-full h-full object-contain pointer-events-none" 
+            {KEYS.map((key) => {
+              const p = collectionData[key];
+              const isActive = activeKey === key;
+              return (
+                <div
+                  key={key}
+                  className="absolute w-[200px] h-[400px] md:w-[280px] md:h-[560px] lg:w-[420px] lg:h-[840px] flex items-center justify-center transition-all duration-500 pointer-events-none"
                   style={{
-                    transform: activeKey === 'athlete' 
-                      ? 'scale(1.1)' 
-                      : activeKey === 'still'
-                      ? 'scale(2.4)' 
-                      : 'scale(2.8)',
-                    transformOrigin: 'center'
+                    opacity: isActive ? 1 : 0,
+                    transform: isActive ? 'translateY(0) scale(1)' : 'translateY(20px) scale(0.95)',
+                    visibility: isActive ? 'visible' : 'hidden',
                   }}
-                />
-              </motion.div>
-            </AnimatePresence>
+                >
+                  <div 
+                    className={`w-full h-full flex items-center justify-center ${
+                      isActive && !prefersReducedMotion ? 'variant-showcase-float' : ''
+                    }`}
+                    style={{
+                      filter: 'drop-shadow(0px 25px 25px rgba(0,0,0,0.5))',
+                    }}
+                  >
+                    <img
+                      src={p.img}
+                      alt={p.title}
+                      className={`w-full h-full object-contain pointer-events-none transition-transform duration-500 ${
+                        key === 'athlete' 
+                          ? 'variant-showcase-img-athlete' 
+                          : key === 'still'
+                          ? 'variant-showcase-img-still' 
+                          : 'variant-showcase-img-other'
+                      }`}
+                      style={{
+                        transformOrigin: 'center'
+                      }}
+                    />
+                  </div>
+                </div>
+              );
+            })}
           </div>
 
         </main>
       </div>
+      <style dangerouslySetInnerHTML={{__html: `
+        @keyframes float-can {
+          0% { transform: translateY(0px) rotate(0deg); }
+          50% { transform: translateY(-15px) rotate(1deg); }
+          100% { transform: translateY(0px) rotate(0deg); }
+        }
+        @media (min-width: 768px) {
+          .variant-showcase-float {
+            animation: float-can 6s ease-in-out infinite;
+          }
+          .variant-showcase-img-athlete { transform: scale(1.1) !important; }
+          .variant-showcase-img-still { transform: scale(2.4) !important; }
+          .variant-showcase-img-other { transform: scale(2.8) !important; }
+        }
+        @media (max-width: 767px) {
+          .variant-showcase-img-athlete { transform: scale(0.65) !important; }
+          .variant-showcase-img-still { transform: scale(1.4) !important; }
+          .variant-showcase-img-other { transform: scale(1.6) !important; }
+        }
+      `}} />
     </section>
   );
 }
