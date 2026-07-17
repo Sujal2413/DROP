@@ -248,13 +248,16 @@ export default function VariantShowcase() {
                   src={activeProduct.image} 
                   alt={activeProduct.displayName} 
                   fill 
-                  className="object-cover" 
+                  className="object-contain pointer-events-none" 
                   sizes="(max-width: 768px) 300px, 440px"
                   quality={95}
                   priority
                   style={{
                     // High-end ambient shadow to ground the object instead of a glowing aura. Fixed 0px for Safari compatibility.
-                    filter: 'drop-shadow(0px 25px 25px rgba(0,0,0,0.5))'
+                    filter: 'drop-shadow(0px 25px 25px rgba(0,0,0,0.5))',
+                    // Scale up landscape images (which have huge transparent side padding) to match the portrait image size
+                    transform: activeProduct.slug === 'athlete-edition' ? 'scale(1.1)' : 'scale(2.8)',
+                    transformOrigin: 'center'
                   }}
                 />
               </motion.div>
