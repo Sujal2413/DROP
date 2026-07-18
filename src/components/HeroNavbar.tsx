@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useState, useEffect, useRef } from 'react';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 interface HeroNavbarProps {
   activeIndex?: number;
@@ -19,8 +19,16 @@ const THEMES = [
 export default function HeroNavbar({ activeIndex = 0 }: HeroNavbarProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
+  const router = useRouter();
   const menuRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
+
+  // Prefetch key routes so mobile drawer taps navigate instantly
+  useEffect(() => {
+    router.prefetch('/story');
+    router.prefetch('/sustainability');
+    router.prefetch('/contact');
+  }, [router]);
 
   // Default to white if activeIndex is not specified
   const theme = THEMES[activeIndex] || { id: 'default', text: '#FFFFFF', accentBg: '#1A1A1A' };

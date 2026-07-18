@@ -5,7 +5,6 @@ import HeroNavbar from '@/components/HeroNavbar';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
 import ScrollToTop from '@/components/ScrollToTop';
-import { motion } from 'framer-motion';
 
 export default function SustainabilityClient() {
   const marqueeRef = useRef<HTMLDivElement>(null);
@@ -41,32 +40,28 @@ export default function SustainabilityClient() {
           </p>
         </header>
 
-        {/* Neo-brutalist Bento Grid */}
+        {/* Neo-brutalist Bento Grid — CSS hover instead of framer-motion */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6 mt-8 relative z-10">
           
           {/* Card 1 */}
-          <motion.div 
-            whileHover={{ scale: 1.02 }}
-            transition={{ type: "spring", stiffness: 300, damping: 20 }}
-            className="bg-[var(--color-mustard)] text-black p-6 md:p-8 border-2 border-black shadow-[5px_5px_0px_black] hover:shadow-[8px_8px_0px_black] flex flex-col justify-between cursor-default min-h-[280px] md:min-h-[320px]"
+          <div 
+            className="bg-[var(--color-mustard)] text-black p-6 md:p-8 border-2 border-black shadow-[5px_5px_0px_black] hover:shadow-[8px_8px_0px_black] hover:scale-[1.02] transition-all duration-300 flex flex-col justify-between cursor-default min-h-[280px] md:min-h-[320px]"
           >
             <h2 className="text-2xl md:text-3xl font-black uppercase tracking-tight mb-6">100% Recyclable</h2>
             <p className="text-base md:text-lg font-bold leading-relaxed">
               Plastic degrades. Aluminum endures. 75% of all aluminum ever produced is still in active use today. Choose the forever metal.
             </p>
-          </motion.div>
+          </div>
  
           {/* Card 2 */}
-          <motion.div 
-            whileHover={{ scale: 1.02 }}
-            transition={{ type: "spring", stiffness: 300, damping: 20 }}
-            className="bg-[var(--color-red)] text-white p-6 md:p-8 border-2 border-black shadow-[5px_5px_0px_black] hover:shadow-[8px_8px_0px_black] flex flex-col justify-between cursor-default min-h-[280px] md:min-h-[320px]"
+          <div 
+            className="bg-[var(--color-red)] text-white p-6 md:p-8 border-2 border-black shadow-[5px_5px_0px_black] hover:shadow-[8px_8px_0px_black] hover:scale-[1.02] transition-all duration-300 flex flex-col justify-between cursor-default min-h-[280px] md:min-h-[320px]"
           >
             <h2 className="text-2xl md:text-3xl font-black uppercase tracking-tight mb-6 text-black drop-shadow-[1px_1px_0px_white]">Low Carbon Loop</h2>
             <p className="text-base md:text-lg font-bold leading-relaxed">
               Aluminum chills faster and weighs less. This means drastically fewer emissions during transport and refrigeration. Tight, localized, efficient.
             </p>
-          </motion.div>
+          </div>
  
           {/* Card 3 */}
           <div className="bg-blue-600 text-white p-6 md:p-8 border-2 border-black shadow-[5px_5px_0px_black] hover:-translate-y-2 hover:shadow-[8px_8px_0px_black] transition-all duration-300 flex flex-col justify-between min-h-[280px] md:min-h-[320px]">

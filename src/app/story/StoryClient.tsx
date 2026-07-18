@@ -1,6 +1,5 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import { useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -15,19 +14,29 @@ export default function StoryClient() {
     <div ref={containerRef} className="w-full relative bg-[#0F1112] text-white font-sans antialiased selection:bg-[#C9A84C] selection:text-black">
       <HeroNavbar activeIndex={1} />
 
-      {/* Ambient Orbs */}
+      {/* Ambient Orbs — pure CSS animations, no framer-motion needed */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
-        <motion.div
-          animate={{ scale: [1, 1.1, 1], opacity: [0.1, 0.2, 0.1] }}
-          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-1/4 -left-1/4 w-[50vw] h-[50vw] bg-[#8b5cf6]/20 rounded-full blur-[60px] md:blur-[150px]"
-        />
-        <motion.div
-          animate={{ scale: [1, 1.2, 1], opacity: [0.05, 0.1, 0.05] }}
-          transition={{ duration: 20, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-          className="absolute bottom-1/4 -right-1/4 w-[60vw] h-[60vw] bg-[#C9A84C]/20 rounded-full blur-[60px] md:blur-[150px]"
-        />
+        <div className="story-orb-1 absolute top-1/4 -left-1/4 w-[50vw] h-[50vw] bg-[#8b5cf6]/20 rounded-full blur-[60px] md:blur-[150px]" />
+        <div className="story-orb-2 absolute bottom-1/4 -right-1/4 w-[60vw] h-[60vw] bg-[#C9A84C]/20 rounded-full blur-[60px] md:blur-[150px]" />
       </div>
+
+      {/* Scoped CSS keyframes for ambient orbs */}
+      <style dangerouslySetInnerHTML={{__html: `
+        @keyframes story-orb-pulse-1 {
+          0%, 100% { transform: scale(1); opacity: 0.1; }
+          50% { transform: scale(1.1); opacity: 0.2; }
+        }
+        @keyframes story-orb-pulse-2 {
+          0%, 100% { transform: scale(1); opacity: 0.05; }
+          50% { transform: scale(1.2); opacity: 0.1; }
+        }
+        .story-orb-1 {
+          animation: story-orb-pulse-1 15s ease-in-out infinite;
+        }
+        .story-orb-2 {
+          animation: story-orb-pulse-2 20s ease-in-out 2s infinite;
+        }
+      `}} />
 
       <main className="max-w-7xl mx-auto px-5 sm:px-6 md:px-16 pt-28 sm:pt-32 pb-20 sm:pb-24 space-y-24 md:space-y-32 relative z-10">
         
