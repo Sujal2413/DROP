@@ -6,18 +6,18 @@ import Link from 'next/link';
 import { Droplet, Recycle, Ban, Zap } from 'lucide-react';
 
 const COL_1_ITEMS = [
-  { src: '/assets/Add_some_details_to_the_202606301348.jpeg', alt: 'DROP water details', height: 380, width: 280 },
-  { src: '/assets/lifestyle-4.jpeg', alt: 'DROP water lifestyle 1', height: 280, width: 350 },
-  { src: '/assets/lifestyle-5.jpeg', alt: 'DROP water lifestyle 2', height: 440, width: 280 },
-  { src: '/assets/clove_can.jpeg', alt: 'DROP water clove can', height: 320, width: 320 },
-  { src: '/assets/screenshot-1.png', alt: 'DROP water screenshot 1', height: 350, width: 350 },
+  { src: '/assets/Add_some_details_to_the_202606301348.jpeg', alt: 'DROP premium still water in a silver aluminium can', height: 380, width: 280 },
+  { src: '/assets/lifestyle-4.jpeg', alt: 'DROP mint functional water can in premium purple aluminium packaging', height: 280, width: 350 },
+  { src: '/assets/lifestyle-5.jpeg', alt: 'DROP premium canned water for gyms and fitness studios', height: 440, width: 280 },
+  { src: '/assets/clove_can.jpeg', alt: 'DROP clove water in a premium blood red aluminium can', height: 320, width: 320 },
+  { src: '/assets/screenshot-1.png', alt: 'DROP sustainable packaged water brand website interface screenshot', height: 350, width: 350 },
 ];
 
 const COL_2_ITEMS = [
-  { src: '/assets/screenshot-2.png', alt: 'DROP water screenshot 2', height: 300, width: 380 },
-  { src: '/assets/lifestyle-1.jpeg', alt: 'DROP water image 1', height: 420, width: 280 },
-  { src: '/assets/lifestyle-2.jpeg', alt: 'DROP water image 2', height: 350, width: 300 },
-  { src: '/assets/lifestyle-3.jpeg', alt: 'DROP water image 3', height: 280, width: 400 },
+  { src: '/assets/screenshot-2.png', alt: 'DROP premium water brand India waitlist counter screenshot', height: 300, width: 380 },
+  { src: '/assets/lifestyle-1.jpeg', alt: 'DROP recyclable canned water served at a fitness studio', height: 420, width: 280 },
+  { src: '/assets/lifestyle-2.jpeg', alt: 'Infinitely recyclable aluminium water cans on display at a café', height: 350, width: 300 },
+  { src: '/assets/lifestyle-3.jpeg', alt: 'DROP premium still water served cold at a luxury hotel lobby', height: 280, width: 400 },
 ];
 
 export default function FeatureSplitSection() {

@@ -47,7 +47,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 'athlete',
-    slug: 'athlete-edition',
+    slug: 'athlete-water',
     displayName: 'DROP Athlete Edition',
     variantName: 'Full Black',
     waterType: 'Still Water',

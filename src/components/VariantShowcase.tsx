@@ -10,6 +10,7 @@ export interface CollectionItem {
   benefits: string;
   format: string;
   img: string;
+  altText: string;
 }
 
 export const collectionData: Record<'still' | 'mint' | 'athlete' | 'clove', CollectionItem> = {
@@ -19,6 +20,7 @@ export const collectionData: Record<'still' | 'mint' | 'athlete' | 'clove', Coll
     benefits: 'Everyday Hydration',
     format: '330ML / 500ML CAN',
     img: '/assets/new-can-2.png',
+    altText: 'DROP premium still water in a sleek silver aluminium can',
   },
   mint: {
     title: 'MINT WATER',
@@ -26,6 +28,7 @@ export const collectionData: Record<'still' | 'mint' | 'athlete' | 'clove', Coll
     benefits: 'Recovery & Focus',
     format: '330ML / 500ML CAN',
     img: '/assets/new-can-variant-1.png',
+    altText: 'DROP mint functional water can in premium purple aluminium packaging',
   },
   athlete: {
     title: 'ATHLETE EDITION',
@@ -33,6 +36,7 @@ export const collectionData: Record<'still' | 'mint' | 'athlete' | 'clove', Coll
     benefits: 'High-intensity Training',
     format: '330ML / 500ML CAN',
     img: '/assets/black_can_raw.png',
+    altText: 'DROP athlete edition functional water in a matte black aluminium can',
   },
   clove: {
     title: 'CLOVE WATER',
@@ -40,6 +44,7 @@ export const collectionData: Record<'still' | 'mint' | 'athlete' | 'clove', Coll
     benefits: 'Vitality & Digestion',
     format: '330ML / 500ML CAN',
     img: '/assets/clove_can_transparent.png',
+    altText: 'DROP clove water in a premium blood red aluminium can',
   },
 };
 
@@ -260,7 +265,7 @@ export default function VariantShowcase() {
                   >
                     <img
                       src={p.img}
-                      alt={p.title}
+                      alt={p.altText}
                       className={`w-full h-full object-contain pointer-events-none transition-transform duration-500 ${
                         key === 'athlete' 
                           ? 'variant-showcase-img-athlete' 

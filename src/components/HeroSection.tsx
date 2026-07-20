@@ -102,17 +102,17 @@ export default function HeroSection() {
           className="opacity-0 transition-colors duration-1000 mb-8 order-1"
           style={{
             fontFamily: '"Anton", "Bebas Neue", "Druk Condensed", Impact, sans-serif',
-            fontSize: 'clamp(2.75rem, 15vw, 8rem)',
+            fontSize: 'clamp(2.5rem, 9vw, 6rem)',
             color: currentTheme.text,
             fontWeight: 900,
             letterSpacing: '0.02em',
-            lineHeight: 0.9,
+            lineHeight: 0.95,
             textShadow: '0 10px 30px rgba(0,0,0,0.3)'
           }}
         >
-          <span className="sr-only">Drop Water - </span>
-          AS. IT.<br />
-          SHOULD. BE.
+          BUILDING INDIA&apos;S<br />
+          PREMIUM CANNED<br />
+          WATER BRAND
         </h1>
 
         {/* Interactive Flavor Selectors */}

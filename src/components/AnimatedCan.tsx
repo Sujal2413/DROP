@@ -8,22 +8,22 @@ import gsap from 'gsap';
 // CANS defines the display scaling and filter effects for each variant of can.
 const CANS = [
   { 
-    id: 'purple', src: '/assets/new-can-variant-1.png', alt: 'Deep Purple Can', scale: 2.2,
+    id: 'purple', src: '/assets/new-can-variant-1.png', alt: 'DROP mint functional water can in premium purple aluminium packaging', scale: 2.2,
     filter: 'drop-shadow(0 20px 30px rgba(0,0,0,0.8))',
     mobileFilter: 'drop-shadow(0 10px 15px rgba(0,0,0,0.5))'
   },
   { 
-    id: 'red', src: '/assets/clove_can_transparent.png', alt: 'Clove Can', scale: 2.2,
+    id: 'red', src: '/assets/clove_can_transparent.png', alt: 'DROP clove water in a premium blood red aluminium can', scale: 2.2,
     filter: 'drop-shadow(0px 0px 1.5px rgba(0,0,0,0.5)) drop-shadow(0px 10px 30px rgba(0,0,0,0.15))',
     mobileFilter: 'drop-shadow(0px 5px 15px rgba(0,0,0,0.3))'
   },
   { 
-    id: 'black', src: '/assets/black_can_extracted.png', alt: 'Athlete Edition Can', scale: 1.1,
+    id: 'black', src: '/assets/black_can_extracted.png', alt: 'DROP athlete edition functional water in a matte black aluminium can', scale: 1.1,
     filter: 'drop-shadow(0px 0px 1.5px rgba(0,0,0,0.5)) drop-shadow(0px 10px 30px rgba(0,0,0,0.15))',
     mobileFilter: 'drop-shadow(0px 5px 15px rgba(0,0,0,0.3))'
   },
   {
-    id: 'silver', src: '/assets/new-can-2.png', alt: 'Sparkling Water Can', scale: 2.2,
+    id: 'silver', src: '/assets/new-can-2.png', alt: 'DROP premium still water in a sleek silver aluminium can', scale: 2.2,
     filter: 'drop-shadow(0px 0px 1.5px rgba(0,0,0,0.5)) drop-shadow(0px 10px 30px rgba(0,0,0,0.15))',
     mobileFilter: 'drop-shadow(0px 5px 15px rgba(0,0,0,0.3))'
   }

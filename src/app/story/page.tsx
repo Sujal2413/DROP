@@ -2,20 +2,20 @@ import StoryClient from './StoryClient';
 
 export const metadata = {
   title: 'Our Story | DROP.',
-  description: 'From a simple habit to a bigger question. Discover the origin of DROP.',
+  description: 'Explore DROP. still water, mint water, clove water and athlete hydration in premium recyclable aluminium cans.',
   alternates: {
     canonical: '/story',
   },
   openGraph: {
     title: 'Our Story | DROP.',
-    description: 'From a simple habit to a bigger question. Discover the origin of DROP.',
+    description: 'Explore DROP. still water, mint water, clove water and athlete hydration in premium recyclable aluminium cans.',
     url: 'https://www.dropwater.in/story',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Our Story | DROP.',
-    description: 'From a simple habit to a bigger question. Discover the origin of DROP.',
+    description: 'Explore DROP. still water, mint water, clove water and athlete hydration in premium recyclable aluminium cans.',
   },
 };
 
