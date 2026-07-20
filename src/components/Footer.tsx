@@ -163,7 +163,7 @@ export default function Footer({ theme = "default" }: FooterProps) {
 
       {/* Fallback giant text for mobile */}
       <div className="flex lg:hidden absolute bottom-[-5vh] left-1/2 -translate-x-1/2 w-full text-center pointer-events-none opacity-[0.03] overflow-hidden select-none z-0">
-        <h1 
+        <div 
           className="text-[clamp(8rem,25vw,20rem)] font-black tracking-tighter"
           style={{
             fontFamily: '"Anton", "Bebas Neue", "Druk Condensed", Impact, sans-serif',
@@ -172,7 +172,7 @@ export default function Footer({ theme = "default" }: FooterProps) {
           }}
         >
           DROP.
-        </h1>
+        </div>
       </div>
 
       <FooterBackgroundGradient theme={theme} />

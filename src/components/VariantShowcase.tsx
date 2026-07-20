@@ -191,12 +191,12 @@ export default function VariantShowcase() {
                 exit={{ opacity: 0, x: 20 }}
                 transition={{ duration: 0.5, ease: "easeOut" }}
               >
-                <h1 
+                <h2 
                   className="text-5xl md:text-6xl lg:text-[6rem] mb-6 leading-[1.15] md:leading-[1.1] origin-left py-1" 
                   style={getTitleStyles(activeKey)}
                 >
                   {activeProduct.title}
-                </h1>
+                </h2>
                 
                 <p className="text-base lg:text-lg font-light leading-relaxed text-white/70 mb-10 max-w-md">
                   {activeProduct.desc}
