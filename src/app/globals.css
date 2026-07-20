@@ -15,7 +15,7 @@
     scroll-behavior: smooth;
   }
   
-  /* Disable smooth scroll when reduced motion is preferred — avoids fighting native Safari momentum */
+  /* Disable smooth scroll when reduced motion is preferred — avoids fighting native Safari momentum. */
   @media (prefers-reduced-motion: reduce) {
     html {
       scroll-behavior: auto;
